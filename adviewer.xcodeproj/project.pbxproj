@@ -1,0 +1,412 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BD1EB99C198E5C0D006EEC1C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB99B198E5C0D006EEC1C /* main.swift */; };
+		BD1EB99E198E5C0D006EEC1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB99D198E5C0D006EEC1C /* AppDelegate.swift */; };
+		BD1EB9A0198E5C0D006EEC1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD1EB99F198E5C0D006EEC1C /* Images.xcassets */; };
+		BD1EB9A3198E5C0D006EEC1C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD1EB9A1198E5C0D006EEC1C /* MainMenu.xib */; };
+		BD1EB9AF198E5C0D006EEC1C /* adviewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BD1EB9A9198E5C0D006EEC1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BD1EB98E198E5C0D006EEC1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BD1EB995198E5C0D006EEC1C;
+			remoteInfo = adviewer;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BD1EB996198E5C0D006EEC1C /* adviewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = adviewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD1EB99A198E5C0D006EEC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD1EB99B198E5C0D006EEC1C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		BD1EB99D198E5C0D006EEC1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BD1EB99F198E5C0D006EEC1C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		BD1EB9A2198E5C0D006EEC1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		BD1EB9A8198E5C0D006EEC1C /* adviewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = adviewerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD1EB9AD198E5C0D006EEC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adviewerTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BD1EB993198E5C0D006EEC1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD1EB9A5198E5C0D006EEC1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BD1EB98D198E5C0D006EEC1C = {
+			isa = PBXGroup;
+			children = (
+				BD1EB998198E5C0D006EEC1C /* adviewer */,
+				BD1EB9AB198E5C0D006EEC1C /* adviewerTests */,
+				BD1EB997198E5C0D006EEC1C /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BD1EB997198E5C0D006EEC1C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BD1EB996198E5C0D006EEC1C /* adviewer.app */,
+				BD1EB9A8198E5C0D006EEC1C /* adviewerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BD1EB998198E5C0D006EEC1C /* adviewer */ = {
+			isa = PBXGroup;
+			children = (
+				BD1EB99D198E5C0D006EEC1C /* AppDelegate.swift */,
+				BD1EB99F198E5C0D006EEC1C /* Images.xcassets */,
+				BD1EB9A1198E5C0D006EEC1C /* MainMenu.xib */,
+				BD1EB999198E5C0D006EEC1C /* Supporting Files */,
+			);
+			path = adviewer;
+			sourceTree = "<group>";
+		};
+		BD1EB999198E5C0D006EEC1C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BD1EB99A198E5C0D006EEC1C /* Info.plist */,
+				BD1EB99B198E5C0D006EEC1C /* main.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BD1EB9AB198E5C0D006EEC1C /* adviewerTests */ = {
+			isa = PBXGroup;
+			children = (
+				BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */,
+				BD1EB9AC198E5C0D006EEC1C /* Supporting Files */,
+			);
+			path = adviewerTests;
+			sourceTree = "<group>";
+		};
+		BD1EB9AC198E5C0D006EEC1C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BD1EB9AD198E5C0D006EEC1C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BD1EB995198E5C0D006EEC1C /* adviewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD1EB9B2198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "adviewer" */;
+			buildPhases = (
+				BD1EB992198E5C0D006EEC1C /* Sources */,
+				BD1EB993198E5C0D006EEC1C /* Frameworks */,
+				BD1EB994198E5C0D006EEC1C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = adviewer;
+			productName = adviewer;
+			productReference = BD1EB996198E5C0D006EEC1C /* adviewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BD1EB9A7198E5C0D006EEC1C /* adviewerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BD1EB9B5198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "adviewerTests" */;
+			buildPhases = (
+				BD1EB9A4198E5C0D006EEC1C /* Sources */,
+				BD1EB9A5198E5C0D006EEC1C /* Frameworks */,
+				BD1EB9A6198E5C0D006EEC1C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BD1EB9AA198E5C0D006EEC1C /* PBXTargetDependency */,
+			);
+			name = adviewerTests;
+			productName = adviewerTests;
+			productReference = BD1EB9A8198E5C0D006EEC1C /* adviewerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BD1EB98E198E5C0D006EEC1C /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "James Carlson";
+				TargetAttributes = {
+					BD1EB995198E5C0D006EEC1C = {
+						CreatedOnToolsVersion = 6.0;
+					};
+					BD1EB9A7198E5C0D006EEC1C = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = BD1EB995198E5C0D006EEC1C;
+					};
+				};
+			};
+			buildConfigurationList = BD1EB991198E5C0D006EEC1C /* Build configuration list for PBXProject "adviewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BD1EB98D198E5C0D006EEC1C;
+			productRefGroup = BD1EB997198E5C0D006EEC1C /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BD1EB995198E5C0D006EEC1C /* adviewer */,
+				BD1EB9A7198E5C0D006EEC1C /* adviewerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BD1EB994198E5C0D006EEC1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD1EB9A0198E5C0D006EEC1C /* Images.xcassets in Resources */,
+				BD1EB9A3198E5C0D006EEC1C /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD1EB9A6198E5C0D006EEC1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BD1EB992198E5C0D006EEC1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD1EB99E198E5C0D006EEC1C /* AppDelegate.swift in Sources */,
+				BD1EB99C198E5C0D006EEC1C /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BD1EB9A4198E5C0D006EEC1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BD1EB9AF198E5C0D006EEC1C /* adviewerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BD1EB9AA198E5C0D006EEC1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BD1EB995198E5C0D006EEC1C /* adviewer */;
+			targetProxy = BD1EB9A9198E5C0D006EEC1C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BD1EB9A1198E5C0D006EEC1C /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BD1EB9A2198E5C0D006EEC1C /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BD1EB9B0198E5C0D006EEC1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BD1EB9B1198E5C0D006EEC1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BD1EB9B3198E5C0D006EEC1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = adviewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BD1EB9B4198E5C0D006EEC1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = adviewer/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BD1EB9B6198E5C0D006EEC1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/adviewer.app/Contents/MacOS/adviewer";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = adviewerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		BD1EB9B7198E5C0D006EEC1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/adviewer.app/Contents/MacOS/adviewer";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = adviewerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BD1EB991198E5C0D006EEC1C /* Build configuration list for PBXProject "adviewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD1EB9B0198E5C0D006EEC1C /* Debug */,
+				BD1EB9B1198E5C0D006EEC1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BD1EB9B2198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "adviewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD1EB9B3198E5C0D006EEC1C /* Debug */,
+				BD1EB9B4198E5C0D006EEC1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		BD1EB9B5198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "adviewerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BD1EB9B6198E5C0D006EEC1C /* Debug */,
+				BD1EB9B7198E5C0D006EEC1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BD1EB98E198E5C0D006EEC1C /* Project object */;
+}
