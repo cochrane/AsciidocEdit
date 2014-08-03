@@ -23,6 +23,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         // testFS()
         
+
+        let frame = NSMakeRect(0.0, 0.0, 1200.0, 700.0)
+        window.setFrame(frame, display: true)
+        
         textView.string = "foo"
         
         
@@ -77,16 +81,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBAction func saveFileAction(sender: AnyObject) {
         
-        println("SaveFileAction (1)")
-        println("documentPath = \(documentPath)")
-        
         if let currentDocumentPath = documentPath {
             
-            println("SaveFileAction (2)")
-            
             documentText = textView.string
-            
-            println("\nin saveFileAction, \ndocumentText:\n----------\n\(documentText)\n----------")
             
             documentText.writeToFile(currentDocumentPath,
                 atomically: false, encoding: NSUTF8StringEncoding, error: nil)
