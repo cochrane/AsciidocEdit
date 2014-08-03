@@ -7,6 +7,8 @@
 //
 
 import Cocoa
+import WebKit
+
 
 class AppDelegate: NSObject, NSApplicationDelegate {
                             
@@ -15,6 +17,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     @IBOutlet weak var scrollView: NSScrollView!
     
     @IBOutlet var textView: NSTextView!
+    
+    @IBOutlet weak var adWebView: WebView!
     
     var documentPath: String?
     var documentText: String = ""

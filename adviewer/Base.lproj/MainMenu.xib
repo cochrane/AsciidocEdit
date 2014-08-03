@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6185.11"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="6185.11"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -13,6 +14,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="adviewer" customModuleProvider="target">
             <connections>
+                <outlet property="adWebView" destination="v2T-D3-8qG" id="enL-LN-bHr"/>
                 <outlet property="saveAsFileAction" destination="Bw7-FT-i3A" id="01v-e0-ZBN"/>
                 <outlet property="saveFileAction" destination="pxx-59-PXV" id="oRj-jF-nma"/>
                 <outlet property="scrollView" destination="dF6-fn-ukB" id="WYX-7Y-mTW"/>
@@ -710,11 +712,19 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <webView misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v2T-D3-8qG">
+                        <rect key="frame" x="206" y="20" width="168" height="320"/>
+                        <webPreferences key="preferences" defaultFontSize="12" defaultFixedFontSize="12"/>
+                    </webView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="v2T-D3-8qG" secondAttribute="bottom" constant="20" id="ATc-bf-tgI"/>
                     <constraint firstAttribute="bottom" secondItem="dF6-fn-ukB" secondAttribute="bottom" constant="20" id="Ui0-tC-EJp"/>
                     <constraint firstItem="dF6-fn-ukB" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="Web-MY-oYb"/>
                     <constraint firstItem="dF6-fn-ukB" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="Ydi-of-ze5"/>
+                    <constraint firstItem="v2T-D3-8qG" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="hOC-Z0-Dg1"/>
+                    <constraint firstAttribute="trailing" secondItem="v2T-D3-8qG" secondAttribute="trailing" constant="106" id="laT-X8-cQX"/>
+                    <constraint firstItem="v2T-D3-8qG" firstAttribute="leading" secondItem="dF6-fn-ukB" secondAttribute="trailing" constant="8" symbolic="YES" id="sbm-ca-M1C"/>
                 </constraints>
             </view>
             <point key="canvasLocation" x="39" y="112"/>
