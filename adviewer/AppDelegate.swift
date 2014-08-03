@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.setFrame(frame, display: true)
         
         textView.string = "foo"
-        
+        textView.automaticSpellingCorrectionEnabled = false
         
         scrollView.drawsBackground = true
         scrollView.backgroundColor = NSColor.lightGrayColor()
