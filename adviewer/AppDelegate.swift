@@ -20,6 +20,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet weak var adWebView: WebView!
     
+    var documentURL: String?
+    var htmlDocumentURL: String?
     var documentPath: String?
     var documentText: String = ""
 
@@ -28,16 +30,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // testFS()
         
 
-        let frame = NSMakeRect(0.0, 0.0, 1200.0, 700.0)
+        let frame = NSMakeRect(0.0, 0.0, 1400.0, 700.0)
         window.setFrame(frame, display: true)
+        window.backgroundColor = NSColor.darkGrayColor()
         
         textView.string = "foo"
+        textView.font = NSFont(name: "Helvetica", size: 18.0)
+        
+       // init(name fontName: String!, size fontSize: CGFloat)
         textView.automaticSpellingCorrectionEnabled = false
+        textView.backgroundColor =  NSColor(SRGBRed: 0.96, green: 0.9, blue: 0.8, alpha: 1.0)
+        // NSColor.lightGrayColor()
         
         scrollView.drawsBackground = true
-        scrollView.backgroundColor = NSColor.lightGrayColor()
+        scrollView.backgroundColor = NSColor(SRGBRed: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
         
-    
+        
         
         // textView.textContainer
         
@@ -69,10 +77,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if (clicked == NSFileHandlingPanelOKButton) {
             
             for url in panel.URLs {
-              if let documentURL = url.absoluteString {
-                documentPath = pathFromURL(documentURL)
+              if let url = url.absoluteString {
+                
+                documentURL = url
+                htmlDocumentURL = baseName(documentURL!) + ".html"
+                documentPath = pathFromURL(documentURL!)
+                
+                println("\ndocumentURL: \(documentURL)")
+                println("\nhtmlDocumentURL: \(htmlDocumentURL)")
+                
                 documentText = readStringFromPath(documentPath!)
                 textView.string = documentText
+                
+                // refreshHTML(documentPath!)
+                let commandOutput = executeCommand("/bin/echo", ["Hello, I am here!"])
+                println("Command output: \(commandOutput)")
+                
+                adWebView.mainFrameURL = htmlDocumentURL!
               }
             }
         }

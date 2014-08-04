@@ -22,6 +22,58 @@ func readStringFromPath(path: String) -> String {
 }
 
 
+/****
+htmlDocumentURL: Optional("file:///Users/carlson/Documents/abcdef.html")
+In readStringFromURL, FILE PATH: /Users/carlson/Documents/abcdef.ad
+env: ruby_executable_hooks: No such file or directory
+
+http://askubuntu.com/questions/182418/how-to-get-usr-bin-env-ruby-to-point-to-the-correct-ruby-environment
+
+???
+gem install executable-hooks -v ">=1.3.2"
+gem regenerate_binstubs
+
+After ensuring I was in the right RVM Ruby
+environment gem install rubygems-bundler did the trick.
+
+****/
+
+func refreshHTML(filePath: String) {
+    
+    let task = NSTask()
+    task.launchPath = "/usr/bin/asciidoctor"
+    task.arguments = [filePath]
+    task.launch()
+ 
+}
+
+func executeCommand(command: String, args: [String]) -> String {
+    
+    let task = NSTask()
+    
+    task.launchPath = command
+    task.arguments = args
+    
+    let pipe = NSPipe()
+    task.standardOutput = pipe
+    task.launch()
+    
+    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    let output: String = NSString(data: data, encoding: NSUTF8StringEncoding)
+    
+    return output
+    
+}
+
+func baseName(path: String) -> String {
+    
+    //let part = path.pathComponents
+    let part = path.componentsSeparatedByString(".")
+    return part[0]
+    
+}
+
+
 func testFS() {
     
     let file = "test_file.txt"
