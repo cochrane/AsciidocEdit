@@ -8,6 +8,17 @@
 
 import Foundation
 
+
+extension String {
+    
+    func countWords() -> Int {
+        
+        let word = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        return word.count
+    }
+}
+
 func pathFromURL(fileURL: String) -> String {
     
     return fileURL.stringByReplacingOccurrencesOfString("file://", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)

@@ -18,7 +18,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     @IBOutlet var textView: NSTextView!
     
-    @IBOutlet weak var adWebView: WebView!
+    @IBOutlet weak var adWebView: WebView!    
+    
+    @IBOutlet weak var messageLabel: NSTextField!
     
     var documentURL: String?
     var htmlDocumentURL: String?
@@ -30,26 +32,18 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // testFS()
         
 
-        let frame = NSMakeRect(0.0, 0.0, 1400.0, 700.0)
+        let frame = NSMakeRect(0.0, 0.0, 1200.0, 700.0)
         window.setFrame(frame, display: true)
-        window.backgroundColor = NSColor.darkGrayColor()
+        window.backgroundColor = NSColor.blackColor()
         
         textView.string = "foo"
         textView.font = NSFont(name: "Helvetica", size: 18.0)
-        
-       // init(name fontName: String!, size fontSize: CGFloat)
         textView.automaticSpellingCorrectionEnabled = false
         textView.backgroundColor =  NSColor(SRGBRed: 0.96, green: 0.9, blue: 0.8, alpha: 1.0)
-        // NSColor.lightGrayColor()
         
-        scrollView.drawsBackground = true
-        scrollView.backgroundColor = NSColor(SRGBRed: 1.0, green: 0.8, blue: 0.8, alpha: 1.0)
+        adWebView.UIDelegate = self
+        messageLabel.stringValue = ""
         
-        
-        
-        // textView.textContainer
-        
-        // Insert code here to initialize your application
     }
 
     func applicationWillTerminate(aNotification: NSNotification?) {
@@ -89,12 +83,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 documentText = readStringFromPath(documentPath!)
                 textView.string = documentText
                 
-                refreshHTML(documentPath!)
-                let commandOutput = executeCommand("/bin/echo", ["Hello, I am here!"])
-                println("Command output: \(commandOutput)")
-                
-                adWebView.mainFrameURL = htmlDocumentURL!
-                adWebView.reload(nil)
+                updateUI()
                 
                 // http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
               }
@@ -116,38 +105,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             documentText.writeToFile(currentDocumentPath,
                 atomically: false, encoding: NSUTF8StringEncoding, error: nil)
             
-            refreshHTML(documentPath!)
-            adWebView.mainFrameURL = htmlDocumentURL!
+            updateUI()
             
-            // adWebView.mainFrame.setNeedsDisplay()
-            
-            // adWebView.reload(nil)
-            
-            // adWebView.mainFrame.reload()
-            
-            /*
-            if adWebView.mainFrame.dataSource == nil {
-                
-                adWebView.mainFrame.reload()
-                
-                // adWebView.mainFrame.loadRequest(<#request: NSURLRequest?#>)
-                
-            } else {
-                
-                // adWebView.super().reload(nil)
-            }
-*/
-            
-            /*
-            if ([[self mainFrame] dataSource] == nil) {
-                [[self mainFrame] loadRequest:myRequest];
-            } else {
-                [super reload:sender];
-            }
-*/
-
-            // http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
-            // adWebView.setNeedsDisplayInRect(nil)
         }
         
     }
@@ -157,6 +116,46 @@ class AppDelegate: NSObject, NSApplicationDelegate {
    
     
     
+    func updateUI() {
+        
+        refreshHTML(documentPath!)
+        adWebView.mainFrameURL = htmlDocumentURL!
+        adWebView.reload(nil)
+        messageLabel.stringValue = "Word count: \(documentText.countWords())"
+        
+    }
+    
     
 }
+
+
+// adWebView.mainFrame.setNeedsDisplay()
+
+// adWebView.reload(nil)
+
+// adWebView.mainFrame.reload()
+
+/*
+if adWebView.mainFrame.dataSource == nil {
+
+adWebView.mainFrame.reload()
+
+// adWebView.mainFrame.loadRequest(<#request: NSURLRequest?#>)
+
+} else {
+
+// adWebView.super().reload(nil)
+}
+*/
+
+/*
+if ([[self mainFrame] dataSource] == nil) {
+[[self mainFrame] loadRequest:myRequest];
+} else {
+[super reload:sender];
+}
+*/
+
+// http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
+// adWebView.setNeedsDisplayInRect(nil)
 
