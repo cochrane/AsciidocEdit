@@ -10,7 +10,8 @@ import Cocoa
 import WebKit
 
 
-class AppDelegate: NSObject, NSApplicationDelegate {
+
+class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                             
     @IBOutlet weak var window: NSWindow!
 
@@ -26,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var htmlDocumentURL: String?
     var documentPath: String?
     var documentText: String = ""
+    var textChanges: Int = 0
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
 
@@ -42,6 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         textView.backgroundColor =  NSColor(SRGBRed: 0.96, green: 0.9, blue: 0.8, alpha: 1.0)
         
+        textView.delegate = self
         adWebView.UIDelegate = self
         messageLabel.stringValue = ""
         
@@ -150,6 +153,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         documentURL = url
         htmlDocumentURL = baseName(documentURL!) + ".html"
         documentPath = pathFromURL(documentURL!)
+    }
+    
+    func textDidChange (notification: NSNotification) {
+        
+       textChanges++
+       println("text changed: \(textChanges)")
+        if textChanges % 6 == 0 {
+            
+            println("-- refreshing: \(textChanges)")
+            updateUI(refresh: true)
+        }
     }
     
     
