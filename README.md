@@ -13,6 +13,10 @@ editor which displys the source file, e.g `foo.ad`
 On the right is a window which displays the file
 `foo.html` which `asciidoctor` produces from `foo.ad`.
 
+Whe you do cmd-S, `asciihelper` calls on `asciidoctor`
+to render `foo.ad` as `foo.html`.  (It calls
+`/usr/bin/asciidoctor`).
+
 At the moment the biggest issue is a "lag" in refreshing
 the WebView (right-hand windowpane).  When you do cmd-S,
 the text on the left is saved and `asciidoctor` is run 
