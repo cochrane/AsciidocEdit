@@ -36,7 +36,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         textView.string = "foo"
         textView.font = NSFont(name: "Helvetica", size: 18.0)
+        
         textView.automaticSpellingCorrectionEnabled = false
+        textView.automaticDashSubstitutionEnabled = false
+        
         textView.backgroundColor =  NSColor(SRGBRed: 0.96, green: 0.9, blue: 0.8, alpha: 1.0)
         
         adWebView.UIDelegate = self
