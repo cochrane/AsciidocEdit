@@ -401,6 +401,7 @@
 				BD1EB9B4198E5C0D006EEC1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BD1EB9B5198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "adviewerTests" */ = {
 			isa = XCConfigurationList;
@@ -409,6 +410,7 @@
 				BD1EB9B7198E5C0D006EEC1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

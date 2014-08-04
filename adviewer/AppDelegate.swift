@@ -89,11 +89,14 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 documentText = readStringFromPath(documentPath!)
                 textView.string = documentText
                 
-                // refreshHTML(documentPath!)
+                refreshHTML(documentPath!)
                 let commandOutput = executeCommand("/bin/echo", ["Hello, I am here!"])
                 println("Command output: \(commandOutput)")
                 
                 adWebView.mainFrameURL = htmlDocumentURL!
+                adWebView.reload(nil)
+                
+                // http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
               }
             }
         }
@@ -112,6 +115,39 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             
             documentText.writeToFile(currentDocumentPath,
                 atomically: false, encoding: NSUTF8StringEncoding, error: nil)
+            
+            refreshHTML(documentPath!)
+            adWebView.mainFrameURL = htmlDocumentURL!
+            
+            // adWebView.mainFrame.setNeedsDisplay()
+            
+            // adWebView.reload(nil)
+            
+            // adWebView.mainFrame.reload()
+            
+            /*
+            if adWebView.mainFrame.dataSource == nil {
+                
+                adWebView.mainFrame.reload()
+                
+                // adWebView.mainFrame.loadRequest(<#request: NSURLRequest?#>)
+                
+            } else {
+                
+                // adWebView.super().reload(nil)
+            }
+*/
+            
+            /*
+            if ([[self mainFrame] dataSource] == nil) {
+                [[self mainFrame] loadRequest:myRequest];
+            } else {
+                [super reload:sender];
+            }
+*/
+
+            // http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
+            // adWebView.setNeedsDisplayInRect(nil)
         }
         
     }

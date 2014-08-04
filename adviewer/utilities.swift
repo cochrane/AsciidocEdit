@@ -17,26 +17,12 @@ func readStringFromPath(path: String) -> String {
     
     println("In readStringFromURL, FILE PATH: \(path)")
     
-    return String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: nil)!
+    let str = String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: nil)!
+    
+    return str
     
 }
 
-
-/****
-htmlDocumentURL: Optional("file:///Users/carlson/Documents/abcdef.html")
-In readStringFromURL, FILE PATH: /Users/carlson/Documents/abcdef.ad
-env: ruby_executable_hooks: No such file or directory
-
-http://askubuntu.com/questions/182418/how-to-get-usr-bin-env-ruby-to-point-to-the-correct-ruby-environment
-
-???
-gem install executable-hooks -v ">=1.3.2"
-gem regenerate_binstubs
-
-After ensuring I was in the right RVM Ruby
-environment gem install rubygems-bundler did the trick.
-
-****/
 
 func refreshHTML(filePath: String) {
     
@@ -44,6 +30,7 @@ func refreshHTML(filePath: String) {
     task.launchPath = "/usr/bin/asciidoctor"
     task.arguments = [filePath]
     task.launch()
+    println("Refreshed \(filePath)")
  
 }
 
