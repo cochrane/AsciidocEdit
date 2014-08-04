@@ -23,7 +23,7 @@ could help out on this, that would be great.
 Installation
 ============
 
-Clone, compile project with XCode. You must have `/usr/bin/asciidoctor`.
+Clone and compile project with XCode. You must have `/usr/bin/asciidoctor`.
 
 License
 =======
