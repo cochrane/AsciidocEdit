@@ -28,8 +28,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     var documentPath: String?
     var documentText: String = ""
     var textChanges: Int = 0
+    
+    func processNotification(notification: NSNotification) {
+        
+        println("Notification: \(notification)")
+        
+    }
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
+        
+        let nc = NSNotificationCenter()
+        nc.addObserver(self, selector: "processNotification", name: nil, object: nil)
 
         let frame = NSMakeRect(0.0, 0.0, 1200.0, 700.0)
         window.setFrame(frame, display: true)
