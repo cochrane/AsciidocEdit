@@ -147,14 +147,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         if refresh {
             
+            documentText.writeToFile(documentPath!,
+                atomically: false, encoding: NSUTF8StringEncoding, error: nil)
             refreshHTML(documentPath!)
             
         }
+        
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
+        // adWebView.mainFrame.reload()
         // adWebView.mainFrameURL = htmlDocumentURL!
         adWebView.reload(nil)
-        messageLabel.stringValue = "Word count: \(documentText.countWords())"
+        adWebView.setNeedsDisplayInRect(adWebView.frame)
         
+        messageLabel.stringValue = "Word count: \(documentText.countWords())"
+        messageLabel.setNeedsDisplay()
+        
+        window.viewsNeedDisplay = true
     }
     
     func synchronizePaths(url: String) {
