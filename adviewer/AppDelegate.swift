@@ -28,6 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     var documentPath: String?
     var documentText: String = ""
     var textChanges: Int = 0
+    var textLength = 0
     
     func processNotification(notification: NSNotification) {
         
@@ -119,15 +120,22 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         if let currentDocumentPath = documentPath {
             
-            documentText = textView.string
-            
-            documentText.writeToFile(currentDocumentPath,
-                atomically: false, encoding: NSUTF8StringEncoding, error: nil)
-            
+            updateDocument(currentDocumentPath)
             updateUI(refresh: true)
             
         }
         
+    }
+    
+    
+    
+    func updateDocument(path: String) {
+        
+        documentText = textView.string
+        
+        documentText.writeToFile(path,
+            atomically: false, encoding: NSUTF8StringEncoding, error: nil)
+ 
     }
     
 
@@ -149,8 +157,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         if refresh {
             
-            documentText.writeToFile(documentPath!,
-                atomically: false, encoding: NSUTF8StringEncoding, error: nil)
+            println("-- writing to file: \(documentPath)")
+            
+            if let currentDocumentPath = documentPath {
+                
+                updateDocument(currentDocumentPath)
+                
+            }
+            
             refreshHTML(documentPath!)
             
         }
@@ -158,7 +172,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
         // adWebView.mainFrame.reload()
         // adWebView.mainFrameURL = htmlDocumentURL!
-        adWebView.reload(nil)
+        // adWebView.reload(nil)
         adWebView.setNeedsDisplayInRect(adWebView.frame)
         
         messageLabel.stringValue = "Word count: \(documentText.countWords())"
@@ -177,10 +191,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     func textDidChange (notification: NSNotification) {
         
        textChanges++
+       let newTextLength = textView.string.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
+       let changeInTextLength = newTextLength - textLength
+       textLength = newTextLength
+        
        println("text changed: \(textChanges)")
-        if textChanges % 6 == 0 {
+        
+        if changeInTextLength > 5 {
             
-            println("-- refreshing: \(textChanges)")
+            println("-- refreshing, changeInTextLength: \(changeInTextLength)")
+            updateUI(refresh: true)
+        }
+        else if textChanges % 5 == 0 {
+            
+            println("-- refreshing, textChanges: \(textChanges)")
             updateUI(refresh: true)
         }
     }
