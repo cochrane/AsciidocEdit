@@ -73,9 +73,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             for url in panel.URLs {
               if let url = url.absoluteString {
                 
+                /*
                 documentURL = url
                 htmlDocumentURL = baseName(documentURL!) + ".html"
                 documentPath = pathFromURL(documentURL!)
+                */
+                
+                synchronizePaths(url)
                 
                 println("\ndocumentURL: \(documentURL)")
                 println("\nhtmlDocumentURL: \(htmlDocumentURL)")
@@ -83,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 documentText = readStringFromPath(documentPath!)
                 textView.string = documentText
                 
-                updateUI()
+                updateUI(refresh: false)
                 
                 // http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
               }
@@ -105,24 +109,46 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             documentText.writeToFile(currentDocumentPath,
                 atomically: false, encoding: NSUTF8StringEncoding, error: nil)
             
-            updateUI()
+            updateUI(refresh: true)
             
         }
         
     }
     
-    
-    @IBOutlet weak var saveAsFileAction: NSMenuItem!
+
+    @IBAction func browserBack(sender: AnyObject) {
+        
+        adWebView.goBack()
+    }
    
     
-    
-    func updateUI() {
+    @IBAction func browserForward(sender: AnyObject) {
         
-        refreshHTML(documentPath!)
-        adWebView.mainFrameURL = htmlDocumentURL!
+        adWebView.goForward()
+        
+    }
+    
+    
+    
+    func updateUI(#refresh: Bool) {
+        
+        if refresh {
+            
+            refreshHTML(documentPath!)
+            
+        }
+        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
+        // adWebView.mainFrameURL = htmlDocumentURL!
         adWebView.reload(nil)
         messageLabel.stringValue = "Word count: \(documentText.countWords())"
         
+    }
+    
+    func synchronizePaths(url: String) {
+        
+        documentURL = url
+        htmlDocumentURL = baseName(documentURL!) + ".html"
+        documentPath = pathFromURL(documentURL!)
     }
     
     
