@@ -28,13 +28,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var documentText: String = ""
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
-        
-        // testFS()
-        
 
         let frame = NSMakeRect(0.0, 0.0, 1200.0, 700.0)
         window.setFrame(frame, display: true)
         window.backgroundColor = NSColor.blackColor()
+        window.title = "AsciiHelper"
         
         textView.string = "foo"
         textView.font = NSFont(name: "Helvetica", size: 18.0)
