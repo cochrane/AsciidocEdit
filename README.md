@@ -7,7 +7,7 @@ It is written in Swift. Although it works at a very basic
 level, it has a long ways to go, especially in 
 doing a good live preview of the asciidoc text.
 
-This app will be distributed free on the appstore
+**Note.** This app will be distributed free on the appstore
 when it is suitable for "publication".  Source
 code will remain here and can always be compiled
 from the source.
