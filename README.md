@@ -34,7 +34,7 @@ Note
 ====
 
 This app will be distributed on the appstore
-when it is suitable for "publication".  Source
+for free when it is suitable for "publication".  Source
 code will remain here and the app can always be compiled
 from the source.
 
