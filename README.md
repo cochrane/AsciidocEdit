@@ -7,12 +7,7 @@ It is written in Swift. Although it works at a very basic
 level, it has a long ways to go, especially in 
 doing a good live preview of the asciidoc text.
 
-**Note.** This app will be distributed free on the appstore
-when it is suitable for "publication".  Source
-code will remain here and can always be compiled
-from the source.
-
-See the screenshot im the images directory for this repo.
+See the screenshot in the images directory for this repo.
 
 The app has two windows.  On the left, a basic text
 editor which displys the source file, e.g `foo.ad`  
@@ -34,6 +29,15 @@ Installation
 ============
 
 Clone and compile project with XCode. You must have `/usr/bin/asciidoctor`.
+
+Note
+====
+
+This app will be distributed free on the appstore
+when it is suitable for "publication".  Source
+code will remain here and can always be compiled
+from the source.
+
 
 License
 =======
