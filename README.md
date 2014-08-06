@@ -35,7 +35,7 @@ Note
 
 This app will be distributed free on the appstore
 when it is suitable for "publication".  Source
-code will remain here and can always be compiled
+code will remain here and the app can always be compiled
 from the source.
 
 
