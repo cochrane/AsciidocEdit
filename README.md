@@ -33,7 +33,7 @@ Clone and compile project with XCode. You must have `/usr/bin/asciidoctor`.
 Note
 ====
 
-This app will be distributed free on the appstore
+This app will be distributed on the appstore
 when it is suitable for "publication".  Source
 code will remain here and the app can always be compiled
 from the source.
