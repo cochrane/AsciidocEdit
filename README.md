@@ -4,7 +4,13 @@ asciihelper
 Asciihelper is a MacOS application for helping to compose 
 documents written in asciidoc (asciidoctor) markup.
 It is written in Swift. Although it works at a very basic
-level, it is in a very primitive state.  
+level, it has a long ways to go, especially in 
+doing a good live preview of the asciidoc text.
+
+This app will be distributed free on the appstore
+when it is suitable for "publication".  Source
+code will remain here and can always be compiled
+from the source.
 
 See the screenshot im the images directory for this repo.
 
