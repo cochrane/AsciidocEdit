@@ -135,6 +135,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
     }
     
+    @IBAction func SaveAsPDFAction(sender: AnyObject) {
+        
+        saveAsPDF(documentPath!)
+        
+    }
     
     
     func updateDocument(path: String) {
@@ -174,6 +179,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
 
         
     }
+    
+    
+    @IBAction func installAsciidoctorAction(sender: AnyObject) {
+    }
+    
     
     func updateUI(#refresh: Bool) {
         

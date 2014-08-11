@@ -36,10 +36,17 @@
                                     <action selector="orderFrontStandardAboutPanel:" target="-1" id="Exp-CZ-Vem"/>
                                 </connections>
                             </menuItem>
+                            <menuItem isSeparatorItem="YES" id="gkK-0S-TIg"/>
                             <menuItem title="Asciidoctor version" id="nA3-b7-tDk">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="aboutAsciidoctorAction:" target="Voe-Tx-rLC" id="omx-UQ-Llh"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Install Asciidoctor" id="73w-Ia-xso">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="installAsciidoctorAction:" target="Voe-Tx-rLC" id="Xgb-Gj-KtV"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
@@ -117,6 +124,12 @@
                             <menuItem title="Save As…" keyEquivalent="S" id="Bw7-FT-i3A">
                                 <connections>
                                     <action selector="saveDocumentAs:" target="-1" id="mDf-zr-I0C"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Save As PDF" id="2DZ-1r-Ejz">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="SaveAsPDFAction:" target="Voe-Tx-rLC" id="Fjf-HR-ci6"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Revert to Saved" id="KaW-ft-85H">
