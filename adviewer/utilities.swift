@@ -58,6 +58,16 @@ func saveAsPDF(filePath: String) {
     
 }
 
+func installAsciidoctor() {
+    
+    executeCommand("/bin/echo", ["foo", "bar"], verbose: true)
+    
+    // executeCommand("rvm", ["use", "system"], verbose: true)
+    executeCommand("/usr/bin/gem", ["install", "asciidoctor"], verbose: true)
+
+    
+}
+
 func executeCommand(command: String, args: [String], verbose: Bool = false ) -> String {
     
     let task = NSTask()

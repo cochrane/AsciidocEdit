@@ -182,6 +182,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     
     @IBAction func installAsciidoctorAction(sender: AnyObject) {
+        
+        installAsciidoctor()
     }
     
     
