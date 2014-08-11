@@ -50,8 +50,8 @@ func refreshHTML(filePath: String) {
 
 func saveAsPDF(filePath: String) {
     
-    // let cmd = "/Users/carlson/.rvm/gems/ruby-2.1.1/bin/asciidoctor-pdf"
-    let cmd = "a2pdf"
+    let cmd = "/usr/bin/asciidoctor-pdf"
+
     
     executeCommand(cmd, [filePath], verbose: true)
     
