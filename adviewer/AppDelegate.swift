@@ -58,6 +58,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         textView.delegate = self
         adWebView.UIDelegate = self
+        
+        
+       //  adWebView.mainFrame.loadHTMLString("javascript:testEcho('Hello World!')");
+        
+        
+        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
+        // adWebView.shouldUpdateWhileOffscreen = true
+
         messageLabel.stringValue = ""
         
     }
@@ -152,8 +160,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     }
     
     
+    @IBAction func aboutAsciidoctorAction(sender: AnyObject) {
+        
+        let cmd = "/usr/bin/asciidoctor"
+        
+        let raw_version = executeCommand(cmd, ["-V"], verbose: false)
+        let part = raw_version.componentsSeparatedByString("\n")
+        let version = part[0]
+        
+        
+        messageLabel.stringValue = version
+        messageLabel.needsDisplay = true
+
+        
+    }
     
     func updateUI(#refresh: Bool) {
+        
         
         if refresh {
             
@@ -169,14 +192,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             
         }
         
+        let win = adWebView.windowScriptObject
+        let location: AnyObject! = win.valueForKey("location")
+        let href: AnyObject! = location.valueForKey("href");
+        
+        println("location: \(location)")
+        println("href: \(href)")
+        
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
         // adWebView.mainFrame.reload()
-        // adWebView.mainFrameURL = htmlDocumentURL!
+        adWebView.mainFrameURL = htmlDocumentURL!
         // adWebView.reload(nil)
-        adWebView.setNeedsDisplayInRect(adWebView.frame)
+        // adWebView.setNeedsDisplayInRect(adWebView.frame)
+        adWebView.needsDisplay = true
         
         messageLabel.stringValue = "Word count: \(documentText.countWords())"
-        messageLabel.setNeedsDisplay()
+        messageLabel.needsDisplay = true
+        
+        
+        // adWebView.scrollPoint(NSPoint(x:0, y:200))
+            // scrollView.contentOffset = CGPointMake(0, 100);
         
         window.viewsNeedDisplay = true
     }
@@ -190,6 +225,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     func textDidChange (notification: NSNotification) {
         
+        /*
+
+        You can use the following on OS X:
+        
+        [webView stringByEvaluatingJavaScriptFromString:[NSString stringWithFormat:@"window.scrollTo(%f, %f)", xPos, yPos]];
+        */
+        
+       // adWebView.mainFrame.
+        
        textChanges++
        let newTextLength = textView.string.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
        let changeInTextLength = newTextLength - textLength
@@ -197,12 +241,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
        println("text changed: \(textChanges)")
         
-        if changeInTextLength > 5 {
+        if changeInTextLength > 20 {
             
             println("-- refreshing, changeInTextLength: \(changeInTextLength)")
             updateUI(refresh: true)
         }
-        else if textChanges % 5 == 0 {
+        else if textChanges % 20 == 0 {
             
             println("-- refreshing, textChanges: \(textChanges)")
             updateUI(refresh: true)
@@ -211,35 +255,4 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     
 }
-
-
-// adWebView.mainFrame.setNeedsDisplay()
-
-// adWebView.reload(nil)
-
-// adWebView.mainFrame.reload()
-
-/*
-if adWebView.mainFrame.dataSource == nil {
-
-adWebView.mainFrame.reload()
-
-// adWebView.mainFrame.loadRequest(<#request: NSURLRequest?#>)
-
-} else {
-
-// adWebView.super().reload(nil)
-}
-*/
-
-/*
-if ([[self mainFrame] dataSource] == nil) {
-[[self mainFrame] loadRequest:myRequest];
-} else {
-[super reload:sender];
-}
-*/
-
-// http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
-// adWebView.setNeedsDisplayInRect(nil)
 

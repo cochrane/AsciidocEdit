@@ -37,20 +37,30 @@ func readStringFromPath(path: String) -> String {
 
 func refreshHTML(filePath: String) {
     
-    let task = NSTask()
-    task.launchPath = "/usr/bin/asciidoctor"
-    task.arguments = [filePath]
-    task.launch()
-    println("Refreshed \(filePath)")
+    let cmd = "/usr/bin/asciidoctor"
+    
+    let version = executeCommand(cmd, ["-V"], verbose: false)
+    
+    println("\n----------------------")
+    println(version)
+    executeCommand(cmd, [filePath], verbose: false)
+    println("----------------------\n")
  
 }
 
-func executeCommand(command: String, args: [String]) -> String {
+func executeCommand(command: String, args: [String], verbose: Bool = false ) -> String {
     
     let task = NSTask()
     
     task.launchPath = command
     task.arguments = args
+    
+    
+    if verbose {
+      println("executeCommand")
+      println("Running: \(command)")
+      println("Args: \(args)")
+    }
     
     let pipe = NSPipe()
     task.standardOutput = pipe
@@ -58,6 +68,12 @@ func executeCommand(command: String, args: [String]) -> String {
     
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
     let output: String = NSString(data: data, encoding: NSUTF8StringEncoding)
+    
+    if verbose {
+        
+        println("Output: \(output)")
+        
+    }
     
     return output
     
