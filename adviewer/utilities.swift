@@ -35,6 +35,24 @@ func readStringFromPath(path: String) -> String {
 }
 
 
+
+func contentsOFLastFileOpened() -> String {
+    
+    let lastDocumentOpenedPath = NSUserDefaults.standardUserDefaults().objectForKey("documentPath") as String?
+    
+    println("lastDocumentOpenedPath: \(lastDocumentOpenedPath)")
+    
+    if let path = lastDocumentOpenedPath  {
+        
+        return readStringFromPath(path)
+        
+    } else {
+        
+        return "Couldn't find the last file you opened."
+    }
+}
+
+
 func refreshHTML(filePath: String) {
     
     let cmd = "/usr/bin/asciidoctor"
@@ -64,7 +82,8 @@ func installAsciidoctor() {
     
     // executeCommand("rvm", ["use", "system"], verbose: true)
     executeCommand("/usr/bin/gem", ["install", "asciidoctor"], verbose: true)
-
+    
+   
     
 }
 
@@ -135,3 +154,20 @@ func testFS() {
         
     }
 }
+
+func memorizeKeyValuePair(key: String, value: String) {
+    
+    NSUserDefaults.standardUserDefaults().setObject(value, forKey:key)
+    NSUserDefaults.standardUserDefaults().synchronize()
+    println("Memorized: \(key) => \(value)")
+    
+}
+
+func recallValueOfKey(key: String) -> String? {
+    
+    let value = NSUserDefaults.standardUserDefaults().objectForKey(key) as String?
+    println("Recalled: \(key) => \(value)")
+    return value
+
+}
+

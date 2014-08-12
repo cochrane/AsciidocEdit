@@ -38,6 +38,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         
+        
+        
         let nc = NSNotificationCenter()
         nc.addObserver(self, selector: "processNotification", name: nil, object: nil)
 
@@ -46,7 +48,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         window.backgroundColor = NSColor.blackColor()
         window.title = "AsciiHelper"
         
-        textView.string = "foo"
+        let url = recallValueOfKey("documentURL")
+        if let documentURL = url {
+           println("DOCUMENT URL: \(documentURL)")
+           synchronizePaths(documentURL)
+           println("DOCUMENT PATH: \(documentPath)")
+           textView.string = readStringFromPath(documentPath!)
+           updateUI(refresh: true)
+            
+        } else {
+            
+            textView.string =  "Couldn't find the last file you opened."
+        }
+        
+        
         textView.font = NSFont(name: "Helvetica", size: 18.0)
         
         textView.automaticSpellingCorrectionEnabled = false
@@ -105,8 +120,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 
                 synchronizePaths(url)
                 
-                println("\ndocumentURL: \(documentURL)")
-                println("\nhtmlDocumentURL: \(htmlDocumentURL)")
+                println("\ndocumentURL: \(documentURL!)")
+                println("\nhtmlDocumentURL: \(htmlDocumentURL!)")
+                
+                memorizeKeyValuePair("documentURL", url)
+                recallValueOfKey("documentURL")
                 
                 documentText = readStringFromPath(documentPath!)
                 textView.string = documentText
