@@ -1,0 +1,72 @@
+++++
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+	  
+      $("#fooxx").scrollTop(200)
+
+	  var result = $("#fooxx").scrollTop()+" px"
+	  
+      alert(result);
+ 
+	  document.getElementById('report').innerHTML=result
+
+  });
+});
+
+</script>
+</head>
+<body>
+
+
+<div id="fooxx" style="border:1px solid black;width:150px;height:150px;overflow:auto; margin-left:40px; margin-top:40px;">
+
+<p>1. some text.</p>
+
+<p>2. some text.</p>
+
+<p>3. some text.</p>
+
+<p>4. some text.</p>
+
+<p>5. some text.</p>
+
+<p>6. some text.</p>
+
+<p>7. some text.</p>
+
+<p>8. some text.</p>
+
+<p>9. some text.</p>
+
+<p>10. some text.</p>
+
+
+
+</div>
+
+<br>
+
+<div id="report" style="margin-bottom:10px;margin-top:20px;">Report</div>
+<button>Jump</button>
+
+</body>
+</html>
+++++
+
+== Comments
+
+Press the "Jump" button to scroll down 200px.  Use the scroll
+bar to move around, then press "Jump" again.
+
+
+
+
