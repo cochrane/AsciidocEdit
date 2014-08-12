@@ -11,28 +11,11 @@ $(document).ready(function(){
 
   $("#b1").click(function(){
 	 
-
 	var position = localStorage.getItem("scroll_position");
 
       $("body").scrollTop(position)
 
-	  
-
   });
-
-$("#b2").click(function(){
-	  
-	  var scroll_position = $("body").scrollTop();
-
-       localStorage.setItem("scroll_position", scroll_position);
-   
-       document.getElementById("result").innerHTML = localStorage.getItem("scroll_position");
-
- 
-	  document.getElementById('report').innerHTML=result2
-
-  });
-
 
 $(document).ready(function(){
 
@@ -43,9 +26,9 @@ $(document).ready(function(){
        localStorage.setItem("scroll_position", scroll_position);
  
 	      document.getElementById('report').innerHTML= scroll_position + " px"
-
     
     })
+
 });
 
  
@@ -53,7 +36,6 @@ $(document).ready(function(){
 
 </script>
 ++++
-
 
 
 ++++
