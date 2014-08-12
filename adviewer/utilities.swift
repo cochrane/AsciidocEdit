@@ -16,22 +16,16 @@ import Foundation
 
 func refreshHTML(filePath: String) {
     
-    let cmd = "/usr/bin/asciidoctor"
+    executeCommand("/usr/bin/asciidoctor", [filePath], verbose: false)
     
-    let version = executeCommand(cmd, ["-V"], verbose: false)
-    
-    println("\n----------------------")
+    let version = executeCommand("/usr/bin/asciidoctor", ["-V"], verbose: false)
     println(version)
-    executeCommand(cmd, [filePath], verbose: false)
-    println("----------------------\n")
- 
 }
 
 func saveAsPDF(filePath: String) {
     
     let cmd = "/usr/bin/asciidoctor-pdf"
 
-    
     executeCommand(cmd, [filePath], verbose: true)
     
     

@@ -278,6 +278,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         adWebView.needsDisplay = true
         
         messageLabel.stringValue = "Word count: \(documentText.countWords())"
+        // messageLabel.stringValue = "File: \(documentPath).    Word count: \(documentText.countWords())"
         messageLabel.needsDisplay = true
         
         
