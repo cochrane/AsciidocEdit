@@ -11,9 +11,9 @@
 $(document).ready(function(){
   $("button").click(function(){
 	  
-      $("#fooxx").scrollTop(200)
+      $("#startdocument").scrollTop(200)
 
-	  var result = $("#fooxx").scrollTop()+" px"
+	  var result = $("#startdocument").scrollTop()+" px"
 	  
       alert(result);
  
@@ -27,7 +27,7 @@ $(document).ready(function(){
 <body>
 
 
-<div id="fooxx" style="border:1px solid black;width:150px;height:150px;overflow:auto; margin-left:40px; margin-top:40px;">
+<div id="startdocument" style="border:1px solid black;width:150px;height:150px;overflow:auto; margin-left:40px; margin-top:40px;">
 
 <p>1. some text.</p>
 
@@ -62,10 +62,32 @@ $(document).ready(function(){
 </html>
 ++++
 
-== Comments
+== Notes
 
 Press the "Jump" button to scroll down 200px.  Use the scroll
-bar to move around, then press "Jump" again.
+bar to move around, then press "Jump" again.  
+
+The code which drives the jump is
+[source,javascript]
+--
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+	  
+      $("#startdocument").scrollTop(200)
+
+	  var result = $("#startdocument").scrollTop()+" px"
+	  
+      alert(result);
+ 
+	  document.getElementById('report').innerHTML=result
+
+  });
+});
+</script>
+--
+
+Look at the source file (jump.ad) for this page for more details.
 
 
 
