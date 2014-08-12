@@ -3,9 +3,7 @@
 
 ++++
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-++++
 
-++++
 <script>
 $(document).ready(function(){
 
@@ -35,10 +33,7 @@ $(document).ready(function(){
 });
 
 </script>
-++++
 
-
-++++
 <span id="report" style="position:fixed; top:10px;right:75px">Position</span>
 
 <span style="position:fixed; top:5px;;right:10px;">
