@@ -51,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
            println("DOCUMENT PATH: \(documentPath)")
            textView.string = readStringFromPath(documentPath!)
            updateUI(refresh: true)
-            messageLabel.stringValue = "Opened file: \(documentPath!)"
+            messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
             messageLabel.needsDisplay = true
             
         } else {
@@ -142,9 +142,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         let oldDocumentURL = NSURL(string: documentURL!)
         
         
+        // From Apple documentatoin
         // func moveItemAtURL(srcURL: NSURL!, toURL dstURL: NSURL!, error: NSErrorPointer) -> Bool
-        // NSFileManager.moveItemAtURL(oldDocumentURL, toURL: newDocumentURL, error :nil)
-        
+       //  NSFileManager.moveItemAtURL(oldDocumentURL, toURL: newDocumentURL, error :nil)
+        // Error: Extra agrument 'toURL' in call
     }
     
     
@@ -183,7 +184,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             }
         }
         
-        messageLabel.stringValue = "Opened file: \(documentPath!)"
+        messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
         messageLabel.needsDisplay = true
 
         
@@ -288,7 +289,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         adWebView.needsDisplay = true
         
         // messageLabel.stringValue = "Word count: \(documentText.countWords())"
-        messageLabel.stringValue = "File: \(documentPath).    Word count: \(documentText.countWords())"
+        messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
         messageLabel.needsDisplay = true
         
         
