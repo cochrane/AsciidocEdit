@@ -9,24 +9,45 @@
 
 <script>
 $(document).ready(function(){
-  $("button").click(function(){
+
+  $("#b1").click(function(){
 	  
       $("#startdocument").scrollTop(200)
 
 	  var result = $("#startdocument").scrollTop()+" px"
-	  
-      alert(result);
  
 	  document.getElementById('report').innerHTML=result
 
   });
+
+$("#b2").click(function(){
+	  
+	  var result2 = $("#startdocument").scrollTop()+" px"
+ 
+	  document.getElementById('report').innerHTML=result2
+
+  });
+
+
+$(document).ready(function(){
+    $(window).scroll(function(){
+
+        var result3 = $("#startdocument").scrollTop()+" px"
+ 
+	  document.getElementById('report').innerHTML=result3
+
+      console.log(result3);
+    })
+});
+
+ 
 });
 
 </script>
 </head>
 <body>
 
-
+<h1 id="tttop">Test</h1>
 <div id="startdocument" style="border:1px solid black;width:150px;height:150px;overflow:auto; margin-left:40px; margin-top:40px;">
 
 <p>1. some text.</p>
@@ -55,10 +76,14 @@ $(document).ready(function(){
 
 <br>
 
-<span id="report" style="position:fixed; top:6px;right:80px">Report</span>
+<span id="report" style="position:fixed; top:10px;right:150px">Report</span>
 
-<span id="report" style="position:fixed; top:0;right:0">
-<button>Jump</button>
+<span style="position:fixed; top:5px;;right:80px;">
+<button id="b1">Jump</button>
+</span>
+
+<span style="position:fixed; top:5px;right:5px;">
+<button id="b2">Report</button>
 </span>
 
 
