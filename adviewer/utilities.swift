@@ -75,6 +75,30 @@ func readStringFromPath(path: String) -> String {
     
 }
 
+func documentsDirectory() -> String? {
+    
+    let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
+    
+    var documentsDirectory: String?
+    
+    
+    
+    if let directories = dirs {
+        
+        if directories.count > 0 {
+            
+            documentsDirectory = directories[0]
+            
+        }
+        
+    }
+    
+    println("documentsDirectory: \(documentsDirectory)")
+    
+    return documentsDirectory
+
+}
+
 
 func testFS() {
     

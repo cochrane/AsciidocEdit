@@ -97,8 +97,47 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
 //MARK: IBActions
     
     @IBAction func newFileAction(sender: AnyObject) {
+
+        if let docDir = documentsDirectory() {
+         let filePath = docDir + "/tmp-89613.ad"
+            println("filePath: \(filePath)")
+            "New file".writeToFile(filePath, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
+            let url = "file:///"+filePath
+            synchronizePaths(url)
+            
+            println("\ndocumentURL: \(documentURL!)")
+            println("\nhtmlDocumentURL: \(htmlDocumentURL!)")
+            
+            memorizeKeyValuePair("documentURL", url)
+            
+            documentText = readStringFromPath(documentPath!)
+            textView.string = documentText
+            
+            updateUI(refresh: true)
+            
+            messageLabel.stringValue = "New file: \(filePath)"
+            messageLabel.needsDisplay = true
+
+        } else {
+            println("Couldn't form docuumetns_idr")
+        }
+
         
-        println("FOO")
+    }
+    
+    
+    @IBAction func closeFileAction(sender: AnyObject) {
+    }
+    
+    @IBAction func saveFileAction(sender: AnyObject) {
+        
+        if let currentDocumentPath = documentPath {
+            
+            updateDocument(currentDocumentPath)
+            updateUI(refresh: true)
+            
+        }
+        
     }
     
     
@@ -118,11 +157,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             for url in panel.URLs {
               if let url = url.absoluteString {
                 
-                /*
-                documentURL = url
-                htmlDocumentURL = baseName(documentURL!) + ".html"
-                documentPath = pathFromURL(documentURL!)
-                */
                 
                 synchronizePaths(url)
                 
@@ -145,19 +179,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     }
     
     
-    @IBAction func closeFileAction(sender: AnyObject) {
-    }
-    
-    @IBAction func saveFileAction(sender: AnyObject) {
-        
-        if let currentDocumentPath = documentPath {
-            
-            updateDocument(currentDocumentPath)
-            updateUI(refresh: true)
-            
-        }
-        
-    }
+  
     
     @IBAction func SaveAsPDFAction(sender: AnyObject) {
         
