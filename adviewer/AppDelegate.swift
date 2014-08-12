@@ -272,6 +272,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
        // adWebView.mainFrame.
         
+        /*
        textChanges++
        let newTextLength = textView.string.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)
        let changeInTextLength = newTextLength - textLength
@@ -289,6 +290,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             println("-- refreshing, textChanges: \(textChanges)")
             updateUI(refresh: true)
         }
+      */
     }
     
     
