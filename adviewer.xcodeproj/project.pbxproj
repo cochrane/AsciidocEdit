@@ -13,6 +13,7 @@
 		BD1EB9A3198E5C0D006EEC1C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD1EB9A1198E5C0D006EEC1C /* MainMenu.xib */; };
 		BD1EB9AF198E5C0D006EEC1C /* adviewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */; };
 		BD1EB9B9198E7AD6006EEC1C /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9B8198E7AD6006EEC1C /* utilities.swift */; };
+		BD95544A199A696D002E870B /* controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD955449199A696D002E870B /* controller.swift */; };
 		BDEBA1711999C38300939D7C /* JSWrappers.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBA1701999C38300939D7C /* JSWrappers.m */; };
 		BDEBA1741999C3C500939D7C /* NSStringExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBA1731999C3C500939D7C /* NSStringExtras.m */; };
 		BDEBA1781999C80200939D7C /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = BDEBA1771999C80200939D7C /* jquery.js */; };
@@ -39,6 +40,7 @@
 		BD1EB9AD198E5C0D006EEC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adviewerTests.swift; sourceTree = "<group>"; };
 		BD1EB9B8198E7AD6006EEC1C /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
+		BD955449199A696D002E870B /* controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = controller.swift; sourceTree = "<group>"; };
 		BDEBA16E1999C33E00939D7C /* JSWrappers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSWrappers.h; sourceTree = "<group>"; };
 		BDEBA16F1999C38300939D7C /* adviewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "adviewer-Bridging-Header.h"; sourceTree = "<group>"; };
 		BDEBA1701999C38300939D7C /* JSWrappers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSWrappers.m; sourceTree = "<group>"; };
@@ -88,11 +90,12 @@
 			children = (
 				BDEBA1761999C7EB00939D7C /* Resources */,
 				BD1EB99D198E5C0D006EEC1C /* AppDelegate.swift */,
+				BD955449199A696D002E870B /* controller.swift */,
+				BD1EB9B8198E7AD6006EEC1C /* utilities.swift */,
+				BD1EB9A1198E5C0D006EEC1C /* MainMenu.xib */,
 				BDEBA1751999C46100939D7C /* JSWrapper */,
 				BD1EB99F198E5C0D006EEC1C /* Images.xcassets */,
-				BD1EB9A1198E5C0D006EEC1C /* MainMenu.xib */,
 				BD1EB999198E5C0D006EEC1C /* Supporting Files */,
-				BD1EB9B8198E7AD6006EEC1C /* utilities.swift */,
 				BDEBA16F1999C38300939D7C /* adviewer-Bridging-Header.h */,
 			);
 			path = adviewer;
@@ -249,6 +252,7 @@
 				BD1EB9B9198E7AD6006EEC1C /* utilities.swift in Sources */,
 				BD1EB99E198E5C0D006EEC1C /* AppDelegate.swift in Sources */,
 				BD1EB99C198E5C0D006EEC1C /* main.swift in Sources */,
+				BD95544A199A696D002E870B /* controller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
