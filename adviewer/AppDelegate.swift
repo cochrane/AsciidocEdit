@@ -130,14 +130,20 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     @IBAction func closeFileAction(sender: AnyObject) {
     }
     
-    @IBAction func saveFileAction(sender: AnyObject) {
+    @IBAction func moveFileAction(sender: AnyObject) {
         
-        if let currentDocumentPath = documentPath {
-            
-            updateDocument(currentDocumentPath)
-            updateUI(refresh: true)
-            
-        }
+        
+
+        // NSURL(string: htmlDocumentURL)
+        
+        
+        let newDocumentURLString = baseName(documentURL!) + "2.ad"
+        let newDocumentURL = NSURL(string: newDocumentURLString)
+        let oldDocumentURL = NSURL(string: documentURL!)
+        
+        
+        // func moveItemAtURL(srcURL: NSURL!, toURL dstURL: NSURL!, error: NSErrorPointer) -> Bool
+        // NSFileManager.moveItemAtURL(oldDocumentURL, toURL: newDocumentURL, error :nil)
         
     }
     

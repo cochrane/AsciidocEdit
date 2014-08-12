@@ -121,9 +121,13 @@
                                     <action selector="saveFileAction:" target="Voe-Tx-rLC" id="y0y-bh-0II"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Save As…" keyEquivalent="S" id="Bw7-FT-i3A">
+                            <menuItem title="Move To" id="Bw7-FT-i3A">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CQ
+</string>
+                                <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="saveDocumentAs:" target="-1" id="mDf-zr-I0C"/>
+                                    <action selector="moveFileAction:" target="Voe-Tx-rLC" id="c3Z-6s-8aW"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Save As PDF" id="2DZ-1r-Ejz">
