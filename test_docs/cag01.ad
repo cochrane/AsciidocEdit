@@ -1,0 +1,1145 @@
+:numbered:
+:stem: latexmath
+
+++++
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+++++
+
+++++
+<script>
+$(document).ready(function(){
+
+  $("#b1").click(function(){
+	  
+      $("body").scrollTop(200)
+
+	  var result = $("body").scrollTop()+" px"
+ 
+	  document.getElementById('report').innerHTML=result
+
+  });
+
+$("#b2").click(function(){
+	  
+	  var result2 = $("body").scrollTop()+" px"
+ 
+	  document.getElementById('report').innerHTML=result2
+
+  });
+
+
+$(document).ready(function(){
+    $(window).scroll(function(){
+
+        var result3 = $("body").scrollTop()+" px"
+ 
+	  document.getElementById('report').innerHTML=result3
+
+      console.log(result3);
+    })
+});
+
+ 
+});
+
+</script>
+++++
+
+++++
+<script src=src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
+
+$(document).ready(function(){
+
+  $("button").click(function(){
+	  
+	  var result = $("#startdocument").scrollTop()+" px"
+	  
+      alert(result);
+ 
+	  document.getElementById('report').innerHTML=result
+
+  });
+
+});
+
+</script>
+++++
+
+
+++++
+<span id="report" style="position:fixed; top:10px;right:150px">Report</span>
+
+<span style="position:fixed; top:5px;;right:80px;">
+<button id="b1">Jump</button>
+</span>
+
+<span style="position:fixed; top:5px;right:5px;">
+<button id="b2">Report</button>
+</span>
+
+++++
+
+\(
+   \def\AA{\mathbb{A}}
+   \def\BB{\mathbb{B}}
+   \def\CC{\mathbb{C}}
+   \def\DD{\mathbb{D}}
+   \def\EE{\mathbb{E}}
+   \def\FF{\mathbb{F}}
+   \def\NN{\mathbb{N}}
+   \def\OO\mathbb{{O}}
+   \def\PP{\mathbb{P}}
+   \def\QQ{\mathbb{Q}}
+   \def\RR{\mathbb{R}}
+   \def\ZZ{\mathbb{Z}}
+   \def\ffp{\mathfrak{p}}
+   \def\bold#1{\bf #1}
+\)
+
+
+\(
+   \newcommand{\commadots}{, \ldots, }
+   \newcommand{\set}[1]{ \{\,#1\,  \} }
+   \newcommand{\sett}[2]{ \{\,#1\, \mid\, #2\, \} }
+   \newcommand{\Set}[1]{ \Big\{\,#1\,  \Big\} }
+   \newcommand{\Sett}[2]{ \Big\{\,#1\, \Big\vert\; #2\,  \Big\} }
+\newcommand{\mapright}[1]{\ \smash{ 
+   \mathop{\longrightarrow}\limits^{#1}}\ }
+  \newcommand{\vars}[2]{{#1}_1\commadots{#1}_{#2}}
+   \newcommand{\map}{\longrightarrow}
+   \def\rank{\mathop{rank}}
+   \def\dim{\mathop{dim}}
+   \def\height{\mathop{height}}
+\)
+
+++++
+<div id="startdocument">
+++++
+== Polynomial Rings, Ideals, and Varieties!
+
+
+An algebraic variety is the solution set of a system of polynomial
+equations.  Our goal in this course is to develop the theory and
+the tools needed to make basic computations with varieties.  For
+example, a variety has a dimension and a degree.  How do we define
+these quantities, and how do we compute them?
+
+In this first chapter, we review some preliminaries about fields,
+rings of polynomials with coefficients in a given field, and
+ideals in such rings.  We establish some parts of the
+algebra-geometry dictionary which relates ideals to varieties.  In
+chapter two. we introduce a special class of ideals  which are
+especially suited to computations.  These are the _monomial
+ideals_.  Monomial ideals are rarely the ideals of the varieties
+in which we are interested.  However, to every ideal in a
+polynomial ring is associated a monomial ideal, and from the
+latter we can often read properties of the former.  The monomial
+ideal associated to a given ideal depends on the choice of a
+suitable total order on the set of monomials, of which there are
+many. We shall discuss two of thee in the next chapter.
+
+A central role in computational commutative algebra -- the theory
+for doing computations in algebraic geometry -- is played by the
+division algorithm for multivariate polynomials and by the notion
+of _Groebner basis_.  Once these two notions are in hand, we will
+be able to solve many problems, e.g, the problem of whether a
+given polynomial is in a given ideal, the problem of whether a
+given ideal is prime, etc..
+
+In these notes, we parallel the theoretical development y with
+code examples using http://sagemath.org[Sage], a free software
+program designed for mathematical research.  By going to the link
+of the previous sentence, you can download Sage and install it on
+your own computer. 
+
+1.1. <<FF, Fields>> +
+1.2. <<IPR, Ideals in Polynomial Rings >> +
+1.3. <<AV, Affine varieties>> +
+1.4. <<IV,  The ideal of a variety>> +
+1.5. <<QR, Quotient rings>> +
+1.6. <<AGD, The Algebra-Geometry Dictionary>> +
+1.7. <<IAD, Irreducibility and decomposition>> +
+1.8. <<PIR, Primes and irreducibles>> +
+1.9. <<OOI, Operations on Ideals>> + 
+1.10. <<CC, Chain conditions>>  +
+1.11. <<DIM, Dimension>> +
+1.12. <<DEG, Degree>> +
+1.13. <<TC, Twisted cubics>>  
+
+
+=== Fields[[FF]]
+
+Let \(k\) be a field.  The most familiar examples are
+
+[role=indent]
+--
+. \(\QQ\) - the field of rational numbers
+. \(\RR\) - the field of real numbers
+. \(\CC\) - the field of complex numbers
+--
+
+All of these are infinite fields.  The last one is
+[term]#algebraically closed#: any polynomial with
+coefficients in the field has at least one root in the field --
+and hence all its roots  in the field.  The last two fields are
+also [term]#complete# in the sense that any Cauchy sequence
+converges.  There are other complete fields, among which the most
+important are the \(p\)-adic fields.  (See the
+xlink::439[appendix]).
+
+*Number fields and algebraic closure.* Consider the field
+\(\QQ(\sqrt{2}) = \sett{a + b\sqrt 2}{a, b \in \QQ}\).  It is a
+_number field_: a finite extension of the rational numbers.  The
+set of all number fields is [term]#directed#: given two such
+fields \(K\) and \(L\),
+there is a third such field \(M\) such that \(K \subset M\) and 
+\(L \subset M\).  In these circumstances there is a smallest field,
+the [term]#direct limit#, which contains all number fields.  This
+is the field of [term]#algebraic numbers#, written \(\bar\QQ\). 
+Like the complex numbers, it is algebraically closed. However, it
+is a countable field, whereas the field of complex numbers is
+uncountable.  The field \(\QQ\) is the [term]#algebraic
+closure# of \(\QQ\): it is the smallest algebraically closed 
+field containing the rational numbers.  One can also define \(\QQ\)
+as the set of all solutions of all polynomial equations with
+rational coefficients.  Defined this way, one has the task of
+showing the \(\QQ\) is a field, not merely a set. (Exercise).
+
+
+*Finite fields.* Consider the integers modulo a prime \(p\), written
+\(\ZZ/p\).  It is a field of \(p\) elements.  
+Let \(f(x)\) be an irreducible polynomial of degree \(n\) with
+coefficients in \(\ZZ/p\).  Let \(\ZZ/p[x]\) be the the ring of
+polynomials in one variable with coefficients in \(\ZZ/p\), and let
+\((f)\)
+be the set of polynomials divisible by \(f\).  It is an ideal in the
+ring \(\ZZ/p[x]\).  Assume that \(f\) is irreducible, and let
+\[
+  GF(p^n) = \ZZ/p[x]/(f)
+\]
+denote the quotient ring, where \(n\) is the degree of \(f\).  It is a
+field of \(q = p^n\) elements.  Any two fields with \(q\) elements are
+isomorphic.  We sometimes denote such a field by \(\FF_q\).   (We
+discuss <<IPR,ideals>> and <<QR,quotient rings>> below.)
+
+The fields \(\FF_q\) for a given prime \(p\) are fields of
+[term]#characteristic# \(p\).  That is, for any element
+\(a \in \FF_q\), the equation \(pa = 0\) holds.  The fields \(\FF_q\) of
+characteristic \(p\) form a directed system and so have a direct
+limit \(\bar \FF_p\).  It is a countably infinite field of
+characteristic \(p\) which is algebraically closed.
+
+
+==== Computations
+
+The common fields are easily defined in Sage.  Once a field is
+defined, one can do computations in it.
+
+.Rational numbers
+[source,python]
+--
+sage: K = QQ
+sage: K
+Rational Field
+sage: a = 2/3
+sage: a.parent()
+Rational Field
+sage: a in K
+True
+sage: a^5
+32/243
+--
+
+.Real numbers
+[source,python]
+--
+sage: L = RR
+sage: L
+Real Field with 53 bits of precision
+sage: b = L(2/3)
+sage: b
+0.666666666666667
+sage: 3*b
+2.00000000000000
+--
+
+.Complex numbers
+[source,python]
+--
+sage: L = CC
+sage: u = L(-1)
+sage: u
+-1.00000000000000
+sage: sqrt(u)
+1.00000000000000*I
+sage: a = 2 + 3*sqrt(u)
+sage: a
+2.00000000000000 + 3.00000000000000*I
+sage: a.conjugate()
+2.00000000000000 - 3.00000000000000*I
+sage: a.abs()
+3.60555127546399
+--
+
+.Number fields
+[source,python]
+--
+sage: K.<u> = NumberField(x^2 - 2)
+sage: K
+Number Field in u with defining polynomial x^2 - 2
+sage: u^2
+2
+sage: u^3
+2*u
+--
+
+Reference:
+http://www.sagemath.org/doc/reference/number_fields/sage/rings/number_field/number_field.html[sage
+math.org]
+
+.Finite fields
+[source,python]
+--
+sage: K.<t> = GF(5)
+sage: K
+Finite Field in t of size 2^5
+sage: t
+t
+sage: t^2
+t + 3
+sage: t^3
+4*t + 3
+--
+
+References:
+http://www.sagemath.org/doc/reference/rings_standard/sage/rings/finite_rings/constructor.html[1]
+
+.p-adic fields
+[source,python]
+--
+sage: K = Qp(3)
+sage: b = K(1/5)
+sage: b
+2 + 3^2 + 2*3^3 + 3^4 + 3^6 + 2*3^7 + 3^8 + 3^10 + 2*3^11 + 3^12 +
+3^14 + 2*3^15 + 3^16 + 3^18 + 2*3^19 + O(3^20)
+--
+The 3-adic expansion of 1/5 is the example given in
+http://en.wikipedia.org/wiki/P-adic_number[Wikipedia article] on
+the p-adic numbers.
+We can format it -- "pretty-print" it --
+using the following code:
+
+.Pretty-print function
+[source,python]
+--
+# file: pretty.sage  
+def p(x):  
+  output = ""
+  for k in range(0,20):
+    output = str(x[k]) + output
+  output = "..." + output
+  return output
+--
+
+To compute the pretty-printed expansion, do this:
+[source,python]
+--
+sage: runfile pretty.sage
+sage: print p(b)
+...21012101210121012102
+--
+
+Sage is a program written in Python, and whose native grammar is
+that of Python, with some small differences.  For example, one
+writes +x^2+ for \(x^2\), just as in mathematics, where in Python
+one writes +x**2+.  There is a short course on Python available
+online at xlink::416[vschool].
+
+*Notes.* (1) Sage is a large language because mathematics is
+large.  To learn to use it, the best way is simply to start using
+it, picking up what you need to know as you go. 
+http://sagemath.org[Sagemath.org] is the place to go for the
+official documentation.  If you google +whatever sagemath+, you
+will likely find what you need to know about +whatever+.  For
+example, +substitution sagemath+ brings up many links, of which
+the first happens to provide the answer (if you scroll down a
+bit).  There are also many online tutorials. There is a very short
+one on xlink::257[vschool].
+
+(2) There is a trick in Sage for finding relevant information. 
+Suppose, for example, that we are doing computations in
+\(\FF_{25}\), the field of 25 elements.  We have set it up in Sage
+as the field \(K.<t>\) as above. Suppose that we want to find the
+minimal polynomial of \(t\).  Instead of googling, we type +t.+,
+(note the dot) then press the TAB key.  Sage displays a list of
+methods applicable to the object +t+.  One of these is
++minimal_polynomial+.
+Now we know what to do:
+[source,python]
+--
+sage: t.minimal_polynomial()
+x^2 + 4*x + 2
+--
+
+(3) Guessing is also an effective method for finding the names of
+Sage methods..  Full names like +minimal_polynomal+ are preferred
+over abbreviations like +mpoly+, +mpol+, +minpoly+, +min_poly+,
+etc. Thus are  great many names in Sage are guessable.
+
+References:
+http://www.sagemath.org/doc/tutorial/tour_numtheory.html[1],
+http://www.sagemath.org/doc/reference/padics/sage/rings/padics/tutorial.html[2]
+
+=== Ideals in Polynomial Rings[[IPR]]
+
+The rings of interest to us in this course are polynomial rings
+and their quotients.  Fix a field \(k\) and let
+\[
+   k[x_1 \commadots x_n] = \Sett{ f }{ f = \sum c_\alpha x^\alpha
+},
+\]
+be the set of polynomials in \(n\) variables with coefficients in
+\(k\).  This set has various structures: it is a \(k\)-vector space,
+and it is a [term]#commutative ring#. it is also an
+[term]#integral domain#: if \(fg = 0\), the \(f = 0\) or \(g = 0\).  In
+other words, \(k[x_1 \commadots x_n]\) has no divisors of zero.
+
+An [term]#ideal# \(I\) in a ring \(R\) is a subset with two closure
+properties: (i) if \(f, g \in I\), then \(f + g \in I\), (ii) if \(f
+\in R\) and \(g \in I\), then \(fg \in I\).  One way of giving an ideal
+is to give a set of generators  \(f_1 \commadots f_r\) in \(k[x_1
+\commadots x_n]\). Consider
+the vector space
+\[
+  I(f_1 \commadots f_r) =
+\sett{a_if_i + \cdots + a_rf_r}{a_i \in k[x]}.
+\]
+One easily checks that \(I(f_1 \commadots f_r)\), 
+which we sometimes write simply as \((f_1 \commadots f_r)\), is an
+ideal.  We say that \(\set{f_i}\) is a set of [term]#generators# of
+\(I\).
+
+
+Now suppose given a set \(S \subset k^n\).  Consider the set
+\[
+   I(S)  = \Sett{ f \in k[\vars{x}{n}] }{ f(S) = 0 }
+\]
+consisting of polynomials which vanish on \(S\). One easily checks
+that this is an ideal.  As it stands, it is not clear whether
+\(I(S)\), or any random ideal, for that matter, has a finite set of
+generators.  To shed light on this question, consider the simplest
+case -- the ideal \(I = I(\set{a})\) of polynomials in one variable
+\(x\) which vanish at \(a \in k\).  Let \(f\) be an element of \(I\). 
+Apply the division algorithm to \(f\) with divisor \(x-a\).
+Then
+\[ 
+     f(x) = (x-a)g(x)  + r,
+\]
+where \(r \in k\).  Evaluating this expression at \(x = a\),
+we find that 
+\[
+    r = 0.
+\]
+Therefore \(f = (x-a)\cdot g\).  We conclude that \(I\)
+is generated by the polynomial \(x-a\):
+\[
+    I(\set{a}) = (x-a).
+\]
+The phenomenon just observed occurs quite generally:
+
+*Theorem {counter:theorem}. (Hilbert Basis Theorem)* _Every ideal
+in \(k[\vars{x}{n}]\) has a finite set of generators._
+
+We shall give a constructive proof of this later using the notion
+of a monomial ideal and a version of the division algorithm for
+polynomials of several variables.
+
+==== Quotients of rings by ideals[[QR]]
+
+Consider the set of cosets of \(I\) in \(k[x_1 \commadots x_n]\):
+\[
+    R =  \sett{f + I}{f \in k[x]}.
+\]
+This set has the structure of a ring, where \((f + I) + (g + I) =
+(f+g+I)\) and \((f +I)(g+I) = fg + I\).  It is the _quotient_ of the
+ring \(k[x_1 \commadots x_n]\) by the ideal \(I\), and is written
+\(k[x_1 \commadots x_n]/I\).
+
+*Exercise {counter:exercise}.* Show that the operations of
+addition and multiplication on cosets of ideals just introduced
+are well-defined.
+
+
+An ideal \(I\) is [term]#prime# if \(fg \in I\) implies that either \(f
+\in I\) or \(g \in I\).  Consider the ring of polynomials in one
+variable over a field \(k\).  Let 
+\(I = (f)\) be the ideal generated by a single polynomial.  
+Then \(I\) is prime if and only if \(f\) is irreducible.  For example,
+\(I = (x^2 - 2)\) is a prime ideal in \(\QQ[x]\), but
+not in \(\RR[x]\).
+
+
+*Proposition {counter:proposition}.* _Let \(R\) be an integral
+domain.  An ideal \(I\) in \(R\) is prime if and only if the quotient
+ring \(R/I\) is an integral domain._
+
+
+*Example {counter:example}.* Let \(I = (x^2-2)\) as above.  Then
+\(\QQ[x]/I \cong \QQ(\sqrt 2)\) is a field.  However, \(\RR[x]/I
+\cong \RR\oplus \RR\) is not an integral domain.
+Indeed, \(x-\sqrt 2\) is a zero divisor, since \((x-\sqrt 2)(x +
+\sqrt 2) = 0\) -- or since, using the isomorphism with the direct
+sum, \((1,0)\times(0,1) = (0,0)\).  If \(J  = (x^2  - 4)\), then
+\(\QQ[x]/J \cong \QQ \oplus \QQ\) is not an integral domain.
+
+
+Here is Sage code which shows how to form a quotient ring and do
+computations in it:
+
+.Code
+[source,python]
+--
+sage: R.<x> = PolynomialRing(QQ)
+sage: I = ideal(x^2 - 2)
+sage: I.is_prime()
+True
+sage: S = R.quotient_ring(I)
+sage: S.gens()
+(xbar,)
+sage: u = S.gens()[0]
+sage: u^2
+2
+--
+
+The method call +S.gens()+ returns a tuple of generators of +S+. 
+In this case, there is only one generator, +xbar+.  For another
+example of the use of
++gens+, consider this:
+[source,python]
+--
+sage: R.<x,y> = PolynomialRing(QQ)
+sage: R.gens()
+(x, y)
+sage: gg = _
+sage: gg
+(x, y)
+sage: gg[0]
+x
+--
+Here the underscore (+_+) is Python's magic variable which holds
+the value of the last expression computed.  We assign they value
+to the variable +gg+.  Now +gg+ is a tuple, and we can access its
+elements as +gg[0]+, etc.
+One can also do this:
+
+[source,python]
+--
+sage: S.<u> = R.quotient_ring(I)
+sage: S
+Univariate Quotient Polynomial Ring in u over Rational Field with
+modulus x^2 - 2
+sage: u^2
+2
+--
+
+And here is Sage code for the quotient 
+\(S = \QQ[x]/(x^2 - 4)\).
+The elements \(p = 2-x\) and \(q = 2+x\) are generalized orthogonal
+idempotents that decompose the identity.  By this we mean that \(p
++ q\) is a nonzero scalar, \(p^2\) is proportional to \(p\), \(q^2\) is
+proportional to \(q\), and
+\(pq = 0\).   Then the map \(x \mapsto (px, qx)\) give is an
+orthogonal direct sum decomposition
+\[
+      S \cong Sp \oplus Sq.
+\]
+
+
+.Code
+[source,python]
+--
+sage: I = ideal(x^2 - 4)
+sage:  S = R.quotient_ring(I)
+sage: S.gens()
+(xbar,)
+sage: u = S.gens()[0]
+sage: u^2
+4
+sage: (2-u)*(2+u)
+0
+sage: (2-u)^2
+4*xbar - 8
+sage: (2+u)^2
+4*xbar + 8
+--
+
+=== Affine varieties[[AV]]
+
+Varieties are solution sets of polynomial equations.  For a formal
+definition, let \(k\) be a field and let \(\set{f_i(\vars{x}{n})}\) be
+a set of polynomials with coefficients in \(k\). Let
+\[
+V  = \Sett{ (\vars{x}{n}) }{ f_i(\vars{x}{n}) = 0\ \forall i
+}.
+\]
+Then \(V\) is an [term]#affine variety# over \(k\).
+Let \(K \supset k\) be an extension field.  It is often worthwhile
+to consider the set \(V(K)\) consisting of solutions with
+coordinates in \(K\).
+
+
+The set \(k^n\) is the affine variety corresponding to the empty set
+of equations.  It is called [term]#affine \(n\)-space#.  If \(V\) and
+\(V'\) are varieties with \(V' \subset V\), then we say that \(V'\) is a
+[term]#subvariety# of \(V\).  If \(f = 0\) defines \(V\) and \(f =0\), \(g
+=0\) defines \(V'\), then \(V'\) is a subvariety of \(V\). Note that
+\(V(K)\) is a sub variety of \(K^n\).
+
+*Example {counter:example}.*  Consider the equation \(x^2 + y^2 - 1
+= 0\). It is a one-dimensional algebraic variety over \(\QQ\). The
+\(\RR\)-valued solutions  \(V(\RR)\) constitute a circle.  Consider a
+solution \((x,y)\) with coordinates in \(\QQ\). Write \(x = a/c\), \(y =
+b/c\), where \(a\), \(b\), and \(c\) are integers.  Then \(a^2 + b^2 =
+c^2\).  Thus rational points on the circle correspond to
+[term]#Pythagorean triplets# -- right triangles whose sides have
+integer length.
+
+
+*Example {counter:example}.* Consider the variety over \(\QQ\)
+defined by \(x^2 + y^2 + 1 = 0\).  Both
+the set of \(\QQ\)-valued points and the set of \(\RR\)-valued points
+is empty.  However, the set of \(\CC\)-valued points is isomorphic
+to \(\CC\) itself.
+
+
+=== The ideal of a variety[[IV]]
+
+Let \(I\) be an ideal in \(k[\vars{x}{n}]\).  Define the variety of
+\(I\) to be
+\[ 
+    V(I) = \Sett{k[\vars{x}{n}} { f(x) = 0, \forall f \in I}.
+\]
+If \(\set{\vars{f}{r}}\) is a set of polynomials, then 
+\[
+   V(\vars{f}{r}) = V(I(\vars{f}{r})).
+\]
+Now let \(V\) be a variety.  Its associated ideal is
+\[
+   I(V) = \Sett{f \in k[\vars{x}{n}]}{ f(V) = 0}.
+\]
+The first depends on a choice of defining equations.  The second
+depends only on the variety.  Moreover, it is not hard to show the
+following:
+
+*Proposition {counter:proposition}.*  \(V(I(V)) = V\).
+
+Thus the ideal \(I(V)\) determines the variety \(V\). In principle,
+therefore, one should be able to read off information about \(V\) by
+reading it off \(I(V)\). We will soon see that this is the case. 
+Note that by the Hilbert Basis Theorem, \(I(V)\) has a finite system
+of generators, so that we can always write \(I(V) = (\vars{g}{s})\).
+
+*Exercise {counter:exercise}.* (1) Show that \(I(V)\) is indeed an
+ideal. (2) Show that  if \(I\) defines \(V\), then \(I \subset I(V)\).
+(3) Is it always the case that \(I = I(V)\)?
+
+Ideals as a more fundamental defining object than systems of
+polynomial equations, even though such equations are the
+motivation for considering varieties in the first place.  While a
+variety may be defined by many systems of equations, there is only
+one ideal \(I(V)\).  It is an intrinsic object that does not depend
+on choices.  We shall see below that many properties of varieties
+can be proved or computed only in terms of the ideals
+corresponding to them.
+
+*Example {counter:example}.* Consider the ideal 
+\(I \subset k[x,y,z]\) defined by \(f = x^3 + x^2y^3 + xy^4\), \(g =
+x^2y^2 + x^4y^4\), \(h = y^4\).  It is easy to see that \((f,g,h) =
+(x^3, x^2y^2, y^4)\).  This is a much simpler set of generators. 
+Using this generating set, it is clear that the variety defined by
+the ideal consists of a single point, the origin.
+
+=== The Algebra-Geometry Dictionary[[AGD]]
+
+We now have maps
+\[
+  \text{Ideals} \mapright{V} \text{Affine Varieties}
+\]
+and
+\[
+  \text{Affine Varieties} \mapright{I} \text{Ideals}
+\]
+This is the [term]#algebra-geometry# dictionary.  According to the
+proposition of the previous section,
+\(V(I(V)) = V\).  That is, the map \(I\) has a left inverse \(V\). 
+Therefore the map \(V \mapsto I(V)\) is injective: if \(I(V_1) =
+I(V_2)\), then \(V_1 = V_2\).. It is also easy to see that both maps
+are order reversing, i.e.., if \(I \subset I'\), then \(V(I) \supset
+V(I')\), and if \(V \subset V'\), then
+\(I(V) \supset I(V')\).
+
+*Exercise {counter:exercise}.* Prove that the maps \(I\) and \(V\) are
+order-reversing.
+
+it is natural to ask if the other map, \(I \mapsto V(I)\) is
+injective.  An easy example shows that it is not: The ideals
+\((x^n)\), \(n > 0\), all define the same variety, namely the origin
+in affine 1-space.  This example leads us to define the
+[term]#radical# of an ideal:
+\[
+\sqrt I = \Sett{f \in k[\vars{x}{n}]}{\exists m > 0: f^m \in I
+}.
+\]
+
+*Exercise {counter:exercise}.* (1) Show that \(\sqrt I\) is an ideal
+containing \(I\), (2) Describe the radical of \((x^n)\).
+
+The radical is computable in Sage:
+[source,python]
+--
+sage: R.<x,y> = PolynomialRing(QQ)
+sage: I = Ideal(x^2,y^3)
+sage: I.radical()
+Ideal (y, x) of Multivariate Polynomial Ring in x, y over Rational
+Field
+--
+Note that \(\sqrt{(x^2,y^3)} = (x,y)\) is a [term]#maximal ideal#: 
+it is not contained in any larger nontrivial ideal.
+
+*Exercise {counter:exercise}.* (1) What are the maximal ideals of
+\(\bar QQ[x]\)?  (2) What are the maximal ideals of \(\QQ[x]\)?
+
+Presumably, if we restrict to radical ideals, the maps \(I \mapsto
+V(I)\) is injective.  However, this is not true either.  Consider
+the empty set in real affine 1-space: \(\emptyset \subset \RR\). 
+The \(I_1 = \RR[x]\) and \(I_2 = (x^2 + 1)\) both have \(\emptyset\) as
+their variety.  The key to this conundrum is the realization that
+\(\RR\) is not an algebraically closed field:
+
+*Theorem {counter:theorem}.* _If \(k\) is algebraically closed, then
+the maps \(I \mapsto V(I\) and \(V \mapsto I(V)\) are order-reversing
+bijections between the set of radical ideals and the set of
+algebraic varieties._
+
+The theorem follows from the next result:
+
+*Theorem {counter:theorem} (Strong Nullstellensatz).* _If \(k\) is
+algebraically closed, then \(I(V(I)) = \sqrt I\)._
+
+The weak Nullstellensatz is the following:
+
+*Theorem {counter:theorem} (Weak Nullstellensatz).* _If \(k\) is
+algebraically closed and \(V(I) = \emptyset\),
+then \(I = k[\vars{x}{n}]\)._
+
+=== Irreducibility and decomposition[[IAD]]
+
+A variety like the circle, given by \(x^2 + y^2 = 1\) consists of a
+single piece, whereas a variety like \(xy= 0\)
+consists of two pieces, namely the \(x\) and \(y\) axes. In this case
+we can write
+\[
+   V = V_1 \cup V_2,
+\]
+The pieces \(V_i\) -- the axes -- cannot themselves be written as
+the union of varieties.  They are said to be [term]#irreducible#,
+while \(V\) itself is [term]#reducible#.
+
+Via our dictionary, the geometric notion of irreducibility has an
+algebraic counterpart:
+
+*Theorem {counter:theorem}.* _A variety is irreducible if and only
+if its ideal is prime._
+
+We shall prove this statement later.  For now we continue with
+examples and observations.  Given the theorem, we can show that
+the circle is irreducible by showing that the ideal \((x^2  + y^2 -
+1)\) is prime.  For this it is enough to show that \(x^2  + y^2 - 1\)
+is irreducible.
+
+*Exercise {counter:exercise}.* (1) Let \(I = (f)\) be a principal
+ideal in \(k[\vars{x}{n}]\).  Show that \(I\) is prime if an only if
+the polynomial \(f\) is irreducible. (2) Show that \(x^2  + y^2 - 1\)
+is irreducible, i.e., cannot be factored.
+
+Questions of the kind we are considering can also be answered by
+Sage:
+ 
+.Code
+[source,python]
+--
+sage: R.<x,y> = PolynomialRing(QQ)
+sage: f = x^2 - y^2 - 1
+sage: f.factor()
+(-1) * (-x^2 + y^2 + 1)
+sage: I = Ideal(f)
+sage: I.is_prime()
+True
+--
+ 
+Just as an integer can be factored into primes, a variety can be
+decomposed into irreducibles:
+
+*Theorem {counter:theorem}.* Let \(V \subset k^n\).  Then \(V\) has a
+minimal decomposition into irreducibles, i.e.,
+\[
+   V  = V_1 \cup \commadots \cup V_\ell.
+\]
+where the \(V_i\) are irreducible and \(V_i \not\subset V_j\) for \(i
+\ne j\).
+
+
+
+
+*Example {counter:example}.*    Consider the variety defined by
+\(xy =0\) in \(\QQ^3\), where the coordinates are \(x,y,z\).  Then \(V\)
+is the union of the \(yz\) plane and the \(xz\) plane.  Writing \(V_1\)
+and \(V_2\) for these components, we have the minimal  decomposition
+\[
+   V = V_1 \cup V_2.
+\]
+The \(V_i\) are irreducible because the ideals \((x)\) and \((y)\) are
+prime.
+
+To better understand how the decomposition of a variety into
+irreducibles is reflected in the behavior of the corresponding
+ideals, we recall another useful property or the algebra-geometry
+dictionary: intersections map to unions and vice versa:
+\[
+  V(I \cap J) = V(I) \cup V(J)
+\]
+and 
+\[
+  I(V \cup W) = I(V) \cap I(W).
+\]
+
+*Exercise {counter:exercise}.* (1) Prove the preceding assertions.
+(2) Show that \(I\cap J\) is an ideal if \(I\) and \(J\) are ideals.
+
+Consider the ideal \(I = (xy)\) in the example above. One can easily
+show that
+\[
+  (xy) = (x) \cap (y).
+\]
+Then
+\[
+    V  = V(xy) = V(x) \cup V(y)
+\]
+is the union of varieties corresponding to intersection of ideals.
+That fact that the varieties on the right are irreducible
+corresponds to the fact that the ideals \((x)\) and \((y)\) are prime.
+This observation leads to an ideal-theoetic description of the
+decomposition of a variety into irreducibles:
+
+*Theorem {counter:theorem}.* Suppose \(V \ne \emptyset\) is a
+variety in \(k^n\), where \(k\) is algebraically closed.  Then_
+\[
+  I(V) = \bigcap_{j=1}^n P_j,
+\]
+_where the \(V_j = V(P_j)\) are the irreducible components of \(V\)._
+
+*Remark {counter:remark}.* Define the project of ideals, \(IJ\) to
+be the ideal generated by products \(f \in I\), \(g \in J\). Then \(IJ
+\subset I \cap J\). Equality holds sometimes but not always. For
+example, \((x)(y) = (xy) = (x) \cap (y)\), but \((x^2)(x)  = (x^3)
+\ne (x^2)\cap(x)\).
+
+For a radical ideal, its description as an intersection of prime
+ideals is given by the _primary decomposition_.  It can be
+computed in Sage as in the next example.
+
+.Code
+[source,python]
+--
+sage: R.<x,y,z> = PolynomialRing(QQ)
+sage: I = Ideal(x*y)
+sage: I.is_prime()
+sage: pd = I.primary_decomposition_complete()
+sage: len(pd)
+2
+sage: pd[0][0]
+Ideal (y) of Multivariate Polynomial Ring in x, y, z over Rational
+Field
+sage: pd[1][0]
+Ideal (x) of Multivariate Polynomial Ring in x, y, z over Rational
+Field
+--
+
+In the code above, +pd+ is a list of objects.  The length of the
+list, given by +len(pd)+ is two.  The expressions +pd[0][0]+,
++pd[1][0]+ extract from this list the parts we want.  For future
+work, we make the following definition in sage:
+
+[source,python]
+--
+# file: components.sage
+def components(I):
+  pd = I.primary_decomposition_complete()
+  n = len(pd)
+  print n, "components:"
+  for j in range(0,n):
+      print " ", pd[j][0]
+--
+
+The we can do this:
+[source,python]
+--
+sage: runfile components.sage
+sage: components(I)
+2 components:
+  Ideal (y) ... 
+  Ideal (x) ...
+--
+
+*Remark {counter:remark}.*  If one can show that a variety is
+_smooth_, i.e., has no singular points, then it follows that \(V\)
+is irreducible.  This follows by algebro-geometirc arguments that
+we shall discuss later.
+
+=== Chain conditions[[CC]]
+
+*Theorem {counter:theorem} (Descending Chain Condition).* Any
+descending chain of varieties eventually stabilizes.  That is, if
+we have
+\[
+    V_1 \supset V_2 \supset \cdots V_n \supset \cdots ,
+\]
+Then there is an \(d > 0\) such that for \(i \ge d\), \(V_i = V_d\).
+
+The proof of the Descending Chain Condition must wait until the
+next lecture, when we discuss ideals. However, given this result,
+we can prove that a variety has a unique decomposition into
+irreducibles.
+
+*Proof.*  Suppose that there is a variety \(V\) which cannot be
+written as a union of irreducibles.  Then it can be written as \(V
+= V_1 \cup V_1'\), where at least one of the varieties \(V_1\),
+\(V_1'\) cannot be written as a union of irreducibles.  Suppose that
+\(V_1\) cannot be written as a union of irreducibles.  The same
+reasoning applies: \(V_1 = V_2 \cup V_2'\), where \(V_2\) cannot be
+written as a union of irreducibles.  Continuing in this fashion,
+we
+obtain an infinite chain of proper inclusions
+\[
+  V \supset V_1 \supset V_2 \supset V_3 \supset \cdots
+\]
+This is a contradiction.
+ Q.E.D.
+
+=== Operations on Ideals[[OOI]]
+
+*Product of ideals.* Given ideals \(I\) and \(J\), consider the set
+\[
+   IJ = \Sett{ \sum_{k=1}^n f_kg_k}
+   { f_k \in I, g_k \in J, n \in \NN}
+\]
+It is easy to see that \(IJ\) is an ideal and that
+\[
+   IJ \subset I \cap J
+\]
+Moreover, if \(I = (f_1 \commadots f_r)\), and 
+\(J = (g_1 \commadots g_s)\), then the products
+\(f_kg_\ell\) generate \(IJ\).  
+
+*Proposition {counter:proposition}.*  \(V(IJ) = V(I) \cup V(J)\). 
+
+*Proof.* Since \(IJ \subset I \cap J \cap I\), \(V(I) \subset V(IJ)\).
+For the same reason \(V(J) \subset V(IJ)\).  Therefore \(V(I) \cup
+V(J) \subset V(IJ)\).  To prove the
+reverse inclusion, let \(x \in V(IJ)\).  Then \(f(x)g(x) = 0\)
+for all \(f \in I\), \(g \in J\).  If \(f(x) = 0\) for all \(f \in I\),
+then \(x \in V(I)\).  If \(f(x) \ne 0\) for some \(f \in I\), then \(g(x)
+= 0\) for all \(g \in J\).  Therefore \(x \in J\).  Consequently \(x \in
+V(I) \cup V(J)\).
+Q.E.D.
+
+*Intersection of ideals.*  Consider next the intersection \(I \cap
+J\) of ideals. It is easy to see that this is an ideal.
+
+*Proposition {counter:proposition}.* \(V(I\cap J) = V(I) \cup
+V(J)\).
+
+*Proof.*
+Observe that \(I\cap J \subset I\), so \(V(I) \subset V(I \cap J)\). 
+For the same reason, \(V(J) \cap V(I \cap J)\).  Therefore \(V(I)
+\cup V(J) \subset V(I\cap J)\).   For the reverse inclusion, use
+\(IJ \subset I \cap J\). Then
+\[
+  V(I \cap J) \subset V(IJ)  = V(I) \cup V(J).
+\]
+Q.E.D.
+
+=== Primes and Irreducibles[[PIR]]
+
+*Theorem {counter:theorem}.* _Let \(V \subset k^n\) be an affine
+variety. Then \(V\) is irreducible if and only if \(I(V)\) is prime._
+
+*Proof (1)* We show that if \(V\) is irreducible, then \(I(V)\) is
+prime.  To that end, suppose that \(fg \in I(V)\).  Let \(V_1 = V
+\cap V(f)\), and let \(V_2 = V \cap V(g)\).  As intersections of
+affine varieties, these are are affine varieties. Since \(fg\)
+vanishes on \(V\), \(V \subset V_1 \cup V_2\).  But \(V_1 \cup V_2
+\subset V\), so
+\(V = V_1 \cup V_2\). Sine \(V\) is irreducible, \(V = V_1\) or \(V =
+V_2\).  Let us suppose \(V = V_1\).  Since \(V_1  = V \cap V(f)\), \(f\)
+vanishes on \(V\), i.e., \(f \in I(V)\).  Therefore \(I(V)\) is prime.
+
+*(2)* We show that if \(I(V)\) is prime, then \(V\) is irreducible.
+Suppose, to the contrary, that \(V\) is reducible.  Then we can
+write \(V\) as a union
+\(V_1 \cup V_2\), where \(V \ne V_i\) for \(i = 1\) or \(i = 2\)  Suppose
+that \(V \ne V_1\).  Then there is a polynomial \(f \in I(V_1) -
+I(V)\). Let \(g \in I(V_2)\).
+Since \(V = V_1 \cup V_2\), the product \(fg\) vanishes on \(V\), and so
+is an element of \(I(V)\).  Since \(f \not\in I(V)\) and \(I(V)\) is
+prime, \(g \in I(V)\).  Since \(g\) was an arbitrary element of
+\(I(V_2)\) we know that \(I(V_2) = I(V)\).  Since \(I\) is an injective
+map from varieties to ideals, \(V = V_2\), a contradiction. 
+Therefore \(V\) is irreducible, as claimed.  Q.E.D.
+
+=== Dimension[[DIM]]
+
+A fundamental invariant of a variety is its [term]#dimension#,
+which we can think of informally as the number of parameters
+needed to specify a point on the variety.  There is an
+ideal-theoretic definition of dimension which we will give later.
+For now, we observe that Sage can do dimension computations:
+
+.Code
+[source,python]
+--
+sage: R.<x,y> = PolynomialRing(QQ)
+sage: I = Ideal(R(0))
+sage: I
+sage: I.dimension()
+2
+sage. I = Ideal(x,y)
+sage I.dimension()
+1
+--
+
+In this example, it was important to use +Ideal(R(0))+ rather than
++Ideal(0)+.  In the latter case, Sage would interpret the result
+as the zero ideal in the integers.  We need the zero element of
+\(R\).
+
+=== Degree[[DEG]]
+
+Another fundamental property of a variety is its [term]#degree#. 
+Informally, the degree is the number of  points in which an affine
+space of complementary dimension cuts the variety.  In the case of
+the variety \(V\) defined by \(xy = 0\), the line \(x + y = 1\) is a
+suitable linear space.  It cuts the variety in two points, so the
+degree is 2, as we expect.
+
+There are some subtleties in this definition.  The plane \(x = 0\)
+is not suitable for degree oomputations since it coincides with
+one of the components.  What about the
+line \(y = x\)?  It meets \(V\) at the origin, but there the
+[term]#intersection multiplicity# is two. Again, we give an ideal
+theoretic definition of this notion later.  For now,
+view it as the number obtained by counting the number of
+intersection points in an line that passes very near the origin. 
+Let the the distance to the origin decrease.  The
+intersectio multiplicity is the value of this limit, namely, 2. 
+It is easily to compute intersection numbers with Sage:
+
+.Code
+[source,python]
+--
+sage: J = Ideal(x*y, x + y - 1)
+sage: J.dimension()
+0
+sage: J.vector_space_dimension()
+2
+--
+
+
+In the code above, \(J\) is the ideal of the variety obtained by
+intersection of \(V\) with a line.  We observe
+first that the variety \(xy = 0\), \(x + y = 1\) is zero-dimensional:
+it consists of finitely many points.  The number of points
+(counting multiplicities) is give by the last expression which in
+reality is the dimension of the vector space \(k[x,y]/J\).
+
+
+=== The Twisted Cubic[[TC]]
+
+As an illustration of and exercise in what we have learned so far,
+let us study the _twisted cubic_.  This is the affine variety  \(C
+\subset k^3\) parametrized by \(x = t\), \(y = t^2\), \(z = t^3\).
+
+Our first task is to show that it really is a variety.  To that
+end, we look for equations which define it.  Since it is a
+one-dimensional variety in 3-space, we will need at lest two
+equations.  Certainly the equations \(xy = z\) and \(xz = y^2\) are
+satisfied.  Let \(I\) be the corresponding ideal.
+We compute as follows:
+
+.Code
+[source,sage]
+--
+sage: R.<x,y,z> = PolynomialRing(QQ)
+sage: f = x*y - z
+sage: g = x*z - y^2
+sage: I = Ideal(f,g)
+sage: I.dimension()
+1
+--
+
+This looks good -- the variety has dimension one since its points
+depend on just one parameter, \(t\).  However, look what happens
+when we compute the number of components:
+
+[source,python]
+--
+sage: components(I)
+2 components:
+  Ideal (z, y) ...
+  Ideal (y^2 - x*z, x*y - z, x^2 - y) ...
+--
+
+The variety \(V(xy -z, xz = y^2)\) consists of two components, the
+first of which is the \(x\)-axis, and the second of which is -- we
+hope -- the twisted cubic.  To see that it is, we set \(J = (xy -z,
+xz = y^2, x^2 - y)\).
+
+[source,python]
+--
+sage: J = Ideal(f,g,x^2 - y)
+sage: J.dimension()
+1
+--
+
+Now let us compute the degree of \(W = V(J)\), namely,
+he intersection number of \(W\) with the plane \(x + 2*y + 3*z = 1\):
+
+[source,python]
+--
+sage: JJ = J + Ideal(x + 2*y + 3*z - 1)
+sage: JJ
+sage: JJ.dimension()
+0
+sage: JJ.vector_space_dimension()
+3
+--
+
+The vector space dimension computed for the ideal \(JJ\)
+is the degree of \(W\).  We conclude that \(W\), a one-dimensional
+irreducible variety of degree three, is the twisted cubic.  Just
+to be sure, we check that \(J\) is prime:
+
+[source,python]
+--
+sage: J.is_prime()
+True
+--
+
+*Exercise {counter:exercise}.* (1) What is the degree of \(V(I)\)? 
+Explain why your answer is a reasonable one.  (2) Compute the
+degree of \(W\) using the plane \(x + y + z = 0\).  In what points
+does it intersect \(W\).  Comment on your results.
+
+++++
+</div>
+++++

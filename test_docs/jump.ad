@@ -12,9 +12,9 @@ $(document).ready(function(){
 
   $("#b1").click(function(){
 	  
-      $("#startdocument").scrollTop(200)
+      $("body").scrollTop(200)
 
-	  var result = $("#startdocument").scrollTop()+" px"
+	  var result = $("body").scrollTop()+" px"
  
 	  document.getElementById('report').innerHTML=result
 
@@ -22,7 +22,7 @@ $(document).ready(function(){
 
 $("#b2").click(function(){
 	  
-	  var result2 = $("#startdocument").scrollTop()+" px"
+	  var result2 = $("body").scrollTop()+" px"
  
 	  document.getElementById('report').innerHTML=result2
 
@@ -32,7 +32,7 @@ $("#b2").click(function(){
 $(document).ready(function(){
     $(window).scroll(function(){
 
-        var result3 = $("#startdocument").scrollTop()+" px"
+        var result3 = $("body").scrollTop()+" px"
  
 	  document.getElementById('report').innerHTML=result3
 
