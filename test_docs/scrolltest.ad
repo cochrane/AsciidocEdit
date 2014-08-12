@@ -11,7 +11,7 @@
 $(document).ready(function(){
   $("button").click(function(){
 	  
-	  var result = $("#fooxx").scrollTop()+" px"
+	  var result = $("#startdocument").scrollTop()+" px"
 	  
       alert(result);
  
@@ -25,23 +25,28 @@ $(document).ready(function(){
 <body>
 
 
-<div id="fooxx" style="border:1px solid black;width:150px;height:150px;overflow:auto; margin-left:40px; margin-top:40px;">
-This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+<div id="startdocument" style="border:1px solid black;width:150px;height:150px;overflow:auto; margin-left:40px; margin-top:40px;">
 
 
-<p>
-<strong>My Target.</strong>
-This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
-This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
-</p>
+<p>1. some text.</p>
 
+<p>2. some text.</p>
+
+<p>3. some text.</p>
+
+<p>4. some text.</p>
+
+<p>5. some text.</p>
+
+<p>6. some text.</p>
+
+<p>7. some text.</p>
+
+<p>8. some text.</p>
+
+<p>9. some text.</p>
+
+<p>10. some text.</p>
 
 
 </div>
