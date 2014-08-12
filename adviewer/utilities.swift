@@ -9,48 +9,9 @@
 import Foundation
 
 
-extension String {
-    
-    func countWords() -> Int {
-        
-        let word = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        
-        return word.count
-    }
-}
-
-func pathFromURL(fileURL: String) -> String {
-    
-    return fileURL.stringByReplacingOccurrencesOfString("file://", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-}
-
-func readStringFromPath(path: String) -> String {
-    
-    println("In readStringFromURL, FILE PATH: \(path)")
-    
-    let str = String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: nil)!
-    
-    return str
-    
-}
 
 
-
-func contentsOFLastFileOpened() -> String {
-    
-    let lastDocumentOpenedPath = NSUserDefaults.standardUserDefaults().objectForKey("documentPath") as String?
-    
-    println("lastDocumentOpenedPath: \(lastDocumentOpenedPath)")
-    
-    if let path = lastDocumentOpenedPath  {
-        
-        return readStringFromPath(path)
-        
-    } else {
-        
-        return "Couldn't find the last file you opened."
-    }
-}
+//MARK: User actions
 
 
 func refreshHTML(filePath: String) {
@@ -87,42 +48,30 @@ func installAsciidoctor() {
     
 }
 
-func executeCommand(command: String, args: [String], verbose: Bool = false ) -> String {
-    
-    let task = NSTask()
-    
-    task.launchPath = command
-    task.arguments = args
-    
-    
-    if verbose {
-      println("executeCommand")
-      println("Running: \(command)")
-      println("Args: \(args)")
-    }
-    
-    let pipe = NSPipe()
-    task.standardOutput = pipe
-    task.launch()
-    
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output: String = NSString(data: data, encoding: NSUTF8StringEncoding)
-    
-    if verbose {
-        
-        println("Output: \(output)")
-        
-    }
-    
-    return output
-    
-}
+
+
+//MARK: File system
 
 func baseName(path: String) -> String {
     
     //let part = path.pathComponents
     let part = path.componentsSeparatedByString(".")
     return part[0]
+    
+}
+
+func pathFromURL(fileURL: String) -> String {
+    
+    return fileURL.stringByReplacingOccurrencesOfString("file://", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+}
+
+func readStringFromPath(path: String) -> String {
+    
+    println("In readStringFromURL, FILE PATH: \(path)")
+    
+    let str = String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: nil)!
+    
+    return str
     
 }
 
@@ -155,6 +104,8 @@ func testFS() {
     }
 }
 
+//MARK: Memorize and recall key-value pairs
+
 func memorizeKeyValuePair(key: String, value: String) {
     
     NSUserDefaults.standardUserDefaults().setObject(value, forKey:key)
@@ -170,4 +121,51 @@ func recallValueOfKey(key: String) -> String? {
     return value
 
 }
+
+//MARK: External command execution
+
+func executeCommand(command: String, args: [String], verbose: Bool = false ) -> String {
+    
+    let task = NSTask()
+    
+    task.launchPath = command
+    task.arguments = args
+    
+    
+    if verbose {
+        println("executeCommand")
+        println("Running: \(command)")
+        println("Args: \(args)")
+    }
+    
+    let pipe = NSPipe()
+    task.standardOutput = pipe
+    task.launch()
+    
+    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    let output: String = NSString(data: data, encoding: NSUTF8StringEncoding)
+    
+    if verbose {
+        
+        println("Output: \(output)")
+        
+    }
+    
+    return output
+    
+}
+
+
+//MARK: Extensions
+
+extension String {
+    
+    func countWords() -> Int {
+        
+        let word = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        return word.count
+    }
+}
+
 

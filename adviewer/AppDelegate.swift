@@ -30,11 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     var textChanges: Int = 0
     var textLength = 0
     
-    func processNotification(notification: NSNotification) {
-        
-        println("Notification: \(notification)")
-        
-    }
+//MARK: appDelegate
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         
@@ -88,8 +84,18 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     func applicationWillTerminate(aNotification: NSNotification?) {
         // Insert code here to tear down your application
     }
+    
+//MARK: Notifications
+    
+    func processNotification(notification: NSNotification) {
+        
+        println("Notification: \(notification)")
+        
+    }   
 
 
+//MARK: IBActions
+    
     @IBAction func newFileAction(sender: AnyObject) {
         
         println("FOO")
@@ -204,6 +210,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         installAsciidoctor()
     }
     
+    
+//MARK: Helpers
     
     func updateUI(#refresh: Bool) {
         
