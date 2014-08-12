@@ -30,6 +30,16 @@ Installation
 
 Clone and compile project with XCode. You must have `/usr/bin/asciidoctor`.
 
+Help needed
+===========
+
+I need help in making the html pane work properly.  Currently, when the
+user saves source text, the rendered text in the right-hand pane
+jumps back to the top of the document.  It should stay in place.
+This should be possible with a bit of javascript/jquery.  Note
+that javascript/jquery can be passed through to the 
+html view unchanged by enclosing it like this ++++[javascript/jquery]+++
+
 Note
 ====
 
