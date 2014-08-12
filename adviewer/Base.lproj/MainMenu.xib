@@ -118,7 +118,7 @@
                             </menuItem>
                             <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                 <connections>
-                                    <action selector="saveFileAction:" target="Voe-Tx-rLC" id="y0y-bh-0II"/>
+                                    <action selector="saveFileAction:" target="Voe-Tx-rLC" id="lwr-ev-uHH"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Move To" id="Bw7-FT-i3A">

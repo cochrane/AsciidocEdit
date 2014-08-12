@@ -189,6 +189,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
     }
     
+    @IBAction func saveFileAction(sender: AnyObject) {
+        
+        if let currentDocumentPath = documentPath {
+            
+            updateDocument(currentDocumentPath)
+            updateUI(refresh: true)
+            
+        }
+        
+    }
     
   
     
@@ -277,8 +287,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         // adWebView.setNeedsDisplayInRect(adWebView.frame)
         adWebView.needsDisplay = true
         
-        messageLabel.stringValue = "Word count: \(documentText.countWords())"
-        // messageLabel.stringValue = "File: \(documentPath).    Word count: \(documentText.countWords())"
+        // messageLabel.stringValue = "Word count: \(documentText.countWords())"
+        messageLabel.stringValue = "File: \(documentPath).    Word count: \(documentText.countWords())"
         messageLabel.needsDisplay = true
         
         

@@ -1,0 +1,55 @@
+++++
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+	  
+	  var result = $("#fooxx").scrollTop()+" px"
+	  
+      alert(result);
+ 
+	  document.getElementById('report').innerHTML=result
+
+  });
+});
+
+</script>
+</head>
+<body>
+
+
+<div id="fooxx" style="border:1px solid black;width:150px;height:150px;overflow:auto; margin-left:40px; margin-top:40px;">
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+
+
+<p>
+<strong>My Target.</strong>
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text. This is some text.
+</p>
+
+
+
+</div>
+
+<br>
+
+<div id="report" style="margin-bottom:10px;margin-top:20px;">Report</div>
+<button>Return the vertical position of the scrollbar</button>
+<p>Move the scrollbar down and click the button again.</p>
+
+</body>
+</html>
+++++
+
+
