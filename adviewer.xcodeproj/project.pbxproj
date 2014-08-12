@@ -15,6 +15,7 @@
 		BD1EB9B9198E7AD6006EEC1C /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9B8198E7AD6006EEC1C /* utilities.swift */; };
 		BDEBA1711999C38300939D7C /* JSWrappers.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBA1701999C38300939D7C /* JSWrappers.m */; };
 		BDEBA1741999C3C500939D7C /* NSStringExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBA1731999C3C500939D7C /* NSStringExtras.m */; };
+		BDEBA1781999C80200939D7C /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = BDEBA1771999C80200939D7C /* jquery.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,7 @@
 		BDEBA1701999C38300939D7C /* JSWrappers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSWrappers.m; sourceTree = "<group>"; };
 		BDEBA1721999C3C500939D7C /* NSStringExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringExtras.h; sourceTree = "<group>"; };
 		BDEBA1731999C3C500939D7C /* NSStringExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringExtras.m; sourceTree = "<group>"; };
+		BDEBA1771999C80200939D7C /* jquery.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		BD1EB998198E5C0D006EEC1C /* adviewer */ = {
 			isa = PBXGroup;
 			children = (
+				BDEBA1761999C7EB00939D7C /* Resources */,
 				BD1EB99D198E5C0D006EEC1C /* AppDelegate.swift */,
 				BDEBA1751999C46100939D7C /* JSWrapper */,
 				BD1EB99F198E5C0D006EEC1C /* Images.xcassets */,
@@ -130,6 +133,15 @@
 				BDEBA1731999C3C500939D7C /* NSStringExtras.m */,
 			);
 			name = JSWrapper;
+			sourceTree = "<group>";
+		};
+		BDEBA1761999C7EB00939D7C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				BDEBA1771999C80200939D7C /* jquery.js */,
+			);
+			name = Resources;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +224,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BDEBA1781999C80200939D7C /* jquery.js in Resources */,
 				BD1EB9A0198E5C0D006EEC1C /* Images.xcassets in Resources */,
 				BD1EB9A3198E5C0D006EEC1C /* MainMenu.xib in Resources */,
 			);
