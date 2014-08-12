@@ -51,10 +51,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
            println("DOCUMENT PATH: \(documentPath)")
            textView.string = readStringFromPath(documentPath!)
            updateUI(refresh: true)
+            messageLabel.stringValue = "Opened file: \(documentPath!)"
+            messageLabel.needsDisplay = true
             
         } else {
             
             textView.string =  "Couldn't find the last file you opened."
+            messageLabel.stringValue = "Couldn't find the last file you opened."
+            messageLabel.needsDisplay = true
         }
         
         
@@ -77,7 +81,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
         // adWebView.shouldUpdateWhileOffscreen = true
 
-        messageLabel.stringValue = ""
+    
         
     }
 
@@ -104,9 +108,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             "New file".writeToFile(filePath, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
             let url = "file:///"+filePath
             synchronizePaths(url)
-            
-            println("\ndocumentURL: \(documentURL!)")
-            println("\nhtmlDocumentURL: \(htmlDocumentURL!)")
             
             memorizeKeyValuePair("documentURL", url)
             
@@ -175,6 +176,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
               }
             }
         }
+        
+        messageLabel.stringValue = "Opened file: \(documentPath!)"
+        messageLabel.needsDisplay = true
+
         
     }
     
