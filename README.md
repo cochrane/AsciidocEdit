@@ -1,12 +1,11 @@
-asciihelper (v0.1)
-==================
+asciihelper
+===========
 
 Asciihelper is a MacOS application for helping to compose 
 documents written in asciidoc markup.  Two panes are
 shown side-by-side in the main window.  On the left
 is the source file (asciidoc).  On the right is the
 html rendered from it.  Type cmd-S to save and render.
-
 See the screenshot in the images directory for this repo.
 
 Asciihelper is written in Swift.  It calls on 
@@ -14,11 +13,13 @@ Asciihelper is written in Swift.  It calls on
 the source file. (It calls
 `/usr/bin/asciidoctor`)
 
+This is version 0.1
+
 Installation
 ============
 
 Clone and compile project with XCode. You must have `/usr/bin/asciidoctor`
-set up for `asciihelper` to work.
+set up for `asciihelper` to work.  See [Asciidoctor](http://asciidoctor.org)
 
 Issues
 ======
@@ -32,9 +33,19 @@ issues.
 of sandbox and permission issues.  If I can't solve this one,
 I will eliminate this menu item.
 
+- "File > MoveTo" has not been implemented yet
+
 
 Planned features
 ===============
+
+- Multiple windows
+
+- epub3 export
+
+
+I welcome suggestions
+
 
 Distribution
 ============
