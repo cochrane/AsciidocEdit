@@ -5,7 +5,10 @@ Asciihelper is a MacOS application for helping to compose
 documents written in asciidoc markup.  Two panes are
 shown side-by-side in the main window.  On the left
 is the source file (asciidoc).  On the right is the
-html rendered from it.  Type cmd-S to save and render.
+html rendered from it.  You will find he html file in
+the same directory as the source file.   
+
+Type cmd-S to save and render.
 See the screenshot in the images directory for this repo.
 
 Asciihelper is written in Swift.  It calls on 
