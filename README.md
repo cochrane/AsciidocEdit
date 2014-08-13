@@ -1,47 +1,43 @@
-asciihelper
-===========
+asciihelper (v0.1)
+==================
 
 Asciihelper is a MacOS application for helping to compose 
-documents written in asciidoc (asciidoctor) markup.
-It is written in Swift. Although it works at a very basic
-level, it has a long ways to go, especially in 
-doing a good live preview of the asciidoc text.
+documents written in asciidoc markup.  Two panes are
+shown side-by-side in the main window.  On the left
+is the source file (asciidoc).  On the right is the
+html rendered from it.  Type cmd-S to save and render.
 
 See the screenshot in the images directory for this repo.
 
-The app has two windows.  On the left, a basic text
-editor which displys the source file, e.g `foo.ad`  
-On the right is a window which displays the file
-`foo.html` which `asciidoctor` produces from `foo.ad`.
-
-Whe you do cmd-S, `asciihelper` calls on `asciidoctor`
-to render `foo.ad` as `foo.html`.  (It calls
-`/usr/bin/asciidoctor`).
-
-At the moment the biggest issue is a "lag" in refreshing
-the WebView (right-hand windowpane).  When you do cmd-S,
-the text on the left is saved and `asciidoctor` is run 
-on it.  However, for some reason you have to do cmd-S
-**twice** to see the rendered output.  If someone
-could help out on this, that would be great.
+Asciihelper is written in Swift.  It calls on 
+[Asciidoctor](http://asciidoctor.org) to process
+the source file. (It calls
+`/usr/bin/asciidoctor`)
 
 Installation
 ============
 
-Clone and compile project with XCode. You must have `/usr/bin/asciidoctor`.
+Clone and compile project with XCode. You must have `/usr/bin/asciidoctor`
+set up for `asciihelper` to work.
 
-Help needed
-===========
+Issues
+======
 
-I need help in making the html pane work properly.  Currently, when the
-user saves source text, the rendered text in the right-hand pane
-jumps back to the top of the document.  It should stay in place.
-This should be possible with a bit of javascript/jquery.  Note
-that javascript/jquery can be passed through to the 
-html view unchanged by enclosing it like this ++++[javascript/jquery]+++
+**Menu Items:**
 
-Note
-====
+- "Save as PDF" may not work because of `asciidoctor-pdf` installation
+issues.
+
+- "Install Asciidoctor" does not work and may never work becaue
+of sandbox and permission issues.  If I can't solve this one,
+I will eliminate this menu item.
+
+
+Planned features
+===============
+
+Distribution
+============
 
 This app will be distributed on the appstore
 for free when it is suitable for "publication".  Source
