@@ -27,7 +27,6 @@ $(document).ready(function(){
 
        localStorage.setItem("scroll_position", scroll_position);
  
-	      document.getElementById('report').innerHTML= scroll_position + " px"
     
     })
 
@@ -38,6 +37,5 @@ $(document).ready(function(){
 
 </script>
 
-<span id="report" style="position:fixed; top:10px;right:75px">Position</span>
 
 ++++
