@@ -26,6 +26,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     var documentURL: String?
     var htmlDocumentURL: String?
     var documentPath: String?
+    var htmlPath: String?
     var documentText: String = ""
     var textChanges: Int = 0
     var textLength = 0
@@ -33,6 +34,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
 //MARK: appDelegate
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
+        
         
         
         
@@ -270,7 +272,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 
             }
             
-            refreshHTML(documentPath!)
+            refreshHTML(documentPath!, htmlPath!)
             
         }
         
@@ -304,6 +306,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         documentURL = url
         htmlDocumentURL = baseName(documentURL!) + ".html"
         documentPath = pathFromURL(documentURL!)
+        htmlPath = pathFromURL(htmlDocumentURL!)
     }
     
     func textDidChange (notification: NSNotification) {

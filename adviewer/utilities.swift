@@ -13,10 +13,47 @@ import Foundation
 
 //MARK: User actions
 
-
-func refreshHTML(filePath: String) {
+func preprocessFile(path: String) {
     
-    executeCommand("/usr/bin/asciidoctor", [filePath], verbose: false)
+    // Get text from file and break it into lines
+    let inputText = readStringFromPath(path)
+    let jsContent = bundleContent("synchronize", "js")
+    let lines = inputText.componentsSeparatedByString("\n")
+    
+    // Insert Javascript after header
+    var output = ""
+    var firstBlankLineFound = false
+    for line in lines {
+        
+        output += line  + "\n"
+        if line == "" && firstBlankLineFound == false {
+            output += "\n"+jsContent+"\n\n"
+            firstBlankLineFound = true
+        }
+    }
+    
+    // Write transformed text to temporary file
+    output.writeToFile("tmp.ad", atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    
+}
+
+
+func bundleContent(fileName: String, resourceType: String) -> String {
+    
+
+    let bundlePath = NSBundle.mainBundle().pathForResource(fileName, ofType: resourceType)
+    let content = readStringFromPath(bundlePath)
+    return content
+    
+}
+
+
+func refreshHTML(filePath: String, htmlPath: String) {
+    
+    preprocessFile(filePath)
+    
+    executeCommand("/usr/bin/asciidoctor", ["tmp.ad"], verbose: false)
+    executeCommand("/bin/mv", ["tmp.html", htmlPath], verbose: false)
     
     let version = executeCommand("/usr/bin/asciidoctor", ["-V"], verbose: false)
     println(version)
@@ -91,6 +128,11 @@ func documentsDirectory() -> String? {
     
     return documentsDirectory
 
+}
+
+func writeStringToFile(str: String, path: String) {
+    
+    str.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
 }
 
 

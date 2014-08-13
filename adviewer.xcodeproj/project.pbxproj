@@ -14,6 +14,7 @@
 		BD1EB9AF198E5C0D006EEC1C /* adviewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */; };
 		BD1EB9B9198E7AD6006EEC1C /* utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9B8198E7AD6006EEC1C /* utilities.swift */; };
 		BD95544A199A696D002E870B /* controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD955449199A696D002E870B /* controller.swift */; };
+		BD95544C199AF9AA002E870B /* synchronize.js in Resources */ = {isa = PBXBuildFile; fileRef = BD95544B199AF9AA002E870B /* synchronize.js */; };
 		BDEBA1711999C38300939D7C /* JSWrappers.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBA1701999C38300939D7C /* JSWrappers.m */; };
 		BDEBA1741999C3C500939D7C /* NSStringExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBA1731999C3C500939D7C /* NSStringExtras.m */; };
 		BDEBA1781999C80200939D7C /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = BDEBA1771999C80200939D7C /* jquery.js */; };
@@ -41,6 +42,7 @@
 		BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adviewerTests.swift; sourceTree = "<group>"; };
 		BD1EB9B8198E7AD6006EEC1C /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
 		BD955449199A696D002E870B /* controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = controller.swift; sourceTree = "<group>"; };
+		BD95544B199AF9AA002E870B /* synchronize.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = synchronize.js; sourceTree = "<group>"; };
 		BDEBA16E1999C33E00939D7C /* JSWrappers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSWrappers.h; sourceTree = "<group>"; };
 		BDEBA16F1999C38300939D7C /* adviewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "adviewer-Bridging-Header.h"; sourceTree = "<group>"; };
 		BDEBA1701999C38300939D7C /* JSWrappers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSWrappers.m; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		BDEBA1761999C7EB00939D7C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD95544B199AF9AA002E870B /* synchronize.js */,
 				BDEBA1771999C80200939D7C /* jquery.js */,
 			);
 			name = Resources;
@@ -228,6 +231,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDEBA1781999C80200939D7C /* jquery.js in Resources */,
+				BD95544C199AF9AA002E870B /* synchronize.js in Resources */,
 				BD1EB9A0198E5C0D006EEC1C /* Images.xcassets in Resources */,
 				BD1EB9A3198E5C0D006EEC1C /* MainMenu.xib in Resources */,
 			);
