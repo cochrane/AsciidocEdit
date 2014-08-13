@@ -48,13 +48,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         let url = recallValueOfKey("documentURL")
         if let documentURL = url {
-           println("DOCUMENT URL: \(documentURL)")
+           
            synchronizePaths(documentURL)
-           println("DOCUMENT PATH: \(documentPath)")
            textView.string = readStringFromPath(documentPath!)
            updateUI(refresh: true)
-            messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
-            messageLabel.needsDisplay = true
+            
+           messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
+           messageLabel.needsDisplay = true
             
         } else {
             
@@ -62,7 +62,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             messageLabel.stringValue = "Couldn't find the last file you opened."
             messageLabel.needsDisplay = true
         }
-        
         
         textView.font = NSFont(name: "Helvetica", size: 18.0)
         
@@ -75,6 +74,21 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         textView.delegate = self
         adWebView.UIDelegate = self
+        adWebView.frameLoadDelegate = self
+        
+        /* WebKit depends on the WebView's WebUIDelegate for all window
+        related management, including opening new windows and controlling the user interface
+        elements in those windows.
+        
+        WebResourceLoadDelegate is used to monitor the progress of resources as they are
+        loaded.  This delegate may be used to present users with a progress monitor.
+        
+        The WebFrameLoadDelegate receives messages when the URL in a WebFrame is
+        changed.
+        
+        WebView's WebPolicyDelegate can make determinations about how
+        content should be handled, based on the resource's URL and MIME type.
+        */
         
         
        //  adWebView.mainFrame.loadHTMLString("javascript:testEcho('Hello World!')");
@@ -83,9 +97,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
         // adWebView.shouldUpdateWhileOffscreen = true
 
+       
+    }
     
+    
+    override func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
+        
+    
+        keepPlace()
         
     }
+    
+    
+    
 
     func applicationWillTerminate(aNotification: NSNotification?) {
         // Insert code here to tear down your application
@@ -270,8 +294,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         if refresh {
             
-            println("-- writing to file: \(documentPath)")
-            
             if let currentDocumentPath = documentPath {
                 
                 updateDocument(currentDocumentPath)
@@ -293,14 +315,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         adWebView.mainFrameURL = htmlDocumentURL!
         adWebView.needsDisplay = true
         
-        
         messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
         messageLabel.needsDisplay = true
         
-       
-        adWebView.stringByEvaluatingJavaScriptFromString("keep_place()")
-        
         window.viewsNeedDisplay = true
+        keepPlace()
+
     }
     
     

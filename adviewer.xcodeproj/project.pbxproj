@@ -90,11 +90,11 @@
 		BD1EB998198E5C0D006EEC1C /* adviewer */ = {
 			isa = PBXGroup;
 			children = (
-				BDEBA1761999C7EB00939D7C /* Resources */,
 				BD1EB99D198E5C0D006EEC1C /* AppDelegate.swift */,
 				BD955449199A696D002E870B /* controller.swift */,
 				BD1EB9B8198E7AD6006EEC1C /* utilities.swift */,
 				BD1EB9A1198E5C0D006EEC1C /* MainMenu.xib */,
+				BDEBA1761999C7EB00939D7C /* Resources */,
 				BDEBA1751999C46100939D7C /* JSWrapper */,
 				BD1EB99F198E5C0D006EEC1C /* Images.xcassets */,
 				BD1EB999198E5C0D006EEC1C /* Supporting Files */,
