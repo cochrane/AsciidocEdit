@@ -96,6 +96,13 @@ func pathFromURL(fileURL: String) -> String {
     return fileURL.stringByReplacingOccurrencesOfString("file://", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
 }
 
+
+func fileExistsAtPath(path: String) -> Bool {
+    
+    return NSFileManager.defaultManager().fileExistsAtPath(path)
+    
+}
+
 func readStringFromPath(path: String) -> String {
     
     println("In readStringFromURL, FILE PATH: \(path)")

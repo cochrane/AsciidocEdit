@@ -36,8 +36,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         
         
-        
-        
         let nc = NSNotificationCenter()
         nc.addObserver(self, selector: "processNotification", name: nil, object: nil)
 
@@ -50,7 +48,17 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         if let documentURL = url {
            
            synchronizePaths(documentURL)
-           textView.string = readStringFromPath(documentPath!)
+            
+           if fileExistsAtPath(documentPath!) {
+            
+             textView.string = readStringFromPath(documentPath!)
+            
+           } else {
+            
+             textView.string = "Could not find \(documentPath!)"
+            
+           }
+            
            updateUI(refresh: true)
             
            messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
@@ -75,21 +83,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         textView.delegate = self
         adWebView.UIDelegate = self
         adWebView.frameLoadDelegate = self
-        
-        /* WebKit depends on the WebView's WebUIDelegate for all window
-        related management, including opening new windows and controlling the user interface
-        elements in those windows.
-        
-        WebResourceLoadDelegate is used to monitor the progress of resources as they are
-        loaded.  This delegate may be used to present users with a progress monitor.
-        
-        The WebFrameLoadDelegate receives messages when the URL in a WebFrame is
-        changed.
-        
-        WebView's WebPolicyDelegate can make determinations about how
-        content should be handled, based on the resource's URL and MIME type.
-        */
-        
+    
         
        //  adWebView.mainFrame.loadHTMLString("javascript:testEcho('Hello World!')");
         
