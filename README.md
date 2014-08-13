@@ -21,8 +21,8 @@ Installation
 ============
 
 Clone and compile project with XCode, v6.0 or later. You must have `asciidoctor` 
-installed in `/usr/bin/asciidoctor`
-set up for `asciihelper` to work.  See [Asciidoctor](http://asciidoctor.org)
+installed in `/usr/bin/asciidoctor` for `asciihelper` to work.  
+See [Asciidoctor](http://asciidoctor.org)
 
 - To use "Save As PDF", you must have `asciidoctor-pdf` installed in `/usr/bin/asciidoctor-pdf`.
 I have not been able to test this feature: while I can install `asciidoctor-pdf` on my
