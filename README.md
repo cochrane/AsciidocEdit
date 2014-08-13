@@ -12,9 +12,8 @@ Type cmd-S to save and render.
 See the screenshot in the images directory for this repo.
 
 Asciihelper is written in Swift.  It calls on 
-[Asciidoctor](http://asciidoctor.org) to process
-the source file. (It calls
-`/usr/bin/asciidoctor`)
+[Asciidoctor](http://asciidoctor.org) (`/usr/bin/asciidoctor`) to process
+the source file. 
 
 This is version 0.1
 
