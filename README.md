@@ -33,7 +33,7 @@ See [asciidoctor-pdf](https://github.com/asciidoctor/asciidoctor-pdf).
 See [asciidoctor-epub3](https://github.com/asciidoctor/asciidoctor-epub3).  I have made 
 a few tests of this feature. Note that if you open a master file for an epub3 document
 which contains the directive `include::`, the file will not be processed into html and so
-the right-hand pane will stay blank.
+the right-hand pane will stay blank.  
 
 Issues
 ======
@@ -54,8 +54,6 @@ Planned features
 ===============
 
 - Multiple windows
-
-- epub3 export
 
 
 I welcome suggestions
