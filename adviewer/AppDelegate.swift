@@ -30,6 +30,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     var documentText: String = ""
     var textChanges: Int = 0
     var textLength = 0
+    var hasIncludes = false
     
 //MARK: appDelegate
 
@@ -45,6 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         window.title = "AsciiHelper"
         
         let url = recallValueOfKey("documentURL")
+        
         if let documentURL = url {
            
            synchronizePaths(documentURL)
@@ -52,12 +54,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
            if fileExistsAtPath(documentPath!) {
             
              textView.string = readStringFromPath(documentPath!)
+           
+    
             
            } else {
             
              textView.string = "Could not find \(documentPath!)"
             
            }
+            
+           setHasIncludes()
             
            updateUI(refresh: true)
             
@@ -196,6 +202,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 
                 documentText = readStringFromPath(documentPath!)
                 textView.string = documentText
+                setHasIncludes()
                 
                 updateUI(refresh: false)
                 
@@ -227,6 +234,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         saveAsPDF(documentPath!)
         
+    }
+    
+    
+    @IBAction func saveAsEPUB3Action(sender: AnyObject) {
+        
+        saveAsEPUB3(documentPath!)
     }
     
     
@@ -294,7 +307,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 
             }
             
-            refreshHTML(documentPath!, htmlPath!)
+            if hasIncludes == false {
+                refreshHTML(documentPath!, htmlPath!)
+            }
             
         }
         
@@ -362,6 +377,19 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             updateUI(refresh: true)
         }
       */
+    }
+    
+    func setHasIncludes() {
+        
+        
+        if textView.string.rangeOfString("include::") == nil {
+            
+            hasIncludes = false
+            
+        } else {
+            
+            hasIncludes = true
+        }
     }
     
     

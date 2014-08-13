@@ -60,11 +60,14 @@ func refreshHTML(filePath: String, htmlPath: String) {
 }
 
 func saveAsPDF(filePath: String) {
-    
-    let cmd = "/usr/bin/asciidoctor-pdf"
 
-    executeCommand(cmd, [filePath], verbose: true)
+    executeCommand("/usr/bin/asciidoctor-pdf", [filePath], verbose: true)
     
+}
+
+func saveAsEPUB3(filePath: String) {
+    
+    executeCommand("/usr/bin/asciidoctor-epub3", [filePath], verbose: true)
     
 }
 
