@@ -9,7 +9,7 @@ function keep_place() {
     
     $("body").scrollTop(position)
 
-}
+};
 
 $(document).ready(function(){
 
