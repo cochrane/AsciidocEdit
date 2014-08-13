@@ -257,6 +257,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     }
     
     
+    
+    @IBAction func keepPlaceAction(sender: AnyObject) {
+        
+        keepPlace()
+    }
+    
 //MARK: Helpers
     
     func updateUI(#refresh: Bool) {
@@ -284,21 +290,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         println("href: \(href)")
         
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
-        // adWebView.mainFrame.reload()
         adWebView.mainFrameURL = htmlDocumentURL!
-        // adWebView.reload(nil)
-        // adWebView.setNeedsDisplayInRect(adWebView.frame)
         adWebView.needsDisplay = true
         
-        // messageLabel.stringValue = "Word count: \(documentText.countWords())"
+        
         messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
         messageLabel.needsDisplay = true
         
-        
-        // adWebView.scrollPoint(NSPoint(x:0, y:200))
-            // scrollView.contentOffset = CGPointMake(0, 100);
+       
+        adWebView.stringByEvaluatingJavaScriptFromString("keep_place()")
         
         window.viewsNeedDisplay = true
+    }
+    
+    
+    
+    func keepPlace() {
+        
+        adWebView.stringByEvaluatingJavaScriptFromString("keep_place()")
     }
     
     func synchronizePaths(url: String) {

@@ -748,7 +748,7 @@ CQ
                         </textFieldCell>
                     </textField>
                     <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-jq-k74">
-                        <rect key="frame" x="206" y="10" width="52" height="19"/>
+                        <rect key="frame" x="287" y="10" width="52" height="19"/>
                         <buttonCell key="cell" type="roundRect" title="Back" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bcs-ai-x5I">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="cellTitle"/>
@@ -758,7 +758,7 @@ CQ
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jh2-xM-Kt8">
-                        <rect key="frame" x="264" y="9" width="67" height="19"/>
+                        <rect key="frame" x="345" y="9" width="67" height="19"/>
                         <buttonCell key="cell" type="roundRect" title="Forward" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ST6-O9-Iea">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="cellTitle"/>
@@ -767,9 +767,20 @@ CQ
                             <action selector="browserForward:" target="Voe-Tx-rLC" id="cFa-U5-Pkw"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AVm-Mv-cTV">
+                        <rect key="frame" x="220" y="9" width="59" height="19"/>
+                        <buttonCell key="cell" type="roundRect" title="Test" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ltt-i1-bB1">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="controlContent"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="keepPlaceAction:" target="Voe-Tx-rLC" id="F9i-Sa-khq"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="jh2-xM-Kt8" firstAttribute="width" secondItem="EUu-jq-k74" secondAttribute="width" id="7fb-7i-xMl"/>
+                    <constraint firstItem="EUu-jq-k74" firstAttribute="leading" secondItem="AVm-Mv-cTV" secondAttribute="trailing" constant="8" symbolic="YES" id="8NS-SW-zsI"/>
                     <constraint firstAttribute="trailing" secondItem="jh2-xM-Kt8" secondAttribute="trailing" constant="20" id="8ZT-F1-3lt"/>
                     <constraint firstItem="dF6-fn-ukB" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="Ccg-kI-lZ4"/>
                     <constraint firstAttribute="bottom" secondItem="v2T-D3-8qG" secondAttribute="bottom" constant="41" id="Fq3-P1-OYB"/>
@@ -780,10 +791,12 @@ CQ
                     <constraint firstItem="dF6-fn-ukB" firstAttribute="width" secondItem="v2T-D3-8qG" secondAttribute="width" id="bUo-TW-Mtn"/>
                     <constraint firstItem="jh2-xM-Kt8" firstAttribute="leading" secondItem="EUu-jq-k74" secondAttribute="trailing" constant="8" symbolic="YES" id="dic-lq-yRG"/>
                     <constraint firstItem="kMk-pE-pDU" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="22" id="gKw-Lc-5jm"/>
+                    <constraint firstAttribute="bottom" secondItem="AVm-Mv-cTV" secondAttribute="bottom" constant="11" id="hPn-ld-FFc"/>
                     <constraint firstAttribute="bottom" secondItem="kMk-pE-pDU" secondAttribute="bottom" constant="11" id="i5G-aj-zms"/>
                     <constraint firstAttribute="trailing" secondItem="v2T-D3-8qG" secondAttribute="trailing" constant="20" id="mhC-Fa-XQw"/>
                     <constraint firstAttribute="bottom" secondItem="dF6-fn-ukB" secondAttribute="bottom" constant="36" id="nBZ-5r-5jZ"/>
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="ofX-T5-D0J"/>
+                    <constraint firstItem="AVm-Mv-cTV" firstAttribute="width" secondItem="EUu-jq-k74" secondAttribute="width" id="qbq-hP-azK"/>
                 </constraints>
             </view>
             <point key="canvasLocation" x="39" y="112"/>
