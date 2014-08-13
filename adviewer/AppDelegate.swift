@@ -181,7 +181,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         panel.canChooseFiles = true
         panel.canChooseDirectories = true
-        
+        panel.allowedFileTypes = ["ad", "adoc", "asciidoc"]
         panel.allowsMultipleSelection = false // yes if more than one dir is allowed
         
         let clicked = panel.runModal()
