@@ -20,7 +20,7 @@ This is version 0.1
 Installation
 ============
 
-Clone and compile project with XCode. You must have `/usr/bin/asciidoctor`
+Clone and compile project with XCode, v6.0 or later. You must have `/usr/bin/asciidoctor`
 set up for `asciihelper` to work.  See [Asciidoctor](http://asciidoctor.org)
 
 Issues
