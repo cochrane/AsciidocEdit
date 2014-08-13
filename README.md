@@ -26,10 +26,13 @@ set up for `asciihelper` to work.  See [Asciidoctor](http://asciidoctor.org)
 - To use "Save As PDF", you must have `asciidoctor-pdf` installed in `/usr/bin/asciidoctor-pdf`.
 I have not been able to test this feature: while I can install `asciidoctor-pdf` on my
 machine, I have been able to install it in `/usr/bin/asciidoctor-pdf`.
-See [asciidoctor-epub3](https://github.com/asciidoctor/asciidoctor-pdf).
+See [asciidoctor-pdf](https://github.com/asciidoctor/asciidoctor-pdf).
 
 - To use "Compile PDF", you must have `asciidoctor-epub3` installed in `/usr/bin/asciidoctor-epub3`.
-See [asciidoctor-epub3](https://github.com/asciidoctor/asciidoctor-epub3).
+See [asciidoctor-epub3](https://github.com/asciidoctor/asciidoctor-epub3).  I have made 
+a few tests of this feature. Note that if you open a master file for an epub3 document
+which contains the directive `include::`, the file will not be processed into html and so
+the right-hand pane will stay blank.
 
 Issues
 ======
