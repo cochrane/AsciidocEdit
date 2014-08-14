@@ -182,47 +182,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         
         
-        let panel = NSOpenPanel()
-        
-        panel.canChooseFiles = true
-        panel.canChooseDirectories = true
-        panel.allowedFileTypes = ["ad", "adoc", "asciidoc"]
-        panel.allowsMultipleSelection = false // yes if more than one dir is allowed
-        
-        let clicked = panel.runModal()
-        
-        if (clicked == NSFileHandlingPanelOKButton) {
-            
-            for url in panel.URLs {
-                if let url = url.absoluteString {
-                    
-                    
-                    synchronizePaths(url)
-                    
-                    // Add document to recent files menu
-                    NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(
-                        NSURL(string: documentURL))
-                    
-                    
-                    println("\ndocumentURL: \(documentURL!)")
-                    println("\nhtmlDocumentURL: \(htmlDocumentURL!)")
-                    
-                    memorizeKeyValuePair("documentURL", url)
-                    recallValueOfKey("documentURL")
-                    
-                    documentText = readStringFromPath(documentPath!)
-                    textView.string = documentText
-                    setHasIncludes()
-                    
-                    updateUI(refresh: false)
-                    
-                    // http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
-                }
-            }
-        }
-        
-        putMessage()
-        
         return true
 
     }
@@ -242,6 +201,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         if (clicked == NSFileHandlingPanelOKButton) {
             
             for url in panel.URLs {
+                
                 if let url = url.absoluteString {
                     
                     
@@ -260,6 +220,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                     
                     documentText = readStringFromPath(documentPath!)
                     textView.string = documentText
+                    
+                    
                     setHasIncludes()
                     
                     updateUI(refresh: false)
@@ -409,11 +371,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         documentURL = url
         let baseURL = baseName(documentURL!)
+        println("\nSYNC:")
         basePath = pathFromURL(baseURL)
         println("basePath = \(basePath)")
         htmlDocumentURL = baseName(documentURL!) + ".html"
+        println("htmlDocumentURL = \(htmlDocumentURL)")
         documentPath = pathFromURL(documentURL!)
+        println("documentPath = \(documentPath)")
         htmlPath = pathFromURL(htmlDocumentURL!)
+        println("htmlPath = \(htmlPath)\n")
     }
     
     func textDidChange (notification: NSNotification) {
@@ -471,7 +437,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     func application(sender: NSApplication!, openFile filename: String!) -> Bool {
         
-        return true
+        if fileExistsAtPath(filename){
+            
+          println("I AM IN application - openFile, found \(filename)")
+          let url = "file:///"+filename
+          synchronizePaths(url)
+            
+          documentText = readStringFromPath(filename)
+          textView.string = documentText
+          updateUI(refresh: true)
+          putMessage()
+          
+            
+          return true
+            
+        } else {
+            
+            println("I AM IN application - openFile, can't find \(filename)")
+            
+          return false
+        }
     }
+    
+    
 }
 
