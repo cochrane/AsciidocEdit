@@ -32,6 +32,8 @@ func preprocessFile(path: String) {
         }
     }
     
+    
+    
     // Write transformed text to temporary file
     output.writeToFile("tmp.ad", atomically: true, encoding: NSUTF8StringEncoding, error: nil)
     
