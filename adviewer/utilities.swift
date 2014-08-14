@@ -13,6 +13,12 @@ import Foundation
 
 //MARK: User actions
 
+func tempPath(path: String) -> String {
+    
+    let part = path.componentsSeparatedByString(".")
+    return part[0]+"-temp"+part[1]
+}
+
 func preprocessFile(path: String) {
     
     // Get text from file and break it into lines
@@ -31,8 +37,9 @@ func preprocessFile(path: String) {
             firstBlankLineFound = true
         }
     }
-    
-    
+        
+    let tempAdPath = tempPath(path)
+    println("TEMP AD PATH = \(tempAdPath)")
     
     // Write transformed text to temporary file
     output.writeToFile("tmp.ad", atomically: true, encoding: NSUTF8StringEncoding, error: nil)
@@ -53,6 +60,8 @@ func bundleContent(fileName: String, resourceType: String) -> String {
 func refreshHTML(filePath: String, htmlPath: String) {
     
     preprocessFile(filePath)
+    
+    println("filePath = \(filePath)")
     
     executeCommand("/usr/bin/asciidoctor", ["tmp.ad"], verbose: false)
     executeCommand("/bin/mv", ["tmp.html", htmlPath], verbose: false)
