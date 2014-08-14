@@ -26,7 +26,7 @@ See [Asciidoctor](http://asciidoctor.org)
 
 - To use "Save As PDF", you must have `asciidoctor-pdf` installed in `/usr/bin/asciidoctor-pdf`.
 I have not been able to test this feature: while I can install `asciidoctor-pdf` on my
-machine, I have been able to install it in `/usr/bin/asciidoctor-pdf`.
+machine, I have not been able to install it in `/usr/bin/asciidoctor-pdf`.
 See [asciidoctor-pdf](https://github.com/asciidoctor/asciidoctor-pdf).
 
 - To use "Compile EPUB3", you must have `asciidoctor-epub3` installed in `/usr/bin/asciidoctor-epub3`.
