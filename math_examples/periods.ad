@@ -1,0 +1,362 @@
+= Seminar in Hodge Theory
+James Carlson
+Version 0.5, August 14, 2014
+:toc2:
+:stem: latexmath
+
+
+
+\(
+   \def\AA{\mathbb{A}}
+   \def\BB{\mathbb{B}}
+   \def\CC{\mathbb{C}}
+   \def\DD{\mathbb{D}}
+   \def\EE{\mathbb{E}}
+   \def\FF{\mathbb{F}}
+   \def\NN{\mathbb{N}}
+   \def\OO\mathbb{{O}}
+   \def\PP{\mathbb{P}}
+   \def\QQ{\mathbb{Q}}
+   \def\RR{\mathbb{R}}
+   \def\ZZ{\mathbb{Z}}
+   \def\ffp{\mathfrak{p}}
+   \def\bold#1{\bf #1}
+\)
+\(
+\def\EEE{\mathcal{E}}
+\def\PPP{\mathcal{P}}
+\)
+\(
+   \newcommand{\commadots}{, \ldots, }
+   \newcommand{\set}[1]{ \{\,#1\,  \} }
+   \newcommand{\sett}[2]{ \{\,#1\, \mid\, #2\, \} }
+   \newcommand{\Set}[1]{ \Big\{\,#1\,  \Big\} }
+   \newcommand{\Sett}[2]{ \Big\{\,#1\, \Big\vert\; #2\,  \Big\} }
+\newcommand{\mapright}[1]{\ \smash{ 
+   \mathop{\longrightarrow}\limits^{#1}}\ }
+  \newcommand{\vars}[2]{{#1}_1\commadots{#1}_{#2}}
+   \newcommand{\map}{\longrightarrow}
+   \def\rank{\mathop{rank}}
+   \def\dim{\mathop{dim}}
+   \def\height{\mathop{height}}
+\)
+
+
+
+
+
+
+:numbered:
+== Periods as interesting numbers
+
+include::foo.ad[Bar]
+
+
+
+The numbers we are familiar with fall into two
+hierarchies.  The first is
+\[
+\NN \subset \ZZ \subset \QQ \subset \bar \QQ
+\subset  \PPP.
+\]
+These are the natural numbers, the integers, the
+rationals, and field of algebraic numbers, and the
+_periods_, respectively.  The last is a class of
+numbers introduced by
+http://www.maths.ed.ac.uk/~aar/papers/kontzagi.pdf[Kontsevich
+and Zagier] in a paper of the same name.  It is
+defined as follows.  Let 
+\(\omega = f(x)dx_1 \wedge \cdots \wedge dx_n\) 
+be a differential form defined on
+a open set in \(\RR^n\), were \(f(\vars{x}{n})\) is a
+rational function with rational coeffcients.  Let \(D\)
+be a domain in \(\RR^n\) defined by polynomial
+inequalities with rational coefficients.  Suppose
+\(\omega\) is defined and regular on \(D\), and let
+\[
+  \alpha = \int_D \omega.
+\]
+Then \(\alpha\) is a "basic" period.  The set of periods
+is the \(\QQ\)-vector space spanned by the basic
+periods.  Kontsevich and Zagier (KZ) argue that
+essentially all the "interesting" numbers we have
+encountered are periods.  For example,
+\[
+   \int_{x^2 \le 2} dx = 2\sqrt{2}
+\]
+and 
+\[
+  \int_{x^2 + y^2 \le 1} dx\wedge dy =\pi.
+\]
+The first is an algebraic number, the second is
+transcendental, a fact proved by Hermite in 1873.
+
+Note that all of the sets of numbers in the first
+hierarchy are countable.  However, as Cantor showed in
+1873, the real and complex number fields,
+\[
+  \RR \subset \CC
+\]
+are uncountable.  Consequently "most" numbers are
+transcendental.  While the ancient Greeks where able
+to exhibit specific irrational numbers (circa 500 BC)
+with short and elegant proofs, much more effort is
+required to exhibit specific transcendental numbers.
+Here is one such
+\[
+   \lambda = \sum_{n=1}^\infty \frac{1}{b^{n!}}.
+\]
+It is an exemplar of an  uncountable class of such
+numbers,
+\[
+   L = \sum_{n=1}^\infty \frac{a_n}{b^{n!}}.
+\]
+These are the _Liouville numbers_, shown to be
+transcendental in 1844.
+
+The key to showing that \(L\) is transcendental lies in
+the theory of Diophantine approximation.  If \(\alpha\)
+is an irrational number which is a root of an a
+polynomial of degree \(n\) with integer coefficients,
+then there is a constant \(c(\alpha)\) such that
+\[
+\left\vert \alpha - \frac{p}{q} \right\vert >
+\frac{c(\alpha)}{q^n}
+\]
+Informally, we say that \(\alpha\) is _badly
+approximable_ by rational numbers.  On the other hand,
+the numbers \(L\) are extremely well approximable by
+rational numbers because of the very rapid convergence
+of the series which define them.
+
+The next big advance in transcendental number theory
+was due to Lindemann, who showed in 1882 that
+exponentials of nonzero algebraic numbers are
+transcendental.  This proved that both \(e\) and \(\pi\)
+are transcendental.  The first is clear. For the
+latter, observe that
+\[
+   e^{2\pi\sqrt{-1}} = 1
+\]
+If \(\pi\) is algebraic, then so is \(2\pi\sqrt{-1}\). 
+Therefore the expression above is transcendental, a
+contradiction.
+
+=== Periods in algebraic geometry
+
+A seemingly much larger class of interesting numbers
+comes from algebraic geometry.  Let \(X\) be an
+algebraic variety defined over the rational numbers,
+and let \(\omega\) be any rational differential \(k\)-form
+on \(X\) with rational coefficients.  Let \(\gamma\) be a
+homology cycle of dimension \(k\).  Then we an form the
+integral
+\[
+   \alpha = \int_\gamma \omega.
+\]
+This gives a seemingly much more general class of
+periods.  However, Kontsevich and Zagier remark that
+\(\gamma\) can be approximated by a homologous cycle
+whose pieces are of the first kind in suitable
+coordinates. Thus there is no real gain in generality.
+
+Consider, for example, the form \(\omega = dz/z\) on the
+punctured complex line \(\CC^* = \sett{z\in \CC}{z \ne
+0}\).  Let \(\gamma\) the unit circle centered a the
+origin taken with some parameterization.  Then
+\[
+   \int\gamma \frac{dz}{z} = 2\pi \sqrt{-1}
+\]
+is a period in the second sense.  Replacing \(\gamma\)
+by  a polygon which encircles the origin, we see that
+it is a period in the seemingly more restricted sense.
+
+For another example, consider the elliptic curve \(E\)
+defined by the equation \(y^2 = x(x-1)(x-a)\).  A
+homology basis \(\set{\delta, \gamma}\) for \(E\) is given
+in Figure XX.  The cycle \(\delta\) encircles the branch
+points 0 and 1, winding once around the branch cut
+from 0 to 1.  The cycle \(\gamma\) starts from a point
+\(p\) on a branch cut from \(a\) to infinity,
+travels in one sheet of \(E\) to a point \(q\) on the he
+branch cut, and from there back \(p\) in the other
+sheet.  By deforming contours, one sees that
+\[
+   \int_{\gamma} \omega
+   =
+   \int_1^a \frac{dx}{y}.
+\]
+Such integrals, classically known as elliptic
+integral,  are transcendental.
+
+== The field of periods
+
+
+
+We will define the field of periods for any
+smootprojective variety, then discuss what is known
+about the transcendence of this field.  We first
+discuss the case of  +\(\CC^*\)+ , then elliptic curves,
+then the general case.
+
+=== The punctured plane
+
+The natural rational form to consider on 
+ \( \CC^* = \CC - \set{0} \)  is the differential  \( dx/x \) .  There is only
+one cycle to consider, since all are homologous to the
+circle  \( C \)   parameterized by  \( t \mapsto \exp(2\pi i) \) .
+The only period to consider is
+\[
+   \int_C \frac{dx}{x} = 2\pi\sqrt{-1}
+\]
+This period is transcendental. 
+
+The field of periods of the punctured plane is the
+field  \( \QQ(2\pi\sqrt{-1}) \) . It has transcendence
+degree one.
+
+=== Elliptic curves
+
+Let  \( E  \) be the elliptic curve defined by  \( y^2 = f(x) \) ,
+where  \( f(x) \)  is a cubic polynomial with rational
+coefficients.  Let
+\[
+  \omega= \frac{dx}{y}
+\]
+Let  +\(\delta\)+  and  +\(\gamma\)+  be a symplectic basis for
+ +\(H_1(E,\ZZ)\)+ .  Thus the  +\(\delta\dot\gamma = 1\)+ .  Then
+t
+\[
+  \alpha = \int_\delta\omega, \qquad
+  \beta = \int_\gamma\omega
+\]
+are periods both in the traditional sense and in the
+sense of KZ. For a specific example let  +\(f(x)  =
+x(x-1)(x-\lambda)\)+  and suppose that  +\(\lambda\)+  lies
+outside the circle  +\(C\)+  of diameter  +\(1 + \epsilon\)+ 
+centered at  +\(1/2\)+ , where  +\(\epsilon\)+  is small.  Then we
+may take for  +\(\delta\)+  the circle  +\(C\)+ , and for  +\(\gamma\)+ 
+a path that runs straight from 1 to  +\(\lambda\)+  and
+back. Then
+\[  
+  \alpha = \int_C \frac{dx}{y}
+\]
+and
+\[
+   \beta = 2\int_1^\lambda  \frac{dx}{y}.
+\]
+This last integral can be written as
+\[ 
+ \beta = 2\int_1^\lambda  \frac{dx}{\sqrt{f(x}}.
+\]
+Results of Siegel and XX show that any nonzero
+elliptic integral, where  +\(E\)+  is smooth, is
+transcendental.
+
+Now consider the rational differential 
+\[
+   \nu = \frac{xdx}{y}.
+\]
+One can show that it is holomorphic everywhere but at
+the point at infinity, where it has a double pole with
+residue zero.  Thus  +\(\nu\)+ , which _a priori_ defines a
+cohomology class on  +\(E - \set{\infty}\)+ , in fact
+defines a class on  +\(E\)+ .  Notice that  +\(\nu\)+  has as
+integrand a rational function of  +\(x\)+  and  +\(y\)+   which is
+holomorphic except at infinity.
+
+Consider the  +\(\QQ\)+ -vector space spanned by the classes
+of  +\(\omega\)+  and  +\(\nu\)+ .  Note that
+\[
+   \QQ\set{\omega, \nu}\otimes_\QQ \CC
+  \cong H^1(E,\CC).
+\]
+Thus  +\(\QQ\set{\omega, \nu}\)+  gives a _rational
+structure_ on  +\(H^1(E,\CC)\)+ .  That is, it furnishes a
+subsapce of  +\(H^1(E,\CC)\)+  viewed as a  +\(\QQ\)+ -vector
+space whose tensor product over  +\(\QQ\)+  with  +\(\CC\)+  is
+ +\(H^(E,\CC)\)+ .
+
+Now let  +\(H^1(E,\QQ)\)+  be the singular homology with
+rational coefficients.  It gives another rational
+structure on  +\(H^(E,\CC)\)+ .  Suppose that the basis for
+ +\(H^1(E,\QQ)\)+  is  +\(\set{\delta,\gamma}\)+ , the Kronecker
+dual basis of the basis  +\(\set{\delta,\gamma}\)+  for
+ +\(H_1(E,\QQ)\)+ .  That is,  +\(\delta^*\)+  is the linear
+functional such that  +\(\delta^*(\delta) = 1\)+  and
+ +\(\delta^*(\gamma) = 0\)+ , etc.  Let
+ +\(P\)+  be the matrix that expresses one basis in terms of
+the other:
++\[ [\omega] = a\delta^* + b\gamma^*, \]+
+and 
++\[  [\nu] = c\delta^* + d\gamma^*, \]+
+The coefficients are the periods encountered above,
+e.g.,
+\[
+   b = \int_\gamma \frac{dx}{y}.
+\]
+
+==== Some references
+
+http://mathoverflow.net/questions/146641/transcendence-of-periods-of-cm-elliptic-curves[Transcendence
+of periods of elliptic curves @ mathoverflow]
+
+
+
+
+:numbered:
+== Exercises and Research Questions
+
+
+
+=== Exercise
+
+. Show that every algebraic number is a period.
+
+
+
+===  Research Questions
+
+. Is \(e\) a period. KZ believe that it is not.
+
+
+
+
+
+:numbered:
+== References
+
+
+
+.
+http://en.wikipedia.org/wiki/Diophantine_approximation[Diophantine
+approximatiion @ Wikipedia]
+
+.
+http://en.wikipedia.org/wiki/Lindemann%E2%80%93Weierstrass_theorem[Lindemann-Weierstrass
+Theorem @ Wikipedia]
+
+
+
+== Notes
+
+
+
+
+.*Papers to study*
+--
+. http://arxiv.org/pdf/0910.0628v3.pdf[ON THE ALGEBRAICITY OF THE
+ZERO LOCUS OF AN ADMISSIBLE NORMAL FUNCTION] - Brosnan and
+Pearlstein
+
+. Hain's paper on heights
+
+Example {counter:ex:1}
+--
+Let \(S = \mathbb{C}\) and consider the normal function
+\(\nu \in NF(S,\mathbb{Z}(1)\) corresponding to the 
+analytic function \(e^z\).  The the zero locus 
+\(Z(\nu)\) is the set \(2\pi i \mathbb{Z}\).  The closure of
+the zero set in \(\bar S = \mathbb{P}^1\) is not analytic.  And
+of course \(\nu\) is not admissible.
+--
