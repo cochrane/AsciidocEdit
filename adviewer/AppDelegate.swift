@@ -46,7 +46,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         let frame = NSMakeRect(0.0, 0.0, 1200.0, 700.0)
         window.setFrame(frame, display: true)
         window.backgroundColor = NSColor.blackColor()
-        window.title = "AsciiHelper"
+        window.title = "AsciidocEdit"
         
         let url = recallValueOfKey("documentURL")
         
@@ -86,7 +86,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         textView.automaticQuoteSubstitutionEnabled = false
     
         
-        textView.backgroundColor =  NSColor(SRGBRed: 0.96, green: 0.9, blue: 0.8, alpha: 1.0)
+        textView.backgroundColor =  NSColor(SRGBRed: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
+        textView.textColor =  NSColor(SRGBRed: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
+        // NSColor(SRGBRed: 0.96, green: 0.9, blue: 0.8, alpha: 1.0)
         
         textView.delegate = self
         adWebView.UIDelegate = self
