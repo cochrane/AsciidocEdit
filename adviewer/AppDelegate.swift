@@ -70,8 +70,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             
            updateUI(refresh: true)
             
-           messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
-           messageLabel.needsDisplay = true
+           putMessage()
             
         } else {
             
@@ -145,8 +144,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             
             updateUI(refresh: true)
             
-            messageLabel.stringValue = "New file: \(filePath)"
-            messageLabel.needsDisplay = true
+            putMessage()
 
         } else {
             println("Couldn't form docuumetns_idr")
@@ -214,8 +212,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             }
         }
         
-        messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
-        messageLabel.needsDisplay = true
+        putMessage()
 
         
     }
@@ -299,6 +296,15 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
 //MARK: Helpers
     
+    func putMessage() {
+        
+        let word_count = documentText.countWords()
+        let page_count = Int(trunc(Double(word_count)/305))
+        
+        messageLabel.stringValue = "File: \(documentPath!).    Word count: \(word_count), about \(page_count) pages"
+        messageLabel.needsDisplay = true
+    }
+    
     func updateUI(#refresh: Bool) {
         
         
@@ -325,8 +331,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         adWebView.mainFrameURL = htmlDocumentURL!
         adWebView.needsDisplay = true
         
-        messageLabel.stringValue = "File: \(documentPath!).    Word count: \(documentText.countWords())"
-        messageLabel.needsDisplay = true
+        putMessage()
         
         window.viewsNeedDisplay = true
         keepPlace()
