@@ -42,15 +42,8 @@ Version 0.5, August 14, 2014
 \)
 
 
-
-
-
-
 :numbered:
 == Periods as interesting numbers
-
-include::foo.ad[Bar]
-
 
 
 The numbers we are familiar with fall into two

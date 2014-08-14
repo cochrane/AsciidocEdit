@@ -59,11 +59,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             
 
              textView.string = readStringFromPath(documentPath!)
-            
-            
-             // NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(
-             //   NSURL(string: documentURL))
-           
     
             
            } else {
@@ -183,9 +178,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         // Error: Extra agrument 'toURL' in call
     }
     
-    
-    @IBAction func openFileAction(sender: AnyObject) {
-    
+    func openFile(path: String) -> Bool {
+        
+        
+        
         let panel = NSOpenPanel()
         
         panel.canChooseFiles = true
@@ -198,30 +194,82 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         if (clicked == NSFileHandlingPanelOKButton) {
             
             for url in panel.URLs {
-              if let url = url.absoluteString {
-                
-                
-                synchronizePaths(url)
-                
-                println("\ndocumentURL: \(documentURL!)")
-                println("\nhtmlDocumentURL: \(htmlDocumentURL!)")
-                
-                memorizeKeyValuePair("documentURL", url)
-                recallValueOfKey("documentURL")
-                
-                documentText = readStringFromPath(documentPath!)
-                textView.string = documentText
-                setHasIncludes()
-                
-                updateUI(refresh: false)
-                
-                // http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
-              }
+                if let url = url.absoluteString {
+                    
+                    
+                    synchronizePaths(url)
+                    
+                    // Add document to recent files menu
+                    NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(
+                        NSURL(string: documentURL))
+                    
+                    
+                    println("\ndocumentURL: \(documentURL!)")
+                    println("\nhtmlDocumentURL: \(htmlDocumentURL!)")
+                    
+                    memorizeKeyValuePair("documentURL", url)
+                    recallValueOfKey("documentURL")
+                    
+                    documentText = readStringFromPath(documentPath!)
+                    textView.string = documentText
+                    setHasIncludes()
+                    
+                    updateUI(refresh: false)
+                    
+                    // http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
+                }
             }
         }
         
         putMessage()
+        
+        return true
 
+    }
+    
+    @IBAction func openFileAction(sender: AnyObject) {
+        
+        
+        let panel = NSOpenPanel()
+        
+        panel.canChooseFiles = true
+        panel.canChooseDirectories = true
+        panel.allowedFileTypes = ["ad", "adoc", "asciidoc"]
+        panel.allowsMultipleSelection = false // yes if more than one dir is allowed
+        
+        let clicked = panel.runModal()
+        
+        if (clicked == NSFileHandlingPanelOKButton) {
+            
+            for url in panel.URLs {
+                if let url = url.absoluteString {
+                    
+                    
+                    synchronizePaths(url)
+                    
+                    // Add document to recent files menu
+                    NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(
+                        NSURL(string: documentURL))
+                    
+                    
+                    println("\ndocumentURL: \(documentURL!)")
+                    println("\nhtmlDocumentURL: \(htmlDocumentURL!)")
+                    
+                    memorizeKeyValuePair("documentURL", url)
+                    recallValueOfKey("documentURL")
+                    
+                    documentText = readStringFromPath(documentPath!)
+                    textView.string = documentText
+                    setHasIncludes()
+                    
+                    updateUI(refresh: false)
+                    
+                    // http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
+                }
+            }
+        }
+        
+        putMessage()
         
     }
     
@@ -414,5 +462,16 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     }
     
     
+    ///////////////////
+    
+   // - (BOOL)application:(NSApplication *)theApplication openFile:(NSString
+    //*)filename
+    
+    // http://www.cocoabuilder.com/archive/cocoa/54514-open-recent-menu-in-non-doc-app.html
+    
+    func application(sender: NSApplication!, openFile filename: String!) -> Bool {
+        
+        return true
+    }
 }
 
