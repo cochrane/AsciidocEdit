@@ -42,6 +42,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         let nc = NSNotificationCenter()
         nc.addObserver(self, selector: "processNotification", name: nil, object: nil)
+    
 
         let frame = NSMakeRect(0.0, 0.0, 1200.0, 700.0)
         window.setFrame(frame, display: true)
@@ -56,7 +57,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             
            if fileExistsAtPath(documentPath!) {
             
+
              textView.string = readStringFromPath(documentPath!)
+            
+            
+             // NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(
+             //   NSURL(string: documentURL))
            
     
             
@@ -318,7 +324,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 
             }
             
-             refreshHTML(documentPath!, htmlPath!)
+            if fileExistsAtPath(documentPath!) {
+                
+                refreshHTML(documentPath!, htmlPath!)
+                
+            }
             
         }
         
