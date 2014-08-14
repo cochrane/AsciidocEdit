@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BD1EB995198E5C0D006EEC1C"
-               BuildableName = "asciihelper.app"
-               BlueprintName = "asciihelper"
-               ReferencedContainer = "container:asciihelper.xcodeproj">
+               BuildableName = "asciidochelper.app"
+               BlueprintName = "AsciidocEdit"
+               ReferencedContainer = "container:AsciidocEdit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BD1EB9A7198E5C0D006EEC1C"
-               BuildableName = "asciihelperTests.xctest"
-               BlueprintName = "asciihelperTests"
-               ReferencedContainer = "container:asciihelper.xcodeproj">
+               BuildableName = "asciidochelperTests.xctest"
+               BlueprintName = "AsciidocEditTests"
+               ReferencedContainer = "container:AsciidocEdit.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BD1EB995198E5C0D006EEC1C"
-            BuildableName = "asciihelper.app"
-            BlueprintName = "asciihelper"
-            ReferencedContainer = "container:asciihelper.xcodeproj">
+            BuildableName = "asciidochelper.app"
+            BlueprintName = "AsciidocEdit"
+            ReferencedContainer = "container:AsciidocEdit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -62,9 +62,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BD1EB995198E5C0D006EEC1C"
-            BuildableName = "asciihelper.app"
-            BlueprintName = "asciihelper"
-            ReferencedContainer = "container:asciihelper.xcodeproj">
+            BuildableName = "asciidochelper.app"
+            BlueprintName = "AsciidocEdit"
+            ReferencedContainer = "container:AsciidocEdit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -80,9 +80,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "BD1EB995198E5C0D006EEC1C"
-            BuildableName = "asciihelper.app"
-            BlueprintName = "asciihelper"
-            ReferencedContainer = "container:asciihelper.xcodeproj">
+            BuildableName = "asciidochelper.app"
+            BlueprintName = "AsciidocEdit"
+            ReferencedContainer = "container:AsciidocEdit.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

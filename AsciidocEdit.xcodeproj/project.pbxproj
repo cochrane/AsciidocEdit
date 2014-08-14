@@ -41,13 +41,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BD1EB996198E5C0D006EEC1C /* asciihelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = asciihelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD1EB996198E5C0D006EEC1C /* AsciidocEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsciidocEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1EB99A198E5C0D006EEC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD1EB99B198E5C0D006EEC1C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		BD1EB99D198E5C0D006EEC1C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BD1EB99F198E5C0D006EEC1C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		BD1EB9A2198E5C0D006EEC1C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		BD1EB9A8198E5C0D006EEC1C /* asciihelperTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = asciihelperTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD1EB9A8198E5C0D006EEC1C /* AsciidocEditTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsciidocEditTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1EB9AD198E5C0D006EEC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adviewerTests.swift; sourceTree = "<group>"; };
 		BD1EB9B8198E7AD6006EEC1C /* utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utilities.swift; sourceTree = "<group>"; };
@@ -101,8 +101,8 @@
 		BD1EB997198E5C0D006EEC1C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BD1EB996198E5C0D006EEC1C /* asciihelper.app */,
-				BD1EB9A8198E5C0D006EEC1C /* asciihelperTests.xctest */,
+				BD1EB996198E5C0D006EEC1C /* AsciidocEdit.app */,
+				BD1EB9A8198E5C0D006EEC1C /* AsciidocEditTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -191,9 +191,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BD1EB995198E5C0D006EEC1C /* asciihelper */ = {
+		BD1EB995198E5C0D006EEC1C /* AsciidocEdit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BD1EB9B2198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "asciihelper" */;
+			buildConfigurationList = BD1EB9B2198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "AsciidocEdit" */;
 			buildPhases = (
 				BD1EB992198E5C0D006EEC1C /* Sources */,
 				BD1EB993198E5C0D006EEC1C /* Frameworks */,
@@ -203,14 +203,14 @@
 			);
 			dependencies = (
 			);
-			name = asciihelper;
+			name = AsciidocEdit;
 			productName = adviewer;
-			productReference = BD1EB996198E5C0D006EEC1C /* asciihelper.app */;
+			productReference = BD1EB996198E5C0D006EEC1C /* AsciidocEdit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BD1EB9A7198E5C0D006EEC1C /* asciihelperTests */ = {
+		BD1EB9A7198E5C0D006EEC1C /* AsciidocEditTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BD1EB9B5198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "asciihelperTests" */;
+			buildConfigurationList = BD1EB9B5198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "AsciidocEditTests" */;
 			buildPhases = (
 				BD1EB9A4198E5C0D006EEC1C /* Sources */,
 				BD1EB9A5198E5C0D006EEC1C /* Frameworks */,
@@ -221,9 +221,9 @@
 			dependencies = (
 				BD1EB9AA198E5C0D006EEC1C /* PBXTargetDependency */,
 			);
-			name = asciihelperTests;
+			name = AsciidocEditTests;
 			productName = adviewerTests;
-			productReference = BD1EB9A8198E5C0D006EEC1C /* asciihelperTests.xctest */;
+			productReference = BD1EB9A8198E5C0D006EEC1C /* AsciidocEditTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -244,7 +244,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BD1EB991198E5C0D006EEC1C /* Build configuration list for PBXProject "asciihelper" */;
+			buildConfigurationList = BD1EB991198E5C0D006EEC1C /* Build configuration list for PBXProject "AsciidocEdit" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -257,8 +257,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				BD1EB995198E5C0D006EEC1C /* asciihelper */,
-				BD1EB9A7198E5C0D006EEC1C /* asciihelperTests */,
+				BD1EB995198E5C0D006EEC1C /* AsciidocEdit */,
+				BD1EB9A7198E5C0D006EEC1C /* AsciidocEditTests */,
 			);
 		};
 /* End PBXProject section */
@@ -321,7 +321,7 @@
 /* Begin PBXTargetDependency section */
 		BD1EB9AA198E5C0D006EEC1C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = BD1EB995198E5C0D006EEC1C /* asciihelper */;
+			target = BD1EB995198E5C0D006EEC1C /* AsciidocEdit */;
 			targetProxy = BD1EB9A9198E5C0D006EEC1C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -423,7 +423,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = adviewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = asciihelper;
+				PRODUCT_NAME = AsciidocEdit;
 				SWIFT_OBJC_BRIDGING_HEADER = "adviewer/adviewer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -437,7 +437,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = adviewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_NAME = asciihelper;
+				PRODUCT_NAME = AsciidocEdit;
 				SWIFT_OBJC_BRIDGING_HEADER = "adviewer/adviewer-Bridging-Header.h";
 			};
 			name = Release;
@@ -457,7 +457,7 @@
 				);
 				INFOPLIST_FILE = adviewerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = asciihelperTests;
+				PRODUCT_NAME = AsciidocEditTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -473,7 +473,7 @@
 				);
 				INFOPLIST_FILE = adviewerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = asciihelperTests;
+				PRODUCT_NAME = AsciidocEditTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -481,7 +481,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BD1EB991198E5C0D006EEC1C /* Build configuration list for PBXProject "asciihelper" */ = {
+		BD1EB991198E5C0D006EEC1C /* Build configuration list for PBXProject "AsciidocEdit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BD1EB9B0198E5C0D006EEC1C /* Debug */,
@@ -490,7 +490,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BD1EB9B2198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "asciihelper" */ = {
+		BD1EB9B2198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "AsciidocEdit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BD1EB9B3198E5C0D006EEC1C /* Debug */,
@@ -499,7 +499,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BD1EB9B5198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "asciihelperTests" */ = {
+		BD1EB9B5198E5C0D006EEC1C /* Build configuration list for PBXNativeTarget "AsciidocEditTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BD1EB9B6198E5C0D006EEC1C /* Debug */,
