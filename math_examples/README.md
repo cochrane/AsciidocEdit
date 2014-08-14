@@ -8,5 +8,8 @@ be put at the top of the file, before the main content
 shows how to include an external macro package.  The include directive should
 be put at the top of the file, before the main content
 
+- `cag`: this is a folder with the content of `cag.ad` organized with one section per file
+and one file `master.ad` which call the section files in using the `include` directive.
+
 - `tex_macros.ad`: the tex macros used above.
  
