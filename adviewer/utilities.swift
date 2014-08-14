@@ -67,9 +67,8 @@ func refreshHTML(filePath: String, htmlPath: String) {
     
     executeCommand("/usr/bin/asciidoctor", [tempADPath], verbose: false)
     executeCommand("/bin/mv", [tempHTMPath, htmlPath], verbose: false)
+    executeCommand("/bin/rm", [tempADPath], verbose: false)
     
-    let version = executeCommand("/usr/bin/asciidoctor", ["-V"], verbose: false)
-    println(version)
 }
 
 func saveAsPDF(filePath: String) {

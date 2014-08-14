@@ -310,9 +310,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 
             }
             
-            if hasIncludes == false {
-                refreshHTML(documentPath!, htmlPath!)
-            }
+             refreshHTML(documentPath!, htmlPath!)
             
         }
         
