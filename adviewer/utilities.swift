@@ -16,7 +16,7 @@ import Foundation
 func tempPath(path: String) -> String {
     
     let part = path.componentsSeparatedByString(".")
-    return part[0]+"-temp"+part[1]
+    return part[0]+"-temp."+part[1]
 }
 
 func preprocessFile(path: String) {
@@ -38,11 +38,10 @@ func preprocessFile(path: String) {
         }
     }
         
-    let tempAdPath = tempPath(path)
-    println("TEMP AD PATH = \(tempAdPath)")
+    let tmpPath = tempPath(path)
     
     // Write transformed text to temporary file
-    output.writeToFile("tmp.ad", atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    output.writeToFile(tmpPath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
     
 }
 
@@ -62,9 +61,12 @@ func refreshHTML(filePath: String, htmlPath: String) {
     preprocessFile(filePath)
     
     println("filePath = \(filePath)")
+
+    let tempADPath = tempPath(filePath)
+    let tempHTMPath = tempPath(htmlPath)
     
-    executeCommand("/usr/bin/asciidoctor", ["tmp.ad"], verbose: false)
-    executeCommand("/bin/mv", ["tmp.html", htmlPath], verbose: false)
+    executeCommand("/usr/bin/asciidoctor", [tempADPath], verbose: false)
+    executeCommand("/bin/mv", [tempHTMPath, htmlPath], verbose: false)
     
     let version = executeCommand("/usr/bin/asciidoctor", ["-V"], verbose: false)
     println(version)
