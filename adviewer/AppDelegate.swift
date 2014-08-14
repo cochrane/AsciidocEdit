@@ -23,10 +23,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     @IBOutlet weak var messageLabel: NSTextField!
     
+    var basePath: String?
     var documentURL: String?
     var htmlDocumentURL: String?
     var documentPath: String?
     var htmlPath: String?
+    
+    
     var documentText: String = ""
     var textChanges: Int = 0
     var textLength = 0
@@ -342,6 +345,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     func synchronizePaths(url: String) {
         
         documentURL = url
+        let baseURL = baseName(documentURL!)
+        basePath = pathFromURL(baseURL)
+        println("basePath = \(basePath)")
         htmlDocumentURL = baseName(documentURL!) + ".html"
         documentPath = pathFromURL(documentURL!)
         htmlPath = pathFromURL(htmlDocumentURL!)
