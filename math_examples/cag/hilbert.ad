@@ -1,0 +1,179 @@
+:stem: latexmath
+
+== Hilbert functions, dimension
+
+
+
+
+
+*Theorem {counter:theorem}.* Every ideal in \(k[x_1,\ldots,x_n\)]
+is finitely generated.
+
+	   
+	   	   
+*Proof.*  Let \(I\) be an ideal.  Let \(\left<LT(I)\right>\) be
+its ideal of
+leading forms.  By Dicskon's lemma, \(\left<LT(I)\right>\) has a
+finite
+set of generators \(M_1, \ldots, M_s\).   Let \(G_1, \ldots, G_s\)
+be elements
+of \(I\) such that \(LT(G_i) = M_i\).   We claim that the \(G_i\)
+are a basis for \(I\).
+Let \(f\) be an element of \(I\).  Divide \(f\) by the \(G_i\): 
+\[
+ f = a_1G_1 + \cdots + a_sG_s + r
+\]
+The remainder \(r\) is in \(I\).  
+Therefore \(LT(r) \in \left<LT(I)\right>\).   
+But monomials of \(r\) are not divisible by the \(M_i\). 
+Therefore \(r = 0\).  Q.E.D.
+
+	   
+
+
+=== Dimension theory
+
+Let \(I\) be an ideal of \(R = k[x_1,\ldots, x_n\)].  Let \(I_{\le
+s}\) be the space of elements of \(I\) of degree at most \(s\) 
+The _Hilbert function_ of \(I\) is
+[math]
+++++
+H_I(s) = \dim \left( R_{\le s} / I_{\le s}\right)
+++++   
+
+*Example {counter:example}.*  Let \(H_{0,n}(s) = \dim
+k[x_1,\ldots, x_n\)_{\le s_] be the Hilbert function of the zero
+ideal
+in \(k[x_1,\ldots, x_n\)].  
+[math]
+++++
+   H_{0,n}(s) = \binom{n + s}{s}  = \frac{s^n}{n!} + \cdots
+++++
+
+In this case the Hilbert function is a polynomial of degree \(n\)
+which
+takes integer values for integer \(s\).
+
+
+What is the general form of the Hilbert function?
+
+Consider the ideal +\(I  = \left< x^3y, x^2y^4 \right>\)+. The
+Hilbert function at \(s\) is the number of white dots below a
+diagonal with intercept \(x = s\).
+
+
+
+image::187[width=60%, align=center]
+
+.Values of the Hilbert function
+----
+    s   0   1   2   3   4   5   6   7   8  ...
+  H(s)  1   3   6   10  14  18  21  24  27 ...
+----
+
+
+Note that \(H_I(s) = 3s + \epsilon(s)\),  where \(\epsilon(s)\) is
+eventually
+constant:  \(\epsilon(s) = 3\) for \(s \ge 6\). 
+This observation leads us to ask: _What is general form of
+\(H(s)\) for a monomial ideal?_   For a monomial ideal, the
+problem of computing the Hilbert function is a problem of counting
+points outside \(C(I)\), the cone of the ideal.  The region
+outside the \(CI)\) is a union of translates of coordinate
+subspaces of dimension \(m\), union a finite set.  The Hilbert
+function for the translate of an \(m\)-dimensional subspace
+by a vector \(\alpha\) is
+[math]
+++++
+(*)\qquad H_{m,\alpha}(s) = \binom{m + s - |\alpha|}{s -
+|\alpha|}.
+++++
+
+Why?  The set of points in that translate of degree at most
+\(s\) is in one-to-one correspondence with points of the subspace
+of
+degree \(s - |\alpha|\):  map \(x\) to \(x - \alpha\).  Using the
+inclusion-exclusion formula, we see that \(H_I(s)\) is a sum of
+functions of the form \((*)\) for various \(m\) and \(\alpha\),
+plus a function which is eventually constant.  This leads to the
+following result:
+
+*Theorem {counter:theorem}.* The Hilbert function \(H_I(s)\) is an
+eventually polynomial
+function. 
+
+Additional properties of the Hilbert function of a monomial ideal
+can be read off from the geometry:
+
+. The degree \(d\) of \(H_I(s)\) is the dimension of the largest
+linear subspaces in the exterior of \(C(I)\).
+
+. The degree is the same as the _dimension_ of
+the variety \(V(I)\), which is a union of linear subspaces. 
+
+. The coefficient of \(s^d/d!\) in \(H_I(s)\) is the number of
+translates of linear subspaces outside of \(C(I)\).
+
+. The coefficient is the _degree_ of \(V(I)\): the sum of the
+multiplicities of the linear subspaces of largest dimension.
+
+
+Consider the ideal +\(\left<x^3, x^2y^2, y^4\right>\)+, whose
+monomials we see pictured in the diagram below as black dots.  The
+generators of the ideal are the "corner" dots at (3,0), (2,2), and
+(0,4).
+
+
+image::188[width=60%, align=center]
+
+
+The values of the Hilbert function are
+1, 3, 6, 9, 10, 10, 10, ... 
+\(I\) is of dimension zero and
+\(\dim_k R/I = 10\).   \(V(I)\)
+is the origin.  But it is a
+``fat'' origin with a 10-dimensional
+ring of functions.
+
+
+.Code
+----
+sage: R.<x,y> = PolynomialRing(QQ, order = 'lex')
+sage: f = x^3; g = x^2*y^2; h = y^4
+sage: I = ideal(f,g,h)
+sage: I.dimension()
+0
+sage: I.vector_space_dimension()
+10
+----
+
+
+
+
+*Theorem {counter:theorem}.* The Hilbert function of an ideal
+is the same as the Hilbert function of its ideal of leading
+terms.
+
+
+
+*Proof.*
+Let \(f_1,\ldots,f_m\) be a basis for \(I_{\le s}\).  
+Let \(F_1,\ldots, F_m\) be the corresponding leading terms.  
+Delete duplicates and put in order.
+Let \(F_1, \ldots, F_k\) be the result. 
+Let \(f_1, \ldots, f_k\) be the corresponding elements of \(I_{\le
+s}\).
+We claim that the \(f_i\) are vector space basis of \(I_{\le s}\).
+The linear independence of the \(f_i\) is easy.  To see that
+they span, let \(W\) be the span of the \(f_i\).  
+Let \(f\) be an element of \(I_{\le s} - W\) with \(LM(f)\)
+minimal.
+ \(LT(f) = \lambda f_i\) for some \(i\).  
+\(LM(f - \lambda f_i) < f_i\).  Thus \(f - \lambda f_i \in W\).
+ Q.E.D.
+
+
+
+===  References
+
+[[[CIM]]] http://www.math.utah.edu/~carlson/cimat/[Cimat Lectures]

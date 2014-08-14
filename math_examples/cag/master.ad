@@ -1,0 +1,13 @@
+:stem: latexmath
+:numbered:
+:toc2:
+
+include::tex_macros.ad[]
+
+include::polyrings.ad[]
+include::monom.ad[]
+include::finite_fields.ad[]
+include::hilbert.ad[]
+include::elim.ad[]
+
+

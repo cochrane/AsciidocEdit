@@ -1,0 +1,158 @@
+:stem: latexmath
+include::tex_macros.ad[]
+
+
+== Varieties over finite fields
+
+
+
+<<CP, Counting points>> +
+
+
+
+=== Counting points[[CP]]
+
+For a variety defined over  +\(\FF_p\)+  we can consider the
+function
+\[
+   N(r) = \text{number of points}(V(\FF_{p^r}))
+\]
+When the variety is affine space of dimension  +\(n\)+ , the
+answer is
+clear:
+\[
+   N(r) = p^{nr}
+\]
+Now suppose that  +\(V\)+  is given by 
++\(x_{n+1}^d = f(x_1,\commadots,x_{n})\)+ , where  +\(f\)+  is of
+degree  +\(d\)+ .  There is a map  +\(V \map \AA^{n}\)+  given
+by the projection 
+\[
+(x_1 \commadots, x_{n}, x_{n+1})  \mapsto (x_1 \commadots,
+x_{n}).
+\] 
+This is a  +\(d\)+ -to- +\(1\)+  map.
+For every point  +\(a\)+  in  +\(\AA^{n1}\)+ , there are at most 
++\(d\)+  solutions
+to the equation  +\(x_n^d = f(a)\)+ .  Thus
+we have an inequality
+\[
+\begin{equation}
+   N(r) \le p^{nr}
+\end{equation}
+\]
+Now suppose that   +\(V\)+  is a hypersurface of degree  +\(d\)+ 
+in
++\(\AA^{n+1}\)+ , i.e., is the solution set of a polynomial
+equation
+ +\(f(x_1\commadots x_{n+1}) = 0\)+ , where  +\(f\)+ 
+has degree  +\(d\)+ .  Then projection onto the hyperplane of the
+first
++\(n\)+  coordinates is again a  +\(d\)+ -to-one map, so the
+above inequality
+holds.
+
+For finite fields with a small number of elements we can
+compute  +\(N(r)\)+  by brute force: for each point in affine
+space,
+check whether the equation is satisfied.  Here is sage code that
+does this:
+
+.Code
+[source,python]
+-- 
+# file: roots.sage
+def roots(f, q):
+  # return number of solutions of f = 0 
+  # in finite field of q elements K.<T> = GF(q)
+  K.<T> = GF(q)
+  g = f.change_ring(K)
+  count = 0
+  for a in K:
+    for b in K:
+      if g(a,b) == 0:
+        count = count + 1
+  return count
+--
+
+Here is how +roots.sage+ is used:
+
+.Session
+[source,python]
+--
+sage: R.<x,y> = PolynomialRing(ZZ)
+sage: f = x + y + 1
+sage: runfile foo.sage
+sage: roots(f,5)
+5
+sage: g = x^2 + y^2 - 1
+sage: roots(g,5)
+4
+sage:   roots(g,5^2)
+24
+--
+
+*Example {counter:example}.* The values of  +\(N(r)\)+  for the
+variety
+defined by  +\(x + y + 1 = 0\)+  and a field of  +\(q= 5^r\)+ 
+elements are
+tabulated below, and are evidently given by the formula  +\(N(r) =
+5^r\)+ .  We could have deduced this by pure thought: the map 
++\((x,y)
+\map x\)+  defines an isomorphism of  +\(V\)+  with  +\(\AA^1\)+ ,
+so  +\(N(r) =
+p^r\)+ .
+
+.*Table for  +\(x + y + 1 = 0\)+ *
+--
+[format="csv", width="50", options="header", frame="all"]
+|===
+r, N(r)
+1,5
+2,25
+3,125
+4,625
+|===
+--
+
+*Example {counter:example}.* For  +\(x^2 + y^2 = 1\)+ , the
+circle, the
+corresponding table is. We find a small but regular deviatios from
+ +\(N(r) = p^r\)+ :
+
+
+
+
+
+.*Table for  +\(x^2 + y^2 = 1\)+ *
+--
+[format="csv", width="50", options="header", frame="all"]
+|===
+r, N(r)
+1,4
+2,24
+3,124
+4,624
+|===
+--
+
+*Example {counter:example}.* For the cubic equation  +\(x^3 + y^3
++ 1
+= 0\)+  there are more significant deviations and no obvious
+pattern:
+
+
+.*Table for  +\(x^3 + y^3 + 1 = 0\)+ *
+--
+[format="csv", width="50", options="header", frame="all"]
+|===
+r, N(r)
+1,5
+2,33
+3,125
+4,574
+|===
+--
+
+*Problem {counter:problem}.* Investigate  +\(N(r)\)+  for other
+varieties.
