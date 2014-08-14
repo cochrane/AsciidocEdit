@@ -58,6 +58,11 @@ Planned features
 
 I welcome suggestions
 
+Notes
+=====
+
+- The file types you can open are `.ad`, `.adoc`, and `.asciidoc`
+
 
 Distribution
 ============
