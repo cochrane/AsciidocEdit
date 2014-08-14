@@ -1,7 +1,7 @@
-asciihelper
+AsciidocEdit
 ===========
 
-Asciihelper is a MacOS application for helping to compose 
+AsciidocEdit is a MacOS application for helping to compose 
 documents written in asciidoc markup.  Two panes are
 shown side-by-side in the main window.  On the left
 is the source file (asciidoc).  On the right is the
@@ -11,7 +11,7 @@ the same directory as the source file.
 Type cmd-S to save and render.
 See the screenshots in the images directory for this repo.
 
-Asciihelper is written in Swift.  It calls on 
+AsciidocEdit is written in Swift.  It calls on 
 [Asciidoctor](http://asciidoctor.org) (`/usr/bin/asciidoctor`) to process
 the source file. 
 
@@ -21,7 +21,7 @@ Installation
 ============
 
 Clone, then compile project with XCode, v6.0 beta 6 or later. You must have `asciidoctor` 
-installed in `/usr/bin/asciidoctor` for `asciihelper` to work.  See [Asciidoctor](http://asciidoctor.org)
+installed in `/usr/bin/asciidoctor` for `AsciidocEdit` to work.  See [Asciidoctor](http://asciidoctor.org)
 
 - To use "Save As PDF", you must have `asciidoctor-pdf` installed in `/usr/bin/asciidoctor-pdf`.
 I have not been able to test this feature: while I can install `asciidoctor-pdf` on my
