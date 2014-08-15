@@ -31,13 +31,28 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     var foo: NSCursor?
     
-    
     var documentText: String = ""
     var textChanges: Int = 0
     var textLength = 0
     var hasIncludes = false
     
 //MARK: appDelegate
+
+    func setTextView() {
+
+        textView.font = NSFont(name: "Helvetica", size: 18.0)
+        
+        textView.automaticSpellingCorrectionEnabled = false
+        textView.automaticDashSubstitutionEnabled = false
+        textView.automaticQuoteSubstitutionEnabled = false
+    
+        
+        textView.backgroundColor =  NSColor(SRGBRed: 0.9, green: 0.9, blue: 0.88, alpha: 1.0)
+        textView.textColor = NSColor(SRGBRed: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
+
+        textView.delegate = self
+
+    }
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         
@@ -50,6 +65,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         window.setFrame(frame, display: true)
         window.backgroundColor = NSColor.blackColor()
         window.title = "AsciidocEdit"
+
+        setTextView()
         
         let url = recallValueOfKey("documentURL")
         
@@ -82,17 +99,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             messageLabel.needsDisplay = true
         }
         
-        textView.font = NSFont(name: "Helvetica", size: 18.0)
         
-        textView.automaticSpellingCorrectionEnabled = false
-        textView.automaticDashSubstitutionEnabled = false
-        textView.automaticQuoteSubstitutionEnabled = false
-    
-        
-        textView.backgroundColor =  NSColor(SRGBRed: 0.9, green: 0.9, blue: 0.88, alpha: 1.0)
-        textView.textColor = NSColor(SRGBRed: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
-        
-        textView.delegate = self
         adWebView.UIDelegate = self
         adWebView.frameLoadDelegate = self
     
