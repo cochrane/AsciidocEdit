@@ -133,9 +133,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
 //MARK: IBActions
     
     
-    func yonk() {
+    func yonk(contents: String) {
         
-        "New file".writeToFile(documentPath, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
+        contents.writeToFile(documentPath!, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
         
         
         memorizeKeyValuePair("documentURL", documentURL!)
@@ -174,19 +174,14 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                     
                     println("\nurl I chose = \(newURL)\n")
                     
-                    yonk()
+                    yonk("New file.")
                 }
                 
             }
             
         }
         
-        
-            newFilePanel.beginWithCompletionHandler(handler)
-            
-        
-        
-            
+        newFilePanel.beginWithCompletionHandler(handler)
             
     }
 
@@ -199,6 +194,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         let oldDocumentURL = documentURL
         let oldDocumentPath = documentPath
+        let fileContents = readStringFromPath(oldDocumentPath!)
         
 
         let newFilePanel = NSSavePanel()
@@ -217,10 +213,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 let url = newFilePanel.URL
                 
                 if let newURL = url.absoluteString {
-                    
-                    
+
                     synchronizePaths(newURL)
                     
+                    yonk(fileContents)
+                    
+                    executeCommand("/bin/rm", [oldDocumentPath!], verbose: false)
                     
                     println("\nurl I chose = \(newURL)\n")
                 }
@@ -233,31 +231,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         newFilePanel.beginWithCompletionHandler(handler)
         
         
-        
-        if true {
-            
-            
-            let fileContents = readStringFromPath(oldDocumentPath!)
-            
-            
-            
-            fileContents.writeToFile(documentPath!, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
-            
-            
-            memorizeKeyValuePair("documentURL", documentURL!)
-            
-            documentText = readStringFromPath(documentPath!)
-            textView.string = documentText
-            
-            updateUI(refresh: true)
-            
-            putMessage()
-
-            
-        } else {
-            
-            println("Couldn't move file")
-        }    }
+    }
+    
+    
     
     func openFile(path: String) -> Bool {
         
