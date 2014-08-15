@@ -134,7 +134,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     @IBAction func newFileAction(sender: AnyObject) {
         
-        let newFilePanel = NSOpenPanel()
+        let newFilePanel = NSSavePanel()
+        
+        newFilePanel.nameFieldLabel = "New file:"
+        newFilePanel.allowedFileTypes = ["ad", "adoc", "asciidoc"]
+        newFilePanel.prompt = "My Prompt"
+        newFilePanel.title = "Create new asciidoc file"
         
         
         func handler(result: Int) {
@@ -142,39 +147,49 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             
             if (result == NSFileHandlingPanelOKButton) {
                 
-                let document = newFilePanel.URLs[0]
+                let url = newFilePanel.URL
                 
-                println("\nNEW DOCUMENT: \(document)")
+                if let newURL = url.absoluteString {
+                    
+                    
+                    synchronizePaths(newURL)
+                    
+                    
+                    println("\nurl I chose = \(newURL)\n")
+                }
+                
             }
             
         }
         
-        newFilePanel.beginWithCompletionHandler(handler)
         
-
-        if let docDir = documentsDirectory() {
-         let filePath = docDir + "/tmp-89613.ad"
-            println("filePath: \(filePath)")
-            "New file".writeToFile(filePath, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
-            let url = "file:///"+filePath
-            synchronizePaths(url)
+            newFilePanel.beginWithCompletionHandler(handler)
             
-            memorizeKeyValuePair("documentURL", url)
-            
-            documentText = readStringFromPath(documentPath!)
-            textView.string = documentText
-            
-            updateUI(refresh: true)
-            
-            putMessage()
-
-        } else {
-            println("Couldn't form docuumetns_idr")
-        }
-
         
+            
+            if true {
+                
+            
+                "New file".writeToFile(documentPath, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
+                
+                
+                memorizeKeyValuePair("documentURL", documentURL!)
+                
+                documentText = readStringFromPath(documentPath!)
+                textView.string = documentText
+                
+                updateUI(refresh: true)
+                
+                putMessage()
+                
+            } else {
+                
+                println("Couldn't creat new file")
+            }
+            
+            
     }
-    
+
     
     @IBAction func closeFileAction(sender: AnyObject) {
     }
