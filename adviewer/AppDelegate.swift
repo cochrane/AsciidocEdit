@@ -35,10 +35,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     var textChanges: Int = 0
     var textLength = 0
     var hasIncludes = false
+
+
     
 //MARK: appDelegate
 
-    func setTextView() {
+
+    func setupTextView() {
 
         textView.font = NSFont(name: "Helvetica", size: 18.0)
         
@@ -54,20 +57,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
 
     }
 
-    func applicationDidFinishLaunching(aNotification: NSNotification?) {
-        
-        
-        let nc = NSNotificationCenter()
-        nc.addObserver(self, selector: "processNotification", name: nil, object: nil)
-    
+    func setupWindow() {
 
         let frame = NSMakeRect(0.0, 0.0, 1200.0, 700.0)
         window.setFrame(frame, display: true)
         window.backgroundColor = NSColor.blackColor()
         window.title = "AsciidocEdit"
+    }
 
-        setTextView()
-        
+    func setupNotifications() {
+
+        let nc = NSNotificationCenter()
+        nc.addObserver(self, selector: "processNotification", name: nil, object: nil)
+  
+    }
+
+    func setupDocument() {
+
         let url = recallValueOfKey("documentURL")
         
         if let documentURL = url {
@@ -98,18 +104,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             messageLabel.stringValue = "Couldn't find the last file you opened."
             messageLabel.needsDisplay = true
         }
-        
-        
+    }
+
+    func setupWebview() {
+
+          
         adWebView.UIDelegate = self
         adWebView.frameLoadDelegate = self
-    
-        
-       //  adWebView.mainFrame.loadHTMLString("javascript:testEcho('Hello World!')");
-        
-        
-        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
-        // adWebView.shouldUpdateWhileOffscreen = true
 
+        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
+ 
+    }
+
+
+    func applicationDidFinishLaunching(aNotification: NSNotification?) {
+        
+        setupWindow()
+        setupTextView()
+        setupNotifications()
+        setupDocument()
+        setupWebview()
        
     }
     
