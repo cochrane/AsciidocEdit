@@ -132,6 +132,23 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
 
 //MARK: IBActions
     
+    
+    func yonk() {
+        
+        "New file".writeToFile(documentPath, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
+        
+        
+        memorizeKeyValuePair("documentURL", documentURL!)
+        
+        documentText = readStringFromPath(documentPath!)
+        textView.string = documentText
+        
+        updateUI(refresh: true)
+        
+        putMessage()
+        
+    }
+    
     @IBAction func newFileAction(sender: AnyObject) {
         
         let newFilePanel = NSSavePanel()
@@ -140,23 +157,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         newFilePanel.allowedFileTypes = ["ad", "adoc", "asciidoc"]
         newFilePanel.prompt = "OK"
         newFilePanel.title = "Create new asciidoc file"
-        
-        
-        func yonk() {
-            
-            "New file".writeToFile(documentPath, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
-            
-            
-            memorizeKeyValuePair("documentURL", documentURL!)
-            
-            documentText = readStringFromPath(documentPath!)
-            textView.string = documentText
-            
-            updateUI(refresh: true)
-            
-            putMessage()
-            
-        }
         
         
         func handler(result: Int) {
