@@ -197,20 +197,67 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     @IBAction func moveFileAction(sender: AnyObject) {
         
         
+        let oldDocumentURL = documentURL
+        let oldDocumentPath = documentPath
+        
 
-        // NSURL(string: htmlDocumentURL)
+        let newFilePanel = NSSavePanel()
+        
+        newFilePanel.nameFieldLabel = "Move file to"
+        newFilePanel.allowedFileTypes = ["ad", "adoc", "asciidoc"]
+        newFilePanel.prompt = "My Prompt"
+        newFilePanel.title = "Move \(documentPath)"
         
         
-        let newDocumentURLString = baseName(documentURL!) + "2.ad"
-        let newDocumentURL = NSURL(string: newDocumentURLString)
-        let oldDocumentURL = NSURL(string: documentURL!)
+        func handler(result: Int) {
+            
+            
+            if (result == NSFileHandlingPanelOKButton) {
+                
+                let url = newFilePanel.URL
+                
+                if let newURL = url.absoluteString {
+                    
+                    
+                    synchronizePaths(newURL)
+                    
+                    
+                    println("\nurl I chose = \(newURL)\n")
+                }
+                
+            }
+            
+        }
         
         
-        // From Apple documentatoin
-        // func moveItemAtURL(srcURL: NSURL!, toURL dstURL: NSURL!, error: NSErrorPointer) -> Bool
-       //  NSFileManager.moveItemAtURL(oldDocumentURL, toURL: newDocumentURL, error :nil)
-        // Error: Extra agrument 'toURL' in call
-    }
+        newFilePanel.beginWithCompletionHandler(handler)
+        
+        
+        
+        if true {
+            
+            
+            let fileContents = readStringFromPath(oldDocumentPath!)
+            
+            
+            
+            fileContents.writeToFile(documentPath!, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
+            
+            
+            memorizeKeyValuePair("documentURL", documentURL!)
+            
+            documentText = readStringFromPath(documentPath!)
+            textView.string = documentText
+            
+            updateUI(refresh: true)
+            
+            putMessage()
+
+            
+        } else {
+            
+            println("Couldn't move file")
+        }    }
     
     func openFile(path: String) -> Bool {
         
