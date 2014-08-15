@@ -189,6 +189,52 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     @IBAction func closeFileAction(sender: AnyObject) {
     }
     
+    
+    @IBAction func copyToAction(sender: AnyObject) {
+        
+        
+        let oldDocumentURL = documentURL
+        let oldDocumentPath = documentPath
+        let fileContents = readStringFromPath(oldDocumentPath!)
+        
+        
+        let newFilePanel = NSSavePanel()
+        
+        newFilePanel.nameFieldLabel = "Copy file to"
+        newFilePanel.allowedFileTypes = ["ad", "adoc", "asciidoc"]
+        // newFilePanel.prompt = "My Prompt"
+        newFilePanel.title = "Copy \(documentPath)"
+        
+        
+        func handler(result: Int) {
+            
+            
+            if (result == NSFileHandlingPanelOKButton) {
+                
+                let url = newFilePanel.URL
+                
+                if let newURL = url.absoluteString {
+                    
+                    synchronizePaths(newURL)
+                    
+                    yonk(fileContents)
+                    
+                    let htmlPath = htmlPathFromPath(oldDocumentPath!)
+                    
+                    
+                    println("\nurl I chose = \(newURL)\n")
+                }
+                
+            }
+            
+        }
+        
+        
+        newFilePanel.beginWithCompletionHandler(handler)
+        
+    }
+    
+    
     @IBAction func moveFileAction(sender: AnyObject) {
         
         
@@ -201,7 +247,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         newFilePanel.nameFieldLabel = "Move file to"
         newFilePanel.allowedFileTypes = ["ad", "adoc", "asciidoc"]
-        newFilePanel.prompt = "My Prompt"
+        // newFilePanel.prompt = "My Prompt"
         newFilePanel.title = "Move \(documentPath)"
         
         
