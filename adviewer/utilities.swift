@@ -106,11 +106,27 @@ func baseName(path: String) -> String {
     
 }
 
-func htmlPathFromPath(path: String) -> String {
+func htmlPath(documentPath: String) -> String {
     
-    let part = path.componentsSeparatedByString(".")
+    let part = documentPath.componentsSeparatedByString(".")
     return part[0] + ".html"
+    
 }
+
+func htmlURL(documentPath: String) -> String {
+    
+    let part = documentPath.componentsSeparatedByString(".")
+    
+    return "file:///" + part[0] + ".html"
+    
+}
+
+func documentURL(documentPath: String) -> String {
+    
+    return "file:///" + documentPath
+    
+}
+
 
 func pathFromURL(fileURL: String) -> String {
     

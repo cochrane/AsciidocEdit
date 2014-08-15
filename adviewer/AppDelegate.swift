@@ -23,11 +23,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     @IBOutlet weak var messageLabel: NSTextField!
     
-    var basePath: String?
-    var documentURL: String?
-    var htmlDocumentURL: String?
     var documentPath: String?
-    var htmlPath: String?
     
     var foo: NSCursor?
     
@@ -37,8 +33,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     var hasIncludes = false
 
 
-    
-//MARK: appDelegate
+//MARK: AppDelegate Helpers
 
 
     func setupTextView() {
@@ -78,7 +73,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         if let documentURL = url {
            
-           synchronizePaths(documentURL)
+           documentPath = pathFromURL(documentURL)
             
            if fileExistsAtPath(documentPath!) {
             
@@ -112,10 +107,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         adWebView.UIDelegate = self
         adWebView.frameLoadDelegate = self
 
+        let htmlDocumentURL = htmlURL(documentPath!)
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
  
     }
 
+
+//MARK: AppDelegate
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         
@@ -135,8 +133,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
     }
     
-    
-    
+
 
     func applicationWillTerminate(aNotification: NSNotification?) {
         // Insert code here to tear down your application
@@ -159,7 +156,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         contents.writeToFile(documentPath!, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
         
         
-        memorizeKeyValuePair("documentURL", documentURL!)
+        let url = documentURL(documentPath!)
+        
+        memorizeKeyValuePair("documentURL", url)
         
         documentText = readStringFromPath(documentPath!)
         textView.string = documentText
@@ -189,11 +188,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 
                 if let newURL = url.absoluteString {
                     
-                    
-                    synchronizePaths(newURL)
-                    
-                    
-                    println("\nurl I chose = \(newURL)\n")
+                    documentPath = pathFromURL(newURL)
                     
                     yonk("New file.")
                 }
@@ -236,14 +231,10 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 
                 if let newURL = url.absoluteString {
                     
-                    synchronizePaths(newURL)
+                    documentPath = pathFromURL(newURL)
                     
                     yonk(fileContents)
                     
-                    let htmlPath = htmlPathFromPath(oldDocumentPath!)
-                    
-                    
-                    println("\nurl I chose = \(newURL)\n")
                 }
                 
             }
@@ -281,13 +272,13 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 
                 if let newURL = url.absoluteString {
 
-                    synchronizePaths(newURL)
+                    documentPath = pathFromURL(newURL)
                     
                     yonk(fileContents)
                     
-                    let htmlPath = htmlPathFromPath(oldDocumentPath!)
+                    let hPath = htmlPath(oldDocumentPath!)
                     
-                    executeCommand("/bin/rm", [oldDocumentPath!, htmlPath], verbose: false)
+                    executeCommand("/bin/rm", [oldDocumentPath!, hPath], verbose: false)
                     
                     
                     
@@ -332,16 +323,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                 
                 if let url = url.absoluteString {
                     
-                    
-                    synchronizePaths(url)
-                    
                     // Add document to recent files menu
-                    NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(
-                        NSURL(string: documentURL))
-                    
-                    
-                    println("\ndocumentURL: \(documentURL!)")
-                    println("\nhtmlDocumentURL: \(htmlDocumentURL!)")
+                    let url = documentURL(documentPath!)
+                    NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(NSURL(string: url))
                     
                     memorizeKeyValuePair("documentURL", url)
                     recallValueOfKey("documentURL")
@@ -464,7 +448,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             
             if fileExistsAtPath(documentPath!) {
                 
-                refreshHTML(documentPath!, htmlPath!)
+                refreshHTML(documentPath!, htmlPath(documentPath!))
                 
             }
             
@@ -477,8 +461,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         println("location: \(location)")
         println("href: \(href)")
         
-        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
-        adWebView.mainFrameURL = htmlDocumentURL!
+        let hURL = htmlURL(documentPath!)
+        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: hURL)))
+        adWebView.mainFrameURL = hURL
         adWebView.needsDisplay = true
         
         putMessage()
@@ -494,21 +479,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         adWebView.stringByEvaluatingJavaScriptFromString("keep_place()")
     }
-    
-    func synchronizePaths(url: String) {
-        
-        documentURL = url
-        let baseURL = baseName(documentURL!)
-        println("\nSYNC:")
-        basePath = pathFromURL(baseURL)
-        println("basePath = \(basePath)")
-        htmlDocumentURL = baseName(documentURL!) + ".html"
-        println("htmlDocumentURL = \(htmlDocumentURL)")
-        documentPath = pathFromURL(documentURL!)
-        println("documentPath = \(documentPath)")
-        htmlPath = pathFromURL(htmlDocumentURL!)
-        println("htmlPath = \(htmlPath)\n")
-    }
+   
     
     func textDidChange (notification: NSNotification) {
         
@@ -569,7 +540,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             
           println("I AM IN application - openFile, found \(filename)")
           let url = "file:///"+filename
-          synchronizePaths(url)
             
           documentText = readStringFromPath(filename)
           textView.string = documentText
