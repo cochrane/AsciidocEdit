@@ -138,8 +138,25 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         newFilePanel.nameFieldLabel = "New file:"
         newFilePanel.allowedFileTypes = ["ad", "adoc", "asciidoc"]
-        newFilePanel.prompt = "My Prompt"
+        newFilePanel.prompt = "OK"
         newFilePanel.title = "Create new asciidoc file"
+        
+        
+        func yonk() {
+            
+            "New file".writeToFile(documentPath, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
+            
+            
+            memorizeKeyValuePair("documentURL", documentURL!)
+            
+            documentText = readStringFromPath(documentPath!)
+            textView.string = documentText
+            
+            updateUI(refresh: true)
+            
+            putMessage()
+            
+        }
         
         
         func handler(result: Int) {
@@ -156,6 +173,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                     
                     
                     println("\nurl I chose = \(newURL)\n")
+                    
+                    yonk()
                 }
                 
             }
@@ -166,26 +185,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             newFilePanel.beginWithCompletionHandler(handler)
             
         
-            
-            if true {
-                
-            
-                "New file".writeToFile(documentPath, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
-                
-                
-                memorizeKeyValuePair("documentURL", documentURL!)
-                
-                documentText = readStringFromPath(documentPath!)
-                textView.string = documentText
-                
-                updateUI(refresh: true)
-                
-                putMessage()
-                
-            } else {
-                
-                println("Couldn't creat new file")
-            }
+        
             
             
     }
