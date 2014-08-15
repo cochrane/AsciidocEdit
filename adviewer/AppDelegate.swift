@@ -133,6 +133,24 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
 //MARK: IBActions
     
     @IBAction func newFileAction(sender: AnyObject) {
+        
+        let newFilePanel = NSOpenPanel()
+        
+        
+        func handler(result: Int) {
+            
+            
+            if (result == NSFileHandlingPanelOKButton) {
+                
+                let document = newFilePanel.URLs[0]
+                
+                println("\nNEW DOCUMENT: \(document)")
+            }
+            
+        }
+        
+        newFilePanel.beginWithCompletionHandler(handler)
+        
 
         if let docDir = documentsDirectory() {
          let filePath = docDir + "/tmp-89613.ad"
