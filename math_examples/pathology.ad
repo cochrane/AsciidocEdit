@@ -1,4 +1,16 @@
 Examples
 
-latexmath:[v: K \map R^+ ]
-+\[ [\omega] = a\delta^* + b\gamma^*, \]+
+. latexmath:[v: K \longrightarrow R^+ ]
+
+. +\[ [\omega] = a\delta^* + b\gamma^*, \]+
+
+. \(a^2 = b^2\)
+
+. \(  (a^2)^3 = a^6  \)
+
+. +\(  (a^2)^3 = a^6  \)+
+
+. latexmath:[(a^2)^3 = a^6]
+
+
+ 
