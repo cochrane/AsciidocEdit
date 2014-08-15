@@ -106,6 +106,12 @@ func baseName(path: String) -> String {
     
 }
 
+func htmlPathFromPath(path: String) -> String {
+    
+    let part = path.componentsSeparatedByString(".")
+    return part[0] + ".html"
+}
+
 func pathFromURL(fileURL: String) -> String {
     
     return fileURL.stringByReplacingOccurrencesOfString("file://", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)

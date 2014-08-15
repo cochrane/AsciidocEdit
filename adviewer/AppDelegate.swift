@@ -218,7 +218,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                     
                     yonk(fileContents)
                     
-                    executeCommand("/bin/rm", [oldDocumentPath!], verbose: false)
+                    let htmlPath = htmlPathFromPath(oldDocumentPath!)
+                    
+                    executeCommand("/bin/rm", [oldDocumentPath!, htmlPath], verbose: false)
+                    
+                    
                     
                     println("\nurl I chose = \(newURL)\n")
                 }
