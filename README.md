@@ -39,7 +39,7 @@ Options
 `$a^2 + b^2 = c^2$` and 
 ```
 \[
-a^3 + b^3 = c^3
+  a^3 + b^3 = c^3
 \]
 ```  
 See the notes `tex/README` in this
