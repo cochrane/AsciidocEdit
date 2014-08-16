@@ -1,4 +1,8 @@
-Examples
+:stem: latexmath
+
+== Bad examples
+
+
 
 . latexmath:[v: K \longrightarrow R^+ ]
 
@@ -13,4 +17,20 @@ Examples
 . latexmath:[(a^2)^3 = a^6]
 
 
- 
+== Good examples
+
+\(
+[\omega] = a\delta^* + b\gamma^*
+\)
+
+
++\((a^2)^3 = a^6 \)+
+
+
+\[
+[\omega] = a\delta^* + b\gamma^*
+\]
+
+
++\[ (a^2)^3 = a^6 \]+
+

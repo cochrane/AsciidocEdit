@@ -1,0 +1,36 @@
+== Pythagorean theorem test
+
+1. $a^2 + b^2 = c^2$
+
+2. \(a^2 + b^2 = c^2\)
+
+3. 
+\[
+  a^2 + b^2 = c^2
+\]
+
+
+== Law of exponents test
+
+
+1. $(a^2)^3 = a^6$
+
+2. \((a^2)^3 = a^6\)
+
+3.
+\[
+  (a^2)^3 = a^6
+\]
+
+== Idempotency
+
+Right now the transformation is not idempotent --
+that is, applying it twice is different from 
+applying it once.
+
+1. +\( a^2 + b^2 = c^2 \)+
+
+2. 
++\[ 
+  a^2 + b^2 = c^2
+ \]+
