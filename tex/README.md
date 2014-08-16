@@ -2,6 +2,7 @@ This folder contains
 
 - `tex_mode_preprocess` 
 - `test.ad`
+- `latex_mode_test.ad`
 
 The purpose of `tex_mode_preprocess`, a ruby script,
 is to apply substitions to
