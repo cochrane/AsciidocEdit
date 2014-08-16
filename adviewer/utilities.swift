@@ -26,7 +26,7 @@ func tempFile(path: String) -> String {
 func inject(pathToFile: String, payloadName: String, payloadType: String) {
     
     // Get text from file and break it into lines
-    let inputText = readStringFromPath(pathToFile)
+    let inputText = readStringFromFile(pathToFile)
     let jsContent = bundleContent(payloadName, payloadType)
     let lines = inputText.componentsSeparatedByString("\n")
     
@@ -55,7 +55,7 @@ func bundleContent(fileName: String, resourceType: String) -> String {
     
 
     let bundlePath = NSBundle.mainBundle().pathForResource(fileName, ofType: resourceType)
-    let content = readStringFromPath(bundlePath)
+    let content = readStringFromFile(bundlePath)
     return content
 
 }
@@ -81,24 +81,20 @@ func refreshHTML(asciidocPath: String, htmlPath: String) {
 
 func saveAsPDF(filePath: String) {
 
-    executeCommand("/usr/bin/asciidoctor-pdf", [filePath], verbose: true)
+    executeCommand("/usr/bin/asciidoctor-pdf", [filePath])
     
 }
 
 func saveAsEPUB3(filePath: String) {
     
-    executeCommand("/usr/bin/asciidoctor-epub3", [filePath], verbose: true)
+    executeCommand("/usr/bin/asciidoctor-epub3", [filePath])
     
 }
 
 func installAsciidoctor() {
     
-    executeCommand("/bin/echo", ["foo", "bar"], verbose: true)
-    
-    // executeCommand("rvm", ["use", "system"], verbose: true)
-    executeCommand("/usr/bin/gem", ["install", "asciidoctor"], verbose: true)
-    
-   
+    executeCommand("/bin/echo", ["foo", "bar"])
+    executeCommand("/usr/bin/gem", ["install", "asciidoctor"])
     
 }
 
@@ -108,7 +104,6 @@ func installAsciidoctor() {
 
 func baseName(path: String) -> String {
     
-    //let part = path.pathComponents
     let part = path.componentsSeparatedByString(".")
     return part[0]
     
@@ -148,11 +143,10 @@ func fileExistsAtPath(path: String) -> Bool {
     
 }
 
-func readStringFromPath(path: String) -> String {
+func readStringFromFile(pathToFile: String) -> String {
+
     
-    println("In readStringFromURL, FILE PATH: \(path)")
-    
-    let str = String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: nil)!
+    let str = String.stringWithContentsOfFile(pathToFile, encoding: NSUTF8StringEncoding, error: nil)!
     
     return str
     

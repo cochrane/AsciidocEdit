@@ -78,7 +78,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
            if fileExistsAtPath(documentPath!) {
             
 
-             textView.string = readStringFromPath(documentPath!)
+             textView.string = readStringFromFile(documentPath!)
     
             
            } else {
@@ -160,7 +160,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         memorizeKeyValuePair("documentURL", url)
         
-        documentText = readStringFromPath(documentPath!)
+        documentText = readStringFromFile(documentPath!)
         textView.string = documentText
         
         updateUI(refresh: true)
@@ -211,7 +211,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         let oldDocumentURL = documentURL
         let oldDocumentPath = documentPath
-        let fileContents = readStringFromPath(oldDocumentPath!)
+        let fileContents = readStringFromFile(oldDocumentPath!)
         
         
         let newFilePanel = NSSavePanel()
@@ -252,7 +252,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
         let oldDocumentURL = documentURL
         let oldDocumentPath = documentPath
-        let fileContents = readStringFromPath(oldDocumentPath!)
+        let fileContents = readStringFromFile(oldDocumentPath!)
         
 
         let newFilePanel = NSSavePanel()
@@ -330,7 +330,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
                     memorizeKeyValuePair("documentURL", url)
                     recallValueOfKey("documentURL")
                     
-                    documentText = readStringFromPath(documentPath!)
+                    documentText = readStringFromFile(documentPath!)
                     textView.string = documentText
                     
                     
@@ -541,7 +541,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
           println("I AM IN application - openFile, found \(filename)")
           let url = "file:///"+filename
             
-          documentText = readStringFromPath(filename)
+          documentText = readStringFromFile(filename)
           textView.string = documentText
           updateUI(refresh: true)
           putMessage()
