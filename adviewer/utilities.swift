@@ -152,63 +152,33 @@ func readStringFromFile(pathToFile: String) -> String {
     
 }
 
-func documentsDirectory() -> String? {
-    
-    let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
-    
-    var documentsDirectory: String?
-    
-    
-    
-    if let directories = dirs {
-        
-        if directories.count > 0 {
-            
-            documentsDirectory = directories[0]
-            
-        }
-        
-    }
-    
-    println("documentsDirectory: \(documentsDirectory)")
-    
-    return documentsDirectory
-
-}
-
 func writeStringToFile(str: String, path: String) {
     
     str.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
 }
 
-
-func testFS() {
+func directories() -> [String]? {
     
-    let file = "test_file.txt"
+    return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
+}
 
-    let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
-
-    if let directories = dirs {
-        // let directories:String[] = dirs;
-        let dir = directories[0]; //documents directory
-        let path = dir.stringByAppendingPathComponent(file);
-        let text = "some text"
+func documentsDirectory() -> String? {
+    
+    var documentsDirectory: String?
+    
+    if let dirs = directories() {
         
-        //writing
-        text.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding, error: nil);
-        
-        
-        println("the string [\(text)] was written to \(file)")
-        
-        //reading
-        let text2 = String.stringWithContentsOfFile(path, encoding: NSUTF8StringEncoding, error: nil)
-        
-        println("the string [\(text2)] was read from \(file)")
-        
-        
+        if dirs.count > 0 {
+            
+            documentsDirectory = dirs[0]
+            
+        }
         
     }
+    
+    return documentsDirectory
 }
+
 
 //MARK: Memorize and recall key-value pairs
 

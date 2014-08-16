@@ -203,6 +203,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
 
     
     @IBAction func closeFileAction(sender: AnyObject) {
+        
     }
     
     
