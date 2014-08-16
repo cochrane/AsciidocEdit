@@ -1,0 +1,11 @@
+:stem: latexmath
+
+== This is a test
+
+Pythagorean theorem: $a^2  + b^2 = c^2$.
+
+An equation with few integer solutions:
+
+\[
+a^3  + b^3 = c^3
+\]
