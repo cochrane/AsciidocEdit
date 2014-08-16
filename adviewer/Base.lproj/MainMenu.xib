@@ -133,11 +133,7 @@
                                     <action selector="copyToAction:" target="Voe-Tx-rLC" id="QbY-j5-I0L"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Move To" id="Bw7-FT-i3A">
-                                <string key="keyEquivalent" base64-UTF8="YES">
-CQ
-</string>
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Move To" keyEquivalent="m" id="Bw7-FT-i3A">
                                 <connections>
                                     <action selector="moveFileAction:" target="Voe-Tx-rLC" id="c3Z-6s-8aW"/>
                                 </connections>
