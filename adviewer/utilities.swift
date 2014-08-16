@@ -50,6 +50,7 @@ func inject(pathToFile: String, payloadName: String, payloadType: String) {
 }
 
 
+// Retrieve contentof file in bundle
 func bundleContent(fileName: String, resourceType: String) -> String {
     
 
@@ -60,18 +61,21 @@ func bundleContent(fileName: String, resourceType: String) -> String {
 }
 
 
-func refreshHTML(filePath: String, htmlPath: String) {
-    
-    inject(filePath, "synchronize", "js")
-    
-    println("filePath = \(filePath)")
 
-    let tempADPath = tempFile(filePath)
-    let tempHTMPath = tempFile(htmlPath)
+// (1) Inject "synchonize.js" after first non-blank line of
+// the file at asciidocPath and write it to a temporary 
+// copy. (2) Apply asciidoctor to the temporary file.
+// (3) Remove the temporary files.
+func refreshHTML(asciidocPath: String, htmlPath: String) {
     
-    executeCommand("/usr/bin/asciidoctor", [tempADPath], verbose: false)
-    executeCommand("/bin/mv", [tempHTMPath, htmlPath], verbose: false)
-    executeCommand("/bin/rm", [tempADPath], verbose: false)
+    inject(asciidocPath, "synchronize", "js")
+    
+    let tempADPath = tempFile(asciidocPath)
+    let tempHTMLPath = tempFile(htmlPath)
+    
+    executeCommand("/usr/bin/asciidoctor", [tempADPath])
+    executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
+    executeCommand("/bin/rm", [tempADPath])
     
 }
 
