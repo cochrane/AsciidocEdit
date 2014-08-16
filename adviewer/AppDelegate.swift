@@ -211,8 +211,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     @IBAction func copyToAction(sender: AnyObject) {
         
         
-        let oldDocumentURL = documentURL
         let oldDocumentPath = documentPath
+        let oldDocumentURL = documentURL(oldDocumentPath!)
         let fileContents = readStringFromFile(oldDocumentPath!)
         
         
@@ -251,9 +251,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     @IBAction func moveFileAction(sender: AnyObject) {
         
-        
-        let oldDocumentURL = documentURL
         let oldDocumentPath = documentPath
+        let oldDocumentURL = documentURL(oldDocumentPath!)
         let fileContents = readStringFromFile(oldDocumentPath!)
         
 
@@ -297,15 +296,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         
     }
     
-    
-    
-    func openFile(path: String) -> Bool {
-        
-        
-        
-        return true
 
-    }
     
     @IBAction func openFileAction(sender: AnyObject) {
         
@@ -324,6 +315,12 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             for url in panel.URLs {
                 
                 if let url = url.absoluteString {
+                    
+                    println("-- URL: \(url)")
+                    
+                    documentPath = pathFromURL(url)
+                    
+                    println("-- documentPath: \(documentPath)")
                     
                     // Add document to recent files menu
                     let url = documentURL(documentPath!)

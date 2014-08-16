@@ -99,6 +99,38 @@ func installAsciidoctor() {
 }
 
 
+//MARK: Strings
+
+// join(["foo", "bar"], separator: "+") = "foo+bar"
+func join(array: [String], separator: String = "") -> String {
+    
+    let lastIndex  = array.count - 1
+    
+    var str = ""
+    
+    for element in array[0..<lastIndex] {
+        
+        str += element + separator
+        
+    }
+    
+    str += array[lastIndex]
+    
+    return str
+}
+
+//MARK: File system
+
+
+// directoryPath("aa/bb/cc.txt") = "aa/bb"
+func directoryPath(path: String) -> String {
+    
+    let components = path.pathComponents
+    let lastIndex = components.count - 1
+    let foo = Array(components[0..<lastIndex])
+    return join(foo, separator: "/")
+    
+}
 
 //MARK: File system
 
