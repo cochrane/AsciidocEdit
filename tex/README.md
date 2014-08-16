@@ -31,7 +31,8 @@ installed.
 
 **Note.** You can run the preprocessor directly from `AsciidoctorEdit`.
 To do, copy`tex_mode_preprocess` to `usr/local/bin` and make
-sure that it is executable (`chmod u+x tex_mode_preprocess`).
+sure that it is executable (`chmod u+x tex_mode_preprocess`).  
+Select "File>Use LaTeX Mode" to enable preprocessing.
 
 I would eventually like to implment this kind of preprocessing
 via an asciidoctor extension if I can figure out how to do that.
