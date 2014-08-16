@@ -11,19 +11,23 @@ import Foundation
 
 
 
-//MARK: User actions
+//MARK: User helpers
 
-func tempPath(path: String) -> String {
+
+// Return path for temporary file
+func tempFile(path: String) -> String {
     
     let part = path.componentsSeparatedByString(".")
     return part[0]+"-temp."+part[1]
 }
 
-func preprocessFile(path: String) {
+
+// Inject resource into temporary file copy
+func inject(pathToFile: String, payloadName: String, payloadType: String) {
     
     // Get text from file and break it into lines
-    let inputText = readStringFromPath(path)
-    let jsContent = bundleContent("synchronize", "js")
+    let inputText = readStringFromPath(pathToFile)
+    let jsContent = bundleContent(payloadName, payloadType)
     let lines = inputText.componentsSeparatedByString("\n")
     
     // Insert Javascript after header
@@ -38,10 +42,10 @@ func preprocessFile(path: String) {
         }
     }
         
-    let tmpPath = tempPath(path)
+    let tmp = tempFile(pathToFile)
     
     // Write transformed text to temporary file
-    output.writeToFile(tmpPath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    output.writeToFile(tmp, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
     
 }
 
@@ -58,12 +62,12 @@ func bundleContent(fileName: String, resourceType: String) -> String {
 
 func refreshHTML(filePath: String, htmlPath: String) {
     
-    preprocessFile(filePath)
+    inject(filePath, "synchronize", "js")
     
     println("filePath = \(filePath)")
 
-    let tempADPath = tempPath(filePath)
-    let tempHTMPath = tempPath(htmlPath)
+    let tempADPath = tempFile(filePath)
+    let tempHTMPath = tempFile(htmlPath)
     
     executeCommand("/usr/bin/asciidoctor", [tempADPath], verbose: false)
     executeCommand("/bin/mv", [tempHTMPath, htmlPath], verbose: false)
