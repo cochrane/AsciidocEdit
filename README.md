@@ -32,6 +32,15 @@ See [asciidoctor-pdf](https://github.com/asciidoctor/asciidoctor-pdf).
 See [asciidoctor-epub3](https://github.com/asciidoctor/asciidoctor-epub3).  I have made 
 a few (successful) tests of this feature. 
 
+Options
+=======
+
+- Select "File>Use LaTeX Mode" if you wish to use conventional LaTeX syntax, e.g.,
+`$a^2 + b^2 = c^2$` and `\[a^3 + b^3 = c^3\]`.  See the notes `tex/README` in this
+repository for instructions on the installation needed to make this option work.
+You still have to put the code `:stem: latexmath` in your source file to activate
+math processing.
+
 Issues
 ======
 
@@ -43,8 +52,6 @@ issues.  It MUST be installed as `/usr/bin/asciidoctor-pdf`
 - "Install Asciidoctor" does not work and may never work becaue
 of sandbox and permission issues.  If I can't solve this one,
 I will eliminate this menu item.
-
-- "File > MoveTo" has not been implemented yet
 
 
 Planned features
