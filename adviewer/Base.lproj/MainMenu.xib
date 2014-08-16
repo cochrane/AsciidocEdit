@@ -15,6 +15,7 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="AsciidocEdit" customModuleProvider="target">
             <connections>
                 <outlet property="adWebView" destination="v2T-D3-8qG" id="enL-LN-bHr"/>
+                <outlet property="latexMenuItem" destination="BOf-aa-8cq" id="Vdq-Yd-RKz"/>
                 <outlet property="messageLabel" destination="kMk-pE-pDU" id="RSn-g4-mhn"/>
                 <outlet property="saveAsFileAction" destination="Bw7-FT-i3A" id="01v-e0-ZBN"/>
                 <outlet property="saveFileAction" destination="pxx-59-PXV" id="oRj-jF-nma"/>
@@ -139,6 +140,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="lT8-R1-dFO"/>
+                            <menuItem title="Use LaTeX Mode" id="BOf-aa-8cq">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="toggleLaTeXMode:" target="Voe-Tx-rLC" id="hu8-iF-KOh"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Save As PDF" id="2DZ-1r-Ejz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -795,7 +802,7 @@
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="ofX-T5-D0J"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="39" y="112"/>
+            <point key="canvasLocation" x="5" y="63"/>
         </window>
     </objects>
 </document>

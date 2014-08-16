@@ -66,13 +66,19 @@ func bundleContent(fileName: String, resourceType: String) -> String {
 // the file at asciidocPath and write it to a temporary 
 // copy. (2) Apply asciidoctor to the temporary file.
 // (3) Remove the temporary files.
-func refreshHTML(asciidocPath: String, htmlPath: String) {
+func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = false) {
     
     inject(asciidocPath, "synchronize", "js")
     
     let tempADPath = tempFile(asciidocPath)
     let tempHTMLPath = tempFile(htmlPath)
     
+    
+    if useLaTexMode {
+        
+        executeCommand("/usr/local/bin/tex_mode_preprocess", [tempADPath, tempADPath])
+        
+    }
     executeCommand("/usr/bin/asciidoctor", [tempADPath])
     executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
     executeCommand("/bin/rm", [tempADPath])

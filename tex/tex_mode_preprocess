@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+# File:   sub.rb
+# Usage   ruby sub.rb in_file out_file
+# Effect: Maps standard tex syntax to asciidoc syntax
+# Author: James Carlson
+# Date:   8/16/2014
+
+text = File.open(ARGV[0], 'r') { |f| f.read }
+
+# Define the substitutions
+
+# $ (a^2)^3 = a^6 $      ==> +\( (a^2)^3 = a^6 \)+
+TexDollarRx = /\$(.*)\$/ 
+TexDollarSub =  "+\\( "'\1'" \\)+"
+
+# \( (a^2)^3 = a^6 $ \)  ==> +\( (a^2)^3 = a^6 \)+
+MathInlineRx = /\\\((.*)\\\)/ 
+MathInlineSub =  "+\\( "'\1'" \\)+"
+
+# \[ (a^2)^3 = a^6 $ \]  ==> +\[ (a^2)^3 = a^6 \]+
+MathDisplayRx = /\\\[(.*?)\\\]/m
+MathDisplaySub =  "+\\[ "'\1'" \\]+"
+
+# Do the substitutions
+text = text.gsub MathInlineRx, MathInlineSub
+text = text.gsub TexDollarRx, TexDollarSub
+text = text.gsub MathDisplayRx, MathDisplaySub
+
+# Write the transformed text to file
+File.open(ARGV[1], 'w') { |file| file.write(text) }

@@ -23,7 +23,11 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     @IBOutlet weak var messageLabel: NSTextField!
     
+    @IBOutlet weak var latexMenuItem: NSMenuItem!
+
+    
     var documentPath: String?
+    var useLaTeXMode = false
     
     var foo: NSCursor?
     
@@ -43,7 +47,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         textView.automaticSpellingCorrectionEnabled = false
         textView.automaticDashSubstitutionEnabled = false
         textView.automaticQuoteSubstitutionEnabled = false
-            
+        
         textView.backgroundColor =  NSColor(SRGBRed: 0.9, green: 0.9, blue: 0.88, alpha: 1.0)
         textView.textColor = NSColor(SRGBRed: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
 
@@ -57,6 +61,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         window.setFrame(frame, display: true)
         window.backgroundColor = NSColor.blackColor()
         window.title = "AsciidocEdit"
+        
+    
     }
 
     func setupNotifications() {
@@ -121,6 +127,8 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         setupNotifications()
         setupDocument()
         setupWebview()
+        
+        // NSMenuItem* file_menu = [menu itemWithTitle:@"File"];
        
     }
     
@@ -422,6 +430,26 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         keepPlace()
     }
     
+    
+    @IBAction func toggleLaTeXMode(sender: AnyObject) {
+        
+        useLaTeXMode = !useLaTeXMode
+        
+        
+        if useLaTeXMode == true {
+            
+            latexMenuItem.title = "√ Use LaTex Mode"
+            
+        } else {
+            
+            latexMenuItem.title = "Use Latex Mode"
+        }
+
+        
+        
+    }
+    
+    
 //MARK: Helpers
     
     func putMessage() {
@@ -446,7 +474,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
             
             if fileExistsAtPath(documentPath!) {
                 
-                refreshHTML(documentPath!, htmlPath(documentPath!))
+                refreshHTML(documentPath!, htmlPath(documentPath!), useLaTexMode: useLaTeXMode)
                 
             }
             
