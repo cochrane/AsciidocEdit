@@ -128,7 +128,6 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
     
     override func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
         
-    
         keepPlace()
         
     }
@@ -136,7 +135,9 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
 
 
     func applicationWillTerminate(aNotification: NSNotification?) {
+        
         // Insert code here to tear down your application
+        
     }
     
 //MARK: Notifications
