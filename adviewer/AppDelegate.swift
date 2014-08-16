@@ -43,8 +43,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         textView.automaticSpellingCorrectionEnabled = false
         textView.automaticDashSubstitutionEnabled = false
         textView.automaticQuoteSubstitutionEnabled = false
-    
-        
+            
         textView.backgroundColor =  NSColor(SRGBRed: 0.9, green: 0.9, blue: 0.88, alpha: 1.0)
         textView.textColor = NSColor(SRGBRed: 0.1, green: 0.1, blue: 0.1, alpha: 1.0)
 
@@ -430,7 +429,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextViewDelegate {
         let word_count = documentText.countWords()
         let page_count = Int(trunc(Double(word_count)/305))
         
-        messageLabel.stringValue = "File: \(documentPath!).    Word count: \(word_count), about \(page_count) pages"
+        messageLabel.stringValue = "File: \(shortPath(documentPath!)).    Word count: \(word_count), about \(page_count) pages"
         messageLabel.needsDisplay = true
     }
     

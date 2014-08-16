@@ -134,6 +134,17 @@ func directoryPath(path: String) -> String {
 
 //MARK: File system
 
+func shortPath(path: String, numberOfParts: Int = 2) -> String {
+
+    let components = path.pathComponents
+    let lastIndex = components.count - 1
+    var firstIndex = lastIndex - numberOfParts + 1
+    if firstIndex < 0 { firstIndex = 0 }
+    let parts = Array(components[firstIndex...lastIndex])
+    return join(parts, separator: "/")
+
+}
+
 func baseName(path: String) -> String {
     
     let part = path.componentsSeparatedByString(".")
