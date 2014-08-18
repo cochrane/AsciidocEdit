@@ -79,6 +79,11 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
         executeCommand("/usr/local/bin/tex_mode_preprocess", [tempADPath, tempADPath])
         var content = readStringFromFile(tempADPath)
         content = ":stem: latexmath\n" + content
+        println("\n\n====================")
+        println("CONTTENT:")
+        println("====================")
+        println(content)
+        println("====================\n\n")
         writeStringToFile(content, tempADPath)
         
         
@@ -281,6 +286,19 @@ func executeCommand(command: String, args: [String], verbose: Bool = false ) -> 
     }
     
     return output
+    
+}
+
+//MARK: Extras
+
+func setLatexMode(content: String) -> Bool {
+    
+    
+    let status = content.contains(":latex:")
+    
+    println("\nLATEX: \(status)")
+    
+    return status
     
 }
 

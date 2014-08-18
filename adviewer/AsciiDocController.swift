@@ -92,6 +92,10 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                 
             }
             
+            useLaTeXMode = setLatexMode(textView.string )
+            setLatexMenuState()
+
+            
             setHasIncludes()
             
             updateUI(refresh: true)
@@ -329,6 +333,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     recallValueOfKey("documentURL")
                     
                     documentText = readStringFromFile(documentPath!)
+                    useLaTeXMode = setLatexMode(documentText)
                     textView.string = documentText
                     
                     
@@ -349,6 +354,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         if let currentDocumentPath = documentPath {
             
+            useLaTeXMode = setLatexMode(documentText)
+            setLatexMenuState()
             updateDocument(currentDocumentPath)
             updateUI(refresh: true)
             
@@ -423,10 +430,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     }
     
     
-    @IBAction func toggleLaTeXMode(sender: AnyObject) {
-        
-        useLaTeXMode = !useLaTeXMode
-        
+    
+    func setLatexMenuState() {
         
         if useLaTeXMode == true {
             
@@ -436,7 +441,14 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             
             latexMenuItem.title = "Use Latex Mode"
         }
+
+    }
+    
+    @IBAction func toggleLaTeXMode(sender: AnyObject) {
         
+        useLaTeXMode = !useLaTeXMode
+        
+        setLatexMenuState()
         
         
     }
