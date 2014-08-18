@@ -14,14 +14,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="AsciidocEdit" customModuleProvider="target">
             <connections>
-                <outlet property="adWebView" destination="v2T-D3-8qG" id="enL-LN-bHr"/>
-                <outlet property="latexMenuItem" destination="BOf-aa-8cq" id="Vdq-Yd-RKz"/>
-                <outlet property="messageLabel" destination="kMk-pE-pDU" id="RSn-g4-mhn"/>
-                <outlet property="saveAsFileAction" destination="Bw7-FT-i3A" id="01v-e0-ZBN"/>
-                <outlet property="saveFileAction" destination="pxx-59-PXV" id="oRj-jF-nma"/>
-                <outlet property="scrollView" destination="dF6-fn-ukB" id="WYX-7Y-mTW"/>
-                <outlet property="textView" destination="G1C-cP-50P" id="aD5-Eu-VJF"/>
-                <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
+                <outlet property="asciidocController" destination="mtz-d8-bGj" id="und-Y0-nAi"/>
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
@@ -41,13 +34,13 @@
                             <menuItem title="Asciidoctor version" id="nA3-b7-tDk">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="aboutAsciidoctorAction:" target="Voe-Tx-rLC" id="omx-UQ-Llh"/>
+                                    <action selector="aboutAsciidoctorAction:" target="mtz-d8-bGj" id="KQl-2T-j5a"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Install Asciidoctor" id="73w-Ia-xso">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="installAsciidoctorAction:" target="Voe-Tx-rLC" id="Xgb-Gj-KtV"/>
+                                    <action selector="installAsciidoctorAction:" target="mtz-d8-bGj" id="oD4-J4-VLe"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
@@ -90,12 +83,12 @@
                         <items>
                             <menuItem title="New" keyEquivalent="n" id="Was-JA-tGl">
                                 <connections>
-                                    <action selector="newFileAction:" target="Voe-Tx-rLC" id="FUx-J9-D1c"/>
+                                    <action selector="newFileAction:" target="mtz-d8-bGj" id="zPq-Fd-XSk"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
-                                    <action selector="openFileAction:" target="Voe-Tx-rLC" id="U43-xJ-v7m"/>
+                                    <action selector="openFileAction:" target="mtz-d8-bGj" id="Q5Y-Sf-WlJ"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Open Recent" id="tXI-mr-wws">
@@ -114,12 +107,12 @@
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
                             <menuItem title="Close" keyEquivalent="w" id="DVo-aG-piG">
                                 <connections>
-                                    <action selector="closeFileAction:" target="Voe-Tx-rLC" id="t0Q-Jv-ceO"/>
+                                    <action selector="closeFileAction:" target="mtz-d8-bGj" id="R1J-gx-Yom"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Save…" keyEquivalent="s" id="pxx-59-PXV">
                                 <connections>
-                                    <action selector="saveFileAction:" target="Voe-Tx-rLC" id="lwr-ev-uHH"/>
+                                    <action selector="saveFileAction:" target="mtz-d8-bGj" id="MeS-Rr-50X"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Revert to Saved" id="KaW-ft-85H">
@@ -131,31 +124,31 @@
                             <menuItem title="Copy To" id="O6M-CR-3tK">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="copyToAction:" target="Voe-Tx-rLC" id="QbY-j5-I0L"/>
+                                    <action selector="copyToAction:" target="mtz-d8-bGj" id="j6V-pA-5Hx"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Move To" keyEquivalent="m" id="Bw7-FT-i3A">
                                 <connections>
-                                    <action selector="moveFileAction:" target="Voe-Tx-rLC" id="c3Z-6s-8aW"/>
+                                    <action selector="moveFileAction:" target="mtz-d8-bGj" id="6B3-wx-1fO"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="lT8-R1-dFO"/>
                             <menuItem title="Use LaTeX Mode" id="BOf-aa-8cq">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="toggleLaTeXMode:" target="Voe-Tx-rLC" id="hu8-iF-KOh"/>
+                                    <action selector="toggleLaTeXMode:" target="mtz-d8-bGj" id="ME7-8u-hD0"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Save As PDF" id="2DZ-1r-Ejz">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="SaveAsPDFAction:" target="Voe-Tx-rLC" id="Fjf-HR-ci6"/>
+                                    <action selector="SaveAsPDFAction:" target="mtz-d8-bGj" id="f5K-8k-JAG"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Compile EPUB3" id="Y5M-co-he3">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
-                                    <action selector="saveAsEPUB3Action:" target="Voe-Tx-rLC" id="T1F-cE-lGW"/>
+                                    <action selector="saveAsEPUB3Action:" target="mtz-d8-bGj" id="ZeC-kL-2D1"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
@@ -770,7 +763,7 @@
                             <font key="font" metaFont="cellTitle"/>
                         </buttonCell>
                         <connections>
-                            <action selector="browserBack:" target="Voe-Tx-rLC" id="F8k-1W-BIr"/>
+                            <action selector="browserBack:" target="mtz-d8-bGj" id="bxB-eO-hkP"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jh2-xM-Kt8">
@@ -780,7 +773,7 @@
                             <font key="font" metaFont="cellTitle"/>
                         </buttonCell>
                         <connections>
-                            <action selector="browserForward:" target="Voe-Tx-rLC" id="cFa-U5-Pkw"/>
+                            <action selector="browserForward:" target="mtz-d8-bGj" id="2Yj-hX-g0P"/>
                         </connections>
                     </button>
                 </subviews>
@@ -804,5 +797,16 @@
             </view>
             <point key="canvasLocation" x="5" y="63"/>
         </window>
+        <customObject id="mtz-d8-bGj" customClass="AsciiDocController" customModule="AsciidocEdit" customModuleProvider="target">
+            <connections>
+                <outlet property="adWebView" destination="v2T-D3-8qG" id="VjG-Bj-20L"/>
+                <outlet property="latexMenuItem" destination="BOf-aa-8cq" id="hRS-pe-PsC"/>
+                <outlet property="messageLabel" destination="kMk-pE-pDU" id="di4-jo-jTs"/>
+                <outlet property="newFileAction" destination="Was-JA-tGl" id="6NE-S7-qnj"/>
+                <outlet property="scrollView" destination="dF6-fn-ukB" id="VeO-DD-WFZ"/>
+                <outlet property="textView" destination="G1C-cP-50P" id="2c7-dH-LtM"/>
+                <outlet property="window" destination="QvC-M9-y7g" id="A05-ES-teg"/>
+            </connections>
+        </customObject>
     </objects>
 </document>
