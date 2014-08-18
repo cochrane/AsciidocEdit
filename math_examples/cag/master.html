@@ -1,0 +1,3231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.0">
+<title>Polynomial Rings, Ideals, and Varieties</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400">
+<style>
+/* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
+/* Remove the comments around the @import statement below when using this as a custom stylesheet */
+/*@import "https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic|Noto+Serif:400,400italic,700,700italic|Droid+Sans+Mono:400";*/
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary{display:block}
+audio,canvas,video{display:inline-block}
+audio:not([controls]){display:none;height:0}
+[hidden],template{display:none}
+script{display:none!important}
+html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{margin:0}
+a{background:transparent}
+a:focus{outline:thin dotted}
+a:active,a:hover{outline:0}
+h1{font-size:2em;margin:.67em 0}
+abbr[title]{border-bottom:1px dotted}
+b,strong{font-weight:bold}
+dfn{font-style:italic}
+hr{-moz-box-sizing:content-box;box-sizing:content-box;height:0}
+mark{background:#ff0;color:#000}
+code,kbd,pre,samp{font-family:monospace;font-size:1em}
+pre{white-space:pre-wrap}
+q{quotes:"\201C" "\201D" "\2018" "\2019"}
+small{font-size:80%}
+sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}
+sup{top:-.5em}
+sub{bottom:-.25em}
+img{border:0}
+svg:not(:root){overflow:hidden}
+figure{margin:0}
+fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}
+legend{border:0;padding:0}
+button,input,select,textarea{font-family:inherit;font-size:100%;margin:0}
+button,input{line-height:normal}
+button,select{text-transform:none}
+button,html input[type="button"],input[type="reset"],input[type="submit"]{-webkit-appearance:button;cursor:pointer}
+button[disabled],html input[disabled]{cursor:default}
+input[type="checkbox"],input[type="radio"]{box-sizing:border-box;padding:0}
+input[type="search"]{-webkit-appearance:textfield;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;box-sizing:content-box}
+input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration{-webkit-appearance:none}
+button::-moz-focus-inner,input::-moz-focus-inner{border:0;padding:0}
+textarea{overflow:auto;vertical-align:top}
+table{border-collapse:collapse;border-spacing:0}
+*,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+html,body{font-size:100%}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto}
+a:hover{cursor:pointer}
+img,object,embed{max-width:100%;height:auto}
+object,embed{height:100%}
+img{-ms-interpolation-mode:bicubic}
+#map_canvas img,#map_canvas embed,#map_canvas object,.map_canvas img,.map_canvas embed,.map_canvas object{max-width:none!important}
+.left{float:left!important}
+.right{float:right!important}
+.text-left{text-align:left!important}
+.text-right{text-align:right!important}
+.text-center{text-align:center!important}
+.text-justify{text-align:justify!important}
+.hide{display:none}
+.antialiased,body{-webkit-font-smoothing:antialiased}
+img{display:inline-block;vertical-align:middle}
+textarea{height:auto;min-height:50px}
+select{width:100%}
+p.lead,.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{font-size:1.21875em;line-height:1.6}
+.subheader,.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{line-height:1.45;color:#7a2518;font-weight:400;margin-top:0;margin-bottom:.25em}
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
+a{color:#2156a5;text-decoration:underline;line-height:inherit}
+a:hover,a:focus{color:#1d4b8f}
+a img{border:none}
+p{font-family:inherit;font-weight:400;font-size:1em;line-height:1.6;margin-bottom:1.25em;text-rendering:optimizeLegibility}
+p aside{font-size:.875em;line-height:1.35;font-style:italic}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{font-family:"Open Sans","DejaVu Sans",sans-serif;font-weight:300;font-style:normal;color:#ba3925;text-rendering:optimizeLegibility;margin-top:1em;margin-bottom:.5em;line-height:1.0125em}
+h1 small,h2 small,h3 small,#toctitle small,.sidebarblock>.content>.title small,h4 small,h5 small,h6 small{font-size:60%;color:#e99b8f;line-height:0}
+h1{font-size:2.125em}
+h2{font-size:1.6875em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.375em}
+h4,h5{font-size:1.125em}
+h6{font-size:1em}
+hr{border:solid #ddddd8;border-width:1px 0 0;clear:both;margin:1.25em 0 1.1875em;height:0}
+em,i{font-style:italic;line-height:inherit}
+strong,b{font-weight:bold;line-height:inherit}
+small{font-size:60%;line-height:inherit}
+code{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;color:rgba(0,0,0,.9)}
+ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
+ul,ol,ul.no-bullet,ol.no-bullet{margin-left:1.5em}
+ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
+ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
+ul.square{list-style-type:square}
+ul.circle{list-style-type:circle}
+ul.disc{list-style-type:disc}
+ul.no-bullet{list-style:none}
+ol li ul,ol li ol{margin-left:1.25em;margin-bottom:0}
+dl dt{margin-bottom:.3125em;font-weight:bold}
+dl dd{margin-bottom:1.25em}
+abbr,acronym{text-transform:uppercase;font-size:90%;color:rgba(0,0,0,.8);border-bottom:1px dotted #ddd;cursor:help}
+abbr{text-transform:none}
+blockquote{margin:0 0 1.25em;padding:.5625em 1.25em 0 1.1875em;border-left:1px solid #ddd}
+blockquote cite{display:block;font-size:.9375em;color:rgba(0,0,0,.6)}
+blockquote cite:before{content:"\2014 \0020"}
+blockquote cite a,blockquote cite a:visited{color:rgba(0,0,0,.6)}
+blockquote,blockquote p{line-height:1.6;color:rgba(0,0,0,.85)}
+@media only screen and (min-width:768px){h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2}
+h1{font-size:2.75em}
+h2{font-size:2.3125em}
+h3,#toctitle,.sidebarblock>.content>.title{font-size:1.6875em}
+h4{font-size:1.4375em}}table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
+table thead,table tfoot{background:#f7f8f7;font-weight:bold}
+table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
+table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
+table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
+h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
+.clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
+.clearfix:after,.float-group:after{clear:both}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
+pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+.keyseq{color:rgba(51,51,51,.8)}
+kbd{display:inline-block;color:rgba(0,0,0,.8);font-size:.75em;line-height:1.4;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:-.15em .15em 0 .15em;padding:.2em .6em .2em .5em;vertical-align:middle;white-space:nowrap}
+.keyseq kbd:first-child{margin-left:0}
+.keyseq kbd:last-child{margin-right:0}
+.menuseq,.menu{color:rgba(0,0,0,.8)}
+b.button:before,b.button:after{position:relative;top:-1px;font-weight:400}
+b.button:before{content:"[";padding:0 3px 0 2px}
+b.button:after{content:"]";padding:0 2px 0 3px}
+p a>code:hover{color:rgba(0,0,0,.9)}
+#header,#content,#footnotes,#footer{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
+#header:before,#header:after,#content:before,#content:after,#footnotes:before,#footnotes:after,#footer:before,#footer:after{content:" ";display:table}
+#header:after,#content:after,#footnotes:after,#footer:after{clear:both}
+#content{margin-top:1.25em}
+#content:before{content:none}
+#header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
+#header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #ddddd8}
+#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #ddddd8;padding-bottom:8px}
+#header .details{border-bottom:1px solid #ddddd8;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:-ms-flexbox;display:-webkit-flex;display:flex;-ms-flex-flow:row wrap;-webkit-flex-flow:row wrap;flex-flow:row wrap}
+#header .details span:first-child{margin-left:-.125em}
+#header .details span.email a{color:rgba(0,0,0,.85)}
+#header .details br{display:none}
+#header .details br+span:before{content:"\00a0\2013\00a0"}
+#header .details br+span.author:before{content:"\00a0\22c5\00a0";color:rgba(0,0,0,.85)}
+#header .details br+span#revremark:before{content:"\00a0|\00a0"}
+#header #revnumber{text-transform:capitalize}
+#header #revnumber:after{content:"\00a0"}
+#content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
+#toc{border-bottom:1px solid #efefed;padding-bottom:.5em}
+#toc>ul{margin-left:.125em}
+#toc ul.sectlevel0>li>a{font-style:italic}
+#toc ul.sectlevel0 ul.sectlevel1{margin:.5em 0}
+#toc ul{font-family:"Open Sans","DejaVu Sans",sans-serif;list-style-type:none}
+#toc a{text-decoration:none}
+#toc a:active{text-decoration:underline}
+#toctitle{color:#7a2518;font-size:1.2em}
+@media only screen and (min-width:768px){#toctitle{font-size:1.375em}
+body.toc2{padding-left:15em;padding-right:0}
+#toc.toc2{margin-top:0!important;background-color:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #efefed;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
+#toc.toc2 #toctitle{margin-top:0;font-size:1.2em}
+#toc.toc2>ul{font-size:.9em;margin-bottom:0}
+#toc.toc2 ul ul{margin-left:0;padding-left:1em}
+#toc.toc2 ul.sectlevel0 ul.sectlevel1{padding-left:0;margin-top:.5em;margin-bottom:.5em}
+body.toc2.toc-right{padding-left:0;padding-right:15em}
+body.toc2.toc-right #toc.toc2{border-right-width:0;border-left:1px solid #efefed;left:auto;right:0}}@media only screen and (min-width:1280px){body.toc2{padding-left:20em;padding-right:0}
+#toc.toc2{width:20em}
+#toc.toc2 #toctitle{font-size:1.375em}
+#toc.toc2>ul{font-size:.95em}
+#toc.toc2 ul ul{padding-left:1.25em}
+body.toc2.toc-right{padding-left:0;padding-right:20em}}#content #toc{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+#content #toc>:first-child{margin-top:0}
+#content #toc>:last-child{margin-bottom:0}
+#footer{max-width:100%;background-color:rgba(0,0,0,.8);padding:1.25em}
+#footer-text{color:rgba(255,255,255,.8);line-height:1.44}
+.sect1{padding-bottom:.625em}
+@media only screen and (min-width:768px){.sect1{padding-bottom:1.25em}}.sect1+.sect1{border-top:1px solid #efefed}
+#content h1>a.anchor,h2>a.anchor,h3>a.anchor,#toctitle>a.anchor,.sidebarblock>.content>.title>a.anchor,h4>a.anchor,h5>a.anchor,h6>a.anchor{position:absolute;z-index:1001;width:1.5ex;margin-left:-1.5ex;display:block;text-decoration:none!important;visibility:hidden;text-align:center;font-weight:400}
+#content h1>a.anchor:before,h2>a.anchor:before,h3>a.anchor:before,#toctitle>a.anchor:before,.sidebarblock>.content>.title>a.anchor:before,h4>a.anchor:before,h5>a.anchor:before,h6>a.anchor:before{content:"\00A7";font-size:.85em;display:block;padding-top:.1em}
+#content h1:hover>a.anchor,#content h1>a.anchor:hover,h2:hover>a.anchor,h2>a.anchor:hover,h3:hover>a.anchor,#toctitle:hover>a.anchor,.sidebarblock>.content>.title:hover>a.anchor,h3>a.anchor:hover,#toctitle>a.anchor:hover,.sidebarblock>.content>.title>a.anchor:hover,h4:hover>a.anchor,h4>a.anchor:hover,h5:hover>a.anchor,h5>a.anchor:hover,h6:hover>a.anchor,h6>a.anchor:hover{visibility:visible}
+#content h1>a.link,h2>a.link,h3>a.link,#toctitle>a.link,.sidebarblock>.content>.title>a.link,h4>a.link,h5>a.link,h6>a.link{color:#ba3925;text-decoration:none}
+#content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover{color:#a53221}
+.audioblock,.imageblock,.literalblock,.listingblock,.stemblock,.videoblock{margin-bottom:1.25em}
+.admonitionblock td.content>.title,.audioblock>.title,.exampleblock>.title,.imageblock>.title,.listingblock>.title,.literalblock>.title,.stemblock>.title,.openblock>.title,.paragraph>.title,.quoteblock>.title,table.tableblock>.title,.verseblock>.title,.videoblock>.title,.dlist>.title,.olist>.title,.ulist>.title,.qlist>.title,.hdlist>.title{text-rendering:optimizeLegibility;text-align:left;font-family:"Noto Serif","DejaVu Serif",serif;font-size:1rem;font-style:italic}
+table.tableblock>caption.title{white-space:nowrap;overflow:visible;max-width:0}
+.paragraph.lead>p,#preamble>.sectionbody>.paragraph:first-of-type p{color:rgba(0,0,0,.85)}
+table.tableblock #preamble>.sectionbody>.paragraph:first-of-type p{font-size:inherit}
+.admonitionblock>table{border-collapse:separate;border:0;background:none;width:100%}
+.admonitionblock>table td.icon{text-align:center;width:80px}
+.admonitionblock>table td.icon img{max-width:none}
+.admonitionblock>table td.icon .title{font-weight:bold;font-family:"Open Sans","DejaVu Sans",sans-serif;text-transform:uppercase}
+.admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #ddddd8;color:rgba(0,0,0,.6)}
+.admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content{border-style:solid;border-width:1px;border-color:#e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;-webkit-border-radius:4px;border-radius:4px}
+.exampleblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child{margin-bottom:0}
+.sidebarblock{border-style:solid;border-width:1px;border-color:#e0e0dc;margin-bottom:1.25em;padding:1.25em;background:#f8f8f7;-webkit-border-radius:4px;border-radius:4px}
+.sidebarblock>:first-child{margin-top:0}
+.sidebarblock>:last-child{margin-bottom:0}
+.sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
+.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
+.sidebarblock .literalblock pre,.sidebarblock .listingblock pre:not(.highlight),.sidebarblock .listingblock pre[class="highlight"],.sidebarblock .listingblock pre[class^="highlight "],.sidebarblock .listingblock pre.CodeRay,.sidebarblock .listingblock pre.prettyprint{background:#f2f1f1}
+.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;font-size:.8125em}
+.literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
+@media only screen and (min-width:768px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}}@media only screen and (min-width:1280px){.literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:1em}}.literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
+.listingblock pre.highlightjs{padding:0}
+.listingblock pre.highlightjs>code{padding:1em;-webkit-border-radius:4px;border-radius:4px}
+.listingblock pre.prettyprint{border-width:0}
+.listingblock>.content{position:relative}
+.listingblock code[data-lang]:before{display:none;content:attr(data-lang);position:absolute;font-size:.75em;top:.425rem;right:.5rem;line-height:1;text-transform:uppercase;color:#999}
+.listingblock:hover code[data-lang]:before{display:block}
+.listingblock.terminal pre .command:before{content:attr(data-prompt);padding-right:.5em;color:#999}
+.listingblock.terminal pre .command:not([data-prompt]):before{content:"$"}
+table.pyhltable{border-collapse:separate;border:0;margin-bottom:0;background:none}
+table.pyhltable td{vertical-align:top;padding-top:0;padding-bottom:0}
+table.pyhltable td.code{padding-left:.75em;padding-right:0}
+pre.pygments .lineno,table.pyhltable td:not(.code){color:#999;padding-left:0;padding-right:.5em;border-right:1px solid #ddddd8}
+pre.pygments .lineno{display:inline-block;margin-right:.25em}
+table.pyhltable .linenodiv{background:none!important;padding-right:0!important}
+.quoteblock{margin:0 1em 1.25em 1.5em;display:table}
+.quoteblock>.title{margin-left:-1.5em;margin-bottom:.75em}
+.quoteblock blockquote,.quoteblock blockquote p{color:rgba(0,0,0,.85);font-size:1.15rem;line-height:1.75;word-spacing:.1em;letter-spacing:0;font-style:italic;text-align:justify}
+.quoteblock blockquote{margin:0;padding:0;border:0}
+.quoteblock blockquote:before{content:"\201c";float:left;font-size:2.75em;font-weight:bold;line-height:.6em;margin-left:-.6em;color:#7a2518;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+.quoteblock blockquote>.paragraph:last-child p{margin-bottom:0}
+.quoteblock .attribution{margin-top:.5em;margin-right:.5ex;text-align:right}
+.quoteblock .quoteblock{margin-left:0;margin-right:0;padding:.5em 0;border-left:3px solid rgba(0,0,0,.6)}
+.quoteblock .quoteblock blockquote{padding:0 0 0 .75em}
+.quoteblock .quoteblock blockquote:before{display:none}
+.verseblock{margin:0 1em 1.25em 1em}
+.verseblock pre{font-family:"Open Sans","DejaVu Sans",sans;font-size:1.15rem;color:rgba(0,0,0,.85);font-weight:300;text-rendering:optimizeLegibility}
+.verseblock pre strong{font-weight:400}
+.verseblock .attribution{margin-top:1.25rem;margin-left:.5ex}
+.quoteblock .attribution,.verseblock .attribution{font-size:.9375em;line-height:1.45;font-style:italic}
+.quoteblock .attribution br,.verseblock .attribution br{display:none}
+.quoteblock .attribution cite,.verseblock .attribution cite{display:block;letter-spacing:-.05em;color:rgba(0,0,0,.6)}
+.quoteblock.abstract{margin:0 0 1.25em 0;display:block}
+.quoteblock.abstract blockquote,.quoteblock.abstract blockquote p{text-align:left;word-spacing:0}
+.quoteblock.abstract blockquote:before,.quoteblock.abstract blockquote p:first-of-type:before{display:none}
+table.tableblock{max-width:100%;border-collapse:separate}
+table.tableblock td>.paragraph:last-child p>p:last-child,table.tableblock th>p:last-child,table.tableblock td>p:last-child{margin-bottom:0}
+table.spread{width:100%}
+table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
+table.grid-all th.tableblock,table.grid-all td.tableblock{border-width:0 1px 1px 0}
+table.grid-all tfoot>tr>th.tableblock,table.grid-all tfoot>tr>td.tableblock{border-width:1px 1px 0 0}
+table.grid-cols th.tableblock,table.grid-cols td.tableblock{border-width:0 1px 0 0}
+table.grid-all *>tr>.tableblock:last-child,table.grid-cols *>tr>.tableblock:last-child{border-right-width:0}
+table.grid-rows th.tableblock,table.grid-rows td.tableblock{border-width:0 0 1px 0}
+table.grid-all tbody>tr:last-child>th.tableblock,table.grid-all tbody>tr:last-child>td.tableblock,table.grid-all thead:last-child>tr>th.tableblock,table.grid-rows tbody>tr:last-child>th.tableblock,table.grid-rows tbody>tr:last-child>td.tableblock,table.grid-rows thead:last-child>tr>th.tableblock{border-bottom-width:0}
+table.grid-rows tfoot>tr>th.tableblock,table.grid-rows tfoot>tr>td.tableblock{border-width:1px 0 0 0}
+table.frame-all{border-width:1px}
+table.frame-sides{border-width:0 1px}
+table.frame-topbot{border-width:1px 0}
+th.halign-left,td.halign-left{text-align:left}
+th.halign-right,td.halign-right{text-align:right}
+th.halign-center,td.halign-center{text-align:center}
+th.valign-top,td.valign-top{vertical-align:top}
+th.valign-bottom,td.valign-bottom{vertical-align:bottom}
+th.valign-middle,td.valign-middle{vertical-align:middle}
+table thead th,table tfoot th{font-weight:bold}
+tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
+tbody tr th,tbody tr th p,tfoot tr th,tfoot tr th p{color:rgba(0,0,0,.8);font-weight:bold}
+p.tableblock>code:only-child{background:none;padding:0}
+p.tableblock{font-size:1em}
+td>div.verse{white-space:pre}
+ol{margin-left:1.75em}
+ul li ol{margin-left:1.5em}
+dl dd{margin-left:1.125em}
+dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
+ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
+ul.unstyled,ol.unnumbered,ul.checklist,ul.none{list-style-type:none}
+ul.unstyled,ol.unnumbered,ul.checklist{margin-left:.625em}
+ul.checklist li>p:first-child>.fa-check-square-o:first-child,ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
+ul.checklist li>p:first-child>input[type="checkbox"]:first-child{position:relative;top:1px}
+ul.inline{margin:0 auto .625em auto;margin-left:-1.375em;margin-right:0;padding:0;list-style:none;overflow:hidden}
+ul.inline>li{list-style:none;float:left;margin-left:1.375em;display:block}
+ul.inline>li>*{display:block}
+.unstyled dl dt{font-weight:400;font-style:normal}
+ol.arabic{list-style-type:decimal}
+ol.decimal{list-style-type:decimal-leading-zero}
+ol.loweralpha{list-style-type:lower-alpha}
+ol.upperalpha{list-style-type:upper-alpha}
+ol.lowerroman{list-style-type:lower-roman}
+ol.upperroman{list-style-type:upper-roman}
+ol.lowergreek{list-style-type:lower-greek}
+.hdlist>table,.colist>table{border:0;background:none}
+.hdlist>table>tbody>tr,.colist>table>tbody>tr{background:none}
+td.hdlist1{padding-right:.75em;font-weight:bold}
+td.hdlist1,td.hdlist2{vertical-align:top}
+.literalblock+.colist,.listingblock+.colist{margin-top:-.5em}
+.colist>table tr>td:first-of-type{padding:0 .75em;line-height:1}
+.colist>table tr>td:last-of-type{padding:.25em 0}
+.thumb,.th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
+.imageblock.left,.imageblock[style*="float: left"]{margin:.25em .625em 1.25em 0}
+.imageblock.right,.imageblock[style*="float: right"]{margin:.25em 0 1.25em .625em}
+.imageblock>.title{margin-bottom:0}
+.imageblock.thumb,.imageblock.th{border-width:6px}
+.imageblock.thumb>.title,.imageblock.th>.title{padding:0 .125em}
+.image.left,.image.right{margin-top:.25em;margin-bottom:.25em;display:inline-block;line-height:0}
+.image.left{margin-right:.625em}
+.image.right{margin-left:.625em}
+a.image{text-decoration:none}
+span.footnote,span.footnoteref{vertical-align:super;font-size:.875em}
+span.footnote a,span.footnoteref a{text-decoration:none}
+span.footnote a:active,span.footnoteref a:active{text-decoration:underline}
+#footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
+#footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em 0;border-width:1px 0 0 0}
+#footnotes .footnote{padding:0 .375em;line-height:1.3;font-size:.875em;margin-left:1.2em;text-indent:-1.2em;margin-bottom:.2em}
+#footnotes .footnote a:first-of-type{font-weight:bold;text-decoration:none}
+#footnotes .footnote:last-of-type{margin-bottom:0}
+#content #footnotes{margin-top:-.625em;margin-bottom:0;padding:.75em 0}
+.gist .file-data>table{border:0;background:#fff;width:100%;margin-bottom:0}
+.gist .file-data>table td.line-data{width:99%}
+div.unbreakable{page-break-inside:avoid}
+.big{font-size:larger}
+.small{font-size:smaller}
+.underline{text-decoration:underline}
+.overline{text-decoration:overline}
+.line-through{text-decoration:line-through}
+.aqua{color:#00bfbf}
+.aqua-background{background-color:#00fafa}
+.black{color:#000}
+.black-background{background-color:#000}
+.blue{color:#0000bf}
+.blue-background{background-color:#0000fa}
+.fuchsia{color:#bf00bf}
+.fuchsia-background{background-color:#fa00fa}
+.gray{color:#606060}
+.gray-background{background-color:#7d7d7d}
+.green{color:#006000}
+.green-background{background-color:#007d00}
+.lime{color:#00bf00}
+.lime-background{background-color:#00fa00}
+.maroon{color:#600000}
+.maroon-background{background-color:#7d0000}
+.navy{color:#000060}
+.navy-background{background-color:#00007d}
+.olive{color:#606000}
+.olive-background{background-color:#7d7d00}
+.purple{color:#600060}
+.purple-background{background-color:#7d007d}
+.red{color:#bf0000}
+.red-background{background-color:#fa0000}
+.silver{color:#909090}
+.silver-background{background-color:#bcbcbc}
+.teal{color:#006060}
+.teal-background{background-color:#007d7d}
+.white{color:#bfbfbf}
+.white-background{background-color:#fafafa}
+.yellow{color:#bfbf00}
+.yellow-background{background-color:#fafa00}
+span.icon>.fa{cursor:default}
+.admonitionblock td.icon [class^="fa icon-"]{font-size:2.5em;text-shadow:1px 1px 2px rgba(0,0,0,.5);cursor:default}
+.admonitionblock td.icon .icon-note:before{content:"\f05a";color:#19407c}
+.admonitionblock td.icon .icon-tip:before{content:"\f0eb";text-shadow:1px 1px 2px rgba(155,155,0,.8);color:#111}
+.admonitionblock td.icon .icon-warning:before{content:"\f071";color:#bf6900}
+.admonitionblock td.icon .icon-caution:before{content:"\f06d";color:#bf3400}
+.admonitionblock td.icon .icon-important:before{content:"\f06a";color:#bf0000}
+.conum[data-value]{display:inline-block;color:#fff!important;background-color:rgba(0,0,0,.8);-webkit-border-radius:100px;border-radius:100px;text-align:center;font-size:.75em;width:1.67em;height:1.67em;line-height:1.67em;font-family:"Open Sans","DejaVu Sans",sans-serif;font-style:normal;font-weight:bold}
+.conum[data-value] *{color:#fff!important}
+.conum[data-value]+b{display:none}
+.conum[data-value]:after{content:attr(data-value)}
+pre .conum[data-value]{position:relative;top:-.125em}
+b.conum *{color:inherit!important}
+.conum:not([data-value]):empty{display:none}
+h1,h2{letter-spacing:-.01em}
+dt,th.tableblock,td.content{text-rendering:optimizeLegibility}
+p,td.content{letter-spacing:-.01em}
+p strong,td.content strong{letter-spacing:-.005em}
+p,blockquote,dt,td.content{font-size:1.0625rem}
+p{margin-bottom:1.25rem}
+.sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
+.exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
+.print-only{display:none!important}
+@media print{@page{margin:1.25cm .75cm}
+*{-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+a{color:inherit!important;text-decoration:underline!important}
+a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
+a[href^="http:"]:not(.bare):after,a[href^="https:"]:not(.bare):after,a[href^="mailto:"]:not(.bare):after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
+abbr[title]:after{content:" (" attr(title) ")"}
+pre,blockquote,tr,img{page-break-inside:avoid}
+thead{display:table-header-group}
+img{max-width:100%!important}
+p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
+h2,h3,#toctitle,.sidebarblock>.content>.title{page-break-after:avoid}
+#toc,.sidebarblock,.exampleblock>.content{background:none!important}
+#toc{border-bottom:1px solid #ddddd8!important;padding-bottom:0!important}
+.sect1{padding-bottom:0!important}
+.sect1+.sect1{border:0!important}
+#header>h1:first-child{margin-top:1.25rem}
+body.book #header{text-align:center}
+body.book #header>h1:first-child{border:0!important;margin:2.5em 0 1em 0}
+body.book #header .details{border:0!important;display:block;padding:0!important}
+body.book #header .details span:first-child{margin-left:0!important}
+body.book #header .details br{display:block}
+body.book #header .details br+span:before{content:none!important}
+body.book #toc{border:0!important;text-align:left!important;padding:0!important;margin:0!important}
+body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-break-before:always}
+.listingblock code[data-lang]:before{display:block}
+#footer{background:none!important;padding:0 .9375em}
+#footer-text{color:rgba(0,0,0,.6)!important;font-size:.9em}
+.hide-on-print{display:none!important}
+.print-only{display:block!important}
+.hide-for-print{display:none!important}
+.show-for-print{display:inherit!important}}
+</style>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [["\\(", "\\)"]],
+    displayMath: [["\\[", "\\]"]],
+    ignoreClass: "nostem|nolatexmath"
+  },
+  asciimath2jax: {
+    delimiters: [["\\$", "\\$"]],
+    ignoreClass: "nostem|noasciimath"
+  }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.4.0/MathJax.js?config=TeX-MML-AM_HTMLorMML"></script>
+</head>
+<body class="article toc2 toc-left">
+<div id="header">
+<div id="toc" class="toc2">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_polynomial_rings_ideals_and_varieties">1. Polynomial Rings, Ideals, and Varieties</a>
+<ul class="sectlevel2">
+<li><a href="#_fields_a_id_ff_a">1.1. Fields<a id="FF"></a></a></li>
+<li><a href="#_ideals_in_polynomial_rings_a_id_ipr_a">1.2. Ideals in Polynomial Rings<a id="IPR"></a></a></li>
+<li><a href="#_affine_varieties_a_id_av_a">1.3. Affine varieties<a id="AV"></a></a></li>
+<li><a href="#_the_ideal_of_a_variety_a_id_iv_a">1.4. The ideal of a variety<a id="IV"></a></a></li>
+<li><a href="#_the_algebra_geometry_dictionary_a_id_agd_a">1.5. The Algebra-Geometry Dictionary<a id="AGD"></a></a></li>
+<li><a href="#_irreducibility_and_decomposition_a_id_iad_a">1.6. Irreducibility and decomposition<a id="IAD"></a></a></li>
+<li><a href="#_chain_conditions_a_id_cc_a">1.7. Chain conditions<a id="CC"></a></a></li>
+<li><a href="#_operations_on_ideals_a_id_ooi_a">1.8. Operations on Ideals<a id="OOI"></a></a></li>
+<li><a href="#_primes_and_irreducibles_a_id_pir_a">1.9. Primes and Irreducibles<a id="PIR"></a></a></li>
+<li><a href="#_dimension_a_id_dim_a">1.10. Dimension<a id="DIM"></a></a></li>
+<li><a href="#_degree_a_id_deg_a">1.11. Degree<a id="DEG"></a></a></li>
+<li><a href="#_the_twisted_cubic_a_id_tc_a">1.12. The Twisted Cubic<a id="TC"></a></a></li>
+</ul>
+</li>
+<li><a href="#_monomial_ideals_groebner_bases_and_the_division_algorithm">2. Monomial Ideals, Groebner Bases, and the Division Algorithm</a>
+<ul class="sectlevel2">
+<li><a href="#_monomial_orders_and_leading_terms_a_id_molt_a">2.1. Monomial orders and leading terms<a id="MOLT"></a></a></li>
+<li><a href="#_monomial_ideals_and_groebner_bases_a_id_miagb_a">2.2. Monomial Ideals and Groebner Bases<a id="MIAGB"></a></a></li>
+<li><a href="#_the_ascending_chain_condition_a_id_acc_a">2.3. The Ascending Chain Condition<a id="ACC"></a></a></li>
+<li><a href="#_the_division_algorithm_a_id_da_a">2.4. The Division Algorithm<a id="DA"></a></a></li>
+<li><a href="#_algorithms_a_id_algo_a">2.5. Algorithms<a id="algo"></a></a></li>
+<li><a href="#_code_for_groebner_basis_cgb">2.6. Code for Groebner Basis[CGB]</a></li>
+<li><a href="#_exercises">2.7. Exercises</a></li>
+</ul>
+</li>
+<li><a href="#_varieties_over_finite_fields">3. Varieties over finite fields</a>
+<ul class="sectlevel2">
+<li><a href="#_counting_points_a_id_cp_a">3.1. Counting points<a id="CP"></a></a></li>
+</ul>
+</li>
+<li><a href="#_hilbert_functions_dimension">4. Hilbert functions, dimension</a>
+<ul class="sectlevel2">
+<li><a href="#_dimension_theory">4.1. Dimension theory</a></li>
+<li><a href="#_references">4.2. References</a></li>
+</ul>
+</li>
+<li><a href="#_elimination_and_intersection_theory">5. Elimination and Intersection Theory</a>
+<ul class="sectlevel2">
+<li><a href="#_intersection_of_two_conics">5.1. Intersection of two conics</a></li>
+<li><a href="#_intersection_of_a_conic_and_a_quintic">5.2. Intersection of a conic and a quintic</a></li>
+<li><a href="#_lines_on_the_cubic_surface">5.3. Lines on the cubic surface</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="content">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script>
+
+function keep_place() {
+
+    var position = localStorage.getItem("scroll_position");
+
+    $("body").scrollTop(position)
+
+};
+
+$(document).ready(function(){
+
+  $("#b1").click(function(){
+
+	keep_place()
+
+  });
+
+$(document).ready(function(){
+
+    $(window).scroll(function(){
+
+       var scroll_position = $("body").scrollTop();
+
+       localStorage.setItem("scroll_position", scroll_position);
+
+
+    })
+
+});
+
+
+});
+
+</script>
+<div class="paragraph">
+<p>\(
+   \def\AA{\mathbb{A}}
+   \def\BB{\mathbb{B}}
+   \def\CC{\mathbb{C}}
+   \def\DD{\mathbb{D}}
+   \def\EE{\mathbb{E}}
+   \def\FF{\mathbb{F}}
+   \def\NN{\mathbb{N}}
+   \def\OO\mathbb{{O}}
+   \def\PP{\mathbb{P}}
+   \def\QQ{\mathbb{Q}}
+   \def\RR{\mathbb{R}}
+   \def\ZZ{\mathbb{Z}}
+   \def\ffp{\mathfrak{p}}
+   \def\bold#1{\bf #1}
+\)
+\(
+   \newcommand{\commadots}{, \ldots, }
+   \newcommand{\set}[1]{ \{\,#1\,  \} }
+   \newcommand{\sett}[2]{ \{\,#1\, \mid\, #2\, \} }
+   \newcommand{\Set}[1]{ \Big\{\,#1\,  \Big\} }
+   \newcommand{\Sett}[2]{ \Big\{\,#1\, \Big\vert\; #2\,  \Big\} }
+\newcommand{\mapright}[1]{\ \smash{
+   \mathop{\longrightarrow}\limits^{#1}}\ }
+  \newcommand{\vars}[2]{{#1}_1\commadots{#1}_{#2}}
+   \newcommand{\map}{\longrightarrow}
+   \def\rank{\mathop{rank}}
+   \def\dim{\mathop{dim}}
+   \def\height{\mathop{height}}
+\)</p>
+</div>
+<div class="sect1">
+<h2 id="_polynomial_rings_ideals_and_varieties">1. Polynomial Rings, Ideals, and Varieties</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>\(
+   \def\AA{\mathbb{A}}
+   \def\BB{\mathbb{B}}
+   \def\CC{\mathbb{C}}
+   \def\DD{\mathbb{D}}
+   \def\EE{\mathbb{E}}
+   \def\FF{\mathbb{F}}
+   \def\NN{\mathbb{N}}
+   \def\OO\mathbb{{O}}
+   \def\PP{\mathbb{P}}
+   \def\QQ{\mathbb{Q}}
+   \def\RR{\mathbb{R}}
+   \def\ZZ{\mathbb{Z}}
+   \def\ffp{\mathfrak{p}}
+   \def\bold#1{\bf #1}
+\)
+\(
+   \newcommand{\commadots}{, \ldots, }
+   \newcommand{\set}[1]{ \{\,#1\,  \} }
+   \newcommand{\sett}[2]{ \{\,#1\, \mid\, #2\, \} }
+   \newcommand{\Set}[1]{ \Big\{\,#1\,  \Big\} }
+   \newcommand{\Sett}[2]{ \Big\{\,#1\, \Big\vert\; #2\,  \Big\} }
+\newcommand{\mapright}[1]{\ \smash{
+   \mathop{\longrightarrow}\limits^{#1}}\ }
+  \newcommand{\vars}[2]{{#1}_1\commadots{#1}_{#2}}
+   \newcommand{\map}{\longrightarrow}
+   \def\rank{\mathop{rank}}
+   \def\dim{\mathop{dim}}
+   \def\height{\mathop{height}}
+\)</p>
+</div>
+<div class="paragraph">
+<p>An algebraic variety is the solution set of a system of polynomial
+equations.  Our goal in this course is to develop the theory and
+the tools needed to make basic computations with varieties.  For
+example, a variety has a dimension and a degree.  How do we define
+these quantities, and how do we compute them?</p>
+</div>
+<div class="paragraph">
+<p>In this first chapter, we review some preliminaries about fields,
+rings of polynomials with coefficients in a given field, and
+ideals in such rings.  We establish some parts of the
+algebra-geometry dictionary which relates ideals to varieties.  In
+chapter two. we introduce a special class of ideals  which are
+especially suited to computations.  These are the <em>monomial
+ideals</em>.  Monomial ideals are rarely the ideals of the varieties
+in which we are interested.  However, to every ideal in a
+polynomial ring is associated a monomial ideal, and from the
+latter we can often read properties of the former.  The monomial
+ideal associated to a given ideal depends on the choice of a
+suitable total order on the set of monomials, of which there are
+many. We shall discuss two of thee in the next chapter.</p>
+</div>
+<div class="paragraph">
+<p>A central role in computational commutative algebra&#8201;&#8212;&#8201;the theory
+for doing computations in algebraic geometry&#8201;&#8212;&#8201;is played by the
+division algorithm for multivariate polynomials and by the notion
+of <em>Groebner basis</em>.  Once these two notions are in hand, we will
+be able to solve many problems, e.g, the problem of whether a
+given polynomial is in a given ideal, the problem of whether a
+given ideal is prime, etc..</p>
+</div>
+<div class="paragraph">
+<p>In these notes, we parallel the theoretical development y with
+code examples using <a href="http://sagemath.org">Sage</a>, a free software
+program designed for mathematical research.  By going to the link
+of the previous sentence, you can download Sage and install it on
+your own computer.</p>
+</div>
+<div class="paragraph">
+<p><a href="#FF">Fields</a><br>
+<a href="#IPR">Ideals in Polynomial Rings</a><br>
+<a href="#AV">Affine varieties</a><br>
+<a href="#IV">The ideal of a variety</a><br>
+<a href="#QR">Quotient rings</a><br>
+<a href="#AGD">The Algebra-Geometry Dictionary</a><br>
+<a href="#IAD">Irreducibility and decomposition</a><br>
+<a href="#PIR">Primes and irreducibles</a><br>
+<a href="#OOI">Operations on Ideals</a><br>
+<a href="#CC">Chain conditions</a> <br>
+<a href="#DIM">Dimension</a><br>
+<a href="#DEG">Degree</a><br>
+<a href="#TC">Twisted cubics</a></p>
+</div>
+<div class="sect2">
+<h3 id="_fields_a_id_ff_a">1.1. Fields<a id="FF"></a></h3>
+<div class="paragraph">
+<p>Let \(k\) be a field.  The most familiar examples are</p>
+</div>
+<div class="openblock indent">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>\(\QQ\) - the field of rational numbers</p>
+</li>
+<li>
+<p>\(\RR\) - the field of real numbers</p>
+</li>
+<li>
+<p>\(\CC\) - the field of complex numbers</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>All of these are infinite fields.  The last one is
+<span class="term">algebraically closed</span>: any polynomial with
+coefficients in the field has at least one root in the field&#8201;&#8212;&#8201;and hence all its roots  in the field.  The last two fields are
+also <span class="term">complete</span> in the sense that any Cauchy sequence
+converges.  There are other complete fields, among which the most
+important are the \(p\)-adic fields.  (See the
+<a href="http://www.noteshare.io/lessons/439">appendix</a>).</p>
+</div>
+<div class="paragraph">
+<p><strong>Number fields and algebraic closure.</strong> Consider the field
+\(\QQ(\sqrt{2}) = \sett{a + b\sqrt 2}{a, b \in \QQ}\).  It is a
+<em>number field</em>: a finite extension of the rational numbers.  The
+set of all number fields is <span class="term">directed</span>: given two such
+fields \(K\) and \(L\),
+there is a third such field \(M\) such that \(K \subset M\) and
+\(L \subset M\).  In these circumstances there is a smallest field,
+the <span class="term">direct limit</span>, which contains all number fields.  This
+is the field of <span class="term">algebraic numbers</span>, written \(\bar\QQ\).
+Like the complex numbers, it is algebraically closed. However, it
+is a countable field, whereas the field of complex numbers is
+uncountable.  The field \(\QQ\) is the <span class="term">algebraic
+closure</span> of \(\QQ\): it is the smallest algebraically closed
+field containing the rational numbers.  One can also define \(\QQ\)
+as the set of all solutions of all polynomial equations with
+rational coefficients.  Defined this way, one has the task of
+showing the \(\QQ\) is a field, not merely a set. (Exercise).</p>
+</div>
+<div class="paragraph">
+<p><strong>Finite fields.</strong> Consider the integers modulo a prime \(p\), written
+\(\ZZ/p\).  It is a field of \(p\) elements.
+Let \(f(x)\) be an irreducible polynomial of degree \(n\) with
+coefficients in \(\ZZ/p\).  Let \(\ZZ/p[x]\) be the the ring of
+polynomials in one variable with coefficients in \(\ZZ/p\), and let
+\((f)\)
+be the set of polynomials divisible by \(f\).  It is an ideal in the
+ring \(\ZZ/p[x]\).  Assume that \(f\) is irreducible, and let
+\[
+  GF(p^n) = \ZZ/p[x]/(f)
+\]
+denote the quotient ring, where \(n\) is the degree of \(f\).  It is a
+field of \(q = p^n\) elements.  Any two fields with \(q\) elements are
+isomorphic.  We sometimes denote such a field by \(\FF_q\).   (We
+discuss <a href="#IPR">ideals</a> and <a href="#QR">quotient rings</a> below.)</p>
+</div>
+<div class="paragraph">
+<p>The fields \(\FF_q\) for a given prime \(p\) are fields of
+<span class="term">characteristic</span> \(p\).  That is, for any element
+\(a \in \FF_q\), the equation \(pa = 0\) holds.  The fields \(\FF_q\) of
+characteristic \(p\) form a directed system and so have a direct
+limit \(\bar \FF_p\).  It is a countably infinite field of
+characteristic \(p\) which is algebraically closed.</p>
+</div>
+<div class="sect3">
+<h4 id="_computations_1">1.1.1. Computations (1)</h4>
+<div class="paragraph">
+<p>The common fields are easily defined in Sage.  Once a field is
+defined, one can do computations in it.</p>
+</div>
+<div class="listingblock">
+<div class="title">Rational numbers</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: K = QQ
+sage: K
+Rational Field
+sage: a = 2/3
+sage: a.parent()
+Rational Field
+sage: a in K
+True
+sage: a^5
+32/243</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Real numbers</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: L = RR
+sage: L
+Real Field with 53 bits of precision
+sage: b = L(2/3)
+sage: b
+0.666666666666667
+sage: 3*b
+2.00000000000000</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Complex numbers</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: L = CC
+sage: u = L(-1)
+sage: u
+-1.00000000000000
+sage: sqrt(u)
+1.00000000000000*I
+sage: a = 2 + 3*sqrt(u)
+sage: a
+2.00000000000000 + 3.00000000000000*I
+sage: a.conjugate()
+2.00000000000000 - 3.00000000000000*I
+sage: a.abs()
+3.60555127546399</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Number fields</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: K.&lt;u&gt; = NumberField(x^2 - 2)
+sage: K
+Number Field in u with defining polynomial x^2 - 2
+sage: u^2
+2
+sage: u^3
+2*u</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Reference:
+<a href="http://www.sagemath.org/doc/reference/number_fields/sage/rings/number_field/number_field.html">sage
+math.org</a></p>
+</div>
+<div class="listingblock">
+<div class="title">Finite fields</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: K.&lt;t&gt; = GF(5)
+sage: K
+Finite Field in t of size 2^5
+sage: t
+t
+sage: t^2
+t + 3
+sage: t^3
+4*t + 3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>References:
+<a href="http://www.sagemath.org/doc/reference/rings_standard/sage/rings/finite_rings/constructor.html">1</a></p>
+</div>
+<div class="listingblock">
+<div class="title">p-adic fields</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: K = Qp(3)
+sage: b = K(1/5)
+sage: b
+2 + 3^2 + 2*3^3 + 3^4 + 3^6 + 2*3^7 + 3^8 + 3^10 + 2*3^11 + 3^12 +
+3^14 + 2*3^15 + 3^16 + 3^18 + 2*3^19 + O(3^20)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The 3-adic expansion of 1/5 is the example given in
+<a href="http://en.wikipedia.org/wiki/P-adic_number">Wikipedia article</a> on
+the p-adic numbers.
+We can format it&#8201;&#8212;&#8201;"pretty-print" it&#8201;&#8212;&#8201;using the following code:</p>
+</div>
+<div class="listingblock">
+<div class="title">Pretty-print function</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python"># file: pretty.sage
+def p(x):
+  output = ""
+  for k in range(0,20):
+    output = str(x[k]) + output
+  output = "..." + output
+  return output</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>To compute the pretty-printed expansion, do this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: runfile pretty.sage
+sage: print p(b)
+...21012101210121012102</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Sage is a program written in Python, and whose native grammar is
+that of Python, with some small differences.  For example, one
+writes x^2 for \(x^2\), just as in mathematics, where in Python
+one writes x**2.  There is a short course on Python available
+online at <a href="http://www.noteshare.io/lessons/416">vschool</a>.</p>
+</div>
+<div class="paragraph">
+<p><strong>Notes.</strong> (1) Sage is a large language because mathematics is
+large.  To learn to use it, the best way is simply to start using
+it, picking up what you need to know as you go.
+<a href="http://sagemath.org">Sagemath.org</a> is the place to go for the
+official documentation.  If you google whatever sagemath, you
+will likely find what you need to know about whatever.  For
+example, substitution sagemath brings up many links, of which
+the first happens to provide the answer (if you scroll down a
+bit).  There are also many online tutorials. There is a very short
+one on <a href="http://www.noteshare.io/lessons/257">vschool</a>.</p>
+</div>
+<div class="paragraph">
+<p>(2) There is a trick in Sage for finding relevant information.
+Suppose, for example, that we are doing computations in
+\(\FF_{25}\), the field of 25 elements.  We have set it up in Sage
+as the field \(K.&lt;t&gt;\) as above. Suppose that we want to find the
+minimal polynomial of \(t\).  Instead of googling, we type t.,
+(note the dot) then press the TAB key.  Sage displays a list of
+methods applicable to the object t.  One of these is
+minimal_polynomial.
+Now we know what to do:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: t.minimal_polynomial()
+x^2 + 4*x + 2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>(3) Guessing is also an effective method for finding the names of
+Sage methods..  Full names like minimal_polynomal are preferred
+over abbreviations like mpoly, mpol, minpoly, min_poly,
+etc. Thus are  great many names in Sage are guessable.</p>
+</div>
+<div class="paragraph">
+<p>References:
+<a href="http://www.sagemath.org/doc/tutorial/tour_numtheory.html">1</a>,
+<a href="http://www.sagemath.org/doc/reference/padics/sage/rings/padics/tutorial.html">2</a></p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_ideals_in_polynomial_rings_a_id_ipr_a">1.2. Ideals in Polynomial Rings<a id="IPR"></a></h3>
+<div class="paragraph">
+<p>The rings of interest to us in this course are polynomial rings
+and their quotients.  Fix a field \(k\) and let
+\[
+   k[x_1 \commadots x_n] = \Sett{ f }{ f = \sum c_\alpha x^\alpha
+},
+\]
+be the set of polynomials in \(n\) variables with coefficients in
+\(k\).  This set has various structures: it is a \(k\)-vector space,
+and it is a <span class="term">commutative ring</span>. it is also an
+<span class="term">integral domain</span>: if \(fg = 0\), the \(f = 0\) or \(g = 0\).  In
+other words, \(k[x_1 \commadots x_n]\) has no divisors of zero.</p>
+</div>
+<div class="paragraph">
+<p>An <span class="term">ideal</span> \(I\) in a ring \(R\) is a subset with two closure
+properties: (i) if \(f, g \in I\), then \(f + g \in I\), (ii) if \(f
+\in R\) and \(g \in I\), then \(fg \in I\).  One way of giving an ideal
+is to give a set of generators  \(f_1 \commadots f_r\) in \(k[x_1
+\commadots x_n]\). Consider
+the vector space
+\[
+  I(f_1 \commadots f_r) =
+\sett{a_if_i + \cdots + a_rf_r}{a_i \in k[x]}.
+\]
+One easily checks that \(I(f_1 \commadots f_r)\),
+which we sometimes write simply as \((f_1 \commadots f_r)\), is an
+ideal.  We say that \(\set{f_i}\) is a set of <span class="term">generators</span> of
+\(I\).</p>
+</div>
+<div class="paragraph">
+<p>Now suppose given a set \(S \subset k^n\).  Consider the set
+\[
+   I(S)  = \Sett{ f \in k[\vars{x}{n}] }{ f(S) = 0 }
+\]
+consisting of polynomials which vanish on \(S\). One easily checks
+that this is an ideal.  As it stands, it is not clear whether
+\(I(S)\), or any random ideal, for that matter, has a finite set of
+generators.  To shed light on this question, consider the simplest
+case&#8201;&#8212;&#8201;the ideal \(I = I(\set{a})\) of polynomials in one variable
+\(x\) which vanish at \(a \in k\).  Let \(f\) be an element of \(I\).
+Apply the division algorithm to \(f\) with divisor \(x-a\).
+Then
+\[
+     f(x) = (x-a)g(x)  + r,
+\]
+where \(r \in k\).  Evaluating this expression at \(x = a\),
+we find that
+\[
+    r = 0.
+\]
+Therefore \(f = (x-a)\cdot g\).  We conclude that \(I\)
+is generated by the polynomial \(x-a\):
+\[
+    I(\set{a}) = (x-a).
+\]
+The phenomenon just observed occurs quite generally:</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 1. (Hilbert Basis Theorem)</strong> <em>Every ideal
+in \(k[\vars{x}{n}]\) has a finite set of generators.</em></p>
+</div>
+<div class="paragraph">
+<p>We shall give a constructive proof of this later using the notion
+of a monomial ideal and a version of the division algorithm for
+polynomials of several variables.</p>
+</div>
+<div class="sect3">
+<h4 id="_quotients_of_rings_by_ideals_a_id_qr_a">1.2.1. Quotients of rings by ideals<a id="QR"></a></h4>
+<div class="paragraph">
+<p>Consider the set of cosets of \(I\) in \(k[x_1 \commadots x_n]\):
+\[
+    R =  \sett{f + I}{f \in k[x]}.
+\]
+This set has the structure of a ring, where \((f + I) + (g + I) =
+(f+g+I)\) and \((f +I)(g+I) = fg + I\).  It is the <em>quotient</em> of the
+ring \(k[x_1 \commadots x_n]\) by the ideal \(I\), and is written
+\(k[x_1 \commadots x_n\]/I\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Exercise 1.</strong> Show that the operations of
+addition and multiplication on cosets of ideals just introduced
+are well-defined.</p>
+</div>
+<div class="paragraph">
+<p>An ideal \(I\) is <span class="term">prime</span> if \(fg \in I\) implies that either \(f
+\in I\) or \(g \in I\).  Consider the ring of polynomials in one
+variable over a field \(k\).  Let 
+\(I = (f)\) be the ideal generated by a single polynomial.  
+Then \(I\) is prime if and only if \(f\) is irreducible.  For example,
+\(I = (x^2 - 2)\) is a prime ideal in \(\QQ[x]\), but
+not in \(\RR[x]\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Proposition 1.</strong> <em>Let \(R\) be an integral
+domain.  An ideal \(I\) in \(R\) is prime if and only if the quotient
+ring \(R/I\) is an integral domain.</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Example 1.</strong> Let \(I = (x^2-2)\) as above.  Then
+\(\QQ[x\]/I \cong \QQ(\sqrt 2)\) is a field.  However, \(\RR[x\]/I
+\cong \RR\oplus \RR\) is not an integral domain.
+Indeed, \(x-\sqrt 2\) is a zero divisor, since \((x-\sqrt 2)(x +
+\sqrt 2) = 0\)&#8201;&#8212;&#8201;or since, using the isomorphism with the direct
+sum, \((1,0)\times(0,1) = (0,0)\).  If \(J  = (x^2  - 4)\), then
+\(\QQ[x\]/J \cong \QQ \oplus \QQ\) is not an integral domain.</p>
+</div>
+<div class="paragraph">
+<p>Here is Sage code which shows how to form a quotient ring and do
+computations in it:</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x&gt; = PolynomialRing(QQ)
+sage: I = ideal(x^2 - 2)
+sage: I.is_prime()
+True
+sage: S = R.quotient_ring(I)
+sage: S.gens()
+(xbar,)
+sage: u = S.gens()[0]
+sage: u^2
+2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The method call S.gens() returns a tuple of generators of S.
+In this case, there is only one generator, xbar.  For another
+example of the use of
+gens, consider this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x,y&gt; = PolynomialRing(QQ)
+sage: R.gens()
+(x, y)
+sage: gg = _
+sage: gg
+(x, y)
+sage: gg[0]
+x</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here the underscore (_) is Python&#8217;s magic variable which holds
+the value of the last expression computed.  We assign they value
+to the variable gg.  Now gg is a tuple, and we can access its
+elements as gg[0], etc.
+One can also do this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: S.&lt;u&gt; = R.quotient_ring(I)
+sage: S
+Univariate Quotient Polynomial Ring in u over Rational Field with
+modulus x^2 - 2
+sage: u^2
+2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>And here is Sage code for the quotient
+\(S = \QQ[x]/(x^2 - 4)\).
+The elements \(p = 2-x\) and \(q = 2+x\) are generalized orthogonal
+idempotents that decompose the identity.  By this we mean that \(p
++ q\) is a nonzero scalar, \(p^2\) is proportional to \(p\), \(q^2\) is
+proportional to \(q\), and
+\(pq = 0\).   Then the map \(x \mapsto (px, qx)\) give is an
+orthogonal direct sum decomposition
+\[
+      S \cong Sp \oplus Sq.
+\]</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: I = ideal(x^2 - 4)
+sage:  S = R.quotient_ring(I)
+sage: S.gens()
+(xbar,)
+sage: u = S.gens()[0]
+sage: u^2
+4
+sage: (2-u)*(2+u)
+0
+sage: (2-u)^2
+4*xbar - 8
+sage: (2+u)^2
+4*xbar + 8</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_affine_varieties_a_id_av_a">1.3. Affine varieties<a id="AV"></a></h3>
+<div class="paragraph">
+<p>Varieties are solution sets of polynomial equations.  For a formal
+definition, let \(k\) be a field and let \(\set{f_i(\vars{x}{n})}\) be
+a set of polynomials with coefficients in \(k\). Let
+\[
+V  = \Sett{ (\vars{x}{n}) }{ f_i(\vars{x}{n}) = 0\ \forall i
+}.
+\]
+Then \(V\) is an <span class="term">affine variety</span> over \(k\).
+Let \(K \supset k\) be an extension field.  It is often worthwhile
+to consider the set \(V(K)\) consisting of solutions with
+coordinates in \(K\).</p>
+</div>
+<div class="paragraph">
+<p>The set \(k^n\) is the affine variety corresponding to the empty set
+of equations.  It is called <span class="term">affine \(n\)-space</span>.  If \(V\) and
+\(V'\) are varieties with \(V' \subset V\), then we say that \(V'\) is a
+<span class="term">subvariety</span> of \(V\).  If \(f = 0\) defines \(V\) and \(f =0\), \(g
+=0\) defines \(V'\), then \(V'\) is a subvariety of \(V\). Note that
+\(V(K)\) is a sub variety of \(K^n\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Example 2.</strong>  Consider the equation \(x^2 + y^2 - 1
+= 0\). It is a one-dimensional algebraic variety over \(\QQ\). The
+\(\RR\)-valued solutions  \(V(\RR)\) constitute a circle.  Consider a
+solution \((x,y)\) with coordinates in \(\QQ\). Write \(x = a/c\), \(y =
+b/c\), where \(a\), \(b\), and \(c\) are integers.  Then \(a^2 + b^2 =
+c^2\).  Thus rational points on the circle correspond to
+<span class="term">Pythagorean triplets</span>&#8201;&#8212;&#8201;right triangles whose sides have
+integer length.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example 3.</strong> Consider the variety over \(\QQ\)
+defined by \(x^2 + y^2 + 1 = 0\).  Both
+the set of \(\QQ\)-valued points and the set of \(\RR\)-valued points
+is empty.  However, the set of \(\CC\)-valued points is isomorphic
+to \(\CC\) itself.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_ideal_of_a_variety_a_id_iv_a">1.4. The ideal of a variety<a id="IV"></a></h3>
+<div class="paragraph">
+<p>Let \(I\) be an ideal in \(k[\vars{x}{n}\]\).  Define the variety of
+\(I\) to be
+\[
+    V(I) = \Sett{k[\vars{x}{n}} { f(x) = 0, \forall f \in I}.
+\]
+If \(\set{\vars{f}{r}}\) is a set of polynomials, then
+\[
+   V(\vars{f}{r}) = V(I(\vars{f}{r})).
+\]
+Now let \(V\) be a variety.  Its associated ideal is
+\[
+   I(V) = \Sett{f \in k[\vars{x}{n}]}{ f(V) = 0}.
+\]
+The first depends on a choice of defining equations.  The second
+depends only on the variety.  Moreover, it is not hard to show the
+following:</p>
+</div>
+<div class="paragraph">
+<p><strong>Proposition 2.</strong>  \(V(I(V)) = V\).</p>
+</div>
+<div class="paragraph">
+<p>Thus the ideal \(I(V)\) determines the variety \(V\). In principle,
+therefore, one should be able to read off information about \(V\) by
+reading it off \(I(V)\). We will soon see that this is the case.
+Note that by the Hilbert Basis Theorem, \(I(V)\) has a finite system
+of generators, so that we can always write \(I(V) = (\vars{g}{s})\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Exercise 2.</strong> (1) Show that \(I(V)\) is indeed an
+ideal. (2) Show that  if \(I\) defines \(V\), then \(I \subset I(V)\).
+(3) Is it always the case that \(I = I(V)\)?</p>
+</div>
+<div class="paragraph">
+<p>Ideals as a more fundamental defining object than systems of
+polynomial equations, even though such equations are the
+motivation for considering varieties in the first place.  While a
+variety may be defined by many systems of equations, there is only
+one ideal \(I(V)\).  It is an intrinsic object that does not depend
+on choices.  We shall see below that many properties of varieties
+can be proved or computed only in terms of the ideals
+corresponding to them.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example 4.</strong> Consider the ideal
+\(I \subset k[x,y,z]\) defined by \(f = x^3 + x^2y^3 + xy^4\), \(g =
+x^2y^2 + x^4y^4\), \(h = y^4\).  It is easy to see that \((f,g,h) =
+(x^3, x^2y^2, y^4)\).  This is a much simpler set of generators.
+Using this generating set, it is clear that the variety defined by
+the ideal consists of a single point, the origin.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_algebra_geometry_dictionary_a_id_agd_a">1.5. The Algebra-Geometry Dictionary<a id="AGD"></a></h3>
+<div class="paragraph">
+<p>We now have maps
+\[
+  \text{Ideals} \mapright{V} \text{Affine Varieties}
+\]
+and
+\[
+  \text{Affine Varieties} \mapright{I} \text{Ideals}
+\]
+This is the <span class="term">algebra-geometry</span> dictionary.  According to the
+proposition of the previous section,
+\(V(I(V)) = V\).  That is, the map \(I\) has a left inverse \(V\).
+Therefore the map \(V \mapsto I(V)\) is injective: if \(I(V_1) =
+I(V_2)\), then \(V_1 = V_2\).. It is also easy to see that both maps
+are order reversing, i.e.., if \(I \subset I'\), then \(V(I) \supset
+V(I')\), and if \(V \subset V'\), then
+\(I(V) \supset I(V')\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Exercise 3.</strong> Prove that the maps \(I\) and \(V\) are
+order-reversing.</p>
+</div>
+<div class="paragraph">
+<p>it is natural to ask if the other map, \(I \mapsto V(I)\) is
+injective.  An easy example shows that it is not: The ideals
+\((x^n)\), \(n &gt; 0\), all define the same variety, namely the origin
+in affine 1-space.  This example leads us to define the
+<span class="term">radical</span> of an ideal:
+\[
+\sqrt I = \Sett{f \in k[\vars{x}{n}]}{\exists m &gt; 0: f^m \in I
+}.
+\]</p>
+</div>
+<div class="paragraph">
+<p><strong>Exercise 4.</strong> (1) Show that \(\sqrt I\) is an ideal
+containing \(I\), (2) Describe the radical of \((x^n)\).</p>
+</div>
+<div class="paragraph">
+<p>The radical is computable in Sage:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x,y&gt; = PolynomialRing(QQ)
+sage: I = Ideal(x^2,y^3)
+sage: I.radical()
+Ideal (y, x) of Multivariate Polynomial Ring in x, y over Rational
+Field</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that \(\sqrt{(x^2,y^3)} = (x,y)\) is a <span class="term">maximal ideal</span>:
+it is not contained in any larger nontrivial ideal.</p>
+</div>
+<div class="paragraph">
+<p><strong>Exercise 5.</strong> (1) What are the maximal ideals of
+\(\bar QQ[x]\)?  (2) What are the maximal ideals of \(\QQ[x]\)?</p>
+</div>
+<div class="paragraph">
+<p>Presumably, if we restrict to radical ideals, the maps \(I \mapsto
+V(I)\) is injective.  However, this is not true either.  Consider
+the empty set in real affine 1-space: \(\emptyset \subset \RR\).
+The \(I_1 = \RR[x]\) and \(I_2 = (x^2 + 1)\) both have \(\emptyset\) as
+their variety.  The key to this conundrum is the realization that
+\(\RR\) is not an algebraically closed field:</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 2.</strong> <em>If \(k\) is algebraically closed, then
+the maps \(I \mapsto V(I\) and \(V \mapsto I(V)\) are order-reversing
+bijections between the set of radical ideals and the set of
+algebraic varieties.</em></p>
+</div>
+<div class="paragraph">
+<p>The theorem follows from the next result:</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 3 (Strong Nullstellensatz).</strong> <em>If \(k\) is
+algebraically closed, then \(I(V(I)) = \sqrt I\).</em></p>
+</div>
+<div class="paragraph">
+<p>The weak Nullstellensatz is the following:</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 4 (Weak Nullstellensatz).</strong> <em>If \(k\) is
+algebraically closed and \(V(I) = \emptyset\),
+then \(I = k[\vars{x}{n}]\).</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_irreducibility_and_decomposition_a_id_iad_a">1.6. Irreducibility and decomposition<a id="IAD"></a></h3>
+<div class="paragraph">
+<p>A variety like the circle, given by \(x^2 + y^2 = 1\) consists of a
+single piece, whereas a variety like \(xy= 0\)
+consists of two pieces, namely the \(x\) and \(y\) axes. In this case
+we can write
+\[
+   V = V_1 \cup V_2,
+\]
+The pieces \(V_i\)&#8201;&#8212;&#8201;the axes&#8201;&#8212;&#8201;cannot themselves be written as
+the union of varieties.  They are said to be <span class="term">irreducible</span>,
+while \(V\) itself is <span class="term">reducible</span>.</p>
+</div>
+<div class="paragraph">
+<p>Via our dictionary, the geometric notion of irreducibility has an
+algebraic counterpart:</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 5.</strong> <em>A variety is irreducible if and only
+if its ideal is prime.</em></p>
+</div>
+<div class="paragraph">
+<p>We shall prove this statement later.  For now we continue with
+examples and observations.  Given the theorem, we can show that
+the circle is irreducible by showing that the ideal \((x^2  + y^2 -
+1)\) is prime.  For this it is enough to show that \(x^2  + y^2 - 1\)
+is irreducible.</p>
+</div>
+<div class="paragraph">
+<p><strong>Exercise 6.</strong> (1) Let \(I = (f)\) be a principal
+ideal in \(k[\vars{x}{n}]\).  Show that \(I\) is prime if an only if
+the polynomial \(f\) is irreducible. (2) Show that \(x^2  + y^2 - 1\)
+is irreducible, i.e., cannot be factored.</p>
+</div>
+<div class="paragraph">
+<p>Questions of the kind we are considering can also be answered by
+Sage:</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x,y&gt; = PolynomialRing(QQ)
+sage: f = x^2 - y^2 - 1
+sage: f.factor()
+(-1) * (-x^2 + y^2 + 1)
+sage: I = Ideal(f)
+sage: I.is_prime()
+True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Just as an integer can be factored into primes, a variety can be
+decomposed into irreducibles:</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 6.</strong> <em>Let \(V \subset k^n\).  Then \(V\) has a
+minimal decomposition into irreducibles, i.e.,</em>
+\[
+   V  = V_1 \cup \commadots \cup V_\ell.
+\]
+<em>where the \(V_i\) are irreducible and \(V_i \not\subset V_j\) for \(i
+\ne j\).</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Example 5.</strong>    Consider the variety defined by
+\(xy =0\) in \(\QQ^3\), where the coordinates are \(x,y,z\).  Then \(V\)
+is the union of the \(yz\) plane and the \(xz\) plane.  Writing \(V_1\)
+and \(V_2\) for these components, we have the minimal  decomposition
+\[
+   V = V_1 \cup V_2.
+\]
+The \(V_i\) are irreducible because the ideals \((x)\) and \((y)\) are
+prime.</p>
+</div>
+<div class="paragraph">
+<p>To better understand how the decomposition of a variety into
+irreducibles is reflected in the behavior of the corresponding
+ideals, we recall another useful property or the algebra-geometry
+dictionary: intersections map to unions and vice versa:
+\[
+  V(I \cap J) = V(I) \cup V(J)
+\]
+and
+\[
+  I(V \cup W) = I(V) \cap I(W).
+\]</p>
+</div>
+<div class="paragraph">
+<p><strong>Exercise 7.</strong> (1) Prove the preceding assertions.
+(2) Show that \(I\cap J\) is an ideal if \(I\) and \(J\) are ideals.</p>
+</div>
+<div class="paragraph">
+<p>Consider the ideal \(I = (xy)\) in the example above. One can easily
+show that
+\[
+  (xy) = (x) \cap (y).
+\]
+Then
+\[
+    V  = V(xy) = V(x) \cup V(y)
+\]
+is the union of varieties corresponding to intersection of ideals.
+That fact that the varieties on the right are irreducible
+corresponds to the fact that the ideals \((x)\) and \((y)\) are prime.
+This observation leads to an ideal-theoetic description of the
+decomposition of a variety into irreducibles:</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 7.</strong> Suppose \(V \ne \emptyset\) is a
+variety in \(k^n\), where \(k\) is algebraically closed.  Then_
+\[
+  I(V) = \bigcap_{j=1}^n P_j,
+\]
+<em>where the \(V_j = V(P_j)\) are the irreducible components of \(V\).</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Remark 1.</strong> Define the project of ideals, \(IJ\) to
+be the ideal generated by products \(f \in I\), \(g \in J\). Then \(IJ
+\subset I \cap J\). Equality holds sometimes but not always. For
+example, \((x)(y) = (xy) = (x) \cap (y)\), but \((x^2)(x)  = (x^3)
+\ne (x^2)\cap(x)\).</p>
+</div>
+<div class="paragraph">
+<p>For a radical ideal, its description as an intersection of prime
+ideals is given by the <em>primary decomposition</em>.  It can be
+computed in Sage as in the next example.</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x,y,z&gt; = PolynomialRing(QQ)
+sage: I = Ideal(x*y)
+sage: I.is_prime()
+sage: pd = I.primary_decomposition_complete()
+sage: len(pd)
+2
+sage: pd[0][0]
+Ideal (y) of Multivariate Polynomial Ring in x, y, z over Rational
+Field
+sage: pd[1][0]
+Ideal (x) of Multivariate Polynomial Ring in x, y, z over Rational
+Field</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the code above, pd is a list of objects.  The length of the
+list, given by len(pd) is two.  The expressions pd[0][0],
+pd[1][0] extract from this list the parts we want.  For future
+work, we make the following definition in sage:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python"># file: components.sage
+def components(I):
+  pd = I.primary_decomposition_complete()
+  n = len(pd)
+  print n, "components:"
+  for j in range(0,n):
+      print " ", pd[j][0]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The we can do this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: runfile components.sage
+sage: components(I)
+2 components:
+  Ideal (y) ...
+  Ideal (x) ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Remark 2.</strong>  If one can show that a variety is
+<em>smooth</em>, i.e., has no singular points, then it follows that \(V\)
+is irreducible.  This follows by algebro-geometirc arguments that
+we shall discuss later.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_chain_conditions_a_id_cc_a">1.7. Chain conditions<a id="CC"></a></h3>
+<div class="paragraph">
+<p><strong>Theorem 8 (Descending Chain Condition).</strong> Any
+descending chain of varieties eventually stabilizes.  That is, if
+we have
+\[
+    V_1 \supset V_2 \supset \cdots V_n \supset \cdots ,
+\]
+Then there is an \(d &gt; 0\) such that for \(i \ge d\), \(V_i = V_d\).</p>
+</div>
+<div class="paragraph">
+<p>The proof of the Descending Chain Condition must wait until the
+next lecture, when we discuss ideals. However, given this result,
+we can prove that a variety has a unique decomposition into
+irreducibles.</p>
+</div>
+<div class="paragraph">
+<p><strong>Proof.</strong>  Suppose that there is a variety \(V\) which cannot be
+written as a union of irreducibles.  Then it can be written as \(V
+= V_1 \cup V_1'\), where at least one of the varieties \(V_1\),
+\(V_1'\) cannot be written as a union of irreducibles.  Suppose that
+\(V_1\) cannot be written as a union of irreducibles.  The same
+reasoning applies: \(V_1 = V_2 \cup V_2'\), where \(V_2\) cannot be
+written as a union of irreducibles.  Continuing in this fashion,
+we
+obtain an infinite chain of proper inclusions
+\[
+  V \supset V_1 \supset V_2 \supset V_3 \supset \cdots
+\]
+This is a contradiction.
+ Q.E.D.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_operations_on_ideals_a_id_ooi_a">1.8. Operations on Ideals<a id="OOI"></a></h3>
+<div class="paragraph">
+<p><strong>Product of ideals.</strong> Given ideals \(I\) and \(J\), consider the set
+\[
+   IJ = \Sett{ \sum_{k=1}^n f_kg_k}
+   { f_k \in I, g_k \in J, n \in \NN}
+\]
+It is easy to see that \(IJ\) is an ideal and that
+\[
+   IJ \subset I \cap J
+\]
+Moreover, if \(I = (f_1 \commadots f_r)\), and
+\(J = (g_1 \commadots g_s)\), then the products
+\(f_kg_\ell\) generate \(IJ\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Proposition 3.</strong>  \(V(IJ) = V(I) \cup V(J)\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Proof.</strong> Since \(IJ \subset I \cap J \cap I\), \(V(I) \subset V(IJ)\).
+For the same reason \(V(J) \subset V(IJ)\).  Therefore \(V(I) \cup
+V(J) \subset V(IJ)\).  To prove the
+reverse inclusion, let \(x \in V(IJ)\).  Then \(f(x)g(x) = 0\)
+for all \(f \in I\), \(g \in J\).  If \(f(x) = 0\) for all \(f \in I\),
+then \(x \in V(I)\).  If \(f(x) \ne 0\) for some \(f \in I\), then \(g(x)
+= 0\) for all \(g \in J\).  Therefore \(x \in J\).  Consequently \(x \in
+V(I) \cup V(J)\).
+Q.E.D.</p>
+</div>
+<div class="paragraph">
+<p><strong>Intersection of ideals.</strong>  Consider next the intersection \(I \cap
+J\) of ideals. It is easy to see that this is an ideal.</p>
+</div>
+<div class="paragraph">
+<p><strong>Proposition 4.</strong> \(V(I\cap J) = V(I) \cup
+V(J)\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Proof.</strong>
+Observe that \(I\cap J \subset I\), so \(V(I) \subset V(I \cap J)\).
+For the same reason, \(V(J) \cap V(I \cap J)\).  Therefore \(V(I)
+\cup V(J) \subset V(I\cap J)\).   For the reverse inclusion, use
+\(IJ \subset I \cap J\). Then
+\[
+  V(I \cap J) \subset V(IJ)  = V(I) \cup V(J).
+\]
+Q.E.D.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_primes_and_irreducibles_a_id_pir_a">1.9. Primes and Irreducibles<a id="PIR"></a></h3>
+<div class="paragraph">
+<p><strong>Theorem 9.</strong> <em>Let \(V \subset k^n\) be an affine
+variety. Then \(V\) is irreducible if and only if \(I(V)\) is prime.</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Proof (1)</strong> We show that if \(V\) is irreducible, then \(I(V)\) is
+prime.  To that end, suppose that \(fg \in I(V)\).  Let \(V_1 = V
+\cap V(f)\), and let \(V_2 = V \cap V(g)\).  As intersections of
+affine varieties, these are are affine varieties. Since \(fg\)
+vanishes on \(V\), \(V \subset V_1 \cup V_2\).  But \(V_1 \cup V_2
+\subset V\), so
+\(V = V_1 \cup V_2\). Sine \(V\) is irreducible, \(V = V_1\) or \(V =
+V_2\).  Let us suppose \(V = V_1\).  Since \(V_1  = V \cap V(f)\), \(f\)
+vanishes on \(V\), i.e., \(f \in I(V)\).  Therefore \(I(V)\) is prime.</p>
+</div>
+<div class="paragraph">
+<p><strong>(2)</strong> We show that if \(I(V)\) is prime, then \(V\) is irreducible.
+Suppose, to the contrary, that \(V\) is reducible.  Then we can
+write \(V\) as a union
+\(V_1 \cup V_2\), where \(V \ne V_i\) for \(i = 1\) or \(i = 2\)  Suppose
+that \(V \ne V_1\).  Then there is a polynomial \(f \in I(V_1) -
+I(V)\). Let \(g \in I(V_2)\).
+Since \(V = V_1 \cup V_2\), the product \(fg\) vanishes on \(V\), and so
+is an element of \(I(V)\).  Since \(f \not\in I(V)\) and \(I(V)\) is
+prime, \(g \in I(V)\).  Since \(g\) was an arbitrary element of
+\(I(V_2)\) we know that \(I(V_2) = I(V)\).  Since \(I\) is an injective
+map from varieties to ideals, \(V = V_2\), a contradiction.
+Therefore \(V\) is irreducible, as claimed.  Q.E.D.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_dimension_a_id_dim_a">1.10. Dimension<a id="DIM"></a></h3>
+<div class="paragraph">
+<p>A fundamental invariant of a variety is its <span class="term">dimension</span>,
+which we can think of informally as the number of parameters
+needed to specify a point on the variety.  There is an
+ideal-theoretic definition of dimension which we will give later.
+For now, we observe that Sage can do dimension computations:</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x,y&gt; = PolynomialRing(QQ)
+sage: I = Ideal(R(0))
+sage: I
+sage: I.dimension()
+2
+sage. I = Ideal(x,y)
+sage I.dimension()
+1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, it was important to use Ideal(R(0)) rather than
+Ideal(0).  In the latter case, Sage would interpret the result
+as the zero ideal in the integers.  We need the zero element of
+\(R\).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_degree_a_id_deg_a">1.11. Degree<a id="DEG"></a></h3>
+<div class="paragraph">
+<p>Another fundamental property of a variety is its <span class="term">degree</span>.
+Informally, the degree is the number of  points in which an affine
+space of complementary dimension cuts the variety.  In the case of
+the variety \(V\) defined by \(xy = 0\), the line \(x + y = 1\) is a
+suitable linear space.  It cuts the variety in two points, so the
+degree is 2, as we expect.</p>
+</div>
+<div class="paragraph">
+<p>There are some subtleties in this definition.  The plane \(x = 0\)
+is not suitable for degree oomputations since it coincides with
+one of the components.  What about the
+line \(y = x\)?  It meets \(V\) at the origin, but there the
+<span class="term">intersection multiplicity</span> is two. Again, we give an ideal
+theoretic definition of this notion later.  For now,
+view it as the number obtained by counting the number of
+intersection points in an line that passes very near the origin.
+Let the the distance to the origin decrease.  The
+intersectio multiplicity is the value of this limit, namely, 2.
+It is easily to compute intersection numbers with Sage:</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: J = Ideal(x*y, x + y - 1)
+sage: J.dimension()
+0
+sage: J.vector_space_dimension()
+2</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>In the code above, \(J\) is the ideal of the variety obtained by
+intersection of \(V\) with a line.  We observe
+first that the variety \(xy = 0\), \(x + y = 1\) is zero-dimensional:
+it consists of finitely many points.  The number of points
+(counting multiplicities) is give by the last expression which in
+reality is the dimension of the vector space \(k[x,y\]/J\).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_twisted_cubic_a_id_tc_a">1.12. The Twisted Cubic<a id="TC"></a></h3>
+<div class="paragraph">
+<p>As an illustration of and exercise in what we have learned so far,
+let us study the <em>twisted cubic</em>.  This is the affine variety  \(C
+\subset k^3\) parametrized by \(x = t\), \(y = t^2\), \(z = t^3\).</p>
+</div>
+<div class="paragraph">
+<p>Our first task is to show that it really is a variety.  To that
+end, we look for equations which define it.  Since it is a
+one-dimensional variety in 3-space, we will need at lest two
+equations.  Certainly the equations \(xy = z\) and \(xz = y^2\) are
+satisfied.  Let \(I\) be the corresponding ideal.
+We compute as follows:</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-sage" data-lang="sage">sage: R.&lt;x,y,z&gt; = PolynomialRing(QQ)
+sage: f = x*y - z
+sage: g = x*z - y^2
+sage: I = Ideal(f,g)
+sage: I.dimension()
+1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This looks good&#8201;&#8212;&#8201;the variety has dimension one since its points
+depend on just one parameter, \(t\).  However, look what happens
+when we compute the number of components:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: components(I)
+2 components:
+  Ideal (z, y) ...
+  Ideal (y^2 - x*z, x*y - z, x^2 - y) ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The variety \(V(xy -z, xz = y^2)\) consists of two components, the
+first of which is the \(x\)-axis, and the second of which is&#8201;&#8212;&#8201;we
+hope&#8201;&#8212;&#8201;the twisted cubic.  To see that it is, we set \(J = (xy -z,
+xz = y^2, x^2 - y)\).</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: J = Ideal(f,g,x^2 - y)
+sage: J.dimension()
+1</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Now let us compute the degree of \(W = V(J)\), namely,
+he intersection number of \(W\) with the plane \(x + 2*y + 3*z = 1\):</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: JJ = J + Ideal(x + 2*y + 3*z - 1)
+sage: JJ
+sage: JJ.dimension()
+0
+sage: JJ.vector_space_dimension()
+3</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The vector space dimension computed for the ideal \(JJ\)
+is the degree of \(W\).  We conclude that \(W\), a one-dimensional
+irreducible variety of degree three, is the twisted cubic.  Just
+to be sure, we check that \(J\) is prime:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: J.is_prime()
+True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Exercise 8.</strong> (1) What is the degree of \(V(I)\)?
+Explain why your answer is a reasonable one.  (2) Compute the
+degree of \(W\) using the plane \(x + y + z = 0\).  In what points
+does it intersect \(W\).  Comment on your results.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_monomial_ideals_groebner_bases_and_the_division_algorithm">2. Monomial Ideals, Groebner Bases, and the Division Algorithm</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="#MOLT">Monomial orders and leading terms</a><br>
+<a href="#MIAGB">Monomial ideal and Groebner bases</a><br>
+<a href="#ACC">The Ascending Chain Condition</a><br>
+<a href="#DA">Division algorithm</a><br></p>
+</div>
+<div class="sect2">
+<h3 id="_monomial_orders_and_leading_terms_a_id_molt_a">2.1. Monomial orders and leading terms<a id="MOLT"></a></h3>
+<div class="imageblock" style="float: right">
+<div class="content">
+<img src="189" alt="189" width="200">
+</div>
+<div class="title">Figure 1. Exponents</div>
+</div>
+<div class="paragraph">
+<p>A <span class="term">monomial</span> in variables \(x_1 \commadots x_n\) is an
+expression
+\[
+   x^\alpha = x_1^{\alpha_1}\cdots x_n^{\alpha_n}
+\]
+where the exponent \(\alpha\) has non-negative integers as
+entries.
+Exponents are elements in the semigroup \(E = (\ZZ^{\ge 0})^n\),
+which we can visualize as in the diagram on the right.  The degree
+of an exponent, written \(|\alpha|\), is the sum \(\alpha_1 +
+\cdots
+\alpha_n\). Exponents of degree \(k\) lie on a hyperplane which
+cuts
+\(E\) in points on the axes at distance \(k\) from the origin.</p>
+</div>
+<div class="paragraph">
+<p>A polynomial with coefficients in a field \(k\) is a linear
+combination with coefficients in \(k\) of monomials in
+the given variables:
+\[
+  f = \sum c_\alpha x^\alpha
+\]
+The degree of \(f\) is the maximum degree of its monomials.</p>
+</div>
+<div class="paragraph">
+<p>A <span class="term">total order</span> on a set is a transitive relation \(&lt;\)
+such
+that trichotomy holds: given arbitrary elements \(\alpha\) and
+\(\beta\) of the set, exactly one of \(\alpha &lt; \beta\),
+\(\alpha =
+\beta\), \(\alpha &gt; \beta\) holds.  The set of exponents
+\(E\) has many
+total orders.  We will be interested in those which are compatible
+with the addition law: if \(\alpha &lt; \beta\), then \(\alpha +
+\gamma
+&lt; \beta + \gamma \) for all \(\gamma\).  Compatible orders on
+exponents correspond to total orders on monomials such that if
+\(M
+&lt; N\), then \(PM = PN\) for all monomials \(P\).  We call
+these
+<span class="term">monomial orders</span>.</p>
+</div>
+<div class="paragraph">
+<p>There are many monomial orders. For the moment we define two: the
+<span class="term">lexicographical order</span>, <em>lex</em> and the <span class="term">degree
+lexicographical order</span>, <em>deglex</em>.  For <em>lex</em>, say that  \(\alpha
+&lt;
+\beta\) if the first nonzero entry of \(\beta - \alpha\) is
+positive.
+Thus \(xy^{10} &lt;_{lex} x^2y\) and \(x^2y &lt;_{lex} x^2y^{10}\).
+For
+<em>deglex</em>, say that \(\alpha &lt; \beta\) if \(|\alpha| &lt;
+|\beta|\).  If
+\(|\alpha| = |\beta|\), then \(\alpha &lt;_{deglex} \beta\) if
+the
+leftmost nonzero entry of
+\(\beta - \alpha\) is positive.  Thus \(x^4y^{4} &lt;_{deglex}
+x^3y^{6}\), and \(xy^8 &lt;_{deglex} x^3y^{6}\).  The <em>deglex</em>
+order is
+a
+<span class="term">graded order</span> in the sense that if \(|\alpha|  &gt;
+|\beta|\),
+then \(x^\alpha &gt; x^\beta\)&#8201;&#8212;&#8201;that is, the monomial with the
+largest total order always wins.</p>
+</div>
+<div class="paragraph">
+<p>When the context makes the ordering clear, we drop the subscript.
+For more information, consult
+<a href="http://www.sagemath.org/doc/reference/polynomial_rings/sage/rings/polynomial/term_order.html">sagemath.org</a></p>
+</div>
+<div class="paragraph">
+<p>For some problems the choice of a monomial order is irrelevant.
+For others, it makes a difference.  The <em>degrevlex</em> order, for
+example, is useful in defining and computing the dimension of a
+variety, whereas <em>lex</em> is not.</p>
+</div>
+<div class="paragraph">
+<p><strong>Exercise 9.</strong> Show the lex and degrevlex are
+indeed monomial orders.</p>
+</div>
+<div class="paragraph">
+<p>One can work with monomial orders in Sage:</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x,y&gt; = PolynomialRing(QQ, order='lex')
+sage: x &gt; y
+True
+sage: x^3 &gt; x^2*y^2
+True
+sage: x^2*y^2 &gt; x^2*y
+True</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let \(f\) be a polynomial.  It is a linear combination of
+monomials
+\(M_i\). Let \(L\) be the greatest of these monomials in the
+given
+monomial order.  Then the <span class="term">leading monomia</span> of \(f\) is
+\[
+  LM(f) = L.
+\]
+The corresponding term of \(f\), \(cL\) for some scalar
+\(c\), is called
+the  <span class="term">leading term</span>, and is written \(LT(f)\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Example 6.</strong> Consider the polynomials \(f_1  =
+x^3
++ 2x^2y^2 + 3x^2y\) and
+\(f_2 =  4x^2 5x<sup>2y</sup>2 + 6x^2y\)+ relative to the <em>lex</em> order.
+Then
+\(LT(f_1) = x^3\) and \(LT(f_2) = 5x^2y^2\).</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x,y&gt; = PolynomialRing(QQ, order='lex')
+sage: f1 = x^3 + 2*x^2*y^2 + 3*x^2*y
+sage: f2 = 4*x^3 + 5*x^2*y^2 + 6*x^2*y
+sage: f1.lt(), f2.lt()
+(x^3, 5*x^2*y^2)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>If we re-run this example in the <em>deglex</em> order, we get
+different results:</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x,y&gt; = PolynomialRing(QQ, order='deglex')
+sage: f1.lt(), f2.lt()
+(x^3, 5*x^2*y^2)
+sage: f1 = x^3 + 2*x^2*y^2 + 3*x^2*y
+sage: f2 = 4*x^2+ 5*x^2*y^2 + 6*x^2*y
+sage: f1.lt(), f2.lt()
+(2*x^2*y^2, 5*x^2*y^2)</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_monomial_ideals_and_groebner_bases_a_id_miagb_a">2.2. Monomial Ideals and Groebner Bases<a id="MIAGB"></a></h3>
+<div class="imageblock left">
+<div class="content">
+<img src="188" alt="188" width="200">
+</div>
+</div>
+<div class="paragraph">
+<p>A <span class="term">monomial ideal</span> is an ideal generated by monomials. For
+an example, take the ideal \(I = (x^3, x^2y^2, y^4)\) in
+\(k[x,y]\).
+It is a monomial ideal generated by three elements which can be
+visualized as follows.  Let \(E(I)\) be the set of exponents of
+monomials in the ideal.  In the case
+at hand, it is a figure with three vertices, as in the figure on
+the left. The vertices are the points \((3,0)\), \((2,2)\),
+and
+\((0,4)\) corresponding to the monomials \(x^3\),
+\(x^2y^2\), and \(y^4\).</p>
+</div>
+<div class="paragraph">
+<p>For the general case, let \(E = \ZZ_{\ge 0}^n\) be the lattice
+of
+possible exponents.  The ideal generated by a monomial \(M =
+x^\alpha\) corresponds to the translate of the quadrant \(E\)
+by the
+exponent. Thus
+\[
+   E(M) = \alpha + E
+\]
+in general, and
+\( E(x^2y^2) = (2,2) + E\)
+in the case at hand.
+Let  \(\mathcal{E}\) be the set of extreme points of \(E(I)\).
+In the
+figure above,
+\[
+   \mathcal{E} = \set{(3,0), (2,2), (0,4)}.
+\]
+It is clear that \(E(I)\) is determined this set:
+\[
+   E(I) = \bigcup_{M \in \mathcal{E}} E(M).
+\]
+Moreover, <em>the ideal \(I\) is generated by the monomials
+corresponding to the extreme points of +\(E(I)\)+</em>. Since these
+points
+lie in a bounded region, they are finite in number.  We have just
+proved a special case of the Hilbert basis theorem:</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 10. (Dickson&#8217;s lemma)</strong>  <em>Monomial ideals
+are finitely generated.</em></p>
+</div>
+<div class="paragraph">
+<p>Now consider an arbitrary ideal \(I\), and let \(LT(I)\) be
+the ideal
+generated by the leading forms of elements of \(I\).  It is a
+monomial ideal which depends very much on the total order used.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example 7.</strong> Let \(f = y^2 - x^3 -1\), so that
+\(V(f)\) is an elliptic curve.  The leading term of \(f\) in
+the
+<em>degvlex</em> order is \(-x^3\) regardless of whether \(x &lt; y\) or
+\(x &gt;
+y\).  In the <em>lex</em> order, the leading term is \(-x^3\) or
+\(y^2\),
+depending on whether \(x &gt; y\) or \(y &gt; x\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Example 8.</strong>  Let \(I = (x^3 + y^3, x^2y,
+y^4)\).
+This ideal is not a monomial ideal.  The associated monomial ideal
+in the <em>lex</em> order with \(x &gt; y\) is \(M(I) =  (x^3, x^2y,
+y^4)\).</p>
+</div>
+<div class="paragraph">
+<p>Despite the dependence of \(LT(I)\) on a total order, any one of
+these orders is sufficient to establish the following fundamental
+result.</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 5. (Groebner Basis Theorem)</strong> <em>Let
+\(\set{\vars{M}{r}}\) be a set of generators of \(LT(I)\), and
+let
+\(g_i \in I\) be such that \(LT(g_i) = M_i\). Then
+\(\set{\vars{g}{r}}\)
+is a set of generators of \(I\).</em></p>
+</div>
+<div class="paragraph">
+<p>The theorem has led us to an important definition: a
+<span class="term">Groebner basis</span> is a basis \(\set{g_i}\) for an ideal
+\(I\)
+such that the set of leading forms \(\set{LT(g_i)}\) is a basis
+for
+\(LT(I)\).  The above theorem asserts their existence for all
+ideals
+\(I \subset k[\vars{x}{n}]\) and as a consequence implies the
+Hilbert Basis Theorem.</p>
+</div>
+<div class="paragraph">
+<p><strong>Proof.</strong>   Let \(\set{\vars{M}{r}}\) and \(\set{\vars{g}{r}}\)
+be as
+in the theorem.
+Consider the sets
+\[
+   S = \Set{f \in I - I(\vars{g}{r})}
+\]
+and
+\[
+   LM(S) = \Sett{LM(f)}{f \in S}
+\]
+We aim to prove that \(S\) is empty.  If it is not, there is a
+least
+monomial \(M'\) in \(LM(S)\) and an element \(f \in S\) such
+that
+\(LT(f) = M'\).  There is a monomial \(M''\) and a monomial
+\(M_j \in
+\set{\vars{M}{r}}\) such that \(M' = M''M_j\).  Consider the
+polynomial
+\[
+   f' = f - M''f_j.
+\]
+By construction, \(LM(f') &lt; LM(f)\).  Therefore \(LM(f') \in
+I\).  But
+then \(f \in I\), a contradiction.</p>
+</div>
+<div class="paragraph">
+<p><strong>Example 9.</strong>  The ideal \(I = (x^3 + y^3, x^2y,
+y^4)\) is given by a Groebner basis.</p>
+</div>
+<div class="paragraph">
+<p>The Groebner Basis Theorem is a version of the Hilbert Basis
+Theorem.  The bases whose existence it asserts are called
+<span class="term">Groebner bases</span>.  They play a central role in the
+computational theory of commutative algebra.  The existence proof
+we have given is non-constructive.  For computational purposes, we
+need a constructive proof, one which yields an algorithm for
+producing Groebner bases.  We shall do this later.</p>
+</div>
+<div class="paragraph">
+<p><strong>Definition 1.</strong>  <em>A Groebner basis for an ideal
+\(I\) is a set \(G = \set{\vars{g}{r}}\) such that for all
+\(f \in I\),
+\(LT(f)\) is divisible by some \(LT(g_i)\).</em></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_ascending_chain_condition_a_id_acc_a">2.3. The Ascending Chain Condition<a id="ACC"></a></h3>
+<div class="paragraph">
+<p>We can now establish one of the fundamental results of commutative
+algebra:</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 11. (Ascending Chain Condition)</strong>  <em>Let
+\(I_1 \subset I_2 \subset \cdots \)
+be an infinite chain of ideals.  There is an integer \(N\) such
+that
+\(I_j = I_N\) for all \(j &gt; N\).</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Proof.</strong> Let \(I = \bigcup_j I_j\).  One easily shows that this
+is
+an ideal. By the Hilbert Basis Theorem, it has a finite set of
+generators \(\set{g_1 \commadots g_r}\). Consequently there is
+an
+integer \(N\) such that \(I_N\) contains this set.  Therefore
+\(I_N =
+I\).  Q.E.D.</p>
+</div>
+<div class="paragraph">
+<p>A ring satisfying the ascending chain condition (ACC) is said to
+be <span class="term">Noetherian</span>, in honor of the mathematician Emmy Noether.
+An immediate consequence of the ACC for \(k[\vars{x}{n}]\) is
+the
+following.</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 12.</strong> <em>A variety \(V\) can be written as
+\(V =
+V_1 \cup \cdots \cup V_r\), where the \(V_j\) are irreducible.</em></p>
+</div>
+<div class="paragraph">
+<p><strong>Proof.</strong> <em>to insert</em> Q.E.D.</p>
+</div>
+<div class="paragraph">
+<p>We say that the decomposition of a variety into irreducibles is
+<span class="term">minimal</span> if \(V_i \not\subset V_j\) for \(i \ne j\).
+For
+example, the decomposition of the variety defined by the equation
+\(xy = 0\) into the union of the coordinate axes is minimal.
+Now
+let \(V_3\) be the origin in the \(xy\) plane.  Then we also
+have
+\[
+   V = V_1 \cup V_2 \cup V_3
+\]
+as a union of irreducibles. But it is not a minimal decomposition&#8201;&#8212;&#8201;the imbedded component \(V_3\) is
+redundant.</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 13.</strong>  <em>Let \(V\) be a variety.  Any two
+minimal decompositions of \(V\) into irreducibles differ only by
+the
+order of the terms.</em></p>
+</div>
+<div class="paragraph">
+<p>From the preceding section, we know that the ideal of an
+irreducible variety is prime. Moreover, we know that via the
+algebra-geometry dictionary, the union of varieties corresponds to
+the intersection of ideals.  Thus we have the following result.</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 14.</strong> <em>Let \(V\) be a variety over an
+algebraically closed field.  Then</em>
+\[
+  I(V) = \bigcap_j P_j
+\]
+<em>is an intersection of prime ideals \(P_j\), where \(P_j =
+I(V_j)\)
+and the \(V_j\) are the terms in the decomposition of \(V\)
+into
+irreducibles.</em></p>
+</div>
+<div class="paragraph">
+<p>Recall that the ideal of a variety is a radical ideal.  Using this
+notion, we can state the preceding result purely in
+ideal-theoretic language.</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 15.</strong> <em>Let \(I\) be a radical ideal in
+\(k[\vars{x}{n}]\), where the field \(k\) is algebraically
+closed.
+Then</em>
+\[
+  I = \bigcap_j P_j
+\]
+<em>is an intersection of prime ideals \(P_j\).  If we assume that
+\(P_i
+\not\subset P_j\) for \(i \ne j\), then this decomposition of
+\(I\) is
+unique up to order.</em></p>
+</div>
+<div class="paragraph">
+<p>The decomposition of a radical ideal into primes is a special case
+of the more general decomposition of an arbitrary ideal into
+primary ideals.  In the previous section, we saw that this
+decomposition can be found by applying Sage&#8217;s
+primary_decomposition_complete() method to an ideal.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_the_division_algorithm_a_id_da_a">2.4. The Division Algorithm<a id="DA"></a></h3>
+<div class="paragraph">
+<p>Consider the polynomial ring \(k[x]\).  Every ideal \(I\)
+in this ring is <span class="term">principal</span>, meaning that it is generated by
+a single element.  The proof goes as follows.  Let \(g \in I\)
+be an
+element of minimal degree.  Let \(f \in I\) be arbitrary.  Apply
+the
+division algorithm to to \(f\) and \(g\) to write
+\[
+   f = qg + r,
+\]
+where \(q\) is the quotient, \(r\) is the remainder, and
+\(\deg r &lt; \deg g\).  Since both \(f\) and \(g\) are in the
+ideal, so is
+\(r\).  But since \(f\) has minimal degree among nonzero
+elements of
+\(I\), \(r  = 0\).  Therefore \(f = qg\), and the proof is
+complete.</p>
+</div>
+<div class="paragraph">
+<p>The proof that an ideal in \(k[x]\) is principal relies on (i)
+the
+existence of an total order on monomials, given here by the
+degree, and (ii) the division algorithm.  For
+\(k[\vars{x}{n}]\), \(n
+&gt; 1\), we have the notion of a total order on monomials.  There
+is
+also a division algorithm&#8201;&#8212;&#8201;both the actual algorithm and the
+theorem. The theorem is as follows:</p>
+</div>
+<div class="paragraph">
+<p><strong>Proposition 6. (Division Algorithm)</strong>
+<em>Suppose given a monomial order, a polynomial \(f\) (the
+dividend)
+and a set of polynomials \(\set{g_i}\) (the divisors).  Then
+there
+are polynomials \(q_i\) (the quotients) and a polynomial \(r\)
+(the
+remainder) such that
+\(f = q_1g_1 + \cdots + q_rg_k + r\), where either \(r = 0\)
+or \(r\) is
+a linear combination of monomials not divisible by any of the
+monomials \(LM(f_i)\).</em></p>
+</div>
+<div class="paragraph">
+<p>The division algorithm for \(k[\vars{x}{r}]\) is weaker than its
+one-variable version.   However, for a Groebner basis, it is much
+stronger:</p>
+</div>
+<div class="paragraph">
+<p><strong>Proposition 7. (Strong Division Algorithm)</strong>
+<em>Consider division of \(f\) by \(G = \set{\vars{g}{s}}\) where
+\(G\) is
+a Groebner basis for an ideal \(I\).  Then the remainder is
+independent of the order of the basis elements, and \(r  = 0\)
+if
+and only if \(f \in I\).</em></p>
+</div>
+<div class="paragraph">
+<p>Note that the division algorithm for a Groebner basis gives a test
+for for determining whether an element \(f \in k[\vars{x}{n}]\)
+is
+element of an ideal \(I\).</p>
+</div>
+<div class="paragraph">
+<p>Let us now describe the multivariate division algorithm. To this
+end, we suppose that we are in the situation of the proposition.
+That is, we are given a polynomial \(f\), the dividend, and
+divisors
+\(g_1 \commadots g_k\).</p>
+</div>
+<div class="paragraph">
+<p>(1) Set up a  \(p = f\) partial dividend and partial quotients
+\(a_i
+= 0\), where \(i = 1 \commadots r\).
+Set \(r = 0\) and set \(i = 1\).</p>
+</div>
+<div class="paragraph">
+<p>(2) If \(LT(f_i)\) divides \(LT(p)\), replace \(p\) by
+\[
+    p - \frac{LT(p)}{LT(f_i)}f_i
+\]
+and replace \(a_i\) by
+\[
+   a_i + \frac{LT(p)}{LT(f_i)}
+\]
+Record the fact that "division occurred", and call this a step of
+type A.
+If \(LT(f_i)\) does not divide \(LT(p)\), replace \(i\) by
+\(i + 1\).  If
+\(i &gt; k\), go to (2) if "division occurred" for some \(i\).
+Otherwise, replace \(r\) by
+\[
+  r + LT(p)
+\]
+and replace \(p\) by
+\[
+  p - LT(p).
+\]
+Call this a step of type B.  At each stage of the process, we have
+\[
+   f = p + a_1f_1 + \cdots + a_kf_k + r.
+\]
+This concludes the description of the algorithm.</p>
+</div>
+<div class="paragraph">
+<p>Notice that after steps of type A or type B, we have
+\[
+   LT(\text{new } p) &lt; LT(\text{old } p).
+\]
+Thus the process described above will terminate in a finite number
+of steps.  When it does terminate, \(p = 0\).  For otherwise we
+could reduce \(LT(p)\) still further by a step of type A or type
+B.
+When the process terminates, we have
+\[
+   f = a_1f_1 + \cdots + a_kf_k + r,
+\]
+as desired.  In the one-variable division algorithm, only steps of
+type A were used.  Without steps of type B, we would be unable to
+reduce the partial \(p\) to zero.</p>
+</div>
+<div class="sect3">
+<h4 id="_example_of_long_division_a_id_eld_a">2.4.1. Example of Long Division<a id="eld"></a></h4>
+<div class="paragraph">
+<p>\[
+    x^5 + y^5 = a_1g_1 + a_2g_2 + r
+    = (x<sup>2)(x</sup>3 + y^2) + (-x^2 + y^3 -y)(y^2 + 1) + (x^2 + y)
+\]</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>   a1: x^2            a2: -x^2+y^3-y
+   g1: x^3 + y^2     |  x^5 + y^5
+   g2: y^2 + 1       |  x^5 + x^2y^2
+   ----------------	-------------
+   r:   x^2	        -x^2y^2 + y^5
+ 			-x^2y^2 - x^2
+			-------------
+			x^2 + y^5
+			-------------
+			y^5
+			y^5 + y^3
+		        -------------
+		        -y^3
+			-y^3 - y
+		        ------------
+			 y</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_algorithms_a_id_algo_a">2.5. Algorithms<a id="algo"></a></h3>
+<div class="listingblock">
+<div class="title">Algorithm</div>
+<div class="content">
+<pre>   Input: g1, ..., gs, g;   Output: a1, ..., as, r
+   a1, ..., as = 0, ..., 0
+   r , p = 0, f
+   WHILE p &lt;&gt; 0:
+      i = 1
+      WHILE I &lt;= s AND divisionoccured = false:
+         IF LT(gi) divides LT(p):
+            ai = ai + LT(p)/LT(gi)
+            p = p - (LT(p)/LT(gi))gi
+            divisionoccured = true
+         ELSE:
+            i = i + 1
+      IF divisionoccured = false:
+         r = r + LT(p)
+         p = p - LT(p)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Below is the algorithm translated into <a href="#SCFDA">Sage code</a>.  You
+can copy it, paste it into a file, and then run the example above
+like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x,y&gt; = PolynomialRing(QQ,order='lex')
+sage: f = x^5 + y^5
+sage: g1 = x^3  +y^2
+sage: g2 = y^2 + 1
+sage: runfile div.sage
+sage: div(f, [g1, g2])
+([x^2, -x^2 + y^3 - y], x^2 + y)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The first component of the result is a list.  Its two components
+give the quotients \(a_1\), \(a_2\).  The second component of
+the
+result is the remainder.</p>
+</div>
+<div class="openblock">
+<div class="title">Exercise</div><div class="content">
+<div class="paragraph">
+<p>Let \(f = xy^2 + xy + y^3 + 1\) and let
+\[
+g_1 = y^2 + 1, \\
+g_2 = xy + 1
+\]
+. Compute \(div(f,[g1,g2])\). Then compute \(div(f,[g2,g1])\).
+. Find a Groebner basis for the ideal generated by \(g_1\) and
+\(g_2\).  Run the division algorithm for \(f\) with this set
+of
+divisors, and for this set of divisors reversed.  What do you
+find?</p>
+</div>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Sage Code<a id="SCFDVA"></a></div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python"># file: div.sage
+def div(f,g):
+  R = f.parent()
+  n = len(g)
+  p, r, a = f, 0,  [0 for x in range(0,n)]
+  while p != 0:
+    i, divisionoccured = 0, False
+    while i &lt; n and divisionoccured == False:
+      glt = g[i].lt();
+      plt = p.lt();
+      if R.monomial_divides( glt, plt ):
+        q = R(plt/glt)
+        a[i] = a[i] + q
+        p = p - q*g[i]
+        divisionoccured = True
+      else:
+        i = i + 1
+    if divisionoccured == False:
+      r = r + plt
+      p = p - plt
+  return a, r</code></pre>
+</div>
+</div>
+<div class="openblock">
+<div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>\(f\) can be in ideal generated by \(G = g_1, \ldots,
+g_n\), but it is possible that \(div(f,G) \ne 0\).</p>
+</li>
+<li>
+<p>The remainder can depend on the order of the divisors.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>=== Code examples<a id="ce"></a>
+.Code example</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>sage: R.&lt;x,y&gt; = PolynomialRing(QQ)
+sage: G = [x^2 + 1, x*y^2 + y]
+sage: f = x*y - y^2
+sage: f in ideal(G)
+True
+sage: div(f,G)
+([0, 0], x*y - y^2)</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Code example</div>
+<div class="content">
+<pre>sage: R.&lt;x,y&gt; = PolynomialRing(QQ, order = 'lex')
+sage: f = x*y - y^2
+sage: I = ideal( x^2 + 1, x*y^2 + y )
+sage: G = I.groebner_basis(); G
+[y^3 + y, x*y - y^2, x^2 + 1]
+sage: div(f,G)
+([0, 1, 0], 0)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let \(f = x^2 + 1\), \(g = xy^2 + y\).   Let&#8217;s try to cook up
+an
+expression \(S = Af + Bg\)
+in which the terms coming from \(LT(f) = x^2\) and \(LT(g) =
+xy^2\)
+cancel:
+\[
+   S = y^2f - xg  = (x<sup>2y</sup>2+ y^2) - (x<sup>2y</sup>2 + xy)  =  -xy + y^2
+\]</p>
+</div>
+<div class="openblock">
+<div class="title">Note</div><div class="content">
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>\(LT(S) = -xy\) is in \(\left&lt;LT(I)\right&gt;\).</p>
+</li>
+<li>
+<p>\(LT(S) \ne x^2, xy^2\)</p>
+</li>
+<li>
+<p>We have <em>discovered</em> a new element of the ideal of leading
+forms: \(x^2  &gt; xy^2  &gt; xy\).</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>In general we must take \(S(f,g) \mathop{mod} B\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Definition</strong>  Let \(LCM = LCM(LM(f), LM(g))\)
+\[
+   S(f,g) = \frac{ LCM }{ LT(f) } f - \frac{ LCM }{ LT(g) } g
+\]</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_code_for_groebner_basis_cgb">2.6. Code for Groebner Basis[CGB]</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">def gb(F):
+   G = [p for p in F]
+   nn, n = -1, -2
+   while nn != n:
+      n = len(G)
+      for i in range(0,n):
+         for j in range(i+1,n):
+            spoly = S(G[i], G[j])
+            spoly = div(spoly,G)[1]
+            if spoly != 0:
+               G += [spoly]
+      nn = len(G)
+   return G</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_exercises">2.7. Exercises</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Show that a variety  \(V\)  is irreducible if and only if its
+ideal
+ \(I(V)\)  is prime.  (See [IVA], p. 195-196 for a solution).</p>
+</li>
+<li>
+<p>Show that any variety given parametrically as the image of a
+polynomial map  \(k^m \mapright{f} k^n\)  is irreducible.</p>
+</li>
+<li>
+<p>Let  \(V \subset k^3\)  be the variety given parametrically by
+\(f(t)
+= (t^3, t^4, t^5)\) . Describe the ideal of  \(V\) .  Is it
+prime?  Is
+the variety a complete intersection?</p>
+</li>
+<li>
+<p>The variety of the previous problem is singular at the origin
+and is smooth elsewhere.  Find the multiplicity of the singularity
+:stem: latexmath</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>\(
+   \def\AA{\mathbb{A}}
+   \def\BB{\mathbb{B}}
+   \def\CC{\mathbb{C}}
+   \def\DD{\mathbb{D}}
+   \def\EE{\mathbb{E}}
+   \def\FF{\mathbb{F}}
+   \def\NN{\mathbb{N}}
+   \def\OO\mathbb{{O}}
+   \def\PP{\mathbb{P}}
+   \def\QQ{\mathbb{Q}}
+   \def\RR{\mathbb{R}}
+   \def\ZZ{\mathbb{Z}}
+   \def\ffp{\mathfrak{p}}
+   \def\bold#1{\bf #1}
+\)
+\(
+   \newcommand{\commadots}{, \ldots, }
+   \newcommand{\set}[1]{ \{\,#1\,  \} }
+   \newcommand{\sett}[2]{ \{\,#1\, \mid\, #2\, \} }
+   \newcommand{\Set}[1]{ \Big\{\,#1\,  \Big\} }
+   \newcommand{\Sett}[2]{ \Big\{\,#1\, \Big\vert\; #2\,  \Big\} }
+\newcommand{\mapright}[1]{\ \smash{
+   \mathop{\longrightarrow}\limits^{#1}}\ }
+  \newcommand{\vars}[2]{{#1}_1\commadots{#1}_{#2}}
+   \newcommand{\map}{\longrightarrow}
+   \def\rank{\mathop{rank}}
+   \def\dim{\mathop{dim}}
+   \def\height{\mathop{height}}
+\)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_varieties_over_finite_fields">3. Varieties over finite fields</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="#CP">Counting points</a><br></p>
+</div>
+<div class="sect2">
+<h3 id="_counting_points_a_id_cp_a">3.1. Counting points<a id="CP"></a></h3>
+<div class="paragraph">
+<p>For a variety defined over  \(\FF_p\)  we can consider the
+function
+\[
+   N(r) = \text{number of points}(V(\FF_{p^r}))
+\]
+When the variety is affine space of dimension  \(n\) , the
+answer is
+clear:
+\[
+   N(r) = p^{nr}
+\]
+Now suppose that  \(V\)  is given by
+\(x_{n+1}^d = f(x_1,\commadots,x_{n})\) , where  \(f\)  is of
+degree  \(d\) .  There is a map  \(V \map \AA^{n}\)  given
+by the projection
+\[
+(x_1 \commadots, x_{n}, x_{n+1})  \mapsto (x_1 \commadots,
+x_{n}).
+\]
+This is a  \(d\) -to- \(1\)  map.
+For every point  \(a\)  in  \(\AA^{n1}\) , there are at most
+\(d\)  solutions
+to the equation  \(x_n^d = f(a)\) .  Thus
+we have an inequality
+\[
+\begin{equation}
+   N(r) \le p^{nr}
+\end{equation}
+\]
+Now suppose that   \(V\)  is a hypersurface of degree  \(d\)
+in
+\(\AA^{n+1}\) , i.e., is the solution set of a polynomial
+equation
+ \(f(x_1\commadots x_{n+1}) = 0\) , where  \(f\)
+has degree  \(d\) .  Then projection onto the hyperplane of the
+first
+\(n\)  coordinates is again a  \(d\) -to-one map, so the
+above inequality
+holds.</p>
+</div>
+<div class="paragraph">
+<p>For finite fields with a small number of elements we can
+compute  \(N(r)\)  by brute force: for each point in affine
+space,
+check whether the equation is satisfied.  Here is sage code that
+does this:</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python"># file: roots.sage
+def roots(f, q):
+  # return number of solutions of f = 0
+  # in finite field of q elements K.&lt;T&gt; = GF(q)
+  K.&lt;T&gt; = GF(q)
+  g = f.change_ring(K)
+  count = 0
+  for a in K:
+    for b in K:
+      if g(a,b) == 0:
+        count = count + 1
+  return count</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Here is how roots.sage is used:</p>
+</div>
+<div class="listingblock">
+<div class="title">Session</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python">sage: R.&lt;x,y&gt; = PolynomialRing(ZZ)
+sage: f = x + y + 1
+sage: runfile foo.sage
+sage: roots(f,5)
+5
+sage: g = x^2 + y^2 - 1
+sage: roots(g,5)
+4
+sage:   roots(g,5^2)
+24</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example 10.</strong> The values of  \(N(r)\)  for the
+variety
+defined by  \(x + y + 1 = 0\)  and a field of  \(q= 5^r\)
+elements are
+tabulated below, and are evidently given by the formula  \(N(r) =
+5^r\) .  We could have deduced this by pure thought: the map
+\((x,y)
+\map x\)  defines an isomorphism of  \(V\)  with  \(\AA^1\) ,
+so  \(N(r) =
+p^r\) .</p>
+</div>
+<div class="openblock">
+<div class="title">*Table for  \(x + y + 1 = 0\) *</div><div class="content">
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">r</th>
+<th class="tableblock halign-left valign-top">N(r)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">25</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">125</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">625</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example 11.</strong> For  \(x^2 + y^2 = 1\) , the
+circle, the
+corresponding table is. We find a small but regular deviatios from
+ \(N(r) = p^r\) :</p>
+</div>
+<div class="openblock">
+<div class="title">*Table for  \(x^2 + y^2 = 1\) *</div><div class="content">
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">r</th>
+<th class="tableblock halign-left valign-top">N(r)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">24</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">124</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">624</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Example 12.</strong> For the cubic equation  \(x^3 + y^3
++ 1
+= 0\)  there are more significant deviations and no obvious
+pattern:</p>
+</div>
+<div class="openblock">
+<div class="title">*Table for  \(x^3 + y^3 + 1 = 0\) *</div><div class="content">
+<table class="tableblock frame-all grid-all" style="width: 50%;">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">r</th>
+<th class="tableblock halign-left valign-top">N(r)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">33</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">125</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">574</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Problem 1.</strong> Investigate  \(N(r)\)  for other
+varieties.
+:stem: latexmath</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_hilbert_functions_dimension">4. Hilbert functions, dimension</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><strong>Theorem 16.</strong> Every ideal in \(k[x_1,\ldots,x_n\)]
+is finitely generated.</p>
+</div>
+<div class="paragraph">
+<p><strong>Proof.</strong>  Let \(I\) be an ideal.  Let \(\left&lt;LT(I)\right&gt;\) be
+its ideal of
+leading forms.  By Dicskon&#8217;s lemma, \(\left&lt;LT(I)\right&gt;\) has a
+finite
+set of generators \(M_1, \ldots, M_s\).   Let \(G_1, \ldots, G_s\)
+be elements
+of \(I\) such that \(LT(G_i) = M_i\).   We claim that the \(G_i\)
+are a basis for \(I\).
+Let \(f\) be an element of \(I\).  Divide \(f\) by the \(G_i\):
+\[
+ f = a_1G_1 + \cdots + a_sG_s + r
+\]
+The remainder \(r\) is in \(I\).
+Therefore \(LT(r) \in \left&lt;LT(I)\right&gt;\).
+But monomials of \(r\) are not divisible by the \(M_i\).
+Therefore \(r = 0\).  Q.E.D.</p>
+</div>
+<div class="sect2">
+<h3 id="_dimension_theory">4.1. Dimension theory</h3>
+<div class="paragraph">
+<p>Let \(I\) be an ideal of \(R = k[x_1,\ldots, x_n\)].  Let \(I_{\le
+s}\) be the space of elements of \(I\) of degree at most \(s\)
+The <em>Hilbert function</em> of \(I\) is</p>
+</div>
+H_I(s) = \dim \left( R_{\le s} / I_{\le s}\right)
+<div class="paragraph">
+<p><strong>Example 13.</strong>  Let \(H_{0,n}(s) = \dim
+k[x_1,\ldots, x_n\)<em>{\le s</em>] be the Hilbert function of the zero
+ideal
+in \(k[x_1,\ldots, x_n\)].</p>
+</div>
+   H_{0,n}(s) = \binom{n + s}{s}  = \frac{s^n}{n!} + \cdots
+<div class="paragraph">
+<p>In this case the Hilbert function is a polynomial of degree \(n\)
+which
+takes integer values for integer \(s\).</p>
+</div>
+<div class="paragraph">
+<p>What is the general form of the Hilbert function?</p>
+</div>
+<div class="paragraph">
+<p>Consider the ideal \(I  = \left&lt; x^3y, x^2y^4 \right&gt;\). The
+Hilbert function at \(s\) is the number of white dots below a
+diagonal with intercept \(x = s\).</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="187" alt="187" width="60%">
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Values of the Hilbert function</div>
+<div class="content">
+<pre>    s   0   1   2   3   4   5   6   7   8  ...
+  H(s)  1   3   6   10  14  18  21  24  27 ...</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Note that \(H_I(s) = 3s + \epsilon(s)\),  where \(\epsilon(s)\) is
+eventually
+constant:  \(\epsilon(s) = 3\) for \(s \ge 6\).
+This observation leads us to ask: <em>What is general form of
+\(H(s)\) for a monomial ideal?</em>   For a monomial ideal, the
+problem of computing the Hilbert function is a problem of counting
+points outside \(C(I)\), the cone of the ideal.  The region
+outside the \(CI)\) is a union of translates of coordinate
+subspaces of dimension \(m\), union a finite set.  The Hilbert
+function for the translate of an \(m\)-dimensional subspace
+by a vector \(\alpha\) is</p>
+</div>
+(*)\qquad H_{m,\alpha}(s) = \binom{m + s - |\alpha|}{s -
+|\alpha|}.
+<div class="paragraph">
+<p>Why?  The set of points in that translate of degree at most
+\(s\) is in one-to-one correspondence with points of the subspace
+of
+degree \(s - |\alpha|\):  map \(x\) to \(x - \alpha\).  Using the
+inclusion-exclusion formula, we see that \(H_I(s)\) is a sum of
+functions of the form \((*)\) for various \(m\) and \(\alpha\),
+plus a function which is eventually constant.  This leads to the
+following result:</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 17.</strong> The Hilbert function \(H_I(s)\) is an
+eventually polynomial
+function.</p>
+</div>
+<div class="paragraph">
+<p>Additional properties of the Hilbert function of a monomial ideal
+can be read off from the geometry:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>The degree \(d\) of \(H_I(s)\) is the dimension of the largest
+linear subspaces in the exterior of \(C(I)\).</p>
+</li>
+<li>
+<p>The degree is the same as the <em>dimension</em> of
+the variety \(V(I)\), which is a union of linear subspaces.</p>
+</li>
+<li>
+<p>The coefficient of \(s^d/d!\) in \(H_I(s)\) is the number of
+translates of linear subspaces outside of \(C(I)\).</p>
+</li>
+<li>
+<p>The coefficient is the <em>degree</em> of \(V(I)\): the sum of the
+multiplicities of the linear subspaces of largest dimension.</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>Consider the ideal \(\left&lt;x^3, x^2y^2, y^4\right&gt;\), whose
+monomials we see pictured in the diagram below as black dots.  The
+generators of the ideal are the "corner" dots at (3,0), (2,2), and
+(0,4).</p>
+</div>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="188" alt="188" width="60%">
+</div>
+</div>
+<div class="paragraph">
+<p>The values of the Hilbert function are
+1, 3, 6, 9, 10, 10, 10, &#8230;&#8203;
+\(I\) is of dimension zero and
+\(\dim_k R/I = 10\).   \(V(I)\)
+is the origin.  But it is a
+``fat'' origin with a 10-dimensional
+ring of functions.</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre>sage: R.&lt;x,y&gt; = PolynomialRing(QQ, order = 'lex')
+sage: f = x^3; g = x^2*y^2; h = y^4
+sage: I = ideal(f,g,h)
+sage: I.dimension()
+0
+sage: I.vector_space_dimension()
+10</pre>
+</div>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 18.</strong> The Hilbert function of an ideal
+is the same as the Hilbert function of its ideal of leading
+terms.</p>
+</div>
+<div class="paragraph">
+<p><strong>Proof.</strong>
+Let \(f_1,\ldots,f_m\) be a basis for \(I_{\le s}\).
+Let \(F_1,\ldots, F_m\) be the corresponding leading terms.
+Delete duplicates and put in order.
+Let \(F_1, \ldots, F_k\) be the result.
+Let \(f_1, \ldots, f_k\) be the corresponding elements of \(I_{\le
+s}\).
+We claim that the \(f_i\) are vector space basis of \(I_{\le s}\).
+The linear independence of the \(f_i\) is easy.  To see that
+they span, let \(W\) be the span of the \(f_i\).
+Let \(f\) be an element of \(I_{\le s} - W\) with \(LM(f)\)
+minimal.
+ \(LT(f) = \lambda f_i\) for some \(i\).
+\(LM(f - \lambda f_i) &lt; f_i\).  Thus \(f - \lambda f_i \in W\).
+ Q.E.D.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_references">4.2. References</h3>
+<div class="paragraph">
+<p><a id="CIM"></a>[CIM] <a href="http://www.math.utah.edu/~carlson/cimat/">Cimat Lectures</a>
+:stem: latexmath</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_elimination_and_intersection_theory">5. Elimination and Intersection Theory</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Define the <em>\(j\)-th elimination ideal</em> of \(I\)
+to be \(I_j = I \cap k[x_{j+1}, \ldots, x_n\)].
+We eliminated the first \(j\) variables to obtain \(I_j\). Thus,
+if \(I \subset k[x,y\)], then
+\(I_x = I \cap k[y\)] is an elimination ideal. The ring
+homomorphism
+\[
+  k[y] \rightarrow k[x,y]
+\] corresponds the
+projection
+\(\mathbb{A}^2 \rightarrow \mathbb{A}^1\) give
+by projection onto the \(y\) axis.  The closure of
+the projection of \(V(I)\)
+on the \(y\)-axis is the variety defined
+by the elimination ideal \(I_x\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Theorem 19.</strong> Let \(G\) be a Groebner basis
+for \(I\) in the lex order.  Then \(G \cap
+k[x_{j+1}, \ldots, x_n\)]is a Groebner
+basis for the \(j\)-th elimination ideal \(I_j\).</p>
+</div>
+<div class="paragraph">
+<p><strong>Example 14.</strong> Let \(I = \left&lt;x^3 + xy + 1,
+x^2y^2,
+y^4\right&gt;\).  Its Groebner basis
+in the  lex order is
+\(y^2, x^3 + xy + 1\).   Therefore \(I_x = \left&lt; y^2 \right&gt;\).
+The projection of \(V(I)\) on the \(y\)-axis is the (doubled)
+origin.</p>
+</div>
+<div class="paragraph">
+<p>The variety \(V(I)\) is easily found using the Groebner basis.
+From the first equation, we see that its points lie on the
+\(x\)-axis.  Substituting \(y = 0\) in the second equation, we
+find that \(x^3 = -1\).
+Thus \(V(I)\) consists of three doubled points on the
+math:x]-axis, while \(V(I_x)\), the projection of this variety,
+consists of one double point.</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s look at \(V(I)\) more closely.  The solutions of the
+equations given by the Groebner basis are
+\[
+  V(I) = \{\ (-1,0), (-\omega,0), (-\omega^2, 0)\ \}
+\]
+Let \(K = \QQ\) and let \(L = \QQ[\omega\)].
+Then \(V(K)\), the set of \(K\)-rational points,
+consists of a single element.  But
+\(V(L)\) has three points.</p>
+</div>
+<div class="paragraph">
+<p>The action of the
+Galois group of \(L/K\), which is \(\ZZ/2\),
+breaks \(V(L)\) into a one-point orbit
+and a two-point orbit.</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-sage" data-lang="sage">sage: R.&lt;x,y&gt; = PolynomialRing(QQ)
+sage: f = x^3 + x*y + 1
+sage: g = x^2*y^2
+sage: h = y^4
+sage: I = Ideal(f,g,h)
+sage: I.groebner_basis()
+[x^3 + x*y + 1, y^2]
+sage: I.dimension()
+0
+sage: I.vector_space_dimension()
+6</code></pre>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_intersection_of_two_conics">5.1. Intersection of two conics</h3>
+<div class="paragraph">
+<p>We will compute the intersection of the circle
+\(x^2 + y^2 = 1\) with the ellipse \(x^2/2 + 2y^2 = 1\).  Let
+\(I\) be the ideal generated by
+\[
+f = x^2 + y^2 - 1, \ g = x^2/2 + 2y^2 = 1.
+\]
+The intersection is the variety
+\[
+V(I) = \{\ (\pm 1/\sqrt 3, \pm \sqrt 2/\sqrt 3)\ \}
+\]
+It consists of four points.  Its projection onto the \(x\)-axis,
+defined by the elimination ideal \(I_y\),
+consists of two points.  Thus the projection is not in general
+position relative to \(V(I)\).</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-sage" data-lang="sage">R.&lt;x,y&gt; = PolynomialRing(QQ)
+f = x^2 + y^2 - 1
+g = x^2/2 + 2*y^2 - 1
+I = ideal(f,g)
+B = I.groebner_basis()
+I.dimension(); I.vector_space_dimension(); B
+0, 4, [y^2 - 1/3, x^2 - 2/3]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let \(K\) be the field obtained by adjoining
+a root of \(y^2 - 1/3 = 0\):
+\(K = \QQ[\sqrt 3\)].
+Its Galois group is of order two.</p>
+</div>
+<div class="paragraph">
+<p>Let \(L\) be the field obtained from \(K\)
+by adjoining a root of \(x^2 - 2/3\):
+\(L = \QQ[\sqrt 2, \sqrt 3\)].  Then \(Gal(L/\QQ) \cong
+\ZZ/2\times\ZZ/2\).  Note that \(Gal(L/\QQ)\) acts transitively on
+\(V(L)\), and that
+\(Gal(K/\QQ)\) permutes the fibers of the projection.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_intersection_of_a_conic_and_a_quintic">5.2. Intersection of a conic and a quintic</h3>
+<div class="paragraph">
+<p>Let&#8217;s study the intersection of the unit circle and the
+quintic \(x^5/2 + 2y^5 = 1\).   Thus let \(I = \left&lt;x^2 + y^2 -
+1, x^5/2 + 2x^5 - 1\right&gt;\)
+We find that \(I\) has dimension zero, and the \(\QQ[x,y\)/I]
+is a vector space of dimension ten.
+The Groebner basis is</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>[ y^10 - 5/17*y^8 + 10/17*y^6 - 16/17*y^5 - 10/17*y^4 +
+     5/17*y^2 + 3/17,
+  x + 238/9*y^9 + 170/9*y^8 + 13*y^7 + 21/2*y^6 + 221/9*y^5
+     - 95/18*y^4 - 145/9*y^3 - 265/18*y^2 - 17/3*y - 35/6  ]</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>It has the form \(F(y), x + G(y)\), where \(I_x =
+\left&lt;F(y)\right&gt;\).  From the form of the
+Groebner basis we see that projection onto
+the \(y\)-axis is generic.
+Also, the Galois group of \(F(y)\) gives the
+action of \(Gal(\bar \QQ/\QQ)\) on \(V(\bar\QQ)\).
+Assuming \(G\) is the Groebner basis in \(R = \QQ[x,y\)],
+we compute the Galois group:</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-sage" data-lang="sage">S.&lt;u&gt; = PolynomialRing(QQ)
+phi = R.hom([0,u], S)
+h = phi(B[0])
+K.&lt;a&gt; = NumberField(h/h.leading_coefficient())
+K.galois_group()
+Galois group PARI group [3628800, -1, 45, "S10"]
+of degree 10 of the number field Number Field
+in a with defining polynomial ...</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Thus \(Gal(\bar \QQ/\QQ)\) acts on \(V(\bar \QQ)\)
+through \(Gal(K/\QQ) \cong S_{10}\).
+And \(V(\bar \QQ) = V(K)\).</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_lines_on_the_cubic_surface">5.3. Lines on the cubic surface</h3>
+<div class="paragraph">
+<p>As an illustration of what we have done so far,
+we will compute the number of lines on a cubic surface \(S\).
+This will be a warmup for our study of the Elsenhans-Jahnel
+paper.  There they study the image of the group \(Gal( \bar\QQ/
+\QQ )\)
+one the set of lines \({\mathcal L}\) of \(S\).
+It is known that that the image is a subgroup of \(W(E_6)\).
+It is also known that generically the image is \(W(E_6)\).
+The Elsenhans-Jahnel algorithm allows us to exihibit
+specific cubic surfaces with maximal Galois image.
+See <a href="http://www.uni-math.gwdg.de/jahnel/linkstopaperse.html" class="bare">http://www.uni-math.gwdg.de/jahnel/linkstopaperse.html</a></p>
+</div>
+<div class="sect3">
+<h4 id="_sage_program">5.3.1. Sage program</h4>
+<div class="paragraph">
+<p>We will write a program {\tt lines.sage} that we can execute
+at the commmand line: {\tt sage lines.sage 2 3 5 7}.
+This command will attempt to find the Galois image for
+\(x^3 + y^3 + z^3 + w^3 + 2yzw + 3xzw + 5xyw + 7xyz\)</p>
+</div>
+<div class="listingblock">
+<div class="title">Code</div>
+<div class="content">
+<pre class="highlight"><code class="language-python" data-lang="python"># file: lines.sage
+import sys
+
+K = QQ
+R.&lt;a,b,c,d&gt; = PolynomialRing(K, order = "lex")
+S.&lt;x,y,z,w&gt; = PolynomialRing(K)
+
+p1, p2, p3, p4 = map( lambda x: int(x), sys.argv[1:] )
+F = x^3 + y^3 + z^3 + w^3 +
+      p1*y*z*w + p2*x*z*w + p3*x*y*w + p4*x*y*z
+print "F =", F
+
+J = ideal(F.jacob())
+pd = J.dimension() - 1
+print "Projective dimension of singular locus =", pd
+
+L = lambda t: (1,t,a+b*t,c+d*t)
+FL = lambda t: F(L(t))
+J = ideal(FL(0), FL(1), FL(2), FL(3) )
+B = J.groebner_basis()
+
+print "Variables on which g[i] depends:"
+
+for i in range(0,len(B)):
+  print i, B[i].variables()
+
+g = B[0]; dg = g.degree(); nf = len(factor(g))
+
+print "degree(g) =", g.degree()
+print "number of factors of g =", len(factor(g))
+
+if nf == 1 and dg == 27:
+	print "cubic surface has 27 lines"</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="title">Session</div>
+<div class="content">
+<pre class="highlight"><code class="language-sage" data-lang="sage">$ sage lines.sage 2 3 5 7
+F = x^3 + y^3 + 7*x*y*z + z^3 +
+      5*x*y*w + 3*x*z*w + 2*y*z*w + w^3
+Projective dimension of singular locus = -1
+Variables on which g[i] depends:
+0 [d]
+1 [d, c]
+2 [d, b]
+3 [d, a]
+degree(g) = 27
+number of factors of g = 1
+cubic surface has 27 lines</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>1631363571648*d^27 + 25828675997904*d^26 +
+174058261443792*d^25 + 670420268514936*d^24 +
+1676405524223304*d^23 + 2975484187123416*d^22 +
+4782940362665136*d^21 + 10123074083576106*d^20 +
+23578095466184706*d^19 + 40873449674344679*d^18 +
+49700044180519437*d^17 + 56665434448534617*d^16 +
+91887374548676657*d^15 + 153951454933532346*d^14 +
+190706504766850386*d^13 + 140074290975822037*d^12 +
+53432695230612333*d^11 + 66098863812061161*d^10 +
+127572387825582827*d^9 + 97842438970193286*d^8 +
+27880556381159262*d^7 + 14563730364420960*d^6 +
+26236696128820584*d^5 + 18211964913020760*d^4 +
+5315592754434120*d^3 + 944024070738000*d^2 +
+34293720251600*d - 47674198376000</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Why can&#8217;t we just look at the number field that \(g\) defines and
+compute the
+Galois group directly using Sage?</p>
+</div>
+<div class="paragraph">
+<p>Answer: \(&lt;\)type 'exceptions.NotImplementedError'\(&gt;\): Sorry,
+computation of Galois groups of fields of degree bigger than 11 is
+not yet implemented.  Try installing the optional free (closed
+source) KASH package, which supports up to degree \(23\).</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2014-08-15 02:15:58 EDT
+</div>
+</div>
+</body>
+</html>
