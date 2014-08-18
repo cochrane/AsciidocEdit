@@ -10,22 +10,39 @@ text = File.open(ARGV[0], 'r') { |f| f.read }
 
 # Define the substitutions
 
+# Protect \$
+# \$ ==> "@@Dollar@@"
+protectDollarRx = /\\$/
+protectedDollarSub =  "@@Dollar@@"
+
+# Resotore \$
+# ++++Dollar++++ ==> \$
+restoreDollarRx = /@@Dollar@@/
+restoredDollarSub =  "\\$"
+
+# Map $ ... $ to +\( ... \)+
 # $ (a^2)^3 = a^6 $      ==> +\( (a^2)^3 = a^6 \)+
 TexDollarRx = /\$(.*)\$/ 
 TexDollarSub =  "+\\( "'\1'" \\)+"
 
+# Map \( ... \) to +\( ... \)+
 # \( (a^2)^3 = a^6 $ \)  ==> +\( (a^2)^3 = a^6 \)+
 MathInlineRx = /\\\((.*)\\\)/ 
 MathInlineSub =  "+\\( "'\1'" \\)+"
 
+# Map \[ ... \] to +\[ ... \]+
 # \[ (a^2)^3 = a^6 $ \]  ==> +\[ (a^2)^3 = a^6 \]+
 MathDisplayRx = /\\\[(.*?)\\\]/m
 MathDisplaySub =  "+\\[ "'\1'" \\]+"
 
 # Do the substitutions
+text = text.gsub protectDollarRx, protectedDollarSub
 text = text.gsub MathInlineRx, MathInlineSub
 text = text.gsub TexDollarRx, TexDollarSub
 text = text.gsub MathDisplayRx, MathDisplaySub
+text = text.gsub restoreDollarRx, restoredDollarSub
+
+
 
 # Write the transformed text to file
 File.open(ARGV[1], 'w') { |file| file.write(text) }

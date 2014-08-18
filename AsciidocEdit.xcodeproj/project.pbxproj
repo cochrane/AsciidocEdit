@@ -14,6 +14,7 @@
 		BD1EB9AF198E5C0D006EEC1C /* adviewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */; };
 		BD1EB9B9198E7AD6006EEC1C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9B8198E7AD6006EEC1C /* Utilities.swift */; };
 		BD36FE4B19A227B400CB31F1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD36FE4A19A227B400CB31F1 /* Extensions.swift */; };
+		BD36FE4D19A231EC00CB31F1 /* tex_mode_preprocess in Resources */ = {isa = PBXBuildFile; fileRef = BD36FE4C19A231EC00CB31F1 /* tex_mode_preprocess */; };
 		BD81713C199D0789005287D8 /* icon_16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = BD817132199D0789005287D8 /* icon_16x16.png */; };
 		BD81713D199D0789005287D8 /* icon_16x16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD817133199D0789005287D8 /* icon_16x16@2x.png */; };
 		BD81713E199D0789005287D8 /* icon_32x32.png in Resources */ = {isa = PBXBuildFile; fileRef = BD817134199D0789005287D8 /* icon_32x32.png */; };
@@ -51,6 +52,7 @@
 		BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adviewerTests.swift; sourceTree = "<group>"; };
 		BD1EB9B8198E7AD6006EEC1C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		BD36FE4A19A227B400CB31F1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		BD36FE4C19A231EC00CB31F1 /* tex_mode_preprocess */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tex_mode_preprocess; path = tex/tex_mode_preprocess; sourceTree = "<group>"; };
 		BD817132199D0789005287D8 /* icon_16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_16x16.png; path = mac.iconset/icon_16x16.png; sourceTree = "<group>"; };
 		BD817133199D0789005287D8 /* icon_16x16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_16x16@2x.png"; path = "mac.iconset/icon_16x16@2x.png"; sourceTree = "<group>"; };
 		BD817134199D0789005287D8 /* icon_32x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_32x32.png; path = mac.iconset/icon_32x32.png; sourceTree = "<group>"; };
@@ -165,6 +167,7 @@
 		BDEBA1761999C7EB00939D7C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BD36FE4C19A231EC00CB31F1 /* tex_mode_preprocess */,
 				BD817131199D0775005287D8 /* icons */,
 				BD95544B199AF9AA002E870B /* synchronize.js */,
 				BDEBA1771999C80200939D7C /* jquery.js */,
@@ -261,6 +264,7 @@
 				BDEBA1781999C80200939D7C /* jquery.js in Resources */,
 				BD817144199D0789005287D8 /* icon_512x512.png in Resources */,
 				BD81713C199D0789005287D8 /* icon_16x16.png in Resources */,
+				BD36FE4D19A231EC00CB31F1 /* tex_mode_preprocess in Resources */,
 				BD95544C199AF9AA002E870B /* synchronize.js in Resources */,
 				BD1EB9A0198E5C0D006EEC1C /* Images.xcassets in Resources */,
 				BD817142199D0789005287D8 /* icon_256x256.png in Resources */,
