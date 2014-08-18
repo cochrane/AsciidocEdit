@@ -77,6 +77,10 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
     if useLaTexMode {
         
         executeCommand("/usr/local/bin/tex_mode_preprocess", [tempADPath, tempADPath])
+        var content = readStringFromFile(tempADPath)
+        content = ":stem: latexmath\n" + content
+        writeStringToFile(content, tempADPath)
+        
         
     }
     executeCommand("/usr/bin/asciidoctor", [tempADPath])
