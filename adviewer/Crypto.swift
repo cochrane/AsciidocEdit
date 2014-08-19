@@ -10,6 +10,7 @@ import Foundation
 
 // Make sure you add #import <CommonCrypto/CommonCrypto.h> to the Xcode bridging header!
 
+/*
 enum HMACAlgorithm {
     
     case MD5, SHA1, SHA224, SHA256, SHA384, SHA512
@@ -74,6 +75,9 @@ extension String {
         
         return hash as String
     }
+
     
 }
+
+*/
  

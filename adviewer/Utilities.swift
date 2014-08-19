@@ -55,7 +55,7 @@ func bundleContent(fileName: String, resourceType: String) -> String {
     
 
     let bundlePath = NSBundle.mainBundle().pathForResource(fileName, ofType: resourceType)
-    let content = readStringFromFile(bundlePath)
+    let content = readStringFromFile(bundlePath!)
     return content
 
 }

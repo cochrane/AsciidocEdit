@@ -29,6 +29,7 @@
 		BD817145199D0789005287D8 /* icon_512x512@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD81713B199D0789005287D8 /* icon_512x512@2x.png */; };
 		BD95544A199A696D002E870B /* AsciiDocController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD955449199A696D002E870B /* AsciiDocController.swift */; };
 		BD95544C199AF9AA002E870B /* synchronize.js in Resources */ = {isa = PBXBuildFile; fileRef = BD95544B199AF9AA002E870B /* synchronize.js */; };
+		BDDA18D619A3F8BB0049F1E0 /* foo.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDDA18D419A3F8BB0049F1E0 /* foo.mm */; };
 		BDEBA1781999C80200939D7C /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = BDEBA1771999C80200939D7C /* jquery.js */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +70,7 @@
 		BD81713B199D0789005287D8 /* icon_512x512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_512x512@2x.png"; path = "mac.iconset/icon_512x512@2x.png"; sourceTree = "<group>"; };
 		BD955449199A696D002E870B /* AsciiDocController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsciiDocController.swift; sourceTree = "<group>"; };
 		BD95544B199AF9AA002E870B /* synchronize.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = synchronize.js; sourceTree = "<group>"; };
+		BDDA18D419A3F8BB0049F1E0 /* foo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = foo.mm; sourceTree = "<group>"; };
 		BDEBA16F1999C38300939D7C /* adviewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "adviewer-Bridging-Header.h"; sourceTree = "<group>"; };
 		BDEBA1771999C80200939D7C /* jquery.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 				BD1EB99F198E5C0D006EEC1C /* Images.xcassets */,
 				BD1EB999198E5C0D006EEC1C /* Supporting Files */,
 				BDEBA16F1999C38300939D7C /* adviewer-Bridging-Header.h */,
+				BDDA18D419A3F8BB0049F1E0 /* foo.mm */,
 			);
 			path = adviewer;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				BD36FE4F19A3653D00CB31F1 /* Experimental.swift in Sources */,
 				BD1EB9B9198E7AD6006EEC1C /* Utilities.swift in Sources */,
 				BD1EB99E198E5C0D006EEC1C /* AppDelegate.swift in Sources */,
+				BDDA18D619A3F8BB0049F1E0 /* foo.mm in Sources */,
 				BD1EB99C198E5C0D006EEC1C /* main.swift in Sources */,
 				BD36FE5119A39C4600CB31F1 /* Crypto.swift in Sources */,
 				BD95544A199A696D002E870B /* AsciiDocController.swift in Sources */,
