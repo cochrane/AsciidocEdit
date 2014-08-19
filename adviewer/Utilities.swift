@@ -96,7 +96,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
 
 func saveAsPDF(filePath: String) {
 
-    executeCommand("/usr/bin/asciidoctor-pdf", [filePath])
+    executeCommand("/Users/carlson/Dropbox/prog/git/asciidoctor-pdf/bin/asciidoctor-pdf", [filePath], verbose: true)
     
 }
 

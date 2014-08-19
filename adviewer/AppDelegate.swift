@@ -11,16 +11,15 @@ import Cocoa
 
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-                            
-  
+
 
     @IBOutlet weak var asciidocController: AsciiDocController!
+    
+    
 
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         
          asciidocController.setup()
-        
-        // NSMenuItem* file_menu = [menu itemWithTitle:@"File"];
        
     }
     

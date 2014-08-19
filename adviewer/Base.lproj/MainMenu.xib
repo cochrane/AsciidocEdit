@@ -151,6 +151,12 @@
                                     <action selector="saveAsEPUB3Action:" target="mtz-d8-bGj" id="ZeC-kL-2D1"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Process Manifest" id="Ekz-vd-6h5">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="processManifestAction:" target="mtz-d8-bGj" id="TLf-zG-abJ"/>
+                                </connections>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
                             <menuItem title="Page Setup…" keyEquivalent="P" id="qIS-W8-SiK">
                                 <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
@@ -707,9 +713,9 @@
         </menu>
         <window title="AsciidocEdit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="34" y="341" width="946" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1366" height="746"/>
+            <windowPositionMask key="initialPositionMask" rightStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="0.0" y="1058" width="946" height="360"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="946" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -730,10 +736,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="223" height="318"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="172" height="302"/>
+                                    <size key="minSize" width="157" height="302"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="172" height="302"/>
+                                    <size key="minSize" width="157" height="302"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                 </textView>
                             </subviews>

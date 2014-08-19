@@ -8,6 +8,7 @@
 
 import Cocoa
 import WebKit
+// import Manifest
 
 class AsciiDocController: NSObject, NSTextViewDelegate {
     
@@ -453,6 +454,18 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
     }
     
+    
+    
+    @IBAction func processManifestAction(sender: AnyObject) {
+        
+        println("Document Path: \(documentPath)")
+        let manifest = Manifest(filePath: documentPath!)
+        manifest.load()
+        manifest.getIncludeList()
+        manifest.getImageList()
+        manifest.getVideoList()
+        manifest.getAssetList("video")
+    }
     
     //MARK: Helpers
     
