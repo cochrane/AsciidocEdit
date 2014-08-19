@@ -328,7 +328,10 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     
                     // Add document to recent files menu
                     let url = documentURL(documentPath!)
-                    NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(NSURL(string: url))
+                    println("\nAdd to recent documents, url = \(url)\n")
+                    let nsurl = NSURL(string: url)
+                    println("\nAdd to recent documents, nsurl = \(nsurl)\n")
+                    NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(nsurl)
                     
                     memorizeKeyValuePair("documentURL", url)
                     recallValueOfKey("documentURL")
@@ -464,7 +467,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         manifest.getIncludeList()
         manifest.getImageList()
         manifest.getVideoList()
-        manifest.getAssetList("video")
+        manifest.getAudioList()
     }
     
     //MARK: Helpers
@@ -578,6 +581,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     // http://www.cocoabuilder.com/archive/cocoa/54514-open-recent-menu-in-non-doc-app.html
     
     func application(sender: NSApplication!, openFile filename: String!) -> Bool {
+        
+        println("FOO::BAR")
         
         if fileExistsAtPath(filename){
             

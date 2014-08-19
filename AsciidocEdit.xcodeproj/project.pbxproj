@@ -16,6 +16,7 @@
 		BD36FE4B19A227B400CB31F1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD36FE4A19A227B400CB31F1 /* Extensions.swift */; };
 		BD36FE4D19A231EC00CB31F1 /* tex_mode_preprocess in Resources */ = {isa = PBXBuildFile; fileRef = BD36FE4C19A231EC00CB31F1 /* tex_mode_preprocess */; };
 		BD36FE4F19A3653D00CB31F1 /* Experimental.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD36FE4E19A3653D00CB31F1 /* Experimental.swift */; };
+		BD36FE5119A39C4600CB31F1 /* Crypto.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD36FE5019A39C4600CB31F1 /* Crypto.swift */; };
 		BD81713C199D0789005287D8 /* icon_16x16.png in Resources */ = {isa = PBXBuildFile; fileRef = BD817132199D0789005287D8 /* icon_16x16.png */; };
 		BD81713D199D0789005287D8 /* icon_16x16@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BD817133199D0789005287D8 /* icon_16x16@2x.png */; };
 		BD81713E199D0789005287D8 /* icon_32x32.png in Resources */ = {isa = PBXBuildFile; fileRef = BD817134199D0789005287D8 /* icon_32x32.png */; };
@@ -55,6 +56,7 @@
 		BD36FE4A19A227B400CB31F1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BD36FE4C19A231EC00CB31F1 /* tex_mode_preprocess */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tex_mode_preprocess; path = tex/tex_mode_preprocess; sourceTree = "<group>"; };
 		BD36FE4E19A3653D00CB31F1 /* Experimental.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Experimental.swift; sourceTree = "<group>"; };
+		BD36FE5019A39C4600CB31F1 /* Crypto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Crypto.swift; sourceTree = "<group>"; };
 		BD817132199D0789005287D8 /* icon_16x16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_16x16.png; path = mac.iconset/icon_16x16.png; sourceTree = "<group>"; };
 		BD817133199D0789005287D8 /* icon_16x16@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_16x16@2x.png"; path = "mac.iconset/icon_16x16@2x.png"; sourceTree = "<group>"; };
 		BD817134199D0789005287D8 /* icon_32x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = icon_32x32.png; path = mac.iconset/icon_32x32.png; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				BD1EB9B8198E7AD6006EEC1C /* Utilities.swift */,
 				BD36FE4A19A227B400CB31F1 /* Extensions.swift */,
 				BD36FE4E19A3653D00CB31F1 /* Experimental.swift */,
+				BD36FE5019A39C4600CB31F1 /* Crypto.swift */,
 				BD1EB9A1198E5C0D006EEC1C /* MainMenu.xib */,
 				BDEBA1761999C7EB00939D7C /* Resources */,
 				BD1EB99F198E5C0D006EEC1C /* Images.xcassets */,
@@ -296,6 +299,7 @@
 				BD1EB9B9198E7AD6006EEC1C /* Utilities.swift in Sources */,
 				BD1EB99E198E5C0D006EEC1C /* AppDelegate.swift in Sources */,
 				BD1EB99C198E5C0D006EEC1C /* main.swift in Sources */,
+				BD36FE5119A39C4600CB31F1 /* Crypto.swift in Sources */,
 				BD95544A199A696D002E870B /* AsciiDocController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

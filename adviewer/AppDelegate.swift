@@ -20,6 +20,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(aNotification: NSNotification?) {
         
          asciidocController.setup()
+        
+        // let hash = "This is a test!".digest(HMACAlgorithm.SHA1, key: "foo")
+        // println("Hash: \(hash)")
        
     }
     

@@ -15,6 +15,7 @@ class Manifest {
     var includeList: [String]?
     var imageList: [String]?
     var videoList: [String]?
+    var audioList: [String]?
     
     
     init(filePath: String) {
@@ -47,75 +48,34 @@ class Manifest {
         let includeRx = "include::.*\\["
         var array = includeRx.match(manifest!)
         includeList = array.map(clean)
-        println("\nIncludes:\n\(includeList!)")
+        println("\nIncludes (\(includeList!.count)): \(includeList!)")
         
     }
     
     func getImageList() {
         
-        func clean(var x: String) -> String {
-            
-            x = x.stringByReplacingOccurrencesOfString("image::", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            x = x.stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            return x
-            
-        }
-
-        
-        let dir = directoryPath(self.filePath)
-        
-        imageList = [String]()
-        
-        for file in includeList! {
-            
-            let path = dir + "/" + file
-            let contents = readStringFromFile(path)
-            
-            let imageRx = "image::.*\\["
-            var array = imageRx.match(contents) as [String]
-            array = array.map(clean)
-            imageList = imageList! + array
-            
-            
-        }
-        println("\nImages:\n\(imageList!)\n")
+        imageList = getAssetList("image")
+        println("\nImages  (\(imageList!.count)): \(imageList!)")
+    
     }
     
     func getVideoList() {
         
-        func clean(var x: String) -> String {
-            
-            x = x.stringByReplacingOccurrencesOfString("video::", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            x = x.stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            return x
-            
-        }
+        videoList = getAssetList("video")
+        println("\nVideos  (\(videoList!.count)): \(videoList!)")
+    }
+    
+    func getAudioList() {
         
-        
-        let dir = directoryPath(self.filePath)
-        
-        videoList = [String]()
-        
-        for file in includeList! {
-            
-            let path = dir + "/" + file
-            let contents = readStringFromFile(path)
-            
-            let videoRx = "video::.*\\["
-            var array = videoRx.match(contents) as [String]
-            array = array.map(clean)
-            videoList = videoList! + array
-            
-            
-        }
-        println("\nVideos:\n\(videoList!)\n")
+        audioList = getAssetList("audio")
+        println("\nAudio Files  (\(audioList!.count)): \(audioList!)")
     }
     
     func getAssetList(assetType: String) -> [String] {
         
         func _clean(var x: String, assetType: String) -> String {
             
-            x = x.stringByReplacingOccurrencesOfString("video::", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+            x = x.stringByReplacingOccurrencesOfString("\(assetType)::", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             x = x.stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
             return x
             
@@ -143,7 +103,6 @@ class Manifest {
             
             
         }
-        println("\n\(assetType)s:\n\(assetList)\n")
         
         return assetList
     }

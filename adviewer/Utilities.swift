@@ -163,14 +163,20 @@ func shortPath(path: String, numberOfParts: Int = 2) -> String {
 func baseName(path: String) -> String {
     
     let part = path.componentsSeparatedByString(".")
-    return part[0]
+    let result = part[0]
+    println("+++ baseName: \(result)")
     
+    return result
 }
 
 func htmlPath(documentPath: String) -> String {
     
     let part = documentPath.componentsSeparatedByString(".")
-    return part[0] + ".html"
+    let result = part[0] + ".html"
+    
+    println("+++ htmlPath: \(result)")
+    
+    return result
     
 }
 
@@ -178,20 +184,36 @@ func htmlURL(documentPath: String) -> String {
     
     let part = documentPath.componentsSeparatedByString(".")
     
-    return "file:///" + part[0] + ".html"
+    let result = "file://" + part[0] + ".html"
+    
+    println("+++ htmlURL: \(result)")
+    
+    return result
     
 }
 
 func documentURL(documentPath: String) -> String {
     
-    return "file:///" + documentPath
+    let result = "file://" + documentPath
+
+    println("+++ documentURL: \(result)")
+    
+    return result
+    
+
     
 }
 
 
 func pathFromURL(fileURL: String) -> String {
     
-    return fileURL.stringByReplacingOccurrencesOfString("file://", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    let result = fileURL.stringByReplacingOccurrencesOfString("file://", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    
+    println("+++ pathFromURL: \(result)")
+    
+    return result
+    
+    
 }
 
 
@@ -251,7 +273,7 @@ func memorizeKeyValuePair(key: String, value: String) {
 func recallValueOfKey(key: String) -> String? {
     
     let value = NSUserDefaults.standardUserDefaults().objectForKey(key) as String?
-    println("Recalled: \(key) => \(value)")
+    println("Recalled: \(key) => \(value!)")
     return value
 
 }
