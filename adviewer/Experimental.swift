@@ -71,21 +71,21 @@ class Manifest {
         println("\nAudio Files  (\(audioList!.count)): \(audioList!)")
     }
     
+    func xclean(var x: String, assetType: String) -> String {
+        
+        x = x.stringByReplacingOccurrencesOfString("\(assetType)::", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        x = x.stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        return x
+        
+    }
+    
+    typealias str2strFun = (x: String) -> String
+    
+
+    
     func getAssetList(assetType: String) -> [String] {
         
-        func _clean(var x: String, assetType: String) -> String {
-            
-            x = x.stringByReplacingOccurrencesOfString("\(assetType)::", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            x = x.stringByReplacingOccurrencesOfString("[", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-            return x
-            
-        }
-        
-        func clean(var x: String) -> String {
-            
-            return _clean(x, assetType)
-        }
-        
+        let clean = { (x: String) -> String in self.xclean(x, assetType: assetType)}
         
         let dir = directoryPath(self.filePath)
         
@@ -107,6 +107,6 @@ class Manifest {
         return assetList
     }
 
-    
+   
     
 }
