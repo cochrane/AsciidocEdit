@@ -322,7 +322,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     
                     println("-- URL: \(url)")
                     
-                    documentPath = pathFromURL(url)
+                    documentPath = pathFromURL(url!)
                     
                     println("-- documentPath: \(documentPath)")
                     
@@ -332,6 +332,10 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     let nsurl = NSURL(string: url)
                     println("\nAdd to recent documents, nsurl = \(nsurl)\n")
                     NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(nsurl)
+                    
+                    // NSDocumentController.sharedDocumentController()
+                    
+                    //.allowedFileTypes = ["ad", "adoc", "asciidoc"]
                     
                     memorizeKeyValuePair("documentURL", url)
                     recallValueOfKey("documentURL")
