@@ -39,6 +39,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     var textChanges: Int = 0
     var textLength = 0
     var hasIncludes = false
+    
+    var manifest: Manifest?
 
     
     func setupWindow() {
@@ -77,7 +79,14 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         let url = recallValueOfKey("documentURL")
         
+        
+        // documentPath = "/Users/carlson/Dropbox/prog/Swift/adviewer/processing/01.ad"
+        //let url = Optional("file:///" + documentPath!)
+        
+       
+    
         if let documentURL = url {
+            
             
             documentPath = pathFromURL(documentURL)
             
@@ -93,7 +102,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                 
             }
             
-            useLaTeXMode = setLatexMode(textView.string )
+            useLaTeXMode = setLatexMode(textView.string! )
             setLatexMenuState()
 
             
@@ -118,7 +127,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         adWebView.frameLoadDelegate = self
         
         let htmlDocumentURL = htmlURL(documentPath!)
-        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)))
+        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)!))
         
     }
     
@@ -128,7 +137,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         setupWindow()
         setupTextView()
         setupNotifications()
-        setupDocument()
+        setupDocument()// complain: launch path not accessible
         setupWebview()
 
     }
@@ -191,7 +200,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                 
                 let url = newFilePanel.URL
                 
-                if let newURL = url.absoluteString {
+                if let newURL = url!.absoluteString {
                     
                     documentPath = pathFromURL(newURL)
                     
@@ -235,7 +244,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                 
                 let url = newFilePanel.URL
                 
-                if let newURL = url.absoluteString {
+                if let newURL = url!.absoluteString {
                     
                     documentPath = pathFromURL(newURL)
                     
@@ -275,7 +284,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                 
                 let url = newFilePanel.URL
                 
-                if let newURL = url.absoluteString {
+                if let newURL = url!.absoluteString {
                     
                     documentPath = pathFromURL(newURL)
                     
@@ -331,7 +340,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     println("\nAdd to recent documents, url = \(url)\n")
                     let nsurl = NSURL(string: url)
                     println("\nAdd to recent documents, nsurl = \(nsurl)\n")
-                    NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(nsurl)
+                    NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(nsurl!)
                     
                     // NSDocumentController.sharedDocumentController()
                     
@@ -388,7 +397,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     func updateDocument(path: String) {
         
-        documentText = textView.string
+        documentText = textView.string!
         
         documentText.writeToFile(path,
             atomically: false, encoding: NSUTF8StringEncoding, error: nil)
@@ -413,7 +422,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         let cmd = "/usr/bin/asciidoctor"
         
-        let raw_version = executeCommand(cmd, ["-V"], verbose: false)
+        let raw_version = executeCommand(cmd, ["-V"], verbose: true)
         let part = raw_version.componentsSeparatedByString("\n")
         let version = part[0]
         
@@ -461,17 +470,83 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
     }
     
-    
+    //MARK: Project Menu
     
     @IBAction func processManifestAction(sender: AnyObject) {
         
         println("Document Path: \(documentPath)")
-        let manifest = Manifest(filePath: documentPath!)
-        manifest.load()
-        manifest.getIncludeList()
-        manifest.getImageList()
-        manifest.getVideoList()
-        manifest.getAudioList()
+        
+        
+        let adFiles = generateIncludeList(documentPath!)
+        
+        
+        println("---------------------------")
+        
+        for file in adFiles {
+            
+            println("include::\(file)[]")
+        }
+        
+        println("---------------------------")
+        
+        manifest = Manifest(filePath: documentPath!)
+        
+        if manifest != nil {
+            
+            manifest!.load()
+            
+        }
+        
+    }
+    
+    
+    @IBAction func gitUpdateAction(sender: AnyObject) {
+        
+        let gitURL = manifest!.gitURL()
+        
+        let currentDirectory = directoryPath(documentPath!)
+        
+        let cmd = currentDirectory + "/git_script"
+        
+        executeCommand(cmd, ["add", "."], verbose: true)
+
+        
+    }
+    
+    
+    @IBAction func gitPullAction(sender: AnyObject) {
+        
+        let gitURL = manifest!.gitURL()
+        
+        let currentDirectory = directoryPath(documentPath!)
+        
+        let cmd = currentDirectory + "/git_script"
+        
+        executeCommand(cmd, ["pull", gitURL], verbose: true)
+        
+       
+    }
+    
+    
+    @IBAction func gitPushAction(sender: AnyObject) {
+        
+        let gitURL = manifest!.gitURL()
+        
+        let currentDirectory = directoryPath(documentPath!)
+        
+        let cmd = currentDirectory + "/git_script"
+        
+        executeCommand(cmd, ["push", gitURL], verbose: true)
+        
+        
+    }
+    
+    
+    
+    @IBAction func cleanHTMLAction(sender: AnyObject) {
+        
+        cleanHTML(directoryPath(documentPath!))
+        
     }
     
     //MARK: Helpers
@@ -512,7 +587,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         println("href: \(href)")
         
         let hURL = htmlURL(documentPath!)
-        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: hURL)))
+        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: hURL)!))
         adWebView.mainFrameURL = hURL
         adWebView.needsDisplay = true
         
@@ -566,7 +641,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     func setHasIncludes() {
         
         
-        if textView.string.rangeOfString("include::") == nil {
+        if textView.string!.rangeOfString("include::") == nil {
             
             hasIncludes = false
             

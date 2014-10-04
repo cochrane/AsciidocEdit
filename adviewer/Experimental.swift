@@ -16,6 +16,7 @@ class Manifest {
     var imageList: [String]?
     var videoList: [String]?
     var audioList: [String]?
+    var dictionary: [String: String]?
     
     
     init(filePath: String) {
@@ -27,11 +28,17 @@ class Manifest {
     
     func load() {
         
+        println("in Manifest, filePath =  \(self.filePath)")
         manifest = readStringFromFile(self.filePath)
         
         let dir = directoryPath(self.filePath)
         println("Directory path: \(dir)")
         
+        getIncludeList()
+        getImageList()
+        getVideoList()
+        getAudioList()
+        getDictionary()
         
     }
     
@@ -69,6 +76,30 @@ class Manifest {
         
         audioList = getAssetList("audio")
         println("\nAudio Files  (\(audioList!.count)): \(audioList!)")
+    }
+    
+    func getDictionary() {
+        
+        let dir = directoryPath(self.filePath)
+        let dictionaryFilePath = dir+"/project.config"
+        if fileExistsAtPath(dictionaryFilePath) {
+          self.dictionary = dictionaryFromFile(dictionaryFilePath)
+          println("Dictionary: \(self.dictionary!)")
+        }
+
+    }
+    
+    func gitURL() -> String {
+        
+        if let dict = dictionary {
+        
+            return "https://" + dict["github"]!
+            
+        } else {
+        
+            return ""
+            
+        }
     }
     
     func xclean(var x: String, assetType: String) -> String {

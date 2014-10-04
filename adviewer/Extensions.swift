@@ -11,6 +11,12 @@ import Foundation
 
 extension String {
     
+   
+    static func stringWithContentsOfFile(txtFilePath: String) -> String {
+               
+        return NSString(contentsOfFile: txtFilePath, encoding:NSUTF8StringEncoding, error: nil)!
+    }
+    
     subscript (i: Int) -> String {
         return String(Array(self)[i])
     }
@@ -57,7 +63,6 @@ extension String {
     }
     
     
-    
     func match( str: String) -> [String] {
         
         var err: NSError?
@@ -68,7 +73,7 @@ extension String {
         let nsstr = str as NSString
         let all = NSRange(location: 0, length: nsstr.length)
         var matches = [String]()
-        regex.enumerateMatchesInString(str, options: NSMatchingOptions(0), range: all) {
+        regex!.enumerateMatchesInString(str, options: nil, range: all) {
             (result: NSTextCheckingResult!, _, _) in matches.append(nsstr.substringWithRange(result.range))
         }
         return matches

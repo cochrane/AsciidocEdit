@@ -8,8 +8,40 @@
 
 import Foundation
 
+/*
+class File {
+    
+    class func exists (path: String) -> Bool {
+        return NSFileManager().fileExistsAtPath(path)
+    }
+    
+    class func read (path: String, encoding: NSStringEncoding = NSUTF8StringEncoding) -> String? {
+        if File.exists(path) {
+            return NSString(contentsOfFile: path, encoding:NSUTF8StringEncoding, error: nil)!
+        }
+        
+        return nil
+    }
+    
+    class func write (path: String, content: String, encoding: NSStringEncoding = NSUTF8StringEncoding) -> Bool {
+        return content.writeToFile(path, atomically: true, encoding: encoding, error: nil)
+    }
+}
+
+*/
 
 
+/*
+
+let read : String? = File.read("/path/to/file.txt")
+
+println(read)
+
+let write : Bool = File.write("/path/to/file2.txt", content: "String to write")
+
+println(write)
+
+*/
 
 //MARK: User helpers
 
@@ -73,14 +105,22 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
     let tempADPath = tempFile(asciidocPath)
     let tempHTMLPath = tempFile(htmlPath)
     
+    var innerUseLatexMode = false
     
-    if useLaTexMode {
+    var test_content = readStringFromFile(tempADPath)
+    if test_content.contains(":latex:") {
+        
+        innerUseLatexMode = true
+    }
+    
+    //if true {
+   if innerUseLatexMode {
         
         executeCommand("/usr/local/bin/tex_mode_preprocess", [tempADPath, tempADPath])
         var content = readStringFromFile(tempADPath)
         content = ":stem: latexmath\n" + content
         println("\n\n====================")
-        println("CONTTENT:")
+        println("CONTENT:")
         println("====================")
         println(content)
         println("====================\n\n")
@@ -88,7 +128,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
         
         
     }
-    executeCommand("/usr/bin/asciidoctor", [tempADPath])
+    executeCommand("/usr/local/bin/asciidoctor", [tempADPath])
     executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
     executeCommand("/bin/rm", [tempADPath])
     
@@ -123,13 +163,30 @@ func join(array: [String], separator: String = "") -> String {
     
     var str = ""
     
-    for element in array[0..<lastIndex] {
+    // Handle case of /User/foo/bar
+    
+    var startIndex = 0
+    
+    if array[0] == separator {
+        
+        startIndex = 1
+        
+    }
+    
+    
+    for element in array[startIndex..<lastIndex] {
         
         str += element + separator
         
     }
     
     str += array[lastIndex]
+    
+    // Handle case of /User/foo/bar
+    if startIndex == 1 {
+        
+        str = separator + str
+    }
     
     return str
 }
@@ -152,11 +209,16 @@ func directoryPath(path: String) -> String {
 func shortPath(path: String, numberOfParts: Int = 2) -> String {
 
     let components = path.pathComponents
+    println("compoments: \(components)")
+    if components.count > 0 {
     let lastIndex = components.count - 1
     var firstIndex = lastIndex - numberOfParts + 1
     if firstIndex < 0 { firstIndex = 0 }
     let parts = Array(components[firstIndex...lastIndex])
     return join(parts, separator: "/")
+    } else {
+        return ""
+    }
 
 }
 
@@ -225,8 +287,8 @@ func fileExistsAtPath(path: String) -> Bool {
 
 func readStringFromFile(pathToFile: String) -> String {
 
-    
-    let str = String.stringWithContentsOfFile(pathToFile, encoding: NSUTF8StringEncoding, error: nil)!
+    // let str = File.read(pathToFile, encoding: NSStringEncoding)
+    let str = String.stringWithContentsOfFile(pathToFile)
     
     return str
     
@@ -259,6 +321,70 @@ func documentsDirectory() -> String? {
     return documentsDirectory
 }
 
+func filesInDirectory(directoryPath: String  ) -> [String] {
+    
+    let fm = NSFileManager.defaultManager()
+    
+    let fileArray = fm.contentsOfDirectoryAtPath(directoryPath, error: nil) as [String]
+    
+    return fileArray
+   
+}
+
+    
+
+func cleanHTML(directoryPath: String) {
+    
+    
+    println("directoryPath = \(directoryPath)")
+    
+    let fileArray = filesInDirectory(directoryPath)
+    
+    for file in fileArray {
+        
+        let path = directoryPath + "/" + file
+        let ext = path.pathExtension
+        
+        if ext == "html" {
+        
+            println("REMOVED: \(path)")
+            executeCommand("/bin/rm", [path])
+            
+    
+        }
+        
+    }
+    
+    
+}
+
+func generateIncludeList(masterFilePath: String)-> [String] {
+    
+    
+    println("masterFilePath = \(masterFilePath)")
+    
+    let masterDirectoryPath = directoryPath(masterFilePath)
+    
+    let fileArray = filesInDirectory(masterDirectoryPath)
+    
+    var array = [String]()
+    
+    for file in fileArray {
+        
+        let path = masterDirectoryPath + "/" + file
+        let ext = path.pathExtension
+        
+        if ext == "ad" && path != masterFilePath {
+            
+           array.append(file)
+            
+        }
+        
+    }
+    
+    return array
+    
+}
 
 //MARK: Memorize and recall key-value pairs
 
@@ -272,9 +398,14 @@ func memorizeKeyValuePair(key: String, value: String) {
 
 func recallValueOfKey(key: String) -> String? {
     
-    let value = NSUserDefaults.standardUserDefaults().objectForKey(key) as String?
-    println("Recalled: \(key) => \(value!)")
-    return value
+    if let value = NSUserDefaults.standardUserDefaults().objectForKey(key) as String? {
+      println("Recalled: \(key) => \(value)")
+      return value
+    }
+    else {
+       println("Recalled: \(key)is NIL")
+       return ""
+    }
 
 }
 
@@ -299,7 +430,7 @@ func executeCommand(command: String, args: [String], verbose: Bool = false ) -> 
     task.launch()
     
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output: String = NSString(data: data, encoding: NSUTF8StringEncoding)
+    let output: String = NSString(data: data, encoding: NSUTF8StringEncoding)!
     
     if verbose {
         
@@ -312,6 +443,25 @@ func executeCommand(command: String, args: [String], verbose: Bool = false ) -> 
 }
 
 //MARK: Extras
+
+func dictionaryFromFile(path: String) -> [String: String] {
+    
+    let data = readStringFromFile(path)
+    let lines = data.componentsSeparatedByString("\n")
+    var dict = [String: String]()
+    for line in lines {
+        
+        let part = line.componentsSeparatedByString(":")
+        if part.count == 2 {
+          dict[part[0]] = part[1]
+          println("key = [\(part[0])], value = [\(part[1])]")
+        }
+    }
+    
+    return dict
+    
+    
+}
 
 func setLatexMode(content: String) -> Bool {
     

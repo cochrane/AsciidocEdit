@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6206.8" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6249" systemVersion="14A379a" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6206.8"/>
-        <plugIn identifier="com.apple.WebKitIBPlugin" version="6206.8"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6249"/>
+        <plugIn identifier="com.apple.WebKitIBPlugin" version="6249"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -143,18 +144,6 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="SaveAsPDFAction:" target="mtz-d8-bGj" id="f5K-8k-JAG"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Compile EPUB3" id="Y5M-co-he3">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="saveAsEPUB3Action:" target="mtz-d8-bGj" id="ZeC-kL-2D1"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Process Manifest" id="Ekz-vd-6h5">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <connections>
-                                    <action selector="processManifestAction:" target="mtz-d8-bGj" id="TLf-zG-abJ"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="aJh-i4-bef"/>
@@ -672,6 +661,54 @@
                         </items>
                     </menu>
                 </menuItem>
+                <menuItem title="Project" id="sG5-JU-aeg">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Project" id="Djc-aj-jvD">
+                        <items>
+                            <menuItem isSeparatorItem="YES" id="JuW-a9-aQF"/>
+                            <menuItem isSeparatorItem="YES" id="qs9-ac-9QO"/>
+                            <menuItem title="Compile EPUB3" id="Y5M-co-he3">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="saveAsEPUB3Action:" target="mtz-d8-bGj" id="ZeC-kL-2D1"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Clean HTML" id="13Z-Zk-X7g">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="cleanHTMLAction:" target="mtz-d8-bGj" id="m13-Rj-7kv"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="FxR-b3-YSb"/>
+                            <menuItem title="Process Manifest" id="Ekz-vd-6h5">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="processManifestAction:" target="mtz-d8-bGj" id="TLf-zG-abJ"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="8AP-Bq-gBo"/>
+                            <menuItem title="Git Update" id="jXR-sh-LX6">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="gitUpdateAction:" target="mtz-d8-bGj" id="frb-Jx-Edi"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Git Pull" id="fdP-X7-EF3">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="gitPullAction:" target="mtz-d8-bGj" id="9d3-QQ-ADg"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Git Push" id="5Me-qE-nm0">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="gitPushAction:" target="mtz-d8-bGj" id="47q-3M-kg3"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem isSeparatorItem="YES" id="aiO-ZN-lIe"/>
+                        </items>
+                    </menu>
+                </menuItem>
                 <menuItem title="Window" id="aUF-d1-5bR">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
@@ -715,7 +752,7 @@
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" rightStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="0.0" y="1058" width="946" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1366" height="746"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="946" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
@@ -736,10 +773,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="223" height="318"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="172" height="302"/>
+                                    <size key="minSize" width="157" height="302"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="172" height="302"/>
+                                    <size key="minSize" width="157" height="302"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -801,7 +838,7 @@
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="ofX-T5-D0J"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="5" y="63"/>
+            <point key="canvasLocation" x="-191" y="77"/>
         </window>
         <customObject id="mtz-d8-bGj" customClass="AsciiDocController" customModule="AsciidocEdit" customModuleProvider="target">
             <connections>
