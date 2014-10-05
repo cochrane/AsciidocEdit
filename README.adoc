@@ -103,8 +103,8 @@ I will eliminate this menu item.
 
 == Planned features
 
-
-- Multiple windows
+* Simplified installation process
+* Multiple windows
 
 
 I welcome suggestions
