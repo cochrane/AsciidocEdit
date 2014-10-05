@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+
+# File:   sub.rb
+# Usage   ruby sub.rb in_file out_file
+# Effect: Maps standard tex syntax to asciidoc syntax
+# Author: James Carlson
+# Date:   8/16/2014
+
+text = File.open(ARGV[0], 'r') { |f| f.read }
+
+# Define the substitutions
+
+# Protect \$
+# \$ ==> "@@Dollar@@"
+protectDollarRx = /\\$/
+protectedDollarSub =  "@@Dollar@@"
+
+# Resotore \$
+# ++++Dollar++++ ==> \$
+restoreDollarRx = /@@Dollar@@/
+restoredDollarSub =  "\\$"
+
+# Map $ ... $ to +\( ... \)+
+# $ (a^2)^3 = a^6 $      ==> +\( (a^2)^3 = a^6 \)+
+texDollarRx = /(^|\s|\()\$(.*?)\$($|\s|\)|,|\.)/
+texDollarSub = '\1+\(\2\)+\3'
+
+# Map \( ... \) to +\( ... \)+
+# \( (a^2)^3 = a^6 $ \)  ==> +\( (a^2)^3 = a^6 \)+
+mathInlineRx = /\\\((.*)\\\)/ 
+mathInlineSub =  "+\\( "'\1'" \\)+"
+
+# Map \[ ... \] to +\[ ... \]+
+# \[ (a^2)^3 = a^6 $ \]  ==> +\[ (a^2)^3 = a^6 \]+
+mathDisplayRx = /\\\[(.*?)\\\]/m
+mathDisplaySub =  "+\\[ "'\1'" \\]+"
+
+# Do the substitutions
+text = text.gsub protectDollarRx, protectedDollarSub
+text = text.gsub mathInlineRx, mathInlineSub
+text = text.gsub texDollarRx, texDollarSub
+text = text.gsub mathDisplayRx, mathDisplaySub
+text = text.gsub restoreDollarRx, restoredDollarSub
+
+
+
+# Write the transformed text to file
+File.open(ARGV[1], 'w') { |file| file.write(text) }

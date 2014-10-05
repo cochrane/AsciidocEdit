@@ -6,6 +6,13 @@
 //  Copyright (c) 2014 James Carlson. All rights reserved.
 //
 
+
+let ASCIIDOCTOR = "/usr/local/bin/asciidoctor"
+let ASCIIDOCTOR_PDF = "/Users/carlson/.rbenv/shims/asciidoctor-pdf"
+let ASCIIDOCTOR_EPUB3 = "/Users/carlson/.rbenv/shims/asciidoctor-epub3"
+let PREPROCESS_TEX = "/usr/local/bin/tex_mode_preprocess"
+let GET_NOTEBOOK = "/Users/carlson/Dropbox/bin2/get_notebook"
+
 import Foundation
 
 /*
@@ -116,7 +123,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
     //if true {
    if innerUseLatexMode {
         
-        executeCommand("/usr/local/bin/tex_mode_preprocess", [tempADPath, tempADPath])
+        executeCommand(PREPROCESS_TEX, [tempADPath, tempADPath])
         var content = readStringFromFile(tempADPath)
         content = ":stem: latexmath\n" + content
         println("\n\n====================")
@@ -128,7 +135,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
         
         
     }
-    executeCommand("/usr/local/bin/asciidoctor", [tempADPath])
+    executeCommand(ASCIIDOCTOR, [tempADPath])
     executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
     executeCommand("/bin/rm", [tempADPath])
     
@@ -136,13 +143,13 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
 
 func saveAsPDF(filePath: String) {
 
-    executeCommand("/Users/carlson/Dropbox/prog/git/asciidoctor-pdf/bin/asciidoctor-pdf", [filePath], verbose: true)
+    executeCommand(ASCIIDOCTOR_PDF, [filePath], verbose: true)
     
 }
 
 func saveAsEPUB3(filePath: String) {
     
-    executeCommand("/usr/bin/asciidoctor-epub3", [filePath])
+    executeCommand(ASCIIDOCTOR_EPUB3, [filePath])
     
 }
 

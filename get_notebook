@@ -1,0 +1,118 @@
+#!/usr/bin/env ruby
+# filename: get_notebook
+
+class String
+
+  def media_file_name
+    md = self.match /http.*original\/(.*)\?.*/
+    md[1]
+  end
+
+  def text_file_name
+    md = self.match /^.*::(.*)\[.*$/
+    md[1]
+  end
+
+end
+
+
+
+class ManifestProcessor
+
+  require "open-uri"
+
+  def initialize (folder)
+
+    @folder = folder
+    @text_manifest = 'manifest.ad'
+    @image_manifest = 'image_manifest.ad'
+
+    if !Dir.exists? 'images'
+      Dir.mkdir 'images'
+    end
+    if !Dir.exists? 'text'
+      Dir.mkdir 'text'
+    end
+
+    get_manifests
+    get_media_dict(@image_manifest)
+    get_text_dict(@text_manifest)
+
+  end
+
+  def get_manifests
+    prefix = "http://s3.amazonaws.com/vschool/manuscripts/#{@folder}/"
+    ManifestProcessor.download_text_file("#{prefix}#{@text_manifest}", @text_manifest)
+    ManifestProcessor.download_text_file("#{prefix}#{@image_manifest}", @image_manifest)
+  end
+
+
+  def get_media_dict(path)
+    text = File.read(path)
+    lines = text.split("\n")
+    @media_dict = {}
+    lines.each do |line|
+      part = line.split(": ")
+      @media_dict[part[0]] = part[1]
+    end
+  end
+
+
+  def get_text_dict(path)
+    @text_files = []
+    text = File.read(path)
+    lines = text.split("\n")
+    lines.each do |line|
+      if line =~ /^include::/
+        @text_files << line.text_file_name
+      end
+    end
+  end
+
+  def self.download_file(url, path)
+    File.open(path, 'wb') do |fo|
+      fo.write open(url).read
+    end
+  end
+
+  def self.download_text_file(url, path)
+    # puts "#{url} ==> #{path}"
+    puts path
+    File.open(path, 'w') do |fo|
+       fo.write open(url).read
+     end
+  end
+
+
+  def download_media_files
+    count = 0
+    @media_dict.each do |id, url|
+      # puts url.media_file_name
+      puts url
+      count += 1
+      ManifestProcessor.download_file(url, "images/#{url.media_file_name}")
+    end
+    puts "---------------------------"
+    puts "count = #{count}"
+    puts
+  end
+
+  def download_text_files
+    prefix = "http://s3.amazonaws.com/vschool/manuscripts/#{@folder}/"
+    count = 0
+    @text_files.each do |file|
+      url = "#{prefix}#{file}"
+      count += 1
+      ManifestProcessor.download_text_file("#{prefix}#{file}", "#{file}")
+    end
+    puts "---------------------------"
+    puts "count = #{count}"
+    puts
+  end
+
+end
+
+mp = ManifestProcessor.new(ARGV[0])
+mp.download_text_files
+mp.download_media_files
+

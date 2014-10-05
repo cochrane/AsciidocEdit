@@ -45,7 +45,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     func setupWindow() {
         
-        let frame = NSMakeRect(0.0, 0.0, 1200.0, 700.0)
+        let frame = NSMakeRect(100.0, 400.0, 1200.0, 700.0)
         window.setFrame(frame, display: true)
         window.backgroundColor = NSColor.blackColor()
         window.title = "AsciidocEdit"
@@ -471,6 +471,14 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     }
     
     //MARK: Project Menu
+    
+    
+    @IBAction func fetchNoteshareArchiveAction(sender: AnyObject) {
+        
+         // executeCommand(FETCH_NOTEBOOK, [noteshareURL], verbose: true)
+        
+    }
+    
     
     @IBAction func processManifestAction(sender: AnyObject) {
         

@@ -680,6 +680,12 @@
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="FxR-b3-YSb"/>
+                            <menuItem title="Fetch Noteshare Archive" id="ijr-q4-Hii">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <connections>
+                                    <action selector="fetchNoteshareArchiveAction:" target="mtz-d8-bGj" id="Jjj-Rz-OUl"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Process Manifest" id="Ekz-vd-6h5">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
@@ -750,9 +756,9 @@
         </menu>
         <window title="AsciidocEdit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" rightStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="0.0" y="1058" width="946" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
+            <rect key="contentRect" x="100" y="100" width="946" height="360"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1177"/>
             <view key="contentView" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="946" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>

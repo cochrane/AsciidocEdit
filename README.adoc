@@ -1,0 +1,128 @@
+:toc:
+:numbered:
+
+== Introduction
+
+
+AsciidocEdit is a MacOS application for helping to compose 
+documents written in asciidoc markup.  
+
+* Two panes are
+shown side-by-side in the main window.  On the left
+is the source file (asciidoc).  On the right is the
+html rendered from it.  You will find the html file in
+the same directory as the source file.   
+
+* Type cmd-S to save and render.
+See the screenshots in the images directory for this repo.
+
+* There are menu items to compile the file into PDF or EPUB3
+
+* An up-to-date Ruby installation is assumed.  You will have to install
+three gems.  See <<Installation>>.
+
+AsciidocEdit is written in Swift.  It calls on 
+http://asciidoctor.org[Asciidoctor] to process
+the source file. 
+
+This is version 0.1
+
+== Installation
+
+=== Clone and Compile
+
+Fetch the project from 
+https://github.com/jxxcarlson/AsciidocEdit[GitHub]:
+```
+    $ git clone https://github.com/jxxcarlson/AsciidocEdit
+```
+Then compile the project with XCode, v6. 
+
+=== Install Gems
+
+Each of the following must be installed by hand:
+
+*  http://asciidoctor.org[Asciidoctor]: `$ gem install asciidoctor`
+* [Asciidoctor-pdf]: `$ gem install asciidoctor-pdf`
+* [Asciidoctor-epub3]: `$ gem install asciidoctor-epub3 --pre`
+
+You may neede to consult the
+http://www.nokogiri.org/tutorials/installing_nokogiri.html[Nokogiri
+Installation Tutorial] for installation of `nokogiri` on MacOS.  This
+gem is required by `asciidoctor-epub3`.  Note that 
+` asciidoctor-epub3` is pre-release software.
+
+In addition, copy the file `tex_mode_preprocess` in the XCode project to
+`/usr/local/bin/tex_mode_preprocess`:
+
+```
+    $ sudo cp tex_mode_preprocess /usr/local/bin/
+```
+
+=== Set Paths
+
+In the file `Utilities.swift` of the XCode project edit the following
+lines so that they conform to your installation:
+
+
+* `let ASCIIDOCTOR = "/usr/local/bin/asciidoctor"`
+* `let ASCIIDOCTOR_PDF = "/Users/carlson/.rbenv/shims/asciidoctor-pdf"`
+* `let ASCIIDOCTOR_EPUB3 = "/Users/carlson/.rbenv/shims/asciidoctor-epub3"`
+* `let PREPROCESS_TEX = "/usr/local/bin/tex_mode_preprocess"`
+* `let GET_NOTEBOOK = "/Users/carlson/Dropbox/bin2/get_notebook"`
+
+== Options
+
+
+- Select "File>Use LaTeX Mode" if you wish to use conventional LaTeX syntax, e.g.,
+`$a^2 + b^2 = c^2$` and 
+```
+\[
+    a^3 + b^3 = c^3
+\]
+```  
+See the notes `tex/README` in this
+repository for instructions on the installation needed to make this option work.
+You still have to put the code `:stem: latexmath` in your source file to activate
+math processing.
+
+== Issues
+
+=== Not working
+
+* The "Install Asciidoctor" does not work and may never work becaue
+of sandbox and permission issues.  If I can't solve this one,
+I will eliminate this menu item.
+
+=== Not implemented
+
+* Git Update, Pull, and Push
+* Fetch Noteshare Archive
+
+
+
+== Planned features
+
+
+- Multiple windows
+
+
+I welcome suggestions
+
+== Notes
+
+
+- The file types you can open are `.ad`, `.adoc`, and `.asciidoc`
+
+
+== Distribution
+
+This app will be distributed on the appstore
+for free when it is suitable for "publication".  Up-to-date source
+code will remain here and the app can always be compiled
+from it.
+
+
+== License
+
+MIT License
