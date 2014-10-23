@@ -79,9 +79,9 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         let url = recallValueOfKey("documentURL")
         
-        
-        // documentPath = "/Users/carlson/Dropbox/prog/Swift/adviewer/processing/01.ad"
-        //let url = Optional("file:///" + documentPath!)
+
+        //  documentPath = "/Users/carlson/Desktop/notebook/note.ad"
+        // let url = Optional("file:///" + documentPath!)
         
        
     
@@ -475,7 +475,11 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func fetchNoteshareArchiveAction(sender: AnyObject) {
         
-         // executeCommand(FETCH_NOTEBOOK, [noteshareURL], verbose: true)
+       let directory = directoryOfPath(documentPath!)
+        let message = fetchNotebook(documentPath!)
+        putMessage(message: message)
+        
+        fetchNotebook("mathematics_notebook_2014_128")
         
     }
     
@@ -559,13 +563,23 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     //MARK: Helpers
     
-    func putMessage() {
+    func putMessage(message: String = "") {
         
-        let word_count = documentText.countWords()
-        let page_count = Int(trunc(Double(word_count)/305))
+        if message == "" {
+          let word_count = documentText.countWords()
+          let page_count = Int(trunc(Double(word_count)/305))
         
-        messageLabel.stringValue = "File: \(shortPath(documentPath!)).    Word count: \(word_count), about \(page_count) pages"
+          messageLabel.stringValue = "File: \(shortPath(documentPath!)).    Word count: \(word_count), about \(page_count) pages"
+            
+        }
+        
+        else {
+            
+             messageLabel.stringValue = message
+        }
+        
         messageLabel.needsDisplay = true
+    
     }
     
     func updateUI(#refresh: Bool) {

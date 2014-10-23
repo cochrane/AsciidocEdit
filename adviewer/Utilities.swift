@@ -7,10 +7,10 @@
 //
 
 
-let ASCIIDOCTOR = "/usr/local/bin/asciidoctor"
+let ASCIIDOCTOR = "/Users/carlson/.rbenv/shims/asciidoctor"
 let ASCIIDOCTOR_PDF = "/Users/carlson/.rbenv/shims/asciidoctor-pdf"
 let ASCIIDOCTOR_EPUB3 = "/Users/carlson/.rbenv/shims/asciidoctor-epub3"
-let PREPROCESS_TEX = "/usr/local/bin/tex_mode_preprocess"
+let PREPROCESS_TEX = "/usr/local/bin/preprocess_tex"
 let GET_NOTEBOOK = "/Users/carlson/Dropbox/bin2/get_notebook"
 
 import Foundation
@@ -89,7 +89,7 @@ func inject(pathToFile: String, payloadName: String, payloadType: String) {
 }
 
 
-// Retrieve contentof file in bundle
+// Retrieve content of file in bundle
 func bundleContent(fileName: String, resourceType: String) -> String {
     
 
@@ -153,6 +153,43 @@ func saveAsEPUB3(filePath: String) {
     
 }
 
+func fetchNotebookFromURL(url: String) {
+    
+    // executeCommand("pwd", [], verbose: true
+    executeCommand(GET_NOTEBOOK, [url])
+    
+}
+
+
+
+func fetchNotebook(path: String) -> String {
+    
+    let currentDirectory = directoryOfPath(path)
+    let configFile = join([currentDirectory, "config"], separator: "/")
+    var message = ""
+    var output = ""
+    
+    if !fileExistsAtPath(configFile) { return "Could not fetch notebook (no config file)" }
+    
+    let defaults = readStringFromFile(configFile)
+    println("DEFAULTS: \(defaults)")
+    let dict = str2dict(defaults)
+    let notebook_url = dict["remote_notebook"]
+   
+    if notebook_url != nil {
+        println ("NOTEBOOK URL: \(notebook_url!)")
+        executeCommand("/usr/bin/cd", [currentDirectory], verbose: true)
+        executeCommand("/bin/pwd", [], verbose: true)
+        output = executeCommand(GET_NOTEBOOK, [notebook_url!, currentDirectory], verbose: true)
+        
+        let pattern = ".ad"
+        let number_of_ad_files = pattern.match(output).count - 3
+        message = "Fetched \(number_of_ad_files) files from " + notebook_url!
+    }
+    
+    return message
+}
+
 func installAsciidoctor() {
     
     executeCommand("/bin/echo", ["foo", "bar"])
@@ -198,6 +235,29 @@ func join(array: [String], separator: String = "") -> String {
     return str
 }
 
+// Return dictionary from string of the form
+// str = "foo:23\nbar:87". Thus dict = str2dict(str)
+// yields dict with dict["foo"] = 23, etc.
+func str2dict(str: String) ->[String: String] {
+    
+    var dict = [String:String]()
+    
+    let lines = str.componentsSeparatedByString("\n")
+    
+    for line in lines {
+        
+        var part = line.componentsSeparatedByString(":")
+        if part.count == 2 {
+          var key = part[0]
+          var value = part[1]
+          dict[key] = value
+        }
+    }
+    
+    return dict
+}
+
+
 //MARK: File system
 
 
@@ -213,28 +273,44 @@ func directoryPath(path: String) -> String {
 
 //MARK: File system
 
+// shortPath("User/carlson/Desktop/foo/bar.html", numberOfParts: 1)
+// shortPath("User/carlson/Desktop/foo/bar.html", numberOfParts: 2)
+// shortPath("User/carlson/Desktop/foo/bar.html", numberOfParts: -1)
 func shortPath(path: String, numberOfParts: Int = 2) -> String {
-
+    
     let components = path.pathComponents
-    println("compoments: \(components)")
-    if components.count > 0 {
-    let lastIndex = components.count - 1
-    var firstIndex = lastIndex - numberOfParts + 1
-    if firstIndex < 0 { firstIndex = 0 }
-    let parts = Array(components[firstIndex...lastIndex])
-    return join(parts, separator: "/")
+
+    if components.count == 0 { return "" }
+    
+    var lastIndex = components.count - 1
+    var firstIndex = 0
+    
+    if numberOfParts >= 0 {
+        firstIndex = lastIndex - numberOfParts + 1
     } else {
+        lastIndex += numberOfParts
+    }
+    if firstIndex <= lastIndex {
+      let parts = Array(components[firstIndex...lastIndex])
+      return join(parts, separator: "/")
+    }
+    else {
         return ""
     }
+    
+}
 
+
+func directoryOfPath(path: String) -> String {
+   
+    return shortPath(path, numberOfParts: -1)
+    
 }
 
 func baseName(path: String) -> String {
     
     let part = path.componentsSeparatedByString(".")
     let result = part[0]
-    println("+++ baseName: \(result)")
-    
     return result
 }
 
