@@ -31,6 +31,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     
     var documentPath: String?
+    var documentOK = false
     var useLaTeXMode = false
     
     var foo: NSCursor?
@@ -39,6 +40,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     var textChanges: Int = 0
     var textLength = 0
     var hasIncludes = false
+    
+    var userDictionary = [:]
     
     var manifest: Manifest?
 
@@ -75,77 +78,56 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
     }
     
-    func documentOK(path: String) -> Bool {
-        
-        var result = false
-        
-        if !fileExistsAtPath(path) { result = false }
-        if isDirectory(path) {result = false }
-        if result {
-            let ext = extName(path)
-            if !contains(["ad", "adoc"], ext) {
-                result = false
-            }
-        }
-        
-        return result
-        
-    }
     
-    func setupDocument() -> Bool {
+    func getDocumentPath() -> String {
         
-        var documentOK = true
-        let documentPath = pathFromURL(documentURL)
+        if let documentURL = recallValueOfKey("documentURL") {
+            return pathFromURL(documentURL)
+        } else {
+            return ""
+        }
+     }
+    
+    func setupDocumentPath(path: String) -> Bool {
         
-        let url = recallValueOfKey("documentURL")
-        
-
         // documentPath = "/Users/carlson/Desktop/notebook/note.ad"
         // let url = Optional("file:///" + documentPath!)
         
-       
-    
-        if let documentURL = url {
-            
-            
-            
-            documentPath = pathFromURL(documentURL)
-            
-            
+        
+        // documentPath = getDocumentPath()
+        if path == "" {return false}
+        if !fileExistsAtPath(path) { return false }
+        if isDirectory(path) {return false }
+        let ext = extName(path)
+            if !contains(["ad", "adoc"], ext) {
+                return false
         }
+        return true
+    }
+    
+    
+    func setupDocument() -> Bool {
         
-        if !documentOK { return false }
+        documentPath = getDocumentPath()
         
-            
-            if documentOK {
-                
-                
-                textView.string = readStringFromFile(documentPath!)
-                
-                
-            } else {
-                
-                textView.string = "Could not find \(documentPath!)"
-                
-            }
-            
-            useLaTeXMode = setLatexMode(textView.string! )
-            setLatexMenuState()
-
-            
-            setHasIncludes()
-            
-            // updateDocument(currentDocumentPath)
-            updateUI(refresh: true)
-            
-            putMessage()
-            
-        } else {
-            
-            textView.string =  "Couldn't find the last file you opened."
+        documentOK = setupDocumentPath(documentPath!)
+        
+        if documentOK == false {
+            textView.string = "Could not find \(documentPath!)"
             messageLabel.stringValue = "Couldn't find the last file you opened."
             messageLabel.needsDisplay = true
+            return false
         }
+        
+        userDictionary = getDict(documentPath!)
+        
+        textView.string = readStringFromFile(documentPath!)
+        useLaTeXMode = setLatexMode(textView.string! )
+        setLatexMenuState()
+        setHasIncludes()
+        updateDocument(documentPath!)
+        updateUI(refresh: true)
+        putMessage()
         
         return true
     }
@@ -167,8 +149,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         setupWindow()
         setupTextView()
         setupNotifications()
-        setupDocument()// complain: launch path not accessible
-        setupWebview()
+        if setupDocument() { setupWebview() }
 
     }
 
@@ -363,6 +344,15 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     
                     documentPath = pathFromURL(url!)
                     
+                    documentOK = setupDocumentPath(documentPath!)
+                    
+                    if !documentOK {
+                        
+                        let message = "You tried to open something you shouldn't -- try again."
+                        putMessage(message: message)
+                        return
+                    }
+                    
                     println("-- documentPath: \(documentPath)")
                     
                     // Add document to recent files menu
@@ -385,6 +375,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     
                     
                     setHasIncludes()
+                    
+                    userDictionary = getDict(documentPath!)
                     
                     updateUI(refresh: false)
                     

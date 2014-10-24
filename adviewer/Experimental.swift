@@ -26,6 +26,7 @@ class Manifest {
         
     }
     
+    
     func load() {
         
         println("in Manifest, filePath =  \(self.filePath)")
@@ -38,7 +39,7 @@ class Manifest {
         getImageList()
         getVideoList()
         getAudioList()
-        getDictionary()
+        self.dictionary = str2dict(DICTIONARY_FILE)
         
     }
     
@@ -78,16 +79,6 @@ class Manifest {
         println("\nAudio Files  (\(audioList!.count)): \(audioList!)")
     }
     
-    func getDictionary() {
-        
-        let dir = directoryPath(self.filePath)
-        let dictionaryFilePath = dir+"/project.config"
-        if fileExistsAtPath(dictionaryFilePath) {
-          self.dictionary = dictionaryFromFile(dictionaryFilePath)
-          println("Dictionary: \(self.dictionary!)")
-        }
-
-    }
     
     func gitURL() -> String {
         

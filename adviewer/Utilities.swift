@@ -12,6 +12,7 @@ let ASCIIDOCTOR_PDF = "/Users/carlson/.rbenv/shims/asciidoctor-pdf"
 let ASCIIDOCTOR_EPUB3 = "/Users/carlson/.rbenv/shims/asciidoctor-epub3"
 let PREPROCESS_TEX = "/usr/local/bin/preprocess_tex"
 let GET_NOTEBOOK = "/Users/carlson/Dropbox/bin2/get_notebook"
+let DICTIONARY_FILE = "config"
 
 import Foundation
 
@@ -126,11 +127,6 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
         executeCommand(PREPROCESS_TEX, [tempADPath, tempADPath])
         var content = readStringFromFile(tempADPath)
         content = ":stem: latexmath\n" + content
-        println("\n\n====================")
-        println("CONTENT:")
-        println("====================")
-        println(content)
-        println("====================\n\n")
         writeStringToFile(content, tempADPath)
         
         
@@ -161,33 +157,47 @@ func fetchNotebookFromURL(url: String) {
 }
 
 
+// Read dictionary data from default DICTIONARY_FILE
+// and return the dictionary.  If there is
+// no DICTIONARY_FILE, return the empty dictionary
+func getDict(path: String) -> [String: String] {
+    
+    let currentDirectory = directoryOfPath(path)
+    let configFile = join([currentDirectory, DICTIONARY_FILE], separator: "/")
+    
+    if fileExistsAtPath(configFile) {
+        
+        let data = readStringFromFile(configFile)
+        return str2dict(data)
+        
+    } else {
+        
+        return [:]
+        
+    }
+
+}
+
+
 
 func fetchNotebook(path: String) -> String {
     
-    let currentDirectory = directoryOfPath(path)
-    let configFile = join([currentDirectory, "config"], separator: "/")
-    var message = ""
-    var output = ""
-    
-    if !fileExistsAtPath(configFile) { return "Could not fetch notebook (no config file)" }
-    
-    let defaults = readStringFromFile(configFile)
-    println("DEFAULTS: \(defaults)")
-    let dict = str2dict(defaults)
+    let dict = getDict(path)
     let notebook_url = dict["remote_notebook"]
    
+    let currentDirectory = directoryOfPath(path)
     if notebook_url != nil {
         println ("NOTEBOOK URL: \(notebook_url!)")
         executeCommand("/usr/bin/cd", [currentDirectory], verbose: true)
         executeCommand("/bin/pwd", [], verbose: true)
-        output = executeCommand(GET_NOTEBOOK, [notebook_url!, currentDirectory], verbose: true)
+        var output = executeCommand(GET_NOTEBOOK, [notebook_url!, currentDirectory], verbose: true)
         
         let pattern = ".ad"
         let number_of_ad_files = pattern.match(output).count - 3
-        message = "Fetched \(number_of_ad_files) files from " + notebook_url!
+        return "Fetched \(number_of_ad_files) files from " + notebook_url!
+    } else {
+        return "Could not fetch notebook"
     }
-    
-    return message
 }
 
 func installAsciidoctor() {
@@ -249,7 +259,7 @@ func str2dict(str: String) ->[String: String] {
         var part = line.componentsSeparatedByString(":")
         if part.count == 2 {
           var key = part[0]
-          var value = part[1]
+          var value = part[1].trim()
           dict[key] = value
         }
     }
@@ -545,24 +555,7 @@ func executeCommand(command: String, args: [String], verbose: Bool = false ) -> 
 
 //MARK: Extras
 
-func dictionaryFromFile(path: String) -> [String: String] {
-    
-    let data = readStringFromFile(path)
-    let lines = data.componentsSeparatedByString("\n")
-    var dict = [String: String]()
-    for line in lines {
-        
-        let part = line.componentsSeparatedByString(":")
-        if part.count == 2 {
-          dict[part[0]] = part[1].trim()
-          println("key = [\(part[0])], value = [\(part[1])]")
-        }
-    }
-    
-    return dict
-    
-    
-}
+
 
 func setLatexMode(content: String) -> Bool {
     
