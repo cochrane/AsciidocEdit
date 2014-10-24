@@ -271,6 +271,24 @@ func directoryPath(path: String) -> String {
     
 }
 
+func extName( path: String ) -> String {
+    
+    if isDirectory(path) {return "" }
+    let parts = shortPath(path, numberOfParts: 1).componentsSeparatedByString(".")
+    var result = ""
+    if parts.count == 2 { result = parts[1] }
+    return result
+}
+
+func isDirectory(path: String) -> Bool {
+    
+    if path.pathComponents.last == "/" {
+        return true
+    } else {
+        return false
+    }
+}
+
 //MARK: File system
 
 // shortPath("User/carlson/Desktop/foo/bar.html", numberOfParts: 1)
@@ -536,7 +554,7 @@ func dictionaryFromFile(path: String) -> [String: String] {
         
         let part = line.componentsSeparatedByString(":")
         if part.count == 2 {
-          dict[part[0]] = part[1]
+          dict[part[0]] = part[1].trim()
           println("key = [\(part[0])], value = [\(part[1])]")
         }
     }

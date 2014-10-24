@@ -75,12 +75,32 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
     }
     
-    func setupDocument() {
+    func documentOK(path: String) -> Bool {
+        
+        var result = false
+        
+        if !fileExistsAtPath(path) { result = false }
+        if isDirectory(path) {result = false }
+        if result {
+            let ext = extName(path)
+            if !contains(["ad", "adoc"], ext) {
+                result = false
+            }
+        }
+        
+        return result
+        
+    }
+    
+    func setupDocument() -> Bool {
+        
+        var documentOK = true
+        let documentPath = pathFromURL(documentURL)
         
         let url = recallValueOfKey("documentURL")
         
 
-        //  documentPath = "/Users/carlson/Desktop/notebook/note.ad"
+        // documentPath = "/Users/carlson/Desktop/notebook/note.ad"
         // let url = Optional("file:///" + documentPath!)
         
        
@@ -88,9 +108,16 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         if let documentURL = url {
             
             
+            
             documentPath = pathFromURL(documentURL)
             
-            if fileExistsAtPath(documentPath!) {
+            
+        }
+        
+        if !documentOK { return false }
+        
+            
+            if documentOK {
                 
                 
                 textView.string = readStringFromFile(documentPath!)
@@ -108,6 +135,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             
             setHasIncludes()
             
+            // updateDocument(currentDocumentPath)
             updateUI(refresh: true)
             
             putMessage()
@@ -118,6 +146,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             messageLabel.stringValue = "Couldn't find the last file you opened."
             messageLabel.needsDisplay = true
         }
+        
+        return true
     }
     
     func setupWebview() {

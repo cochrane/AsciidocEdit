@@ -86,5 +86,10 @@ extension String {
     // "image::foo.png[float=left]", "image::bar[float=right, width=200]"]
 
     
+    func trim() -> String {
+        
+        let spaceSet = NSCharacterSet.whitespaceCharacterSet()
+        return self.stringByTrimmingCharactersInSet(spaceSet)
+    }
     
 }
