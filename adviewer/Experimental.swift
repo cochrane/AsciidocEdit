@@ -8,31 +8,75 @@
 
 import Foundation
 
-class Manifest {
+class Manuscript {
     
-    let filePath: String
-    var manifest: String?
+    var filePath: String?
+    var url: String?
+    var title: String?
+    var notebook_name: String?
+    var notebook_id: String?
+    var domain: String?
+    var archiveURL: String?
+    var manuscript: String?
     var includeList: [String]?
     var imageList: [String]?
     var videoList: [String]?
     var audioList: [String]?
     var dictionary: [String: String]?
     
-    
-    init(filePath: String) {
+    init() {
         
-        self.filePath = filePath
+        // self.filePath = filePath
         
         
     }
     
     
+    func foobar (url: String) -> String {
+        
+       
+        let notebook = shortPath(url, numberOfParts: 1)
+        let name = notebook.componentsSeparatedByString(".")[0]
+        println("Notebook: \(name)")
+        return name
+        
+    }
+
+
+    
+    func parseURL (url: String) {
+        
+        println("\n\n\n")
+        
+        println("URL = \(url)")
+        
+        let path = pathFromURL(url)
+        let path_part = path.pathComponents
+        domain = path_part[0]
+        println("Domain: \(domain)")
+        
+        let data = shortPath(url, numberOfParts: 2)
+        let part = data.componentsSeparatedByString("/")
+        notebook_id = part[0]
+        
+        let archiveList = ["http:/", domain!, "courses", notebook_id!, "edit?archive=yes&remote=true"]
+        
+        archiveURL = join(archiveList, separator: "/")
+        
+        println("Notebook ID: \(notebook_id)")
+        
+        println("archiveURL: \(archiveURL)")
+
+        println("\n\n\n")
+    }
+    
+    
     func load() {
         
-        println("in Manifest, filePath =  \(self.filePath)")
-        manifest = readStringFromFile(self.filePath)
+        println("in Manuscript, filePath =  \(self.filePath)")
+        manuscript = readStringFromFile(self.filePath!)
         
-        let dir = directoryPath(self.filePath)
+        let dir = directoryPath(self.filePath!)
         println("Directory path: \(dir)")
         
         getIncludeList()
@@ -54,7 +98,7 @@ class Manifest {
         }
         
         let includeRx = "include::.*\\["
-        var array = includeRx.match(manifest!)
+        var array = includeRx.match(manuscript!)
         includeList = array.map(clean)
         println("\nIncludes (\(includeList!.count)): \(includeList!)")
         
@@ -109,7 +153,7 @@ class Manifest {
         
         let clean = { (x: String) -> String in self.xclean(x, assetType: assetType)}
         
-        let dir = directoryPath(self.filePath)
+        let dir = directoryPath(self.filePath!)
         
         var assetList = [String]()
         
@@ -128,7 +172,7 @@ class Manifest {
         
         return assetList
     }
-
+    
    
     
 }

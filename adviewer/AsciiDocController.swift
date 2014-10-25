@@ -30,6 +30,9 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     @IBOutlet weak var latexMenuItem: NSMenuItem!
     
     
+    @IBOutlet weak var urlTextField: NSTextField!
+    
+    
     var documentPath: String?
     var documentOK = false
     var useLaTeXMode = false
@@ -41,9 +44,9 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     var textLength = 0
     var hasIncludes = false
     
-    var userDictionary = [:]
+    var userDictionary = [:] as [String:String]
     
-    var manifest: Manifest?
+    var manuscript = Manuscript()
 
     
     func setupWindow() {
@@ -99,12 +102,12 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         if !fileExistsAtPath(path) { return false }
         if isDirectory(path) {return false }
         let ext = extName(path)
-            if !contains(["ad", "adoc"], ext) {
-                return false
+        if ext == "" { return false }
+        if !contains(["ad", "adoc"], ext) {
+            return false
         }
         return true
     }
-    
     
     func setupDocument() -> Bool {
         
@@ -120,6 +123,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         }
         
         userDictionary = getDict(documentPath!)
+        printDictionary(userDictionary)
         
         textView.string = readStringFromFile(documentPath!)
         useLaTeXMode = setLatexMode(textView.string! )
@@ -127,6 +131,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         setHasIncludes()
         updateDocument(documentPath!)
         updateUI(refresh: true)
+        
+        manuscript = Manuscript()
         putMessage()
         
         return true
@@ -377,6 +383,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     setHasIncludes()
                     
                     userDictionary = getDict(documentPath!)
+                    printDictionary(userDictionary)
                     
                     updateUI(refresh: false)
                     
@@ -398,6 +405,11 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             updateDocument(currentDocumentPath)
             updateUI(refresh: true)
             
+        }
+        
+        else {
+        
+            putMessage(message: "Error")
         }
         
     }
@@ -494,19 +506,80 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     //MARK: Project Menu
     
+    /***
+    
+    You should access the DOM using the Objective-C DOM API and insert the appropriate <link> or <style> element into the DOM.
+    
+    
+    DOMDocument* domDocument=[webView mainFrameDocument];
+    DOMElement* styleElement=[domDocument createElement:@"style"];
+    [styleElement setAttribute:@"type" value:@"text/css"];
+    DOMText* cssText=[domDocument createTextNode:@"body{font-weight:bold;}"];
+    [styleElement appendChild:cssText];
+    DOMElement* headElement=(DOMElement*)[[domDocument getElementsByTagName:@"head"] item:0];
+    [headElement appendChild:styleElement];
+    
+    
+    **/
+    
+    
+    // var webDoc = adWebView.mainFrameDocument
+    // var archive_message = adWebView.stringByEvaluatingJavaScriptFromString("document.getElementsByTagName('p')[1].innerHTML")
+    // println("archive_message = \(archive_message)")
+
+    
+    func askServerToArchiveNotebook() {
+    
+        let url = urlTextField.stringValue
+        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
+        manuscript.parseURL(url)
+        
+        let archiveURL = manuscript.archiveURL!
+        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: archiveURL)!))
+        adWebView.mainFrameURL = url
+        adWebView.needsDisplay = true
+    
+    }
+    
+    func fetchAndUpdate() {
+        
+        let directory = directoryOfPath(documentPath!)
+        println("MANUSCRIPT NOTEBOOK ID: \(manuscript.notebook_id)")
+        let message = fetchNotebook(manuscript.notebook_id!, directory)
+        putMessage(message: message)
+        
+       
+    }
+    
+    func updateAfterFetch() {
+    
+        let directory = directoryOfPath(documentPath!)
+        
+        documentPath = join([directory, "manifest.ad"], separator: "/")
+        documentText = readStringFromFile(documentPath!)
+        useLaTeXMode = true    /// setLatexMode(documentText)
+        textView.string = documentText
+        
+        refreshHTML(documentPath!, htmlPath(documentPath!), useLaTexMode: true)
+        updateUI(refresh: true)
+        
+        let url = documentURL(documentPath!)
+        memorizeKeyValuePair("documentURL", url)
+       
+    }
     
     @IBAction func fetchNoteshareArchiveAction(sender: AnyObject) {
         
-       let directory = directoryOfPath(documentPath!)
-        let message = fetchNotebook(documentPath!)
-        putMessage(message: message)
+        println("URL = \(urlTextField.stringValue)")
         
-        fetchNotebook("mathematics_notebook_2014_128")
-        
+        askServerToArchiveNotebook()
+        fetchAndUpdate()
+        updateAfterFetch()
+          
     }
     
     
-    @IBAction func processManifestAction(sender: AnyObject) {
+    @IBAction func processManuscriptAction(sender: AnyObject) {
         
         println("Document Path: \(documentPath)")
         
@@ -523,20 +596,16 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         println("---------------------------")
         
-        manifest = Manifest(filePath: documentPath!)
-        
-        if manifest != nil {
-            
-            manifest!.load()
-            
-        }
+        manuscript = Manuscript()
+        manuscript.filePath = documentPath!
+             manuscript.load()
         
     }
     
     
     @IBAction func gitUpdateAction(sender: AnyObject) {
         
-        let gitURL = manifest!.gitURL()
+        let gitURL = manuscript.gitURL()
         
         let currentDirectory = directoryPath(documentPath!)
         
@@ -550,7 +619,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func gitPullAction(sender: AnyObject) {
         
-        let gitURL = manifest!.gitURL()
+        let gitURL = manuscript.gitURL()
         
         let currentDirectory = directoryPath(documentPath!)
         
@@ -564,7 +633,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func gitPushAction(sender: AnyObject) {
         
-        let gitURL = manifest!.gitURL()
+        let gitURL = manuscript.gitURL()
         
         let currentDirectory = directoryPath(documentPath!)
         
@@ -580,6 +649,23 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     @IBAction func cleanHTMLAction(sender: AnyObject) {
         
         cleanHTML(directoryPath(documentPath!))
+        
+    }
+    
+    //MARK: Web
+    
+    
+    @IBAction func gotoURL_Action(sender: AnyObject) {
+        
+        println("URL = \(urlTextField.stringValue)")
+        
+        let url = urlTextField.stringValue
+        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
+        adWebView.mainFrameURL = url
+        adWebView.needsDisplay = true
+        manuscript.parseURL(url)
+        urlTextField.stringValue = manuscript.archiveURL!
+
         
     }
     

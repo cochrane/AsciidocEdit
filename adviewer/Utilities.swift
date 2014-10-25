@@ -124,14 +124,14 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
     //if true {
    if innerUseLatexMode {
         
-        executeCommand(PREPROCESS_TEX, [tempADPath, tempADPath])
+        executeCommand(PREPROCESS_TEX, [tempADPath, tempADPath], verbose: true)
         var content = readStringFromFile(tempADPath)
         content = ":stem: latexmath\n" + content
         writeStringToFile(content, tempADPath)
         
         
     }
-    executeCommand(ASCIIDOCTOR, [tempADPath])
+    executeCommand(ASCIIDOCTOR, [tempADPath], verbose: true)
     executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
     executeCommand("/bin/rm", [tempADPath])
     
@@ -180,24 +180,17 @@ func getDict(path: String) -> [String: String] {
 
 
 
-func fetchNotebook(path: String) -> String {
-    
-    let dict = getDict(path)
-    let notebook_url = dict["remote_notebook"]
-   
-    let currentDirectory = directoryOfPath(path)
-    if notebook_url != nil {
-        println ("NOTEBOOK URL: \(notebook_url!)")
-        executeCommand("/usr/bin/cd", [currentDirectory], verbose: true)
-        executeCommand("/bin/pwd", [], verbose: true)
-        var output = executeCommand(GET_NOTEBOOK, [notebook_url!, currentDirectory], verbose: true)
+func fetchNotebook(notebook_url: String, directory: String) -> String {
+  
+        // executeCommand("/usr/bin/cd", [directory], verbose: true)
+        // executeCommand("/bin/pwd", [], verbose: true)
+        // var output = executeCommand(GET_NOTEBOOK, [notebook_url, directory], verbose: true)
+        var output = executeCommand(GET_NOTEBOOK, [notebook_url, directory], verbose: true)
         
         let pattern = ".ad"
         let number_of_ad_files = pattern.match(output).count - 3
-        return "Fetched \(number_of_ad_files) files from " + notebook_url!
-    } else {
-        return "Could not fetch notebook"
-    }
+        return "Fetched \(number_of_ad_files) files from " + notebook_url
+  
 }
 
 func installAsciidoctor() {
@@ -378,14 +371,21 @@ func documentURL(documentPath: String) -> String {
 }
 
 
-func pathFromURL(fileURL: String) -> String {
+func pathFromURL(url: String) -> String {
     
-    let result = fileURL.stringByReplacingOccurrencesOfString("file://", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+    if url.contains("file://") {
     
-    println("+++ pathFromURL: \(result)")
+       return url.stringByReplacingOccurrencesOfString("file://", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+    }
     
-    return result
+    if url.contains("http://") {
+        
+        return url.stringByReplacingOccurrencesOfString("http://", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+    }
     
+   return url
     
 }
 
@@ -581,4 +581,12 @@ extension String {
     }
 }
 
+func printDictionary(dict: [String:String]) {
+    
+    println("\n--------------------")
+    for key in dict.keys {
+        println("\(key): \(dict[key]!)")
+    }
+    println("--------------------\n\(dict.count) items")
+}
 
