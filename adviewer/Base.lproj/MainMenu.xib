@@ -738,9 +738,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="758" height="369"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-jq-k74">
-                        <rect key="frame" x="699" y="19" width="52" height="19"/>
-                        <buttonCell key="cell" type="roundRect" title="Back" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bcs-ai-x5I">
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-jq-k74">
+                        <rect key="frame" x="686" y="16" width="62" height="19"/>
+                        <buttonCell key="cell" type="roundRect" title="Back" bezelStyle="roundedRect" image="red_orange30x100" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bcs-ai-x5I">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="cellTitle"/>
                         </buttonCell>
@@ -801,9 +801,12 @@
                             <action selector="gotoURL_Action:" target="mtz-d8-bGj" id="ThT-X2-vyX"/>
                         </connections>
                     </textField>
-                    <button verticalHuggingPriority="750" misplaced="YES" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="jh2-xM-Kt8">
-                        <rect key="frame" x="684" y="45" width="67" height="19"/>
-                        <buttonCell key="cell" type="roundRect" title="Forward" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ST6-O9-Iea">
+                    <button verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="jh2-xM-Kt8">
+                        <rect key="frame" x="619" y="16" width="67" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="67" id="jPq-Yu-A1H"/>
+                        </constraints>
+                        <buttonCell key="cell" type="roundRect" title="Forward" bezelStyle="roundedRect" image="red_orange30x100" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ST6-O9-Iea">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="cellTitle"/>
                         </buttonCell>
@@ -811,32 +814,45 @@
                             <action selector="browserForward:" target="mtz-d8-bGj" id="2Yj-hX-g0P"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="BPk-j3-LQ4">
+                        <rect key="frame" x="693" y="330" width="59" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="59" id="5AI-Ok-KCX"/>
+                        </constraints>
+                        <buttonCell key="cell" type="roundRect" title="Fetch" bezelStyle="roundedRect" image="red_orange30x100" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="7yR-1a-tpJ">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="titleBar"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="fetchNoteshareArchiveAction:" target="mtz-d8-bGj" id="abM-ZH-2NU"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="jh2-xM-Kt8" firstAttribute="baseline" secondItem="EUu-jq-k74" secondAttribute="baseline" id="2os-gV-Ujp"/>
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="trailing" secondItem="MAg-5r-mWB" secondAttribute="trailing" constant="-5" id="2wu-CF-NFq"/>
-                    <constraint firstAttribute="trailing" secondItem="EUu-jq-k74" secondAttribute="trailing" constant="7" id="5YY-gQ-V0i"/>
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="5ef-P4-9Tv"/>
-                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="EUu-jq-k74" secondAttribute="trailing" constant="7" id="6vr-Zn-BOM"/>
-                    <constraint firstAttribute="trailing" secondItem="jh2-xM-Kt8" secondAttribute="trailing" constant="7" id="Bcy-Qe-D7V"/>
-                    <constraint firstItem="EUu-jq-k74" firstAttribute="top" secondItem="jh2-xM-Kt8" secondAttribute="bottom" constant="8" id="JVT-rA-J6Z"/>
+                    <constraint firstAttribute="trailing" secondItem="EUu-jq-k74" secondAttribute="trailing" constant="10" id="7ab-ZW-Dnn"/>
                     <constraint firstItem="kMk-pE-pDU" firstAttribute="top" secondItem="dF6-fn-ukB" secondAttribute="bottom" constant="8" id="Lzv-iz-9W5"/>
+                    <constraint firstAttribute="trailing" secondItem="BPk-j3-LQ4" secondAttribute="trailing" constant="10" id="Pl2-95-bC2"/>
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="leading" secondItem="dF6-fn-ukB" secondAttribute="trailing" constant="17" id="TAs-b0-0uE"/>
                     <constraint firstAttribute="bottom" secondItem="v2T-D3-8qG" secondAttribute="bottom" constant="45" id="Tq5-I6-S9z"/>
-                    <constraint firstAttribute="bottom" secondItem="EUu-jq-k74" secondAttribute="bottom" constant="20" id="UEi-hA-aba"/>
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="width" secondItem="dF6-fn-ukB" secondAttribute="width" constant="1" id="YiN-4O-VqH"/>
                     <constraint firstItem="dF6-fn-ukB" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="ZhF-U4-S2f"/>
                     <constraint firstItem="dF6-fn-ukB" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="a7U-yw-0O1"/>
                     <constraint firstItem="kMk-pE-pDU" firstAttribute="trailing" secondItem="dF6-fn-ukB" secondAttribute="trailing" id="bMh-L9-AlS"/>
                     <constraint firstAttribute="bottom" secondItem="dF6-fn-ukB" secondAttribute="bottom" constant="45" id="dz7-RX-YkH"/>
-                    <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="EUu-jq-k74" secondAttribute="trailing" constant="7" id="jSW-RQ-8Jz"/>
+                    <constraint firstAttribute="bottom" secondItem="EUu-jq-k74" secondAttribute="bottom" constant="17" id="gPK-An-dn7"/>
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="leading" secondItem="MAg-5r-mWB" secondAttribute="leading" id="k4e-rh-dhe"/>
                     <constraint firstAttribute="trailing" secondItem="v2T-D3-8qG" secondAttribute="trailing" constant="200" id="k9Q-VV-Xwp"/>
                     <constraint firstItem="kMk-pE-pDU" firstAttribute="leading" secondItem="dF6-fn-ukB" secondAttribute="leading" constant="2" id="kCd-eo-Omc"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="EUu-jq-k74" secondAttribute="bottom" constant="20" id="lOe-vg-nQF"/>
+                    <constraint firstItem="EUu-jq-k74" firstAttribute="leading" secondItem="jh2-xM-Kt8" secondAttribute="trailing" id="nSc-Lt-Alr"/>
+                    <constraint firstItem="BPk-j3-LQ4" firstAttribute="trailing" secondItem="EUu-jq-k74" secondAttribute="trailing" id="rsJ-zJ-4uL"/>
+                    <constraint firstItem="jh2-xM-Kt8" firstAttribute="leading" secondItem="MAg-5r-mWB" secondAttribute="trailing" constant="56" id="vZC-7C-svK"/>
                     <constraint firstItem="MAg-5r-mWB" firstAttribute="top" secondItem="v2T-D3-8qG" secondAttribute="bottom" constant="8" id="ygR-5L-qNr"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="-482" y="89.5"/>
+            <point key="canvasLocation" x="-693" y="-218.5"/>
         </window>
         <customObject id="mtz-d8-bGj" customClass="AsciiDocController" customModule="AsciidocEdit" customModuleProvider="target">
             <connections>
@@ -876,4 +892,7 @@
             </connections>
         </menuItem>
     </objects>
+    <resources>
+        <image name="red_orange30x100" width="100" height="30"/>
+    </resources>
 </document>

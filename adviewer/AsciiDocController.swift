@@ -8,6 +8,7 @@
 
 import Cocoa
 import WebKit
+
 // import Manifest
 
 class AsciiDocController: NSObject, NSTextViewDelegate {
@@ -47,6 +48,9 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     var userDictionary = [:] as [String:String]
     
     var manuscript = Manuscript()
+    var metadata : Metadata?
+   
+   
 
     
     func setupWindow() {
@@ -156,6 +160,11 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         setupTextView()
         setupNotifications()
         if setupDocument() { setupWebview() }
+        
+        var directory = directoryOfPath(documentPath!)
+        
+        metadata = Metadata( path: directory + "/metadata.txt")
+        metadata!.print()
 
     }
 
@@ -528,19 +537,29 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     // println("archive_message = \(archive_message)")
 
     
-    func askServerToArchiveNotebook() {
+    func askServerToArchiveNotebook() -> Bool {
     
         let url = urlTextField.stringValue
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
-        manuscript.parseURL(url)
         
-        let archiveURL = manuscript.archiveURL!
-        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: archiveURL)!))
-        adWebView.mainFrameURL = url
-        adWebView.needsDisplay = true
-    
+        if url.contains("noteshare") {
+            manuscript.parseURL(url)
+            
+            let archiveURL = manuscript.archiveURL!
+            adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: archiveURL)!))
+            adWebView.mainFrameURL = url
+            adWebView.needsDisplay = true
+            
+            return true
+        
+        } else {
+            
+            return false
+        }
+        
     }
     
+        
     func fetchAndUpdate() {
         
         let directory = directoryOfPath(documentPath!)
@@ -572,10 +591,12 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         println("URL = \(urlTextField.stringValue)")
         
-        askServerToArchiveNotebook()
-        fetchAndUpdate()
-        updateAfterFetch()
-          
+        let proceed = askServerToArchiveNotebook()
+        if proceed == true {
+            fetchAndUpdate()
+            updateAfterFetch()
+        }
+        
     }
     
     
@@ -663,8 +684,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
         adWebView.mainFrameURL = url
         adWebView.needsDisplay = true
-        manuscript.parseURL(url)
-        urlTextField.stringValue = manuscript.archiveURL!
+        // manuscript.parseURL(url)
+        // urlTextField.stringValue = manuscript.archiveURL!
 
         
     }
