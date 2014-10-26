@@ -108,6 +108,39 @@ func bundleContent(fileName: String, resourceType: String) -> String {
 // copy. (2) Apply asciidoctor to the temporary file.
 // (3) Remove the temporary files.
 // refreshHTML goes here
+func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = false) {
+    
+    let preprocess_cmd = recallValueOfKey("PREPROCESS_TEX")
+    let asciidoctor_cmd = recallValueOfKey("ASCIIDOCTOR")
+    
+    inject(asciidocPath, "synchronize", "js")
+    
+    let tempADPath = tempFile(asciidocPath)
+    let tempHTMLPath = tempFile(htmlPath)
+    
+    var innerUseLatexMode = false
+    
+    var test_content = readStringFromFile(tempADPath)
+    if test_content.contains(":latex:") {
+        
+        innerUseLatexMode = true
+    }
+    
+    //if true {
+    if innerUseLatexMode {
+        
+        executeCommand(preprocess_cmd!, [tempADPath, tempADPath])
+        var content = readStringFromFile(tempADPath)
+        content = ":stem: latexmath\n" + content
+        writeStringToFile(content, tempADPath)
+        
+        
+    }
+    executeCommand(asciidoctor_cmd!, [tempADPath])
+    executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
+    executeCommand("/bin/rm", [tempADPath])
+    
+}
 
 
 

@@ -124,7 +124,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         return false
         
       } else {
-        
+        println("KEY: \(key)")
         memorizeKeyValuePair(key, userDictionary[key]!)
         return true
         }
@@ -143,7 +143,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         var toolchainLoaded = true
         toolchainLoaded = memorizeKey("ASCIIDOCTOR")
         toolchainLoaded = memorizeKey("ASCIIDOCTOR-PDF")
-        toolchainLoaded = memorizeKey("ASCIIDOCTOR-EPUB3")
+        toolchainLoaded = memorizeKey("ASCIIDOCTOR-EPUB")
         toolchainLoaded = memorizeKey("GET_NOTEBOOK")
         toolchainLoaded = memorizeKey("PREPROCESS_TEX")
  
