@@ -30,6 +30,10 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBOutlet weak var latexMenuItem: NSMenuItem!
     
+    @IBOutlet weak var currentDirectoryTF: NSTextField!
+    
+    @IBOutlet weak var remoteNotebookTF: NSTextField!
+    
     
     @IBOutlet weak var urlTextField: NSTextField!
     
@@ -169,11 +173,25 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         setupNotifications()
         if setupDocument() { setupWebview() }
         
-        // var directory = directoryOfPath(documentPath!)
+        updateUI()
         
-        // metadata = Metadata( path: directory + "/metadata.txt")
-        // metadata!.print()
+        var directory = directoryOfPath(documentPath!)
+        
+        //metadata = Metadata( path: directory + "/metadata.txt")
+        //metadata!.print()
 
+    }
+    
+    func updateUI() {
+        
+        currentDirectoryTF.stringValue = shortPath(directoryOfPath(documentPath!))
+        
+        if let id = userDictionary["remote_notebook"] {
+            remoteNotebookTF.stringValue = "Remote notebook: \(id)"
+        } else {
+            remoteNotebookTF.stringValue = "Remote notebook: none"
+        }
+        
     }
 
     
@@ -397,7 +415,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     
                     setHasIncludes()
                     
-                    userDictionary = readDictionary(documentPath!)
+                    let dictPath = dictionaryPath(documentPath!)
+                    userDictionary = readDictionary(dictPath)
                     printDictionary(userDictionary)
                     
         
@@ -409,6 +428,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             }
         }
         
+        updateUI()
         putMessage()
         
     }
@@ -562,7 +582,11 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             adWebView.mainFrameURL = archiveURL
             adWebView.needsDisplay = true
             
-            let remote_id = manuscript.notebook_id
+            let dictPath = dictionaryPath(documentPath!)
+            userDictionary = readDictionary(dictPath)
+            printDictionary(userDictionary)
+            
+            let remote_id = manuscript.notebook_id!
             let user_id = userDictionary["remote_notebook"]
             
             if remote_id == user_id {
@@ -729,7 +753,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
           let word_count = documentText.countWords()
           let page_count = Int(trunc(Double(word_count)/305))
         
-          messageLabel.stringValue = "File: \(shortPath(documentPath!)).    Word count: \(word_count), about \(page_count) pages"
+            messageLabel.stringValue = "\(shortPath(documentPath!,numberOfParts:1)): word count: \(word_count), about \(page_count) pages"
             
         }
         
