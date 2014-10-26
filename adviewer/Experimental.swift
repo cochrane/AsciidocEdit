@@ -61,7 +61,7 @@ class Manuscript {
         
         let archiveList = ["http:/", domain!, "courses", notebook_id!, "edit?archive=yes&remote=true"]
         
-        archiveURL = join(archiveList, separator: "/")
+        archiveURL = join(archiveList, separator: "/")  // ARCHVE URL IS OK
         
         println("Notebook ID: \(notebook_id)")
         

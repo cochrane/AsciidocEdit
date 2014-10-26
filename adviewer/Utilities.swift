@@ -157,17 +157,24 @@ func fetchNotebookFromURL(url: String) {
 }
 
 
-// Read dictionary data from default DICTIONARY_FILE
+// return path for default dictionary 
+// given the current document path
+func dictionaryPath(docPath: String) -> String {
+    
+    let currentDirectory = directoryOfPath(docPath)
+    return join([currentDirectory, DICTIONARY_FILE], separator: "/")
+
+}
+
+// Read dictionary data from the file at path
 // and return the dictionary.  If there is
-// no DICTIONARY_FILE, return the empty dictionary
-func getDict(path: String) -> [String: String] {
+// no file, return the empty dictionary
+func readDictionary(path: String) -> [String: String] {
     
-    let currentDirectory = directoryOfPath(path)
-    let configFile = join([currentDirectory, DICTIONARY_FILE], separator: "/")
     
-    if fileExistsAtPath(configFile) {
+    if fileExistsAtPath(path) {
         
-        let data = readStringFromFile(configFile)
+        let data = readStringFromFile(path)
         return str2dict(data)
         
     } else {
@@ -176,6 +183,20 @@ func getDict(path: String) -> [String: String] {
         
     }
 
+}
+
+func writeDictionary(path: String, dict: [String:String]) {
+    
+    let currentDirectory = directoryOfPath(path)
+    let configFile = join([currentDirectory, DICTIONARY_FILE], separator: "/")
+   
+     var data = ""
+    for key in dict.keys {
+        data += "\(key): \(dict[key])\n"
+    }
+    
+    writeStringToFile(data, path)
+    
 }
 
 

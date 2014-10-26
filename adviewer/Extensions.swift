@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                                                                          //
+                                                                                                                                                                                                                                                                                                                                                                                                                                                       //
 //  Extensions.swift
 //  AsciidocEdit
 //

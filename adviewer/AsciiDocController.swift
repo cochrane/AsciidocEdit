@@ -1,4 +1,4 @@
-//
+                //
 //  controller.swift
 //  adviewer
 //
@@ -116,6 +116,11 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     func setupDocument() -> Bool {
         
         documentPath = getDocumentPath()
+    
+        let dictPath = dictionaryPath(documentPath!)
+        
+        userDictionary = readDictionary(dictPath)
+        printDictionary(userDictionary)
         
         documentOK = setupDocumentPath(documentPath!)
         
@@ -126,8 +131,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             return false
         }
         
-        userDictionary = getDict(documentPath!)
-        printDictionary(userDictionary)
+       
         
         textView.string = readStringFromFile(documentPath!)
         useLaTeXMode = setLatexMode(textView.string! )
@@ -147,6 +151,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         adWebView.UIDelegate = self
         adWebView.frameLoadDelegate = self
+        adWebView.customUserAgent = "Mozilla/5.0 (iPhone; CPU iPhone OS 6_1_4 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/6.0 Mobile/10B350 Safari/8536.25"
+        adWebView.applicationNameForUserAgent = "Safari"
         
         let htmlDocumentURL = htmlURL(documentPath!)
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: htmlDocumentURL)!))
@@ -164,7 +170,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         var directory = directoryOfPath(documentPath!)
         
         metadata = Metadata( path: directory + "/metadata.txt")
-        metadata!.print()
+        /// metadata!.print()
 
     }
 
@@ -354,8 +360,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             for url in panel.URLs {
                 
                 if let url = url.absoluteString {
-                    
-                    println("-- URL: \(url)")
+                
                     
                     documentPath = pathFromURL(url!)
                     
@@ -368,14 +373,14 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                         return
                     }
                     
-                    println("-- documentPath: \(documentPath)")
+                    
+                    let url = documentURL(documentPath!)
                     
                     // Add document to recent files menu
-                    let url = documentURL(documentPath!)
-                    println("\nAdd to recent documents, url = \(url)\n")
-                    let nsurl = NSURL(string: url)
-                    println("\nAdd to recent documents, nsurl = \(nsurl)\n")
-                    NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(nsurl!)
+                    //println("\nAdd to recent documents, url = \(url)\n")
+                    //let nsurl = NSURL(string: url)
+                    //println("\nAdd to recent documents, nsurl = \(nsurl)\n")
+                    //NSDocumentController.sharedDocumentController().noteNewRecentDocumentURL(nsurl!)
                     
                     // NSDocumentController.sharedDocumentController()
                     
@@ -388,13 +393,14 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     useLaTeXMode = setLatexMode(documentText)
                     textView.string = documentText
                     
-                    
                     setHasIncludes()
                     
-                    userDictionary = getDict(documentPath!)
+                    userDictionary = readDictionary(documentPath!)
                     printDictionary(userDictionary)
                     
-                    updateUI(refresh: false)
+        
+                    updateDocument(documentPath!)
+                    updateUI(refresh: true)
                     
                     // http://lapcatsoftware.com/blog/2006/11/19/the-webview-reloaded/
                 }
@@ -540,17 +546,32 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     func askServerToArchiveNotebook() -> Bool {
     
         let url = urlTextField.stringValue
-        adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
+        // dWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
         
-        if url.contains("noteshare") {
+        if url.contains("notebook") {
+            
             manuscript.parseURL(url)
             
             let archiveURL = manuscript.archiveURL!
+            
+            println("!!! ARCHIVE URL: \(archiveURL)")
+            
             adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: archiveURL)!))
-            adWebView.mainFrameURL = url
+            adWebView.mainFrameURL = archiveURL
             adWebView.needsDisplay = true
             
-            return true
+            if manuscript.notebook_id == userDictionary["remote_notebook"] {
+                
+                putMessage(message: "remote notebook OK, procedding ...")
+                return true
+                
+            } else {
+                
+                putMessage(message: "Sorry, you would overwrite an existing notebook")
+                return false
+            }
+            
+           
         
         } else {
             
@@ -564,6 +585,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         let directory = directoryOfPath(documentPath!)
         println("MANUSCRIPT NOTEBOOK ID: \(manuscript.notebook_id)")
+        println("DIRECTORY: \(directory)")
         let message = fetchNotebook(manuscript.notebook_id!, directory)
         putMessage(message: message)
         
@@ -680,13 +702,16 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         println("URL = \(urlTextField.stringValue)")
         
-        let url = urlTextField.stringValue
+        var url = urlTextField.stringValue
+        if url.contains("/notebook/") {
+            
+            url = url.stringByReplacingOccurrencesOfString("/notebook",withString: "/notebook2")
+            urlTextField.stringValue = url
+            
+        }
         adWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
         adWebView.mainFrameURL = url
         adWebView.needsDisplay = true
-        // manuscript.parseURL(url)
-        // urlTextField.stringValue = manuscript.archiveURL!
-
         
     }
     
