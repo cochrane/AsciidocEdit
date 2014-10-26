@@ -199,7 +199,7 @@ func writeDictionary(path: String, dict: [String:String]) {
    
      var data = ""
     for key in dict.keys {
-        data += "\(key): \(dict[key])\n"
+        data += "\(key): \(dict[key]!)\n"
     }
     
     writeStringToFile(data, path)

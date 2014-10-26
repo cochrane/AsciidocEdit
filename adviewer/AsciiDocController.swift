@@ -643,9 +643,21 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             let remote_id = manuscript.notebook_id!
             let user_id = userDictionary["remote_notebook"]
             
-            if remote_id == user_id {
+            
+            if user_id == nil {
                 
-                putMessage(message: "remote notebook OK, procedding ...")
+                userDictionary["remote_notebook"] = remote_id
+                let dictPath = directoryOfPath(documentPath!) + "/config"
+                writeDictionary(dictPath, userDictionary)
+                updateUI()
+                
+                putMessage(message: "setting remote notebook to \(remote_id)")
+                return true
+
+                
+            } else if remote_id == user_id {
+                
+                putMessage(message: "remote notebook OK, proceeding ...")
                 return true
                 
             } else {
@@ -667,10 +679,18 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
     func fetchAndUpdate() {
         
+        var id = ""
+        if userDictionary["remote_notebook"] == nil {
+            id = manuscript.notebook_id!
+            println("I got the ID from the server")
+        } else {
+            id = userDictionary["remote_notebook"]!
+             println("I used the stored ID")
+        }
         let directory = directoryOfPath(documentPath!)
-        println("MANUSCRIPT NOTEBOOK ID: \(manuscript.notebook_id)")
+        println("MANUSCRIPT NOTEBOOK ID: \(id)")
         println("DIRECTORY: \(directory)")
-        let message = fetchNotebook(manuscript.notebook_id!, directory)
+        let message = fetchNotebook(id, directory)
         putMessage(message: message)
         
        
@@ -697,7 +717,13 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         println("URL = \(urlTextField.stringValue)")
         
-        let proceed = askServerToArchiveNotebook()
+        var proceed = false
+        
+        if userDictionary["remote_notebook"] == nil {
+            proceed = askServerToArchiveNotebook()
+        } else {
+            proceed = true
+        }
         if proceed == true {
             fetchAndUpdate()
             updateAfterFetch()
