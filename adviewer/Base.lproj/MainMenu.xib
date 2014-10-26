@@ -732,14 +732,14 @@
         <window title="AsciidocEdit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES"/>
-            <rect key="contentRect" x="100" y="100" width="636" height="354"/>
+            <rect key="contentRect" x="100" y="100" width="764" height="364"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="636" height="354"/>
+                <rect key="frame" x="0.0" y="0.0" width="764" height="364"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-jq-k74">
-                        <rect key="frame" x="564" y="16" width="62" height="19"/>
+                    <button verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EUu-jq-k74">
+                        <rect key="frame" x="692" y="16" width="62" height="19"/>
                         <buttonCell key="cell" type="roundRect" title="Back" bezelStyle="roundedRect" image="red_orange30x100" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bcs-ai-x5I">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="cellTitle"/>
@@ -749,13 +749,13 @@
                         </connections>
                     </button>
                     <webView translatesAutoresizingMaskIntoConstraints="NO" id="v2T-D3-8qG">
-                        <rect key="frame" x="236" y="45" width="200" height="289"/>
+                        <rect key="frame" x="295" y="45" width="260" height="299"/>
                         <webPreferences key="preferences" defaultFontSize="14" defaultFixedFontSize="14">
                             <nil key="identifier"/>
                         </webPreferences>
                     </webView>
                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dF6-fn-ukB">
-                        <rect key="frame" x="20" y="45" width="199" height="289"/>
+                        <rect key="frame" x="20" y="45" width="258" height="299"/>
                         <clipView key="contentView" id="KnC-ar-A9h">
                             <rect key="frame" x="1" y="1" width="223" height="133"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -764,10 +764,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="223" height="318"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <size key="minSize" width="197" height="287"/>
+                                    <size key="minSize" width="256" height="297"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                     <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <size key="minSize" width="197" height="287"/>
+                                    <size key="minSize" width="256" height="297"/>
                                     <size key="maxSize" width="463" height="10000000"/>
                                 </textView>
                             </subviews>
@@ -783,7 +783,7 @@
                         </scroller>
                     </scrollView>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kMk-pE-pDU">
-                        <rect key="frame" x="22" y="5" width="197" height="17"/>
+                        <rect key="frame" x="22" y="15" width="261" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Label" drawsBackground="YES" id="IDr-LO-Rwl">
                             <font key="font" metaFont="system" size="16"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -791,7 +791,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MAg-5r-mWB">
-                        <rect key="frame" x="236" y="15" width="205" height="22"/>
+                        <rect key="frame" x="295" y="15" width="265" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="9IH-af-2Ua">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -802,7 +802,7 @@
                         </connections>
                     </textField>
                     <button verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="jh2-xM-Kt8">
-                        <rect key="frame" x="497" y="16" width="67" height="19"/>
+                        <rect key="frame" x="616" y="16" width="67" height="19"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="67" id="jPq-Yu-A1H"/>
                         </constraints>
@@ -814,8 +814,34 @@
                             <action selector="browserForward:" target="mtz-d8-bGj" id="2Yj-hX-g0P"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="BPk-j3-LQ4">
-                        <rect key="frame" x="693" y="315" width="59" height="19"/>
+                    <button verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="aWU-Bj-hDG">
+                        <rect key="frame" x="692" y="325" width="62" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="62" id="9bk-Ps-230"/>
+                        </constraints>
+                        <buttonCell key="cell" type="roundRect" title="EPUB" bezelStyle="roundedRect" image="red_orange30x100" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6W7-OM-ojZ">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="titleBar"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="saveAsEPUB3Action:" target="mtz-d8-bGj" id="vtK-Xc-rjT"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="P44-en-Ey7">
+                        <rect key="frame" x="627" y="325" width="62" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="62" id="vYc-fs-gPU"/>
+                        </constraints>
+                        <buttonCell key="cell" type="roundRect" title="PDF" bezelStyle="roundedRect" image="red_orange30x100" imagePosition="overlaps" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="bry-dU-kPL">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="titleBar"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="SaveAsPDFAction:" target="mtz-d8-bGj" id="b0s-VE-Gr7"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" misplaced="YES" alphaValue="0.90000000000000002" translatesAutoresizingMaskIntoConstraints="NO" id="BPk-j3-LQ4">
+                        <rect key="frame" x="701" y="290" width="59" height="19"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="59" id="5AI-Ok-KCX"/>
                         </constraints>
@@ -833,26 +859,35 @@
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="trailing" secondItem="MAg-5r-mWB" secondAttribute="trailing" constant="-5" id="2wu-CF-NFq"/>
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="5ef-P4-9Tv"/>
                     <constraint firstAttribute="trailing" secondItem="EUu-jq-k74" secondAttribute="trailing" constant="10" id="7ab-ZW-Dnn"/>
-                    <constraint firstItem="kMk-pE-pDU" firstAttribute="top" secondItem="dF6-fn-ukB" secondAttribute="bottom" constant="8" id="Lzv-iz-9W5"/>
+                    <constraint firstItem="jh2-xM-Kt8" firstAttribute="trailing" secondItem="P44-en-Ey7" secondAttribute="trailing" constant="-6" id="7gs-Zn-6FH"/>
+                    <constraint firstItem="aWU-Bj-hDG" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="EWm-hw-dn8"/>
+                    <constraint firstItem="aWU-Bj-hDG" firstAttribute="leading" secondItem="P44-en-Ey7" secondAttribute="trailing" constant="3" id="IAh-LH-yET"/>
+                    <constraint firstItem="kMk-pE-pDU" firstAttribute="top" secondItem="dF6-fn-ukB" secondAttribute="bottom" constant="13" id="Lzv-iz-9W5"/>
                     <constraint firstAttribute="trailing" secondItem="BPk-j3-LQ4" secondAttribute="trailing" constant="10" id="Pl2-95-bC2"/>
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="leading" secondItem="dF6-fn-ukB" secondAttribute="trailing" constant="17" id="TAs-b0-0uE"/>
+                    <constraint firstItem="P44-en-Ey7" firstAttribute="leading" secondItem="v2T-D3-8qG" secondAttribute="trailing" constant="72" id="TBt-rN-ePW"/>
                     <constraint firstAttribute="bottom" secondItem="v2T-D3-8qG" secondAttribute="bottom" constant="45" id="Tq5-I6-S9z"/>
+                    <constraint firstItem="BPk-j3-LQ4" firstAttribute="top" secondItem="aWU-Bj-hDG" secondAttribute="bottom" constant="18" id="YVL-fl-Mdb"/>
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="width" secondItem="dF6-fn-ukB" secondAttribute="width" constant="1" id="YiN-4O-VqH"/>
                     <constraint firstItem="dF6-fn-ukB" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="20" id="ZhF-U4-S2f"/>
                     <constraint firstItem="dF6-fn-ukB" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="a7U-yw-0O1"/>
                     <constraint firstItem="kMk-pE-pDU" firstAttribute="trailing" secondItem="dF6-fn-ukB" secondAttribute="trailing" id="bMh-L9-AlS"/>
+                    <constraint firstItem="BPk-j3-LQ4" firstAttribute="trailing" secondItem="EUu-jq-k74" secondAttribute="trailing" id="bf1-oE-4UF"/>
+                    <constraint firstAttribute="trailing" secondItem="aWU-Bj-hDG" secondAttribute="trailing" constant="10" id="dLQ-LZ-S3b"/>
                     <constraint firstAttribute="bottom" secondItem="dF6-fn-ukB" secondAttribute="bottom" constant="45" id="dz7-RX-YkH"/>
                     <constraint firstAttribute="bottom" secondItem="EUu-jq-k74" secondAttribute="bottom" constant="17" id="gPK-An-dn7"/>
                     <constraint firstItem="v2T-D3-8qG" firstAttribute="leading" secondItem="MAg-5r-mWB" secondAttribute="leading" id="k4e-rh-dhe"/>
                     <constraint firstAttribute="trailing" secondItem="v2T-D3-8qG" secondAttribute="trailing" constant="200" id="k9Q-VV-Xwp"/>
                     <constraint firstItem="kMk-pE-pDU" firstAttribute="leading" secondItem="dF6-fn-ukB" secondAttribute="leading" constant="2" id="kCd-eo-Omc"/>
                     <constraint firstItem="EUu-jq-k74" firstAttribute="leading" secondItem="jh2-xM-Kt8" secondAttribute="trailing" id="nSc-Lt-Alr"/>
+                    <constraint firstItem="P44-en-Ey7" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" id="p6U-dM-QMY"/>
                     <constraint firstItem="BPk-j3-LQ4" firstAttribute="trailing" secondItem="EUu-jq-k74" secondAttribute="trailing" id="rsJ-zJ-4uL"/>
                     <constraint firstItem="jh2-xM-Kt8" firstAttribute="leading" secondItem="MAg-5r-mWB" secondAttribute="trailing" constant="56" id="vZC-7C-svK"/>
+                    <constraint firstItem="BPk-j3-LQ4" firstAttribute="trailing" secondItem="aWU-Bj-hDG" secondAttribute="trailing" id="y4I-FR-OrQ"/>
                     <constraint firstItem="MAg-5r-mWB" firstAttribute="top" secondItem="v2T-D3-8qG" secondAttribute="bottom" constant="8" id="ygR-5L-qNr"/>
                 </constraints>
             </view>
-            <point key="canvasLocation" x="-754" y="-226"/>
+            <point key="canvasLocation" x="-690" y="-221"/>
         </window>
         <customObject id="mtz-d8-bGj" customClass="AsciiDocController" customModule="AsciidocEdit" customModuleProvider="target">
             <connections>

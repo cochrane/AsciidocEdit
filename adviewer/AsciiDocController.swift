@@ -115,6 +115,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     func setupDocument() -> Bool {
         
+      
         documentPath = getDocumentPath()
     
         let dictPath = dictionaryPath(documentPath!)
@@ -143,6 +144,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         manuscript = Manuscript()
         putMessage()
         
+        
         return true
     }
     
@@ -167,10 +169,10 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         setupNotifications()
         if setupDocument() { setupWebview() }
         
-        var directory = directoryOfPath(documentPath!)
+        // var directory = directoryOfPath(documentPath!)
         
-        metadata = Metadata( path: directory + "/metadata.txt")
-        /// metadata!.print()
+        // metadata = Metadata( path: directory + "/metadata.txt")
+        // metadata!.print()
 
     }
 
@@ -560,14 +562,18 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             adWebView.mainFrameURL = archiveURL
             adWebView.needsDisplay = true
             
-            if manuscript.notebook_id == userDictionary["remote_notebook"] {
+            let remote_id = manuscript.notebook_id
+            let user_id = userDictionary["remote_notebook"]
+            
+            if remote_id == user_id {
                 
                 putMessage(message: "remote notebook OK, procedding ...")
                 return true
                 
             } else {
                 
-                putMessage(message: "Sorry, you would overwrite an existing notebook")
+                let message =  "Sorry, you would overwrite an existing notebook (\(remote_id):\(user_id))"
+                putMessage(message: message)
                 return false
             }
             

@@ -65,6 +65,7 @@ func tempFile(path: String) -> String {
 // Inject resource into temporary file copy
 func inject(pathToFile: String, payloadName: String, payloadType: String) {
     
+    
     // Get text from file and break it into lines
     let inputText = readStringFromFile(pathToFile)
     let jsContent = bundleContent(payloadName, payloadType)
@@ -86,7 +87,7 @@ func inject(pathToFile: String, payloadName: String, payloadType: String) {
     
     // Write transformed text to temporary file
     output.writeToFile(tmp, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
-    
+   
 }
 
 
