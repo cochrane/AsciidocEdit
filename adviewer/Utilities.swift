@@ -110,6 +110,7 @@ func bundleContent(fileName: String, resourceType: String) -> String {
 // refreshHTML goes here
 
 
+
 func saveAsPDF(filePath: String) {
 
     executeCommand(ASCIIDOCTOR_PDF, [filePath], verbose: true)
