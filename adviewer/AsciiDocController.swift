@@ -139,13 +139,30 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         let dictPath = dictionaryPath(documentPath!)
         userDictionary = readDictionary(dictPath)
         printDictionary(userDictionary)
-        
+
         var toolchainLoaded = true
-        toolchainLoaded = memorizeKey("ASCIIDOCTOR")
-        toolchainLoaded = memorizeKey("ASCIIDOCTOR-PDF")
-        toolchainLoaded = memorizeKey("ASCIIDOCTOR-EPUB")
-        toolchainLoaded = memorizeKey("GET_NOTEBOOK")
-        toolchainLoaded = memorizeKey("PREPROCESS_TEX")
+
+        if recallValueOfKey("toolchainLoaded") != "yes" || userDictionary["reloadToolchain"] == "yes" {
+        
+            println("Try to load toolchain")
+            
+            toolchainLoaded = memorizeKey("ASCIIDOCTOR")
+            toolchainLoaded = memorizeKey("ASCIIDOCTOR-PDF")
+            toolchainLoaded = memorizeKey("ASCIIDOCTOR-EPUB")
+            toolchainLoaded = memorizeKey("GET_NOTEBOOK")
+            toolchainLoaded = memorizeKey("PREPROCESS_TEX")
+
+        } else {
+
+            println("Toolchain is already in place")
+        }
+
+        if toolchainLoaded {
+
+            println("Toolchain is loaded")
+            memorizeKeyValuePair("toolchainLoaded", "yes")
+
+        }
  
         return toolchainLoaded
         
