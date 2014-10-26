@@ -117,15 +117,44 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         return true
     }
     
+    func memorizeKey(key: String) -> Bool {
+    
+      if userDictionary[key] == "" {
+        
+        return false
+        
+      } else {
+        
+        memorizeKeyValuePair(key, userDictionary[key]!)
+        return true
+        }
+        
+    }
+    
+    
+    func manageDictionary() -> Bool {
+        
+        documentPath = getDocumentPath()
+        
+        let dictPath = dictionaryPath(documentPath!)
+        userDictionary = readDictionary(dictPath)
+        printDictionary(userDictionary)
+        
+        var toolchainLoaded = true
+        toolchainLoaded = memorizeKey("ASCIIDOCTOR")
+        toolchainLoaded = memorizeKey("ASCIIDOCTOR-PDF")
+        toolchainLoaded = memorizeKey("ASCIIDOCTOR-EPUB3")
+        toolchainLoaded = memorizeKey("GET_NOTEBOOK")
+        toolchainLoaded = memorizeKey("PREPROCESS_TEX")
+ 
+        return toolchainLoaded
+        
+    }
+    
     func setupDocument() -> Bool {
         
       
         documentPath = getDocumentPath()
-    
-        let dictPath = dictionaryPath(documentPath!)
-        
-        userDictionary = readDictionary(dictPath)
-        printDictionary(userDictionary)
         
         documentOK = setupDocumentPath(documentPath!)
         
@@ -171,6 +200,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         setupWindow()
         setupTextView()
         setupNotifications()
+        manageDictionary()
         if setupDocument() { setupWebview() }
         
         updateUI()
@@ -491,15 +521,22 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func aboutAsciidoctorAction(sender: AnyObject) {
         
-        let cmd = "/usr/bin/asciidoctor"
+        let cmd = recallValueOfKey("ASCIIDOCTOR")
         
-        let raw_version = executeCommand(cmd, ["-V"], verbose: true)
-        let part = raw_version.componentsSeparatedByString("\n")
-        let version = part[0]
+        if cmd != "" {
         
-        
-        messageLabel.stringValue = version
-        messageLabel.needsDisplay = true
+            let raw_version = executeCommand(cmd!, ["-V"], verbose: true)
+            let part = raw_version.componentsSeparatedByString("\n")
+            let version = part[0]
+            
+            
+            messageLabel.stringValue = version
+            messageLabel.needsDisplay = true
+            
+        } else {
+            
+            putMessage(message: "ERROR: could not fnd Asciidoctor")
+        }
         
         
     }
