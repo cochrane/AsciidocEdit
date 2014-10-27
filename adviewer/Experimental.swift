@@ -10,7 +10,9 @@ import Foundation
 
 class Manuscript {
     
-    var filePath: String?
+
+    var root: String
+    var filePath: String
     var url: String?
     var title: String?
     var notebook_name: String?
@@ -24,11 +26,17 @@ class Manuscript {
     var audioList: [String]?
     var dictionary: [String: String]?
     
-    init() {
+    init(docPath: String) {
         
-        // self.filePath = filePath
+        self.filePath = docPath
+        self.root = directoryOfPath(self.filePath)
         
+    }
+    
+    func macro_path() -> String {
         
+       return "foo"
+    
     }
     
     
@@ -74,9 +82,9 @@ class Manuscript {
     func load() {
         
         println("in Manuscript, filePath =  \(self.filePath)")
-        manuscript = readStringFromFile(self.filePath!)
+        manuscript = readStringFromFile(self.filePath)
         
-        let dir = directoryPath(self.filePath!)
+        let dir = directoryPath(self.filePath)
         println("Directory path: \(dir)")
         
         getIncludeList()
@@ -153,7 +161,7 @@ class Manuscript {
         
         let clean = { (x: String) -> String in self.xclean(x, assetType: assetType)}
         
-        let dir = directoryPath(self.filePath!)
+        let dir = directoryPath(self.filePath)
         
         var assetList = [String]()
         

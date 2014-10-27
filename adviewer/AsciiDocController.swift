@@ -51,7 +51,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     var userDictionary = [:] as [String:String]
     
-    var manuscript = Manuscript()
+    var manuscript : Manuscript?
     var metadata : Metadata?
    
    
@@ -190,7 +190,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         updateDocument(documentPath!)
         updateUI(refresh: true)
         
-        manuscript = Manuscript()
+        manuscript = Manuscript(docPath: documentPath!)
         putMessage()
         
         
@@ -620,14 +620,15 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     func askServerToArchiveNotebook() -> Bool {
     
+    
         let url = urlTextField.stringValue
         // dWebView.mainFrame.loadRequest(NSURLRequest(URL: NSURL(string: url)!))
         
         if url.contains("notebook") {
             
-            manuscript.parseURL(url)
+            manuscript!.parseURL(url)
             
-            let archiveURL = manuscript.archiveURL!
+            let archiveURL = manuscript!.archiveURL!
             
             println("!!! ARCHIVE URL: \(archiveURL)")
             
@@ -639,7 +640,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             userDictionary = readDictionary(dictPath)
             printDictionary(userDictionary)
             
-            let remote_id = manuscript.notebook_id!
+            let remote_id = manuscript!.notebook_id!
             let user_id = userDictionary["remote_notebook"]
             
             
@@ -680,7 +681,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         var id = ""
         if userDictionary["remote_notebook"] == nil {
-            id = manuscript.notebook_id!
+            id = manuscript!.notebook_id!
             println("I got the ID from the server")
         } else {
             id = userDictionary["remote_notebook"]!
@@ -748,16 +749,16 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         println("---------------------------")
         
-        manuscript = Manuscript()
-        manuscript.filePath = documentPath!
-             manuscript.load()
+         manuscript = Manuscript(docPath: documentPath!)
+        manuscript!.filePath = documentPath!
+             manuscript!.load()
         
     }
     
     
     @IBAction func gitUpdateAction(sender: AnyObject) {
         
-        let gitURL = manuscript.gitURL()
+        let gitURL = manuscript!.gitURL()
         
         let currentDirectory = directoryPath(documentPath!)
         
@@ -771,7 +772,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func gitPullAction(sender: AnyObject) {
         
-        let gitURL = manuscript.gitURL()
+        let gitURL = manuscript!.gitURL()
         
         let currentDirectory = directoryPath(documentPath!)
         
@@ -785,7 +786,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func gitPushAction(sender: AnyObject) {
         
-        let gitURL = manuscript.gitURL()
+        let gitURL = manuscript!.gitURL()
         
         let currentDirectory = directoryPath(documentPath!)
         

@@ -62,12 +62,13 @@ func tempFile(path: String) -> String {
 }
 
 
+
 // Inject resource into temporary file copy
-func injectFromBundle(pathToFile: String, payloadName: String, payloadType: String) {
+func injectFromBundle(inputPath: String, outputPath: String, payloadName: String, payloadType: String) {
     
     
     // Get text from file and break it into lines
-    let inputText = readStringFromFile(pathToFile)
+    let inputText = readStringFromFile(inputPath)
     let jsContent = bundleContent(payloadName, payloadType)
     let lines = inputText.componentsSeparatedByString("\n")
     
@@ -82,13 +83,37 @@ func injectFromBundle(pathToFile: String, payloadName: String, payloadType: Stri
             firstBlankLineFound = true
         }
     }
-        
-    let tmp = tempFile(pathToFile)
     
     // Write transformed text to temporary file
-    output.writeToFile(tmp, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    output.writeToFile(outputPath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
    
 }
+
+// Inject payload into temporary file copy
+func injectFromFile(inputPath: String, outputPath: String, payloadPath: String) {
+    
+    // Get text from file and break it into lines
+    let inputText = readStringFromFile(inputPath)
+    let payload = readStringFromFile(payloadPath)
+    let lines = inputText.componentsSeparatedByString("\n")
+    
+    // Insert Javascript after header
+    var output = ""
+    var firstBlankLineFound = false
+    for line in lines {
+        
+        output += line  + "\n"
+        if line == "" && firstBlankLineFound == false {
+            output += "\n"+payload+"\n\n"
+            firstBlankLineFound = true
+        }
+    }
+    
+    // Write transformed text to temporary file
+    output.writeToFile(outputPath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    
+}
+
 
 
 // Retrieve content of file in bundle
@@ -115,7 +140,9 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
     
     
     // inject(<#pathToFile: String#>, <#payloadName: String#>, <#payloadType: String#>)
-    injectFromBundle(asciidocPath, "synchronize", "js")
+    
+    let tmp = tempFile(asciidocPath)
+    injectFromBundle(asciidocPath, tmp, "synchronize", "js")
     
     let tempADPath = tempFile(asciidocPath)
     let tempHTMLPath = tempFile(htmlPath)
