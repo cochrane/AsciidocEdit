@@ -63,7 +63,7 @@ func tempFile(path: String) -> String {
 
 
 // Inject resource into temporary file copy
-func inject(pathToFile: String, payloadName: String, payloadType: String) {
+func injectFromBundle(pathToFile: String, payloadName: String, payloadType: String) {
     
     
     // Get text from file and break it into lines
@@ -113,7 +113,9 @@ func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = fa
     let preprocess_cmd = recallValueOfKey("PREPROCESS_TEX")
     let asciidoctor_cmd = recallValueOfKey("ASCIIDOCTOR")
     
-    inject(asciidocPath, "synchronize", "js")
+    
+    // inject(<#pathToFile: String#>, <#payloadName: String#>, <#payloadType: String#>)
+    injectFromBundle(asciidocPath, "synchronize", "js")
     
     let tempADPath = tempFile(asciidocPath)
     let tempHTMLPath = tempFile(htmlPath)

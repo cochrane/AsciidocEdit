@@ -856,7 +856,7 @@
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="He5-W2-Ufc">
                         <rect key="frame" x="591" y="231" width="166" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="HCu-aN-HTn">
-                            <font key="font" size="12" name=".HelveticaNeueDeskInterface-Regular"/>
+                            <font key="font" metaFont="cellTitle"/>
                             <color key="textColor" red="1" green="0.3904781725" blue="0.01385355425" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
@@ -864,7 +864,7 @@
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WLm-rO-wVT">
                         <rect key="frame" x="590" y="256" width="166" height="17"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="1lN-sa-uzK">
-                            <font key="font" size="12" name=".HelveticaNeueDeskInterface-Regular"/>
+                            <font key="font" metaFont="cellTitle"/>
                             <color key="textColor" red="1" green="0.3904781725" blue="0.01385355425" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="backgroundColor" name="controlDarkShadowColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>

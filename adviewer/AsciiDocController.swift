@@ -64,7 +64,6 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         window.backgroundColor = NSColor.blackColor()
         window.title = "AsciidocEdit"
         
-        
     }
 
     func setupTextView() {
@@ -715,7 +714,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func fetchNoteshareArchiveAction(sender: AnyObject) {
         
-        println("URL = \(urlTextField.stringValue)")
+        println("3: URL = \(urlTextField.stringValue)")
         
         var proceed = false
         
@@ -810,7 +809,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func gotoURL_Action(sender: AnyObject) {
         
-        println("URL = \(urlTextField.stringValue)")
+        println("2: URL = \(urlTextField.stringValue)")
         
         var url = urlTextField.stringValue
         if url.contains("/notebook/") {

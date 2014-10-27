@@ -48,7 +48,7 @@ class Manuscript {
         
         println("\n\n\n")
         
-        println("URL = \(url)")
+        println("1: URL = \(url)")
         
         let path = pathFromURL(url)
         let path_part = path.pathComponents

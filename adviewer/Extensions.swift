@@ -35,6 +35,9 @@ extension String {
     }
 
     func contains(other: String) -> Bool{
+        
+        if self == "" { return false }
+        
         var start = startIndex
         
         do{
