@@ -181,20 +181,16 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             return false
         }
         
-       
-        
         textView.string = readStringFromFile(documentPath!)
         useLaTeXMode = setLatexMode(textView.string! )
         setLatexMenuState()
         setHasIncludes()
         updateDocument(documentPath!)
-        updateUI(refresh: true)
-        
         manuscript = Manuscript(docPath: documentPath!)
+        updateUI(refresh: true)
         putMessage()
-        
-        
         return true
+        
     }
     
     func setupWebview() {
@@ -219,7 +215,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         manageDictionary()
         if setupDocument() { setupWebview() }
         
-        updateUI()
+        updateUI(refresh: false)
+        updateTF()
         
         var directory = directoryOfPath(documentPath!)
         
@@ -228,7 +225,9 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
 
     }
     
-    func updateUI() {
+  
+    
+    func updateTF() {
         
         currentDirectoryTF.stringValue = shortPath(directoryOfPath(documentPath!))
         
@@ -239,6 +238,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         }
         
     }
+
 
     
     override func webView(sender: WebView!, didFinishLoadForFrame frame: WebFrame!) {
@@ -474,7 +474,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             }
         }
         
-        updateUI()
+        // updateUI()
         putMessage()
         
     }
@@ -649,7 +649,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                 userDictionary["remote_notebook"] = remote_id
                 let dictPath = directoryOfPath(documentPath!) + "/config"
                 writeDictionary(dictPath, userDictionary)
-                updateUI()
+                updateUI(refresh: false)
                 
                 putMessage(message: "setting remote notebook to \(remote_id)")
                 return true
@@ -705,7 +705,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         useLaTeXMode = true    /// setLatexMode(documentText)
         textView.string = documentText
         
-        refreshHTML(documentPath!, htmlPath(documentPath!), useLaTexMode: true)
+        refreshHTML(documentPath!, htmlPath(documentPath!), manuscript!)
         updateUI(refresh: true)
         
         let url = documentURL(documentPath!)
@@ -848,6 +848,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     func updateUI(#refresh: Bool) {
         
+        updateTF()
         
         if refresh {
             
@@ -859,7 +860,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             
             if fileExistsAtPath(documentPath!) {
                 
-                refreshHTML(documentPath!, htmlPath(documentPath!), useLaTexMode: useLaTeXMode)
+                refreshHTML(documentPath!, htmlPath(documentPath!), manuscript!)
                 
             }
             

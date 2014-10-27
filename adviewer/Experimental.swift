@@ -35,7 +35,7 @@ class Manuscript {
     
     func macro_path() -> String {
         
-       return "foo"
+       return root + "/macros.tex"
     
     }
     

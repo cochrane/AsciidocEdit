@@ -133,19 +133,22 @@ func bundleContent(fileName: String, resourceType: String) -> String {
 // copy. (2) Apply asciidoctor to the temporary file.
 // (3) Remove the temporary files.
 // refreshHTML goes here
-func refreshHTML(asciidocPath: String, htmlPath: String, useLaTexMode: Bool = false) {
+func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript!) {
     
     let preprocess_cmd = recallValueOfKey("PREPROCESS_TEX")
     let asciidoctor_cmd = recallValueOfKey("ASCIIDOCTOR")
     
     
-    // inject(<#pathToFile: String#>, <#payloadName: String#>, <#payloadType: String#>)
-    
     let tmp = tempFile(asciidocPath)
     injectFromBundle(asciidocPath, tmp, "synchronize", "js")
     
+    println("MACRO FILE: \(manuscript.macro_path())")
+    
+    injectFromFile(tmp, tmp, manuscript.macro_path())
+    
     let tempADPath = tempFile(asciidocPath)
     let tempHTMLPath = tempFile(htmlPath)
+
     
     var innerUseLatexMode = false
     
