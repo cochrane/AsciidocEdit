@@ -309,7 +309,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     func updateTF() {
         
-        currentDirectoryTF.stringValue = shortPath(directoryOfPath(documentPath!))
+        currentDirectoryTF.stringValue = shortPath(directoryOfPath(documentPath!), numberOfParts: 3)
         
         if let id = userDictionary["remote_notebook"] {
             remoteNotebookTF.stringValue = "Remote notebook: \(id)"

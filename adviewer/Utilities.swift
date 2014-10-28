@@ -172,12 +172,8 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
     
     injectFromBundle(asciidocPath, tmp, "synchronize", "js")
     
-    if packageIsInstalled("MAKE_ASCII") {
-        
-        executeCommand(make_ascii_cmd!, [tmp, tmp+"2"])
-        executeCommand("/bin/v", [tmp+"2", tmp])
+    // if packageIsInstalled("MAKE_ASCII") { executeCommand(make_ascii_cmd!, [tmp]) }
     
-    }
     // perl -pe's/[[:^ascii:]]//g' < input.txt > output.txt
     // perl -i.bk -pe 's/[^[:ascii:]]//g;' file
     // perl -pe 's/[^[:ascii:]]//g;' file
@@ -196,8 +192,13 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
         
         if  fileExistsAtPath(macro_path) {
             
+            println("File exists at macro path (2)")
+            
             injectFromFile(tmp, tmp, macro_path)
             
+        } else {
+            
+            println("File does NOT exist at macro path (2)")
         }
         
     }
