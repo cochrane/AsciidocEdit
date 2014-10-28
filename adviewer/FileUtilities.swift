@@ -45,9 +45,13 @@ func isDirectory(path: String) -> Bool {
 
 //MARK: File system
 
+
 // shortPath("User/carlson/Desktop/foo/bar.html", numberOfParts: 1)
+// => bar.html
 // shortPath("User/carlson/Desktop/foo/bar.html", numberOfParts: 2)
+// => foo/bar.html
 // shortPath("User/carlson/Desktop/foo/bar.html", numberOfParts: -1)
+// => User/carlson/Desktop/foo"
 func shortPath(path: String, numberOfParts: Int = 2) -> String {
     
     let components = path.pathComponents
@@ -144,6 +148,14 @@ func pathFromURL(url: String) -> String {
 func fileExistsAtPath(path: String) -> Bool {
     
     return NSFileManager.defaultManager().fileExistsAtPath(path)
+    
+}
+
+func file_in_parent(path: String) -> String {
+    
+    let parent_directory = shortPath(path, numberOfParts: -2)
+    let file = shortPath(path, numberOfParts: 1)
+    return parent_directory + "/" + file
     
 }
 

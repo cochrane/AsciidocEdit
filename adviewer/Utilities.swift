@@ -12,6 +12,7 @@ let ASCIIDOCTOR_PDF = "/Users/carlson/.rbenv/shims/asciidoctor-pdf"
 let ASCIIDOCTOR_EPUB3 = "/Users/carlson/.rbenv/shims/asciidoctor-epub3"
 let PREPROCESS_TEX = "/usr/local/bin/preprocess_tex"
 let GET_NOTEBOOK = "/Users/carlson/Dropbox/bin2/get_notebook"
+let MAKE_ASCII = "/usr/local/bin/make_ascii"
 let DICTIONARY_FILE = "config"
 
 import Foundation
@@ -154,49 +155,75 @@ func bundleContent(fileName: String, resourceType: String) -> String {
 // refreshHTML goes here
 func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript!) {
     
+    let make_ascii_cmd = recallValueOfKey("MAKE_ASCII")
     let preprocess_cmd = recallValueOfKey("PREPROCESS_TEX")
     let asciidoctor_cmd = recallValueOfKey("ASCIIDOCTOR")
     
     
     let tmp = tempFile(asciidocPath)
-    injectFromBundle(asciidocPath, tmp, "synchronize", "js")
-    
-    println("MACRO FILE: \(manuscript.macro_path())")
-
-    if  fileExistsAtPath(manuscript.macro_path()) { injectFromFile(tmp, tmp, manuscript.macro_path()) }
-    
-    let tempADPath = tempFile(asciidocPath)
-    let tempHTMLPath = tempFile(htmlPath)
-
     
     var innerUseLatexMode = false
-    
-    var test_content = readStringFromFile(tempADPath)
+
+    var test_content = readStringFromFile(asciidocPath)
     if test_content.contains(":latex:") {
         
         innerUseLatexMode = true
     }
+    
+    injectFromBundle(asciidocPath, tmp, "synchronize", "js")
+    
+    if packageIsInstalled("MAKE_ASCII") {
+        
+        executeCommand(make_ascii_cmd!, [tmp, tmp+"2"])
+        executeCommand("/bin/v", [tmp+"2", tmp])
+    
+    }
+    // perl -pe's/[[:^ascii:]]//g' < input.txt > output.txt
+    // perl -i.bk -pe 's/[^[:ascii:]]//g;' file
+    // perl -pe 's/[^[:ascii:]]//g;' file
+    
+    println("MACRO FILE: \(manuscript.macro_path())")
+
+    if  innerUseLatexMode && fileExistsAtPath(manuscript.macro_path()) {
+        
+          injectFromFile(tmp, tmp, manuscript.macro_path())
+        
+    } else {
+        
+        let macro_path = file_in_parent(manuscript.macro_path())
+        
+         println("MACRO FILE (2): \(macro_path)")
+        
+        if  fileExistsAtPath(macro_path) {
+            
+            injectFromFile(tmp, tmp, macro_path)
+            
+        }
+        
+    }
+    
+    let tempHTMLPath = tempFile(htmlPath)
     
     if innerUseLatexMode {
         
         var content = ""
         
         if packageIsInstalled("PREPROCESS_TEX") {
-          executeCommand(preprocess_cmd!, [tempADPath, tempADPath])
-          content = readStringFromFile(tempADPath)
+          executeCommand(preprocess_cmd!, [tmp, tmp])
+          content = readStringFromFile(tmp)
           content = ":stem: latexmath\n" + content
         } else {
-           content = readStringFromFile(tempADPath)
+           content = readStringFromFile(tmp)
         }
-        writeStringToFile(content, tempADPath)
+        writeStringToFile(content, tmp)
         
         
     }
     
     if packageIsInstalled("ASCIIDOCTOR") {
-        executeCommand(asciidoctor_cmd!, [tempADPath])
+        executeCommand(asciidoctor_cmd!, [tmp])
         executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
-        executeCommand("/bin/rm", [tempADPath])
+        executeCommand("/bin/rm", [tmp])
     }
     
 }
@@ -431,7 +458,7 @@ func recallValueOfKey(key: String) -> String? {
       return value
     }
     else {
-       println("Recalled: \(key)is NIL")
+       println("Recalled: \(key) is NIL")
        return ""
     }
 

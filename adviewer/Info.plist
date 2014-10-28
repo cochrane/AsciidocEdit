@@ -10,6 +10,7 @@
 			<key>CFBundleTypeExtensions</key>
 			<array>
 				<string>ad</string>
+				<string>tex</string>
 			</array>
 			<key>CFBundleTypeName</key>
 			<string>asciidoc2</string>

@@ -212,10 +212,11 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         let r3 = installPackage("ASCIIDOCTOR_EPUB")
         let r4 = installPackage("GET_NOTEBOOK")
         let r5 = installPackage("PREPROCESS_TEX")
+        let r6 = installPackage("MAKE_ASCII")
         
         println("toolchain checked ...\n")
             
-        toolchainLoaded =  r1 && r2 && r3 && r5
+        toolchainLoaded =  r1 && r2 && r3 && r5 && r6
         
 
         if toolchainLoaded {
