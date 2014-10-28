@@ -16,9 +16,28 @@ let DICTIONARY_FILE = "config"
 
 import Foundation
 
+
+func packageIsInstalled(packageKey: String) -> Bool {
+    
+    if let cmd = recallValueOfKey(packageKey) {
+        
+        
+        println("package installed: \(packageKey)")
+        
+        return fileExistsAtPath(cmd)
+        
+    } else {
+        
+         println("package NOT installed: \(packageKey)")
+        
+        return false
+    }
+    
+}
+
 /*
 class File {
-    
+
     class func exists (path: String) -> Bool {
         return NSFileManager().fileExistsAtPath(path)
     }
@@ -158,40 +177,58 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
         innerUseLatexMode = true
     }
     
-    //if true {
     if innerUseLatexMode {
         
-        executeCommand(preprocess_cmd!, [tempADPath, tempADPath])
-        var content = readStringFromFile(tempADPath)
-        content = ":stem: latexmath\n" + content
+        var content = ""
+        
+        if packageIsInstalled("PREPROCESS_TEX") {
+          executeCommand(preprocess_cmd!, [tempADPath, tempADPath])
+          content = readStringFromFile(tempADPath)
+          content = ":stem: latexmath\n" + content
+        } else {
+           content = readStringFromFile(tempADPath)
+        }
         writeStringToFile(content, tempADPath)
         
         
     }
-    executeCommand(asciidoctor_cmd!, [tempADPath])
-    executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
-    executeCommand("/bin/rm", [tempADPath])
+    
+    if packageIsInstalled("ASCIIDOCTOR") {
+        executeCommand(asciidoctor_cmd!, [tempADPath])
+        executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
+        executeCommand("/bin/rm", [tempADPath])
+    }
     
 }
 
 
 
 func saveAsPDF(filePath: String) {
+    
+    if packageIsInstalled("ASCIIDOCTOR_PDF") {
 
-    executeCommand(ASCIIDOCTOR_PDF, [filePath], verbose: true)
+        executeCommand(ASCIIDOCTOR_PDF, [filePath], verbose: true)
+    
+    }
     
 }
 
 func saveAsEPUB3(filePath: String) {
-    
-    executeCommand(ASCIIDOCTOR_EPUB3, [filePath])
+
+    if packageIsInstalled("ASCIIDOCTOR_EPUB") {
+        
+        executeCommand(ASCIIDOCTOR_EPUB3, [filePath])
+        
+    }
     
 }
 
 func fetchNotebookFromURL(url: String) {
     
-    // executeCommand("pwd", [], verbose: true
-    executeCommand(GET_NOTEBOOK, [url])
+    if packageIsInstalled("GET_NOTEBOOK") {
+        
+        executeCommand(GET_NOTEBOOK, [url])
+    }
     
 }
 
@@ -245,6 +282,8 @@ func fetchNotebook(notebook_url: String, directory: String) -> String {
         // executeCommand("/usr/bin/cd", [directory], verbose: true)
         // executeCommand("/bin/pwd", [], verbose: true)
         // var output = executeCommand(GET_NOTEBOOK, [notebook_url, directory], verbose: true)
+    
+    ASCIIDOCTOR_EPUB3
         var output = executeCommand(GET_NOTEBOOK, [notebook_url, directory], verbose: true)
         
         let pattern = ".ad"

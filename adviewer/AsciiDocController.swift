@@ -37,6 +37,19 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBOutlet weak var urlTextField: NSTextField!
     
+    //////
+    
+    
+    @IBOutlet weak var SaveMenuItem: NSMenuItem!
+    
+    @IBOutlet weak var SaveASPDFMenuItem: NSMenuItem!
+    
+    @IBOutlet weak var SaveAsEPUBMenuItem: NSMenuItem!
+    
+    
+    @IBOutlet weak var FetchNoteshareArchiveMenuItem: NSMenuItem!
+    
+    
     
     var documentPath: String?
     var documentOK = false
@@ -116,22 +129,73 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         return true
     }
     
-    func memorizeKey(key: String) -> Bool {
     
-      if userDictionary[key] == "" {
+    // transer key-value pairs from userDictionary
+    // to NSUserDefaults and return status
+    func copyKeyValuePairToNSUserDefaults(key: String) -> Bool {
+    
+      if userDictionary[key] == nil {
         
         return false
         
       } else {
-        println("KEY: \(key)")
+        
         memorizeKeyValuePair(key, userDictionary[key]!)
         return true
+        
+        }
+        
+    }
+    
+    func packageIsInstalled(packageKey: String) -> Bool {
+        
+        if let cmd = recallValueOfKey(packageKey) {
+            
+           return fileExistsAtPath(cmd)
+            
+        } else {
+            
+            return false
         }
         
     }
     
     
-    func manageDictionary() -> Bool {
+    func installPackage(packageKey: String) -> Bool {
+        
+        var result = false
+        
+        copyKeyValuePairToNSUserDefaults(packageKey)
+        
+        if recallValueOfKey(packageKey) != nil {
+            
+            if packageIsInstalled(packageKey) {
+                
+                println("\(packageKey) INSTALLED\n")
+                
+                return true
+            
+            } else {
+                
+                println("\(packageKey) NOT INSTALLED: NOT FOUND\n")
+                
+                return false
+                
+            }
+            
+        } else {
+            
+            println("\(packageKey) NOT INSTALLED: NO KEY\n")
+            
+            return false
+        }
+
+        
+    }
+    
+    
+    
+    func checkToolChain() -> Bool {
         
         documentPath = getDocumentPath()
         
@@ -140,27 +204,28 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         printDictionary(userDictionary)
 
         var toolchainLoaded = true
-
-        if recallValueOfKey("toolchainLoaded") != "yes" || userDictionary["reloadToolchain"] == "yes" {
         
-            println("Try to load toolchain")
+        println("\nChecking toolchain ...")
+
+        let r1 = installPackage("ASCIIDOCTOR")
+        let r2 = installPackage("ASCIIDOCTOR_PDF")
+        let r3 = installPackage("ASCIIDOCTOR_EPUB")
+        let r4 = installPackage("GET_NOTEBOOK")
+        let r5 = installPackage("PREPROCESS_TEX")
+        
+        println("toolchain checked ...\n")
             
-            toolchainLoaded = memorizeKey("ASCIIDOCTOR")
-            toolchainLoaded = memorizeKey("ASCIIDOCTOR-PDF")
-            toolchainLoaded = memorizeKey("ASCIIDOCTOR-EPUB")
-            toolchainLoaded = memorizeKey("GET_NOTEBOOK")
-            toolchainLoaded = memorizeKey("PREPROCESS_TEX")
-
-        } else {
-
-            println("Toolchain is already in place")
-        }
+        toolchainLoaded =  r1 && r2 && r3 && r5
+        
 
         if toolchainLoaded {
 
             println("Toolchain is loaded")
             memorizeKeyValuePair("toolchainLoaded", "yes")
 
+        } else {
+            
+            println("Toolhcain incomplete")
         }
  
         return toolchainLoaded
@@ -207,16 +272,30 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     }
     
     
+    
+    
+    
+    func setMenuItemStatus() {
+        
+        if !packageIsInstalled("ASCIIDOCTOR") { SaveASPDFMenuItem.enabled = false }
+        if !packageIsInstalled("ASCIIDOCTOR_PDF") { SaveASPDFMenuItem.enabled = false }
+        if !packageIsInstalled("ASCIIDOCTOR_EPUB") { SaveAsEPUBMenuItem.enabled = false }
+        if !packageIsInstalled("GET_NOTEBOOK") { FetchNoteshareArchiveMenuItem.enabled = false }
+        
+    }
+    
     func setup() {
         
         setupWindow()
         setupTextView()
         setupNotifications()
-        manageDictionary()
+        checkToolChain()
         if setupDocument() { setupWebview() }
         
         updateUI(refresh: false)
         updateTF()
+        
+        setMenuItemStatus()
         
         var directory = directoryOfPath(documentPath!)
         
@@ -497,6 +576,28 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
     }
     
+    //MARK: Buttons
+
+    
+    @IBAction func showGuideAction(sender: AnyObject) {
+        
+       
+        textView.string = bundleContent("asciidoc", "ad")
+        documentPath = manuscript!.root + "/asciidoctor.ad"
+        updateUI(refresh: false)
+    
+        
+    }
+    
+    
+    
+    @IBAction func showManualAction(sender: AnyObject) {
+        
+        textView.string = bundleContent("manual", "ad")
+        documentPath = manuscript!.root + "/manual.ad"
+        updateUI(refresh: false)
+        
+    }
     
     
     @IBAction func SaveAsPDFAction(sender: AnyObject) {
@@ -521,6 +622,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
     }
     
+    
+    //MS
     
     @IBAction func browserBack(sender: AnyObject) {
         

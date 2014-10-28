@@ -34,6 +34,9 @@
 		BD95544C199AF9AA002E870B /* synchronize.js in Resources */ = {isa = PBXBuildFile; fileRef = BD95544B199AF9AA002E870B /* synchronize.js */; };
 		BDDA18D619A3F8BB0049F1E0 /* foo.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDDA18D419A3F8BB0049F1E0 /* foo.mm */; };
 		BDE8AC2219FEBC070089CFDB /* FileUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE8AC2119FEBC070089CFDB /* FileUtilities.swift */; };
+		BDE8AC2519FEC1F90089CFDB /* asciidoc.ad in Resources */ = {isa = PBXBuildFile; fileRef = BDE8AC2419FEC1F90089CFDB /* asciidoc.ad */; };
+		BDE8AC2719FECA270089CFDB /* golde512square.png in Resources */ = {isa = PBXBuildFile; fileRef = BDE8AC2619FECA270089CFDB /* golde512square.png */; };
+		BDE8AC2919FECAA50089CFDB /* manual.ad in Resources */ = {isa = PBXBuildFile; fileRef = BDE8AC2819FECAA50089CFDB /* manual.ad */; };
 		BDEBA1781999C80200939D7C /* jquery.js in Resources */ = {isa = PBXBuildFile; fileRef = BDEBA1771999C80200939D7C /* jquery.js */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +82,9 @@
 		BD95544B199AF9AA002E870B /* synchronize.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = synchronize.js; sourceTree = "<group>"; };
 		BDDA18D419A3F8BB0049F1E0 /* foo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = foo.mm; sourceTree = "<group>"; };
 		BDE8AC2119FEBC070089CFDB /* FileUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileUtilities.swift; sourceTree = "<group>"; };
+		BDE8AC2419FEC1F90089CFDB /* asciidoc.ad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = asciidoc.ad; sourceTree = "<group>"; };
+		BDE8AC2619FECA270089CFDB /* golde512square.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = golde512square.png; path = adviewer/golde512square.png; sourceTree = "<group>"; };
+		BDE8AC2819FECAA50089CFDB /* manual.ad */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = manual.ad; sourceTree = "<group>"; };
 		BDEBA16F1999C38300939D7C /* adviewer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "adviewer-Bridging-Header.h"; sourceTree = "<group>"; };
 		BDEBA1771999C80200939D7C /* jquery.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = jquery.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -188,6 +194,9 @@
 		BDEBA1761999C7EB00939D7C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				BDE8AC2819FECAA50089CFDB /* manual.ad */,
+				BDE8AC2619FECA270089CFDB /* golde512square.png */,
+				BDE8AC2419FEC1F90089CFDB /* asciidoc.ad */,
 				BD36FE4C19A231EC00CB31F1 /* tex_mode_preprocess */,
 				BD817131199D0775005287D8 /* icons */,
 				BD95544B199AF9AA002E870B /* synchronize.js */,
@@ -283,12 +292,15 @@
 				BD817143199D0789005287D8 /* icon_256x256@2x.png in Resources */,
 				BD014A0C19FC1F5B00DA6ABF /* red_orange30x100.png in Resources */,
 				BD81713D199D0789005287D8 /* icon_16x16@2x.png in Resources */,
+				BDE8AC2719FECA270089CFDB /* golde512square.png in Resources */,
 				BDEBA1781999C80200939D7C /* jquery.js in Resources */,
 				BD817144199D0789005287D8 /* icon_512x512.png in Resources */,
 				BD014A0A19FC1EA800DA6ABF /* red_orange.png in Resources */,
 				BD81713C199D0789005287D8 /* icon_16x16.png in Resources */,
 				BD36FE4D19A231EC00CB31F1 /* tex_mode_preprocess in Resources */,
+				BDE8AC2519FEC1F90089CFDB /* asciidoc.ad in Resources */,
 				BD95544C199AF9AA002E870B /* synchronize.js in Resources */,
+				BDE8AC2919FECAA50089CFDB /* manual.ad in Resources */,
 				BD1EB9A0198E5C0D006EEC1C /* Images.xcassets in Resources */,
 				BD817142199D0789005287D8 /* icon_256x256.png in Resources */,
 				BD81713E199D0789005287D8 /* icon_32x32.png in Resources */,
