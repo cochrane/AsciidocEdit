@@ -109,8 +109,33 @@ func injectFromBundle(inputPath: String, outputPath: String, payloadName: String
    
 }
 
+
+func catenateFiles(fileList: [String], outputFile: String) {
+    
+    println("\nBEGIN: catenateFile")
+    
+    var outputText = ""
+    
+    for file in fileList {
+        
+        println("Reading \(file) ...")
+        var text = readStringFromFile(file)
+        outputText +=  text
+        
+    }
+    
+    outputText.writeToFile(outputFile, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    
+    
+    println("END: catenateFile\n")
+    
+}
+
+
 // Inject payload into temporary file copy
 func injectFromFile(inputPath: String, outputPath: String, payloadPath: String) {
+    
+    println("\nBEGIN: injectFromFile")
     
     // Get text from file and break it into lines
     let inputText = readStringFromFile(inputPath)
@@ -124,13 +149,19 @@ func injectFromFile(inputPath: String, outputPath: String, payloadPath: String) 
         
         output += line  + "\n"
         if line == "" && firstBlankLineFound == false {
+            println("  ... writing payload ...")
             output += "\n"+payload+"\n\n"
             firstBlankLineFound = true
         }
     }
     
     // Write transformed text to temporary file
+    
+    println("\n-----------------\n\(output)\n------------\n")
     output.writeToFile(outputPath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+    
+    
+    println("END: injectFromFile\n")
     
 }
 
@@ -182,7 +213,9 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
 
     if  innerUseLatexMode && fileExistsAtPath(manuscript.macro_path()) {
         
-          injectFromFile(tmp, tmp, manuscript.macro_path())
+          println("MACRO FILE (1) exists: \(manuscript.macro_path())")
+        
+          catenateFiles([manuscript.macro_path(), tmp], tmp)
         
     } else {
         
@@ -190,11 +223,11 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
         
          println("MACRO FILE (2): \(macro_path)")
         
-        if  fileExistsAtPath(macro_path) {
+        if  innerUseLatexMode && fileExistsAtPath(macro_path) {
             
             println("File exists at macro path (2)")
             
-            injectFromFile(tmp, tmp, macro_path)
+             catenateFiles([macro_path, tmp], tmp)
             
         } else {
             
@@ -202,6 +235,70 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
         }
         
     }
+    
+    ////////
+    
+    var javascript_path = manuscript.root + "/script.js"
+    
+    if  fileExistsAtPath(javascript_path) {
+        
+        catenateFiles([javascript_path, tmp], tmp)
+        
+    } else {
+        
+        javascript_path = file_in_parent(javascript_path)
+        
+        println("MACRO FILE (2): \(javascript_path)")
+        
+        if  fileExistsAtPath(javascript_path) {
+            
+            println("File exists at js path (2)")
+            
+            // injectFromFile(tmp, tmp, javascript_path)
+            catenateFiles([javascript_path, tmp], tmp)
+            
+        } else {
+            
+            println("File does NOT exist at js path (2)")
+        }
+        
+    }
+    
+    //////////
+    
+    var style_path = manuscript.root + "/style.css"
+    
+    if  fileExistsAtPath(style_path) {
+        
+        // injectFromFile(tmp, tmp, style_path)
+         catenateFiles([style_path, tmp], tmp)
+        
+    } else {
+        
+        style_path = file_in_parent(style_path)
+        
+        println("MACRO FILE (2): \(style_path)")
+        
+        if  fileExistsAtPath(style_path) {
+            
+            println("File exists at style path (2)")
+            
+           //  injectFromFile(tmp, tmp, style_path)
+            catenateFiles([style_path, tmp], tmp)
+            
+        } else {
+            
+            println("File does NOT exist at style path (2)")
+        }
+        
+    }
+    
+    
+    
+    
+    /////////
+    
+    
     
     let tempHTMLPath = tempFile(htmlPath)
     
@@ -475,10 +572,10 @@ func executeCommand(command: String, args: [String], verbose: Bool = false ) -> 
     task.arguments = args
     
     
-    if verbose {
-        println("executeCommand")
+    if true {
+        println("\nexecuteCommand")
         println("Running: \(command)")
-        println("Args: \(args)")
+        println("Args: \(args)\n")
     }
     
     let pipe = NSPipe()

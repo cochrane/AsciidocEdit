@@ -451,6 +451,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = adviewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = AsciidocEdit;
 				SWIFT_OBJC_BRIDGING_HEADER = "adviewer/adviewer-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -465,6 +466,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = adviewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_NAME = AsciidocEdit;
 				SWIFT_OBJC_BRIDGING_HEADER = "adviewer/adviewer-Bridging-Header.h";
 			};

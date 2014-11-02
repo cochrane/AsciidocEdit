@@ -302,6 +302,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         //metadata = Metadata( path: directory + "/metadata.txt")
         //metadata!.print()
+        
+
 
     }
     

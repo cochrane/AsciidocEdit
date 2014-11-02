@@ -159,12 +159,14 @@ func file_in_parent(path: String) -> String {
     
 }
 
-func readStringFromFile(pathToFile: String) -> String {
+func readStringFromFile(path: String) -> String {
     
     // let str = File.read(pathToFile, encoding: NSStringEncoding)
-    let str = String.stringWithContentsOfFile(pathToFile)
+    return  String(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)!
+    // XXX: This nees to be dealt with: we should return an Optional
+    // let str = String.stringWithContentsOfFile(pathToFile)
     
-    return str
+    // return str
     
 }
 
