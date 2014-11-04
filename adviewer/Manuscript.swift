@@ -32,7 +32,7 @@ class Manuscript {
     init(docPath: String) {
         
         self.filePath = docPath
-        self.root = directoryOfPath(self.filePath)
+        self.root = File.directoryOf(self.filePath)
         
     }
     
@@ -46,7 +46,7 @@ class Manuscript {
     func foobar (url: String) -> String {
         
        
-        let notebook = shortPath(url, numberOfParts: 1)
+        let notebook = File.baseName(url)
         let name = notebook.componentsSeparatedByString(".")[0]
         println("Notebook: \(name)")
         return name
@@ -66,7 +66,7 @@ class Manuscript {
         domain = path_part[0]
         println("Domain: \(domain)")
         
-        let data = shortPath(url, numberOfParts: 2)
+        let data = File.segment(url, 2)
         let part = data.componentsSeparatedByString("/")
         notebook_id = part[0]
         
@@ -85,7 +85,7 @@ class Manuscript {
     func load() {
         
         println("in Manuscript, filePath =  \(self.filePath)")
-        manuscript = readStringFromFile(self.filePath)
+        manuscript = File.read(self.filePath)
         
         let dir = directoryPath(self.filePath)
         println("Directory path: \(dir)")
@@ -171,7 +171,7 @@ class Manuscript {
         for file in includeList! {
             
             let path = dir + "/" + file
-            let contents = readStringFromFile(path)
+            let contents = File.read(path)
             
             let assetRx = "\(assetType)::.*\\["
             var array = assetRx.match(contents) as [String]

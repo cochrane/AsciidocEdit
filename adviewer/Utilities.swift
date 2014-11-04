@@ -25,7 +25,7 @@ func packageIsInstalled(packageKey: String) -> Bool {
         
         println("package installed: \(packageKey)")
         
-        return fileExistsAtPath(cmd)
+        return File.exists(cmd)
         
     } else {
         
@@ -88,7 +88,7 @@ func injectFromBundle(inputPath: String, outputPath: String, payloadName: String
     
     
     // Get text from file and break it into lines
-    let inputText = readStringFromFile(inputPath)
+    let inputText = File.read(inputPath)
     let jsContent = bundleContent(payloadName, payloadType)
     let lines = inputText.componentsSeparatedByString("\n")
     
@@ -119,7 +119,7 @@ func catenateFiles(fileList: [String], outputFile: String) {
     for file in fileList {
         
         println("Reading \(file) ...")
-        var text = readStringFromFile(file)
+        var text = File.read(file)
         outputText +=  text
         
     }
@@ -138,8 +138,8 @@ func injectFromFile(inputPath: String, outputPath: String, payloadPath: String) 
     println("\nBEGIN: injectFromFile")
     
     // Get text from file and break it into lines
-    let inputText = readStringFromFile(inputPath)
-    let payload = readStringFromFile(payloadPath)
+    let inputText = File.read(inputPath)
+    let payload = File.read(payloadPath)
     let lines = inputText.componentsSeparatedByString("\n")
     
     // Insert Javascript after header
@@ -172,7 +172,7 @@ func bundleContent(fileName: String, resourceType: String) -> String {
     
 
     let bundlePath = NSBundle.mainBundle().pathForResource(fileName, ofType: resourceType)
-    let content = readStringFromFile(bundlePath!)
+    let content = File.read(bundlePath!)
     return content
 
 }
@@ -195,7 +195,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
     
     var innerUseLatexMode = false
 
-    var test_content = readStringFromFile(asciidocPath)
+    var test_content = File.read(asciidocPath)
     if test_content.contains(":latex:") {
         
         innerUseLatexMode = true
@@ -211,7 +211,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
     
     println("MACRO FILE: \(manuscript.macro_path())")
 
-    if  innerUseLatexMode && fileExistsAtPath(manuscript.macro_path()) {
+    if  innerUseLatexMode && File.exists(manuscript.macro_path()) {
         
           println("MACRO FILE (1) exists: \(manuscript.macro_path())")
         
@@ -219,11 +219,11 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
         
     } else {
         
-        let macro_path = file_in_parent(manuscript.macro_path())
+        let macro_path = File.file_in_parent(manuscript.macro_path())
         
          println("MACRO FILE (2): \(macro_path)")
         
-        if  innerUseLatexMode && fileExistsAtPath(macro_path) {
+        if  innerUseLatexMode && File.exists(macro_path) {
             
             println("File exists at macro path (2)")
             
@@ -240,17 +240,17 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
     
     var javascript_path = manuscript.root + "/script.js"
     
-    if  fileExistsAtPath(javascript_path) {
+    if  File.exists(javascript_path) {
         
         catenateFiles([javascript_path, tmp], tmp)
         
     } else {
         
-        javascript_path = file_in_parent(javascript_path)
+        javascript_path = File.file_in_parent(javascript_path)
         
         println("MACRO FILE (2): \(javascript_path)")
         
-        if  fileExistsAtPath(javascript_path) {
+        if  File.exists(javascript_path) {
             
             println("File exists at js path (2)")
             
@@ -268,18 +268,18 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
     
     var style_path = manuscript.root + "/style.css"
     
-    if  fileExistsAtPath(style_path) {
+    if  File.exists(style_path) {
         
         // injectFromFile(tmp, tmp, style_path)
          catenateFiles([style_path, tmp], tmp)
         
     } else {
         
-        style_path = file_in_parent(style_path)
+        style_path = File.file_in_parent(style_path)
         
         println("MACRO FILE (2): \(style_path)")
         
-        if  fileExistsAtPath(style_path) {
+        if  File.exists(style_path) {
             
             println("File exists at style path (2)")
             
@@ -308,12 +308,12 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
         
         if packageIsInstalled("PREPROCESS_TEX") {
           executeCommand(preprocess_cmd!, [tmp, tmp])
-          content = readStringFromFile(tmp)
+          content = File.read(tmp)
           content = ":stem: latexmath\n" + content
         } else {
-           content = readStringFromFile(tmp)
+           content = File.read(tmp)
         }
-        writeStringToFile(content, tmp)
+        File.write(content, tmp)
         
         
     }
@@ -362,7 +362,7 @@ func fetchNotebookFromURL(url: String) {
 // given the current document path
 func dictionaryPath(docPath: String) -> String {
     
-    let currentDirectory = directoryOfPath(docPath)
+    let currentDirectory = File.directoryOf(docPath)
     return join([currentDirectory, DICTIONARY_FILE], separator: "/")
 
 }
@@ -373,9 +373,9 @@ func dictionaryPath(docPath: String) -> String {
 func readDictionary(path: String) -> [String: String] {
     
     
-    if fileExistsAtPath(path) {
+    if File.exists(path) {
         
-        let data = readStringFromFile(path)
+        let data = File.read(path)
         return str2dict(data)
         
     } else {
@@ -388,7 +388,7 @@ func readDictionary(path: String) -> [String: String] {
 
 func writeDictionary(path: String, dict: [String:String]) {
     
-    let currentDirectory = directoryOfPath(path)
+    let currentDirectory = File.directoryOf(path)
     let configFile = join([currentDirectory, DICTIONARY_FILE], separator: "/")
    
      var data = ""
@@ -396,7 +396,7 @@ func writeDictionary(path: String, dict: [String:String]) {
         data += "\(key): \(dict[key]!)\n"
     }
     
-    writeStringToFile(data, path)
+    File.write(data, path)
     
 }
 
@@ -491,7 +491,7 @@ func cleanHTML(directoryPath: String) {
     
     println("directoryPath = \(directoryPath)")
     
-    let fileArray = filesInDirectory(directoryPath)
+    let fileArray = File.ls(directoryPath)
     
     for file in fileArray {
         
@@ -518,7 +518,7 @@ func generateIncludeList(masterFilePath: String)-> [String] {
     
     let masterDirectoryPath = directoryPath(masterFilePath)
     
-    let fileArray = filesInDirectory(masterDirectoryPath)
+    let fileArray = File.ls(masterDirectoryPath)
     
     var array = [String]()
     

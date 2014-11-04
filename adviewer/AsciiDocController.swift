@@ -119,9 +119,9 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         // documentPath = getDocumentPath()
         if path == "" {return false}
-        if !fileExistsAtPath(path) { return false }
+        if !File.exists(path) { return false }
         if isDirectory(path) {return false }
-        let ext = extName(path)
+        let ext = File.extName(path)
         if ext == "" { return false }
         if !contains(["ad", "adoc"], ext) {
             return false
@@ -151,7 +151,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         if let cmd = recallValueOfKey(packageKey) {
             
-           return fileExistsAtPath(cmd)
+           return File.exists(cmd)
             
         } else {
             
@@ -247,7 +247,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             return false
         }
         
-        textView.string = readStringFromFile(documentPath!)
+        textView.string = File.read(documentPath!)
         useLaTeXMode = setLatexMode(textView.string! )
         setLatexMenuState()
         setHasIncludes()
@@ -298,7 +298,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         setMenuItemStatus()
         
-        var directory = directoryOfPath(documentPath!)
+        var directory = File.directoryOf(documentPath!)
         
         //metadata = Metadata( path: directory + "/metadata.txt")
         //metadata!.print()
@@ -311,7 +311,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     func updateTF() {
         
-        currentDirectoryTF.stringValue = shortPath(directoryOfPath(documentPath!), numberOfParts: 3)
+        currentDirectoryTF.stringValue = File.segment(File.directoryOf(documentPath!), 3)
         
         if let id = userDictionary["remote_notebook"] {
             remoteNotebookTF.stringValue = "Remote notebook: \(id)"
@@ -352,7 +352,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         memorizeKeyValuePair("documentURL", url)
         
-        documentText = readStringFromFile(documentPath!)
+        documentText = File.read(documentPath!)
         textView.string = documentText
         
         updateUI(refresh: true)
@@ -406,7 +406,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         let oldDocumentPath = documentPath
         let oldDocumentURL = documentURL(oldDocumentPath!)
-        let fileContents = readStringFromFile(oldDocumentPath!)
+        let fileContents = File.read(oldDocumentPath!)
         
         
         let newFilePanel = NSSavePanel()
@@ -446,7 +446,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         let oldDocumentPath = documentPath
         let oldDocumentURL = documentURL(oldDocumentPath!)
-        let fileContents = readStringFromFile(oldDocumentPath!)
+        let fileContents = File.read(oldDocumentPath!)
         
         
         let newFilePanel = NSSavePanel()
@@ -537,7 +537,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     memorizeKeyValuePair("documentURL", url)
                     recallValueOfKey("documentURL")
                     
-                    documentText = readStringFromFile(documentPath!)
+                    documentText = File.read(documentPath!)
                     useLaTeXMode = setLatexMode(documentText)
                     textView.string = documentText
                     
@@ -753,7 +753,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             if user_id == nil {
                 
                 userDictionary["remote_notebook"] = remote_id
-                let dictPath = directoryOfPath(documentPath!) + "/config"
+                let dictPath = File.directoryOf(documentPath!) + "/config"
                 writeDictionary(dictPath, userDictionary)
                 updateUI(refresh: false)
                 
@@ -793,7 +793,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             id = userDictionary["remote_notebook"]!
              println("I used the stored ID")
         }
-        let directory = directoryOfPath(documentPath!)
+        let directory = File.directoryOf(documentPath!)
         println("MANUSCRIPT NOTEBOOK ID: \(id)")
         println("DIRECTORY: \(directory)")
         let message = fetchNotebook(id, directory)
@@ -804,10 +804,10 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     func updateAfterFetch() {
     
-        let directory = directoryOfPath(documentPath!)
+        let directory = File.directoryOf(documentPath!)
         
         documentPath = join([directory, "manifest.ad"], separator: "/")
-        documentText = readStringFromFile(documentPath!)
+        documentText = File.read(documentPath!)
         useLaTeXMode = true    /// setLatexMode(documentText)
         textView.string = documentText
         
@@ -938,8 +938,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         if message == "" {
           let word_count = documentText.countWords()
           let page_count = Int(trunc(Double(word_count)/305))
-        
-            messageLabel.stringValue = "\(shortPath(documentPath!,numberOfParts:1)): word count: \(word_count), about \(page_count) pages"
+    
+            messageLabel.stringValue = "\(File.segment(documentPath!,1)): word count: \(word_count), about \(page_count) pages"
             
         }
         
@@ -964,7 +964,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                 
             }
             
-            if fileExistsAtPath(documentPath!) {
+            if File.exists(documentPath!) {
                 
                 refreshHTML(documentPath!, htmlPath(documentPath!), manuscript!)
                 
@@ -1056,12 +1056,12 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         println("FOO::BAR")
         
-        if fileExistsAtPath(filename){
+        if File.exists(filename){
             
             println("I AM IN application - openFile, found \(filename)")
             let url = "file:///"+filename
             
-            documentText = readStringFromFile(filename)
+            documentText = File.read(filename)
             textView.string = documentText
             updateUI(refresh: true)
             putMessage()

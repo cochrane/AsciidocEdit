@@ -16,8 +16,8 @@ class Metadata {
     
     init( path: String ) {
         
-    if fileExistsAtPath(path)  {
-       data = readStringFromFile(path)
+    if File.exists(path)  {
+       data = File.read(path)
        dictionary = str2dict(data!)
     }
 
