@@ -30,7 +30,7 @@ class StringDictionary {
         
         if File.exists(path) {
             println("path: \(path)")
-            println("FILE EXISTS")                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+            println("FILE EXISTS")                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
             
             let data = File.read(path)
             
