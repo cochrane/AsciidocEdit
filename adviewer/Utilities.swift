@@ -613,15 +613,7 @@ func setLatexMode(content: String) -> Bool {
 
 //MARK: Extensions
 
-extension String {
-    
-    func countWords() -> Int {
-        
-        let word = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-        
-        return word.count
-    }
-}
+
 
 func printDictionary(dict: [String:String]) {
     

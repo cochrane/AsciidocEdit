@@ -8,6 +8,9 @@
 
 import Foundation
 
+
+// Class Manuscript provides utilities for discovering the 
+// assets (image, video, audio) of an archive.
 class Manuscript {
     
 

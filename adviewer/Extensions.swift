@@ -7,7 +7,8 @@
 //
 
 import Foundation
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                                                                                                           
                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
 extension String {
@@ -94,6 +95,14 @@ extension String {
         
         let spaceSet = NSCharacterSet.whitespaceCharacterSet()
         return self.stringByTrimmingCharactersInSet(spaceSet)
+    }
+    
+    
+    func countWords() -> Int {
+        
+        let word = self.componentsSeparatedByCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        return word.count
     }
     
 }

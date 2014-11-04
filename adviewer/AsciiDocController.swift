@@ -856,8 +856,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         println("---------------------------")
         
          manuscript = Manuscript(docPath: documentPath!)
-        manuscript!.filePath = documentPath!
-             manuscript!.load()
+         manuscript!.filePath = documentPath!
+         manuscript!.load()
         
     }
     
