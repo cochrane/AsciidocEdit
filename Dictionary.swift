@@ -18,7 +18,6 @@ class StringDictionary {
     
     init(path: String) {
         
-        
         self.path = path
         println("path: \(self.path)")
     }
@@ -30,7 +29,7 @@ class StringDictionary {
         
         if File.exists(path) {
             println("path: \(path)")
-            println("FILE EXISTS")                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+            println("FILE EXISTS")
             
             let data = File.read(path)
             
@@ -94,5 +93,6 @@ class StringDictionary {
             
         }
     }
+
     
 }

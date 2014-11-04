@@ -136,6 +136,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     }
     
     
+    
+    // t
     // transer key-value pairs from userDictionary
     // to NSUserDefaults and return status
     func copyKeyValuePairToNSUserDefaults(key: String) -> Bool {
@@ -153,6 +155,8 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
     }
     
+    
+    // t
     func packageIsInstalled(packageKey: String) -> Bool {
         
         if let cmd = recallValueOfKey(packageKey) {
@@ -167,6 +171,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     }
     
     
+    // t
     func installPackage(packageKey: String) -> Bool {
         
         var result = false
@@ -306,8 +311,15 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         var directory = File.directoryOf(documentPath!)
         
-        //metadata = Metadata( path: directory + "/metadata.txt")
-        //metadata!.print()
+       ///////////////////
+        
+        let toolchain = Toolchain(path: "/Users/carlson/Desktop/tools.config")
+        toolchain.check()
+        
+        println("PAUSE")
+        
+        
+       /////////////////////
 
     }
     

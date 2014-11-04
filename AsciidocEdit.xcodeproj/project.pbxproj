@@ -85,7 +85,7 @@
 		BD81713B199D0789005287D8 /* icon_512x512@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "icon_512x512@2x.png"; path = "mac.iconset/icon_512x512@2x.png"; sourceTree = "<group>"; };
 		BD955449199A696D002E870B /* AsciiDocController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsciiDocController.swift; sourceTree = "<group>"; };
 		BD95544B199AF9AA002E870B /* synchronize.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = synchronize.js; sourceTree = "<group>"; };
-		BDB432F91A094ABB00237FC5 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tools.swift; sourceTree = "<group>"; };
+		BDB432F91A094ABB00237FC5 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tools.swift; path = ../Tools.swift; sourceTree = "<group>"; };
 		BDDA18D419A3F8BB0049F1E0 /* foo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = foo.mm; sourceTree = "<group>"; };
 		BDE241DD1A08E770004191B8 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		BDE241DF1A08E828004191B8 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = ../File.swift; sourceTree = "<group>"; };
@@ -118,7 +118,6 @@
 		BD1EB98D198E5C0D006EEC1C = {
 			isa = PBXGroup;
 			children = (
-				BDB432F91A094ABB00237FC5 /* Tools.swift */,
 				BD1EB998198E5C0D006EEC1C /* adviewer */,
 				BD1EB9AB198E5C0D006EEC1C /* adviewerTests */,
 				BD1EB997198E5C0D006EEC1C /* Products */,
@@ -147,6 +146,7 @@
 				BD36FE4E19A3653D00CB31F1 /* Manuscript.swift */,
 				BD36FE5019A39C4600CB31F1 /* Crypto.swift */,
 				BD1EB9A1198E5C0D006EEC1C /* MainMenu.xib */,
+				BDB432F91A094ABB00237FC5 /* Tools.swift */,
 				BDE241DF1A08E828004191B8 /* File.swift */,
 				BDE8AC2119FEBC070089CFDB /* FileUtilities.swift */,
 				BDEBA1761999C7EB00939D7C /* Resources */,
