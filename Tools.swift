@@ -1,4 +1,4 @@
-//
+                         //
 //  Tools.swift
 //  AsciidocEdit
 //
@@ -6,33 +6,81 @@
 //  Copyright (c) 2014 James Carlson. All rights reserved.
 //
 
+
+
+
 import Foundation
 
 // requires -- a userDictionary, the functions memorizeKeyValuePair, recallValueOfKey
 
 class Toolchain {
 
-    var dict : StringDictionary  // holds pairs lke "ASCIIDOCTOR", '/usr/local/bin/asciidoctor
+    let toolBox = ["ASCIIDOCTOR", "ASCIIDOCTOR_PDF", "ASCIIDOCTOR_EPUB", "GET_NOTEBOOK", "MAKE_ASCII"]
+    let newSettings: StringDictionary
+    var installed = [:] as [String:Bool]
     
     init(path: String) {
         
-        self.dict = StringDictionary(path: path)
-        self.dict.read()
+        self.newSettings = StringDictionary(path: path)
+        self.newSettings.read()
 
     }
     
+    
+    func setupTool(tool: String) -> Bool {
+        
+        
+        // If there is a new location for the tool, try to load it
+        if newSettings.value(tool) != nil && File.exists(newSettings.value(tool)!) {
+            
+            memorizeKeyValuePair(tool, newSettings.value(tool)!)
+            installed[tool] = true
+            println("\(tool) installed with NEW SETTNG")
+            return true
+        
+        }
+        
+        // Otherwise, try to load the tool from location used last time
+        if recallValueOfKey(tool) != nil && File.exists(recallValueOfKey(tool)!) {
+            
+            installed[tool] = true
+            println("\(tool) installed with OLD SETTNG")
+            return true
+        
+        }
+        
+        // Fail
+        installed[tool] = false
+        println("\(tool) NOT installed")
+        return false
+        
+    }
+    
+    func setup() -> Bool {
+        
+        var toolChainComplete = true
+    
+        for tool in toolBox {
+            
+            let result = setupTool(tool)
+            toolChainComplete = result && toolChainComplete
+            
+        }
+        
+        return toolChainComplete
+    }
+    
+    
+    
     func run(tool: String, args: [String], verbose: Bool) -> Bool {
         
-        if installed(tool) {
+        if installed[tool] != nil {
             
-            var toolPath = dict.value(tool)!
-            Toolchain.executeCommand(toolPath, args: args, verbose: verbose)
+            let toolPath = recallValueOfKey(tool)
+            Toolchain.executeCommand(toolPath!, args: args, verbose: verbose)
             return true
             
-        } else {
-            
-            return false
-        }
+        } else { return false }
         
     }
     
@@ -67,87 +115,6 @@ class Toolchain {
             
             return output
             
-    }
-    
-    
-    // transer key-value pairs from userDictionary
-    // to NSUserDefaults and return status
-    // FORMERLY: copyKeyValuePairToNSUserDefaults
-    func memorize(tool: String) -> Bool {
-        
-        if dict.value(tool) == nil {
-            
-            return false
-            
-        } else {
-            
-            memorizeKeyValuePair(tool, dict.value(tool)!)
-            return true
-            
-        }
-        
-    }
-    
-    
-    func installed(tool: String) -> Bool {
-    
-        if let cmd = dict.value(tool) {
-            
-            return File.exists(cmd)
-            
-        } else {
-            
-            return false
-        }
-        
-    }
-    
-    func install(tool: String) -> Bool {
-        
-        
-        // Ensure that tool neme and location are remembered if valid
-        if dict.value(tool) != nil {
-          memorizeKeyValuePair(tool, dict.value(tool)!)
-          println("Memorized: \(tool)")
-        } else {
-            return false
-        }
-        
-        return installed(tool)
-        
-    }
-    
-    
-    func check() -> Bool {
-        
-        var toolchainLoaded = true
-        
-        println("\nChecking toolchain ...")
-        
-        for tool in dict.dict.keys {
-            
-            let result = install(tool)
-            if result == true {
-                println("\(tool) loaded")
-            } else {
-                println("\(tool) NOT FOUND")
-            }
-            toolchainLoaded = result && toolchainLoaded
-        }
-        
-        if toolchainLoaded {
-            
-            println("Toolchain is loaded")
-            memorizeKeyValuePair("toolchainLoaded", "yes")
-            
-        } else {
-            
-            memorizeKeyValuePair("toolchainLoaded", "no")
-            println("Toolhcain incomplete")
-        }
-        
-        return toolchainLoaded
-        
     }
     
     

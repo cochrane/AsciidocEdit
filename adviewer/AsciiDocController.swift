@@ -312,9 +312,9 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         var directory = File.directoryOf(documentPath!)
         
        ///////////////////
-        
-        let toolchain = Toolchain(path: "/Users/carlson/Desktop/tools.config")
-        toolchain.check()
+
+        let toolchain = Toolchain(path: "/Users/carlson/Desktoooop/tools.config")
+        toolchain.setup()
         
         println("PAUSE")
         
