@@ -110,26 +110,7 @@ func injectFromBundle(inputPath: String, outputPath: String, payloadName: String
 }
 
 
-func catenateFiles(fileList: [String], outputFile: String) {
-    
-    println("\nBEGIN: catenateFile")
-    
-    var outputText = ""
-    
-    for file in fileList {
-        
-        println("Reading \(file) ...")
-        var text = File.read(file)
-        outputText +=  text
-        
-    }
-    
-    outputText.writeToFile(outputFile, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
-    
-    
-    println("END: catenateFile\n")
-    
-}
+
 
 
 // Inject payload into temporary file copy
@@ -215,7 +196,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
         
           println("MACRO FILE (1) exists: \(manuscript.macro_path())")
         
-          catenateFiles([manuscript.macro_path(), tmp], tmp)
+          File.catenate([manuscript.macro_path(), tmp], tmp)
         
     } else {
         
@@ -227,7 +208,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
             
             println("File exists at macro path (2)")
             
-             catenateFiles([macro_path, tmp], tmp)
+             File.catenate([macro_path, tmp], tmp)
             
         } else {
             
@@ -242,7 +223,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
     
     if  File.exists(javascript_path) {
         
-        catenateFiles([javascript_path, tmp], tmp)
+        File.catenate([javascript_path, tmp], tmp)
         
     } else {
         
@@ -255,7 +236,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
             println("File exists at js path (2)")
             
             // injectFromFile(tmp, tmp, javascript_path)
-            catenateFiles([javascript_path, tmp], tmp)
+            File.catenate([javascript_path, tmp], tmp)
             
         } else {
             
@@ -271,7 +252,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
     if  File.exists(style_path) {
         
         // injectFromFile(tmp, tmp, style_path)
-         catenateFiles([style_path, tmp], tmp)
+         File.catenate([style_path, tmp], tmp)
         
     } else {
         
@@ -284,7 +265,7 @@ func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript
             println("File exists at style path (2)")
             
            //  injectFromFile(tmp, tmp, style_path)
-            catenateFiles([style_path, tmp], tmp)
+            File.catenate([style_path, tmp], tmp)
             
         } else {
             
@@ -358,47 +339,6 @@ func fetchNotebookFromURL(url: String) {
 }
 
 
-// return path for default dictionary 
-// given the current document path
-func dictionaryPath(docPath: String) -> String {
-    
-    let currentDirectory = File.directoryOf(docPath)
-    return join([currentDirectory, DICTIONARY_FILE], separator: "/")
-
-}
-
-// Read dictionary data from the file at path
-// and return the dictionary.  If there is
-// no file, return the empty dictionary
-func readDictionary(path: String) -> [String: String] {
-    
-    
-    if File.exists(path) {
-        
-        let data = File.read(path)
-        return str2dict(data)
-        
-    } else {
-        
-        return [:]
-        
-    }
-
-}
-
-func writeDictionary(path: String, dict: [String:String]) {
-    
-    let currentDirectory = File.directoryOf(path)
-    let configFile = join([currentDirectory, DICTIONARY_FILE], separator: "/")
-   
-     var data = ""
-    for key in dict.keys {
-        data += "\(key): \(dict[key]!)\n"
-    }
-    
-    File.write(data, path)
-    
-}
 
 
 
@@ -461,29 +401,6 @@ func join(array: [String], separator: String = "") -> String {
     
     return str
 }
-
-// Return dictionary from string of the form
-// str = "foo:23\nbar:87". Thus dict = str2dict(str)
-// yields dict with dict["foo"] = 23, etc.
-func str2dict(str: String) ->[String: String] {
-    
-    var dict = [String:String]()
-    
-    let lines = str.componentsSeparatedByString("\n")
-    
-    for line in lines {
-        
-        var part = line.componentsSeparatedByString(":")
-        if part.count == 2 {
-          var key = part[0]
-          var value = part[1].trim()
-          dict[key] = value
-        }
-    }
-    
-    return dict
-}
-
 
 
 func cleanHTML(directoryPath: String) {

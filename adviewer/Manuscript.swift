@@ -94,7 +94,7 @@ class Manuscript {
         getImageList()
         getVideoList()
         getAudioList()
-        self.dictionary = str2dict(DICTIONARY_FILE)
+        // setupDictionary()
         
     }
     
@@ -137,15 +137,7 @@ class Manuscript {
     
     func gitURL() -> String {
         
-        if let dict = dictionary {
-        
-            return "https://" + dict["github"]!
-            
-        } else {
-        
-            return ""
-            
-        }
+        return ""
     }
     
     func xclean(var x: String, assetType: String) -> String {

@@ -10,29 +10,7 @@ import Foundation
 
 class Metadata {
     
-    var dictionary: [String:String]?
-    var fileName: String?
-    var data: String?
-    
-    init( path: String ) {
-        
-    if File.exists(path)  {
-       data = File.read(path)
-       dictionary = str2dict(data!)
-    }
-
-        
-    }
-    
-    func print() {
-        
-        println("DICTIONARY")
-        for key in dictionary!.keys {
-            
-            println("dict[\(key)] = \(dictionary![key])")
-        }
-    }
-    
+   
 }
 
     

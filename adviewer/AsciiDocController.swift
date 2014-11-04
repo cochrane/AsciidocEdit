@@ -62,13 +62,18 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     var textLength = 0
     var hasIncludes = false
     
-    var userDictionary = [:] as [String:String]
+    var userDictionary : StringDictionary?
     
     var manuscript : Manuscript?
     var metadata : Metadata?
    
    
-
+    func setupDictionary() {
+        
+        let currentDirectory = File.directoryOf(documentPath!)
+        let dictionaryPath = [currentDirectory, "config"].join("/")
+        userDictionary = StringDictionary(path: dictionaryPath)
+    }
     
     func setupWindow() {
         
@@ -126,6 +131,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         if !contains(["ad", "adoc"], ext) {
             return false
         }
+        setupDictionary()
         return true
     }
     
@@ -134,13 +140,13 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     // to NSUserDefaults and return status
     func copyKeyValuePairToNSUserDefaults(key: String) -> Bool {
     
-      if userDictionary[key] == nil {
+      if userDictionary!.value(key) == nil {
         
         return false
         
       } else {
         
-        memorizeKeyValuePair(key, userDictionary[key]!)
+        memorizeKeyValuePair(key, userDictionary!.value(key)!)
         return true
         
         }
@@ -199,9 +205,9 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         documentPath = getDocumentPath()
         
-        let dictPath = dictionaryPath(documentPath!)
-        userDictionary = readDictionary(dictPath)
-        printDictionary(userDictionary)
+        setupDictionary()
+        userDictionary?.read()
+        userDictionary?.print()
 
         var toolchainLoaded = true
         
@@ -311,7 +317,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         currentDirectoryTF.stringValue = File.segment(File.directoryOf(documentPath!), 3)
         
-        if let id = userDictionary["remote_notebook"] {
+        if let id = userDictionary?.value("remote_notebook") {
             remoteNotebookTF.stringValue = "Remote notebook: \(id)"
         } else {
             remoteNotebookTF.stringValue = "Remote notebook: none"
@@ -541,9 +547,9 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     
                     setHasIncludes()
                     
-                    let dictPath = dictionaryPath(documentPath!)
-                    userDictionary = readDictionary(dictPath)
-                    printDictionary(userDictionary)
+                    setupDictionary()
+                    userDictionary?.read()
+                    userDictionary?.print()
                     
         
                     updateDocument(documentPath!)
@@ -740,19 +746,18 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             adWebView.mainFrameURL = archiveURL
             adWebView.needsDisplay = true
             
-            let dictPath = dictionaryPath(documentPath!)
-            userDictionary = readDictionary(dictPath)
-            printDictionary(userDictionary)
+            userDictionary?.read()
+            userDictionary?.print()
             
             let remote_id = manuscript!.notebook_id!
-            let user_id = userDictionary["remote_notebook"]
+            let user_id = userDictionary?.value("remote_notebook")
             
             
             if user_id == nil {
                 
-                userDictionary["remote_notebook"] = remote_id
+                userDictionary?.insert(key: "remote_notebook", value: remote_id)
                 let dictPath = File.directoryOf(documentPath!) + "/config"
-                writeDictionary(dictPath, userDictionary)
+                userDictionary?.write()
                 updateUI(refresh: false)
                 
                 putMessage(message: "setting remote notebook to \(remote_id)")
@@ -783,18 +788,18 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
     func fetchAndUpdate() {
         
-        var id = ""
-        if userDictionary["remote_notebook"] == nil {
+        var id = Optional("")
+        if userDictionary?.value("remote_notebook") == nil {
             id = manuscript!.notebook_id!
             println("I got the ID from the server")
         } else {
-            id = userDictionary["remote_notebook"]!
+            id = userDictionary?.value("remote_notebook")
              println("I used the stored ID")
         }
         let directory = File.directoryOf(documentPath!)
         println("MANUSCRIPT NOTEBOOK ID: \(id)")
         println("DIRECTORY: \(directory)")
-        let message = fetchNotebook(id, directory)
+        let message = fetchNotebook(id!, directory)
         putMessage(message: message)
         
        
@@ -823,7 +828,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         var proceed = false
         
-        if userDictionary["remote_notebook"] == nil {
+        if userDictionary?.value("remote_notebook") == nil {
             proceed = askServerToArchiveNotebook()
         } else {
             proceed = true

@@ -11,6 +11,8 @@ import Foundation
 
 class File {
     
+    //MARK: Path functions
+    
     class func pathLength(path: String) -> Int {
         
         let components = path.pathComponents
@@ -94,11 +96,6 @@ class File {
         return result
     }
     
-    class func directoryOf(path: String) -> String {
-        
-        return File.segment(path, -1)
-        
-    }
     
     class func exists(path: String) -> Bool {
         
@@ -106,7 +103,37 @@ class File {
         
     }
     
-    //////////////////////
+    
+    //MARK: Operations
+    
+    class func catenate(fileList: [String], _ outputFile: String) {
+        
+        println("\nBEGIN: catenateFile")
+        
+        var outputText = ""
+        
+        for file in fileList {
+            
+            println("Reading \(file) ...")
+            var text = File.read(file)
+            outputText +=  text
+            
+        }
+        
+        outputText.writeToFile(outputFile, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+        
+        
+        println("END: catenateFile\n")
+        
+    }
+    
+    //MARK: Directory
+    
+    class func directoryOf(path: String) -> String {
+        
+        return File.segment(path, -1)
+        
+    }
     
     class func ls(directoryPath: String  ) -> [String] {
         
@@ -141,7 +168,7 @@ class File {
     }
     
     
-    /////////////////////
+    //MARK: Input-Output
     
     
     class func read(path: String) -> String {

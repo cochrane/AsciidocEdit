@@ -56,7 +56,7 @@
 /* Begin PBXFileReference section */
 		BD014A0919FC1EA800DA6ABF /* red_orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_orange.png; sourceTree = "<group>"; };
 		BD014A0B19FC1F5B00DA6ABF /* red_orange30x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_orange30x100.png; sourceTree = "<group>"; };
-		BD1D1D3D1A0916D800196C6E /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
+		BD1D1D3D1A0916D800196C6E /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dictionary.swift; path = ../Dictionary.swift; sourceTree = "<group>"; };
 		BD1EB996198E5C0D006EEC1C /* AsciidocEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsciidocEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1EB99A198E5C0D006EEC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD1EB99B198E5C0D006EEC1C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -116,7 +116,6 @@
 		BD1EB98D198E5C0D006EEC1C = {
 			isa = PBXGroup;
 			children = (
-				BD1D1D3D1A0916D800196C6E /* Dictionary.swift */,
 				BD1EB998198E5C0D006EEC1C /* adviewer */,
 				BD1EB9AB198E5C0D006EEC1C /* adviewerTests */,
 				BD1EB997198E5C0D006EEC1C /* Products */,
@@ -139,6 +138,7 @@
 				BD955449199A696D002E870B /* AsciiDocController.swift */,
 				BD1EB9B8198E7AD6006EEC1C /* Utilities.swift */,
 				BD5F09D219FAB74D00798CE1 /* Metadata.swift */,
+				BD1D1D3D1A0916D800196C6E /* Dictionary.swift */,
 				BD36FE4A19A227B400CB31F1 /* Extensions.swift */,
 				BDE241DD1A08E770004191B8 /* ArrayExtensions.swift */,
 				BD36FE4E19A3653D00CB31F1 /* Manuscript.swift */,
