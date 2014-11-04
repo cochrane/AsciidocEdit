@@ -18,7 +18,7 @@ func directoryPath(path: String) -> String {
     let components = path.pathComponents
     let lastIndex = components.count - 1
     let foo = Array(components[0..<lastIndex])
-    return join(foo, separator: "/")
+    return foo.join("/")
     
 }
 

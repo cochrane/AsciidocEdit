@@ -72,12 +72,12 @@ class Toolchain {
     
     
     
-    func run(tool: String, args: [String], verbose: Bool) -> Bool {
+    func run(tool: String, _ args: [String], verbose: Bool = false) -> Bool {
         
         if installed[tool] != nil {
             
             let toolPath = recallValueOfKey(tool)
-            Toolchain.executeCommand(toolPath!, args: args, verbose: verbose)
+            Toolchain.executeCommand(toolPath!, args, verbose: verbose)
             return true
             
         } else { return false }
@@ -86,7 +86,7 @@ class Toolchain {
     
     
     
-    class func executeCommand(command: String, args: [String], verbose: Bool = false ) -> String {
+    class func executeCommand(command: String, _ args: [String], verbose: Bool = false ) -> String {
             
             let task = NSTask()
             

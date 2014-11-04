@@ -1,4 +1,4 @@
-                //
+ //
 //  controller.swift
 //  adviewer
 //
@@ -15,41 +15,19 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     
     @IBOutlet weak var window: NSWindow!
-    
-    
-    
     @IBOutlet weak var scrollView: NSScrollView!
-   
     @IBOutlet var textView: NSTextView!
-    
-    
     @IBOutlet weak var adWebView: WebView!
-    
     @IBOutlet weak var messageLabel: NSTextField!
-    
-    
     @IBOutlet weak var latexMenuItem: NSMenuItem!
-    
     @IBOutlet weak var currentDirectoryTF: NSTextField!
-    
     @IBOutlet weak var remoteNotebookTF: NSTextField!
-    
-    
     @IBOutlet weak var urlTextField: NSTextField!
     
-    //////
-    
-    
     @IBOutlet weak var SaveMenuItem: NSMenuItem!
-    
     @IBOutlet weak var SaveASPDFMenuItem: NSMenuItem!
-    
     @IBOutlet weak var SaveAsEPUBMenuItem: NSMenuItem!
-    
-    
     @IBOutlet weak var FetchNoteshareArchiveMenuItem: NSMenuItem!
-    
-    
     
     var documentPath: String?
     var documentOK = false
@@ -65,9 +43,10 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     var userDictionary : StringDictionary?
     
     var manuscript : Manuscript?
+    var processor : ManuscriptProcessor?
     var metadata : Metadata?
-   
-   
+    
+
     func setupDictionary() {
         
         let currentDirectory = File.directoryOf(documentPath!)
@@ -156,98 +135,14 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     }
     
     
-    // t
-    func packageIsInstalled(packageKey: String) -> Bool {
-        
-        if let cmd = recallValueOfKey(packageKey) {
-            
-           return File.exists(cmd)
-            
-        } else {
-            
-            return false
-        }
-        
-    }
-    
-    
-    // t
-    func installPackage(packageKey: String) -> Bool {
-        
-        var result = false
-        
-        copyKeyValuePairToNSUserDefaults(packageKey)
-        
-        if recallValueOfKey(packageKey) != nil {
-            
-            if packageIsInstalled(packageKey) {
-                
-                println("\(packageKey) INSTALLED\n")
-                
-                return true
-            
-            } else {
-                
-                println("\(packageKey) NOT INSTALLED: NOT FOUND\n")
-                
-                return false
-                
-            }
-            
-        } else {
-            
-            println("\(packageKey) NOT INSTALLED: NO KEY\n")
-            
-            return false
-        }
-
-        
-    }
-    
-    
-    
-    func checkToolChain() -> Bool {
-        
-        documentPath = getDocumentPath()
-        
-        setupDictionary()
-        userDictionary?.read()
-        userDictionary?.print()
-
-        var toolchainLoaded = true
-        
-        println("\nChecking toolchain ...")
-
-        let r1 = installPackage("ASCIIDOCTOR")
-        let r2 = installPackage("ASCIIDOCTOR_PDF")
-        let r3 = installPackage("ASCIIDOCTOR_EPUB")
-        let r4 = installPackage("GET_NOTEBOOK")
-        let r5 = installPackage("PREPROCESS_TEX")
-        let r6 = installPackage("MAKE_ASCII")
-        
-        println("toolchain checked ...\n")
-            
-        toolchainLoaded =  r1 && r2 && r3 && r5 && r6
-        
-
-        if toolchainLoaded {
-
-            println("Toolchain is loaded")
-            memorizeKeyValuePair("toolchainLoaded", "yes")
-
-        } else {
-            
-            println("Toolhcain incomplete")
-        }
- 
-        return toolchainLoaded
-        
-    }
     
     func setupDocument() -> Bool {
         
+       
       
         documentPath = getDocumentPath()
+        
+       
         
         documentOK = setupDocumentPath(documentPath!)
         
@@ -259,7 +154,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         }
         
         textView.string = File.read(documentPath!)
-        useLaTeXMode = setLatexMode(textView.string! )
+        // useLaTeXMode = processor!.setLatexMode(textView.string! ) // ????
         setLatexMenuState()
         setHasIncludes()
         updateDocument(documentPath!)
@@ -289,11 +184,12 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     func setMenuItemStatus() {
         
+        /*
         if !packageIsInstalled("ASCIIDOCTOR") { SaveASPDFMenuItem.enabled = false }
         if !packageIsInstalled("ASCIIDOCTOR_PDF") { SaveASPDFMenuItem.enabled = false }
         if !packageIsInstalled("ASCIIDOCTOR_EPUB") { SaveAsEPUBMenuItem.enabled = false }
         if !packageIsInstalled("GET_NOTEBOOK") { FetchNoteshareArchiveMenuItem.enabled = false }
-        
+        */
     }
     
     func setup() {
@@ -301,7 +197,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         setupWindow()
         setupTextView()
         setupNotifications()
-        checkToolChain()
+        processor = ManuscriptProcessor(path: "/Users/carlson/Desktoooop/tools.config")
         if setupDocument() { setupWebview() }
         
         updateUI(refresh: false)
@@ -311,12 +207,13 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         var directory = File.directoryOf(documentPath!)
         
+        
+    
+        
        ///////////////////
 
-        let toolchain = Toolchain(path: "/Users/carlson/Desktoooop/tools.config")
-        toolchain.setup()
         
-        println("PAUSE")
+        println("Status of processor: \(processor!.foo)")
         
         
        /////////////////////
@@ -488,7 +385,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     
                     let hPath = htmlPath(oldDocumentPath!)
                     
-                    executeCommand("/bin/rm", [oldDocumentPath!, hPath], verbose: false)
+                    Toolchain.executeCommand("/bin/rm", [oldDocumentPath!, hPath], verbose: false)
                     
                     
                     
@@ -554,7 +451,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
                     recallValueOfKey("documentURL")
                     
                     documentText = File.read(documentPath!)
-                    useLaTeXMode = setLatexMode(documentText)
+                    useLaTeXMode = processor!.setLatexMode(documentText)
                     textView.string = documentText
                     
                     setHasIncludes()
@@ -581,7 +478,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         if let currentDocumentPath = documentPath {
             
-            useLaTeXMode = setLatexMode(documentText)
+            useLaTeXMode = processor!.setLatexMode(documentText)
             setLatexMenuState()
             updateDocument(currentDocumentPath)
             updateUI(refresh: true)
@@ -601,7 +498,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     @IBAction func showGuideAction(sender: AnyObject) {
         
        
-        textView.string = bundleContent("asciidoc", "ad")
+        textView.string = processor!.bundleContent("asciidoc", resourceType: "ad")
         documentPath = manuscript!.root + "/asciidoctor.ad"
         updateUI(refresh: false)
     
@@ -612,7 +509,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func showManualAction(sender: AnyObject) {
         
-        textView.string = bundleContent("manual", "ad")
+        textView.string = processor!.bundleContent("manual", resourceType: "ad")
         documentPath = manuscript!.root + "/manual.ad"
         updateUI(refresh: false)
         
@@ -621,14 +518,14 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func SaveAsPDFAction(sender: AnyObject) {
         
-        saveAsPDF(documentPath!)
+        processor!.saveAsPDF(documentPath!)
         
     }
     
     
     @IBAction func saveAsEPUB3Action(sender: AnyObject) {
         
-        saveAsEPUB3(documentPath!)
+        processor!.saveAsEPUB3(documentPath!)
     }
     
     
@@ -663,7 +560,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         if cmd != "" {
         
-            let raw_version = executeCommand(cmd!, ["-V"], verbose: true)
+            let raw_version = Toolchain.executeCommand(cmd!, ["-V"], verbose: true)
             let part = raw_version.componentsSeparatedByString("\n")
             let version = part[0]
             
@@ -682,7 +579,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func installAsciidoctorAction(sender: AnyObject) {
         
-        installAsciidoctor()
+        
     }
     
     
@@ -811,7 +708,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         let directory = File.directoryOf(documentPath!)
         println("MANUSCRIPT NOTEBOOK ID: \(id)")
         println("DIRECTORY: \(directory)")
-        let message = fetchNotebook(id!, directory)
+        let message = processor!.fetchNotebook(id!, directory: directory)
         putMessage(message: message)
         
        
@@ -821,12 +718,12 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
         let directory = File.directoryOf(documentPath!)
         
-        documentPath = join([directory, "manifest.ad"], separator: "/")
+        documentPath = [directory, "manifest.ad"].join("/")
         documentText = File.read(documentPath!)
         useLaTeXMode = true    /// setLatexMode(documentText)
         textView.string = documentText
         
-        refreshHTML(documentPath!, htmlPath(documentPath!), manuscript!)
+        processor!.refreshHTML(documentPath!, htmlPath: htmlPath(documentPath!), manuscript: manuscript!)
         updateUI(refresh: true)
         
         let url = documentURL(documentPath!)
@@ -858,7 +755,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         println("Document Path: \(documentPath)")
         
         
-        let adFiles = generateIncludeList(documentPath!)
+        let adFiles = processor!.generateIncludeList(documentPath!)
         
         
         println("---------------------------")
@@ -885,21 +782,15 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         
         let cmd = currentDirectory + "/git_script"
         
-        executeCommand(cmd, ["add", "."], verbose: true)
+        Toolchain.executeCommand(cmd, ["add", "."], verbose: true)
 
         
     }
     
     
     @IBAction func gitPullAction(sender: AnyObject) {
-        
-        let gitURL = manuscript!.gitURL()
-        
-        let currentDirectory = directoryPath(documentPath!)
-        
-        let cmd = currentDirectory + "/git_script"
-        
-        executeCommand(cmd, ["pull", gitURL], verbose: true)
+
+       
         
        
     }
@@ -907,13 +798,6 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func gitPushAction(sender: AnyObject) {
         
-        let gitURL = manuscript!.gitURL()
-        
-        let currentDirectory = directoryPath(documentPath!)
-        
-        let cmd = currentDirectory + "/git_script"
-        
-        executeCommand(cmd, ["push", gitURL], verbose: true)
         
         
     }
@@ -922,7 +806,6 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     @IBAction func cleanHTMLAction(sender: AnyObject) {
         
-        cleanHTML(directoryPath(documentPath!))
         
     }
     
@@ -981,7 +864,7 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
             
             if File.exists(documentPath!) {
                 
-                refreshHTML(documentPath!, htmlPath(documentPath!), manuscript!)
+                processor!.refreshHTML(documentPath!, htmlPath: htmlPath(documentPath!), manuscript: manuscript!)
                 
             }
             

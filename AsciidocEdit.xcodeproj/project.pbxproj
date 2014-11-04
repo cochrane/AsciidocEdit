@@ -15,7 +15,7 @@
 		BD1EB9A0198E5C0D006EEC1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD1EB99F198E5C0D006EEC1C /* Images.xcassets */; };
 		BD1EB9A3198E5C0D006EEC1C /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BD1EB9A1198E5C0D006EEC1C /* MainMenu.xib */; };
 		BD1EB9AF198E5C0D006EEC1C /* adviewerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */; };
-		BD1EB9B9198E7AD6006EEC1C /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9B8198E7AD6006EEC1C /* Utilities.swift */; };
+		BD1EB9B9198E7AD6006EEC1C /* ManuscriptProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB9B8198E7AD6006EEC1C /* ManuscriptProcessor.swift */; };
 		BD36FE4B19A227B400CB31F1 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD36FE4A19A227B400CB31F1 /* Extensions.swift */; };
 		BD36FE4D19A231EC00CB31F1 /* tex_mode_preprocess in Resources */ = {isa = PBXBuildFile; fileRef = BD36FE4C19A231EC00CB31F1 /* tex_mode_preprocess */; };
 		BD36FE4F19A3653D00CB31F1 /* Manuscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD36FE4E19A3653D00CB31F1 /* Manuscript.swift */; };
@@ -34,6 +34,7 @@
 		BD95544A199A696D002E870B /* AsciiDocController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD955449199A696D002E870B /* AsciiDocController.swift */; };
 		BD95544C199AF9AA002E870B /* synchronize.js in Resources */ = {isa = PBXBuildFile; fileRef = BD95544B199AF9AA002E870B /* synchronize.js */; };
 		BDB432FA1A094ABB00237FC5 /* Tools.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB432F91A094ABB00237FC5 /* Tools.swift */; };
+		BDB432FC1A09849800237FC5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDB432FB1A09849800237FC5 /* Utilities.swift */; };
 		BDDA18D619A3F8BB0049F1E0 /* foo.mm in Sources */ = {isa = PBXBuildFile; fileRef = BDDA18D419A3F8BB0049F1E0 /* foo.mm */; };
 		BDE241DE1A08E770004191B8 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE241DD1A08E770004191B8 /* ArrayExtensions.swift */; };
 		BDE241E01A08E828004191B8 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDE241DF1A08E828004191B8 /* File.swift */; };
@@ -67,7 +68,7 @@
 		BD1EB9A8198E5C0D006EEC1C /* AsciidocEditTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AsciidocEditTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1EB9AD198E5C0D006EEC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD1EB9AE198E5C0D006EEC1C /* adviewerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adviewerTests.swift; sourceTree = "<group>"; };
-		BD1EB9B8198E7AD6006EEC1C /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		BD1EB9B8198E7AD6006EEC1C /* ManuscriptProcessor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManuscriptProcessor.swift; sourceTree = "<group>"; };
 		BD36FE4A19A227B400CB31F1 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BD36FE4C19A231EC00CB31F1 /* tex_mode_preprocess */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tex_mode_preprocess; path = tex/tex_mode_preprocess; sourceTree = "<group>"; };
 		BD36FE4E19A3653D00CB31F1 /* Manuscript.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manuscript.swift; sourceTree = "<group>"; };
@@ -86,6 +87,7 @@
 		BD955449199A696D002E870B /* AsciiDocController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsciiDocController.swift; sourceTree = "<group>"; };
 		BD95544B199AF9AA002E870B /* synchronize.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = synchronize.js; sourceTree = "<group>"; };
 		BDB432F91A094ABB00237FC5 /* Tools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tools.swift; path = ../Tools.swift; sourceTree = "<group>"; };
+		BDB432FB1A09849800237FC5 /* Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		BDDA18D419A3F8BB0049F1E0 /* foo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = foo.mm; sourceTree = "<group>"; };
 		BDE241DD1A08E770004191B8 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		BDE241DF1A08E828004191B8 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = ../File.swift; sourceTree = "<group>"; };
@@ -138,7 +140,7 @@
 			children = (
 				BD1EB99D198E5C0D006EEC1C /* AppDelegate.swift */,
 				BD955449199A696D002E870B /* AsciiDocController.swift */,
-				BD1EB9B8198E7AD6006EEC1C /* Utilities.swift */,
+				BD1EB9B8198E7AD6006EEC1C /* ManuscriptProcessor.swift */,
 				BD5F09D219FAB74D00798CE1 /* Metadata.swift */,
 				BD1D1D3D1A0916D800196C6E /* Dictionary.swift */,
 				BD36FE4A19A227B400CB31F1 /* Extensions.swift */,
@@ -149,6 +151,7 @@
 				BDB432F91A094ABB00237FC5 /* Tools.swift */,
 				BDE241DF1A08E828004191B8 /* File.swift */,
 				BDE8AC2119FEBC070089CFDB /* FileUtilities.swift */,
+				BDB432FB1A09849800237FC5 /* Utilities.swift */,
 				BDEBA1761999C7EB00939D7C /* Resources */,
 				BD1EB99F198E5C0D006EEC1C /* Images.xcassets */,
 				BD1EB999198E5C0D006EEC1C /* Supporting Files */,
@@ -338,9 +341,10 @@
 				BD36FE4B19A227B400CB31F1 /* Extensions.swift in Sources */,
 				BDE241E01A08E828004191B8 /* File.swift in Sources */,
 				BD36FE4F19A3653D00CB31F1 /* Manuscript.swift in Sources */,
+				BDB432FC1A09849800237FC5 /* Utilities.swift in Sources */,
 				BD1D1D3E1A0916D800196C6E /* Dictionary.swift in Sources */,
 				BD5F09D319FAB74D00798CE1 /* Metadata.swift in Sources */,
-				BD1EB9B9198E7AD6006EEC1C /* Utilities.swift in Sources */,
+				BD1EB9B9198E7AD6006EEC1C /* ManuscriptProcessor.swift in Sources */,
 				BD1EB99E198E5C0D006EEC1C /* AppDelegate.swift in Sources */,
 				BDE241DE1A08E770004191B8 /* ArrayExtensions.swift in Sources */,
 				BDDA18D619A3F8BB0049F1E0 /* foo.mm in Sources */,
