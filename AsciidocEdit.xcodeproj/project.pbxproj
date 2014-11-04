@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		BD014A0A19FC1EA800DA6ABF /* red_orange.png in Resources */ = {isa = PBXBuildFile; fileRef = BD014A0919FC1EA800DA6ABF /* red_orange.png */; };
 		BD014A0C19FC1F5B00DA6ABF /* red_orange30x100.png in Resources */ = {isa = PBXBuildFile; fileRef = BD014A0B19FC1F5B00DA6ABF /* red_orange30x100.png */; };
+		BD1D1D3E1A0916D800196C6E /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1D1D3D1A0916D800196C6E /* Dictionary.swift */; };
 		BD1EB99C198E5C0D006EEC1C /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB99B198E5C0D006EEC1C /* main.swift */; };
 		BD1EB99E198E5C0D006EEC1C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1EB99D198E5C0D006EEC1C /* AppDelegate.swift */; };
 		BD1EB9A0198E5C0D006EEC1C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BD1EB99F198E5C0D006EEC1C /* Images.xcassets */; };
@@ -55,6 +56,7 @@
 /* Begin PBXFileReference section */
 		BD014A0919FC1EA800DA6ABF /* red_orange.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_orange.png; sourceTree = "<group>"; };
 		BD014A0B19FC1F5B00DA6ABF /* red_orange30x100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = red_orange30x100.png; sourceTree = "<group>"; };
+		BD1D1D3D1A0916D800196C6E /* Dictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		BD1EB996198E5C0D006EEC1C /* AsciidocEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AsciidocEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD1EB99A198E5C0D006EEC1C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD1EB99B198E5C0D006EEC1C /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 		BD1EB98D198E5C0D006EEC1C = {
 			isa = PBXGroup;
 			children = (
+				BD1D1D3D1A0916D800196C6E /* Dictionary.swift */,
 				BD1EB998198E5C0D006EEC1C /* adviewer */,
 				BD1EB9AB198E5C0D006EEC1C /* adviewerTests */,
 				BD1EB997198E5C0D006EEC1C /* Products */,
@@ -332,6 +335,7 @@
 				BD36FE4B19A227B400CB31F1 /* Extensions.swift in Sources */,
 				BDE241E01A08E828004191B8 /* File.swift in Sources */,
 				BD36FE4F19A3653D00CB31F1 /* Manuscript.swift in Sources */,
+				BD1D1D3E1A0916D800196C6E /* Dictionary.swift in Sources */,
 				BD5F09D319FAB74D00798CE1 /* Metadata.swift in Sources */,
 				BD1EB9B9198E7AD6006EEC1C /* Utilities.swift in Sources */,
 				BD1EB99E198E5C0D006EEC1C /* AppDelegate.swift in Sources */,
