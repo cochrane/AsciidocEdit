@@ -114,11 +114,10 @@ class ManuscriptProcessor {
     func hasLatex(path: String) -> Bool {
         
         let content = File.read(path)
-        if content.contains(":latex:") {
+        let displayTexRx = /"\\[.*\\]"
+        if content.contains(":latex:") || (content =~ displayTexRx) {
             return true
-        } else {
-            return false
-        }
+        } else { return false }
     }
     
     func injectMacros(path: String, _ m: Manuscript) {
