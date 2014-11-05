@@ -11,7 +11,7 @@ import Foundation
 
 class File {
     
-    //MARK: Path functions
+    //MARK: Paths
     
     class func pathLength(path: String) -> Int {
         

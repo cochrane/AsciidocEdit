@@ -183,7 +183,6 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     
     
     
-    
     func setMenuItemStatus() {
         
         /*
@@ -571,13 +570,6 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     @IBAction func installAsciidoctorAction(sender: AnyObject) {
         
         
-    }
-    
-    
-    
-    @IBAction func keepPlaceAction(sender: AnyObject) {
-        
-        keepPlace()
     }
     
     

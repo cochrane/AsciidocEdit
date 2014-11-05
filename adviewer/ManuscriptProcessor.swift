@@ -16,6 +16,9 @@ class ManuscriptProcessor {
     let toolChain: Toolchain?
     let foo: String?
     
+    
+    //MARK: File helpers
+    
     init(path: String) {
     
         self.toolChain = Toolchain(path: path)
@@ -23,15 +26,27 @@ class ManuscriptProcessor {
         self.foo = "Ho ho ho                                                                        a"
     }
 
-
     // Return path for temporary file
     func tempFile(path: String) -> String {
         
         let part = path.componentsSeparatedByString(".")
         return part[0]+"-temp."+part[1]
     }
-
-
+    
+    // MARK: Inspectors
+    
+    
+    func hasLatex(path: String) -> Bool {
+        
+        let content = File.read(path)
+        let displayTexRx = /"\\[.*\\]"
+        if content.contains(":latex:") || (content =~ displayTexRx) {
+            return true
+        } else { return false }
+    }
+    
+   
+     //MARK: Injectors
 
     // Inject resource into temporary file copy
     func injectFromBundle(inputPath: String, outputPath: String, payloadName: String, payloadType: String) {
@@ -108,17 +123,6 @@ class ManuscriptProcessor {
 
     }
 
-
-    
-    
-    func hasLatex(path: String) -> Bool {
-        
-        let content = File.read(path)
-        let displayTexRx = /"\\[.*\\]"
-        if content.contains(":latex:") || (content =~ displayTexRx) {
-            return true
-        } else { return false }
-    }
     
     func injectMacros(path: String, _ m: Manuscript) {
         var macro_path = m.macro_path()
@@ -155,6 +159,8 @@ class ManuscriptProcessor {
             }
         }
     }
+    
+    //MARK: Processors
     
     func preprocessTex(path: String) {
         var content = ""
@@ -200,6 +206,8 @@ class ManuscriptProcessor {
     }
 
 
+    
+    //MARK: Exporters
 
     func saveAsPDF(filePath: String) {
         
@@ -212,6 +220,8 @@ class ManuscriptProcessor {
             toolChain!.run("ASCIIDOCTOR_EPUB", [filePath])
         
     }
+    
+    //MARK: Noteshare
 
     func fetchNotebookFromURL(url: String) {
             
@@ -235,6 +245,8 @@ class ManuscriptProcessor {
     }
 
 
+    
+    //MARK: Housekeeping
 
     func cleanHTML(directoryPath: String) {
         
@@ -260,6 +272,9 @@ class ManuscriptProcessor {
         
         
     }
+    
+    
+    //MARK: Manifest
 
     func generateIncludeList(masterFilePath: String)-> [String] {
         

@@ -58,13 +58,6 @@ func isDirectory(path: String) -> Bool {
 
 
 
-
-//MARK: File system
-
-
-
-
-
 func htmlPath(documentPath: String) -> String {
     
     let part = documentPath.componentsSeparatedByString(".")
