@@ -159,20 +159,20 @@ class ManuscriptProcessor {
     
     func preprocessTex(path: String) {
         var content = ""
-        if toolChain!.run("PREPROCESS_TEX", [path, path]) {
+        if toolChain!.run("PREPROCESS_TEX", [path, path]).0 {
             content = File.read(path)
-            content = ":stem: latexmath\n" + content
+            content = ":stem: latexmath\n\n" + content
         } else {
             content = File.read(path)
         }
         File.write(content, path)
+        File.write(content, "/Users/carlson/Desktop/preprocessed.text")
     }
 
     // (1) Inject "synchonize.js" after first non-blank line of
     // the file at asciidocPath and write it to a temporary
     // copy. (2) Apply asciidoctor to the temporary file.
     // (3) Remove the temporary files.
-    // refreshHTML goes here
     func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript!) {
         
         let tmp = tempFile(asciidocPath)
@@ -183,18 +183,17 @@ class ManuscriptProcessor {
         injectFromBundle(asciidocPath, outputPath: tmp, payloadName: "synchronize", payloadType: "js")
         
         // Insert macros, javascript, css, and preprocess
-    
         if  true {
         // if  innerUseLatexMode {
           preprocessTex(tmp)
-          injectFromBundle(tmp, outputPath: tmp, payloadName: "mathjax", payloadType: "js")
           injectMacros(tmp, manuscript)
         }
         // injectJavascript(tmp, manuscript)
         // injectCSS(tmp, manuscript)
         
        // Finally, run asciidoctor
-        if toolChain!.run("ASCIIDOCTOR", ["-a stem=latexmath", tmp]) {
+        if toolChain!.run("ASCIIDOCTOR", ["-a", "stem=latexmath", tmp]).0 {
+            Toolchain.executeCommand("/bin/cp", [tmp, "/Users/carlson/Desktop/out.html"])
             Toolchain.executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
             Toolchain.executeCommand("/bin/rm", [tmp])
         }
@@ -226,15 +225,13 @@ class ManuscriptProcessor {
     func fetchNotebook(notebook_url: String, directory: String) -> String {
       
 
-            toolChain!.run("GET_NOTEBOOK", [notebook_url, directory], verbose: true)
+            let output = toolChain!.run("GET_NOTEBOOK", [notebook_url, directory], verbose: true).1
         
-        /**
+        
             let pattern = ".ad"
             let number_of_ad_files = pattern.match(output).count - 3
             return "Fetched \(number_of_ad_files) files from " + notebook_url
-         **/
-        
-        return "***"
+    
       
     }
 

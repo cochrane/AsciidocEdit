@@ -208,17 +208,6 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
         setMenuItemStatus()
         
         var directory = File.directoryOf(documentPath!)
-        
-        
-    
-        
-       ///////////////////
-
-        
-        println("Status of processor: \(processor!.foo)")
-        
-        
-       /////////////////////
 
     }
     

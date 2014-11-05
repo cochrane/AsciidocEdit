@@ -15,7 +15,7 @@ import Foundation
 
 class Toolchain {
 
-    let toolBox = ["ASCIIDOCTOR", "ASCIIDOCTOR_PDF", "ASCIIDOCTOR_EPUB", "GET_NOTEBOOK", "MAKE_ASCII"]
+    let toolBox = ["ASCIIDOCTOR", "ASCIIDOCTOR_PDF", "ASCIIDOCTOR_EPUB", "GET_NOTEBOOK", "PREPROCESS_TEX", "MAKE_ASCII"]
     let newSettings: StringDictionary
     var installed = [:] as [String:Bool]
     
@@ -72,15 +72,15 @@ class Toolchain {
     
     
     
-    func run(tool: String, _ args: [String], verbose: Bool = false) -> Bool {
+    func run(tool: String, _ args: [String], verbose: Bool = true) -> (Bool, String) {
         
         if installed[tool] != nil {
             
             let toolPath = recallValueOfKey(tool)
-            Toolchain.executeCommand(toolPath!, args, verbose: verbose)
-            return true
+            let output = Toolchain.executeCommand(toolPath!, args, verbose: verbose)
+            return (true, output)
             
-        } else { return false }
+        } else { return (false, "") }
         
     }
     
