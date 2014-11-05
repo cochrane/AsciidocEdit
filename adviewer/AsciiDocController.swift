@@ -46,7 +46,9 @@ class AsciiDocController: NSObject, NSTextViewDelegate {
     var processor : ManuscriptProcessor?
     var metadata : Metadata?
     
-
+    
+    //MARK: Setup
+    
     func setupDictionary() {
         
         let currentDirectory = File.directoryOf(documentPath!)

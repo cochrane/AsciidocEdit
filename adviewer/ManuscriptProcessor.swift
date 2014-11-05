@@ -109,105 +109,96 @@ class ManuscriptProcessor {
     }
 
 
+    
+    
+    func hasLatex(path: String) -> Bool {
+        
+        let content = File.read(path)
+        if content.contains(":latex:") {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func injectMacros(path: String, _ m: Manuscript) {
+        var macro_path = m.macro_path()
+        if File.exists(macro_path) {
+            File.catenate([m.macro_path(), path], path)
+        } else {
+            macro_path = File.file_in_parent(m.macro_path())
+            if File.exists(macro_path) {
+                File.catenate([macro_path, path], path)
+            }
+        }
+    }
+    
+    func injectJavascript(path: String, _ m: Manuscript){
+        var javascript_path = m.root + "/script.js"
+        if  File.exists(javascript_path) { File.catenate([javascript_path, path], path) }
+        else {
+            javascript_path = File.file_in_parent(javascript_path)
+            if  File.exists(javascript_path) {
+                File.catenate([javascript_path, path], path)
+            }
+        }
+    }
+    
+    
+    func injectCSS(path: String, _ m: Manuscript) {
+        var style_path = m.root + "/style.css"
+        if  File.exists(style_path) {
+            File.catenate([style_path, path], path)
+        } else {
+            style_path = File.file_in_parent(style_path)
+            if  File.exists(style_path) {
+                File.catenate([style_path, path], path)
+            }
+        }
+    }
+    
+    func preprocessTex(path: String) {
+        var content = ""
+        if toolChain!.run("PREPROCESS_TEX", [path, path]) {
+            content = File.read(path)
+            content = ":stem: latexmath\n" + content
+        } else {
+            content = File.read(path)
+        }
+        File.write(content, path)
+    }
 
     // (1) Inject "synchonize.js" after first non-blank line of
-    // the file at asciidocPath and write it to a temporary 
+    // the file at asciidocPath and write it to a temporary
     // copy. (2) Apply asciidoctor to the temporary file.
     // (3) Remove the temporary files.
     // refreshHTML goes here
     func refreshHTML(asciidocPath: String, htmlPath: String, manuscript:  Manuscript!) {
         
         let tmp = tempFile(asciidocPath)
-        var innerUseLatexMode = false
-        var test_content = File.read(asciidocPath)
-        if test_content.contains(":latex:") { innerUseLatexMode = true }
-        
-        injectFromBundle(asciidocPath, outputPath: tmp, payloadName: "synchronize", payloadType: "js")
-        println("MACRO FILE: \(manuscript.macro_path())")
-
-        if  innerUseLatexMode && File.exists(manuscript.macro_path()) {
-            
-              println("MACRO FILE (1) exists: \(manuscript.macro_path())")
-            
-              File.catenate([manuscript.macro_path(), tmp], tmp)
-            
-        } else {
-            
-            let macro_path = File.file_in_parent(manuscript.macro_path())
-             println("MACRO FILE (2): \(macro_path)")
-            if  innerUseLatexMode && File.exists(macro_path) {
-                println("File exists at macro path (2)")
-                File.catenate([macro_path, tmp], tmp)
-            } else {
-                println("File does NOT exist at macro path (2)")
-            }
-        }
-        
-        ////////
-        
-        var javascript_path = manuscript.root + "/script.js"
-        
-        if  File.exists(javascript_path) { File.catenate([javascript_path, tmp], tmp) }
-        else {
-            
-            javascript_path = File.file_in_parent(javascript_path)
-            println("MACRO FILE (2): \(javascript_path)")
-            if  File.exists(javascript_path) {
-                println("File exists at js path (2)")
-                File.catenate([javascript_path, tmp], tmp)
-            } else {
-                println("File does NOT exist at js path (2)")
-            }
-        }
-        
-        //////////
-        
-        var style_path = manuscript.root + "/style.css"
-        
-        if  File.exists(style_path) {
-             File.catenate([style_path, tmp], tmp)
-        } else {        
-            style_path = File.file_in_parent(style_path)
-            println("MACRO FILE (2): \(style_path)")
-            if  File.exists(style_path) {
-                println("File exists at style path (2)")
-                File.catenate([style_path, tmp], tmp)
-            } else {
-                println("File does NOT exist at style path (2)")
-            }
-        }
-        
-        
-        
-        
-        /////////
-        
-        
-        
         let tempHTMLPath = tempFile(htmlPath)
+        let innerUseLatexMode = hasLatex(asciidocPath)
         
-        if innerUseLatexMode {
-            
-            var content = ""
-            
-            
-            if toolChain!.run("PREPROCESS_TEX", [tmp, tmp]) {
-              content = File.read(tmp)
-              content = ":stem: latexmath\n" + content
-            } else {
-               content = File.read(tmp)
-            }
-            File.write(content, tmp)
-            
-            
+        // Inject javascript code to keep rendered text in place //
+        injectFromBundle(asciidocPath, outputPath: tmp, payloadName: "synchronize", payloadType: "js")
+        
+        // Insert macros, javascript, css, and preprocess
+    
+        if  true {
+        // if  innerUseLatexMode {
+          preprocessTex(tmp)
+          injectFromBundle(tmp, outputPath: tmp, payloadName: "mathjax", payloadType: "js")
+          injectMacros(tmp, manuscript)
         }
+        // injectJavascript(tmp, manuscript)
+        // injectCSS(tmp, manuscript)
         
-     
-        if   toolChain!.run("ASCIIDOCTOR", [tmp]) {
+       // Finally, run asciidoctor
+        if toolChain!.run("ASCIIDOCTOR", ["-a stem=latexmath", tmp]) {
             Toolchain.executeCommand("/bin/mv", [tempHTMLPath, htmlPath])
             Toolchain.executeCommand("/bin/rm", [tmp])
         }
-        
+   
     }
 
 
@@ -277,7 +268,7 @@ class ManuscriptProcessor {
     func generateIncludeList(masterFilePath: String)-> [String] {
         
         
-        println("masterFilePath = \(masterFilePath)")
+        println("mASCIIterFilePath = \(masterFilePath)")
         
         let masterDirectoryPath = directoryPath(masterFilePath)
         
