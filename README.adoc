@@ -3,6 +3,8 @@
 
 == Introduction
 
+image::asciidoc_edit.png[width=90%]
+
 
 AsciidocEdit is a MacOS application for helping to compose 
 documents written in asciidoc markup.  
